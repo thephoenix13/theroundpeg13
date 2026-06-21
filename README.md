@@ -32,6 +32,7 @@ ready-to-run scripts, and a **Claude skill** so Claude knows exactly how to use 
 ## What it scrapes (and what it doesn't)
 
 - ✅ **Google Maps business listings** → a clean **lead list** by default: `name, phone, email, website, category, address, rating, review count`. The scraper captures ~34 raw fields, but the kit **strips the noise** (geo coordinates, IDs, hours, images, review blobs) so you only get data you can actually use for outreach. Want everything? `scrape.py --full`.
+- ➕ **Optional socials** (`--socials`): also pulls each business's **Instagram / Facebook / LinkedIn** by scanning its website. **Token cost: 0** — it runs in code (HTTP + regex), no AI. It only adds ~40–50 tokens *per business* if you later load the rows into an AI chat (≈+2k for 50 leads; nothing if you keep the file on disk). It's slower (one fetch per site) and coverage is partial (only businesses that link socials on their site).
 - ❌ **Not** a social-media scraper. It cannot touch Instagram / TikTok / YouTube.
 
 ## Why use this instead of asking an AI to "just scrape Google Maps"

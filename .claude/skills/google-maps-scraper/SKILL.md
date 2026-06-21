@@ -82,6 +82,19 @@ outreach), `link`, `plus_code`, `cid`, `data_id`, `place_id`, `open_hours`, `pop
 `--fields "a,b,c"` to customize). If you call the API directly, **strip to the lead fields yourself** before
 presenting — never dump the full 34-column row at the user.
 
+### Social profiles — optional (Instagram / Facebook / LinkedIn)
+Google Maps has no social links, so this is an enrichment: visit each business's `website` and regex out its
+IG/FB/LinkedIn URLs. **Use the script:** `python3 scripts/scrape.py … --socials`.
+
+- **Token cost — say this to the user when they ask for socials:** the extraction itself is **0 LLM tokens**
+  (pure HTTP + regex in the script). It only adds **~40–50 tokens per business** to *your* context **if** you
+  load the rows into chat — e.g. ~+2k tokens for 50 leads. Negligible if you keep the file on disk and show a
+  sample. Save the file; show a few rows.
+- **DO NOT** fetch each website yourself with WebFetch to find socials — that reads every page into your
+  context and costs **thousands of tokens**. The script does it for free. Always prefer `--socials`.
+- It's **opt-in/slower** (one HTTP fetch per business) and coverage is partial (~40–70%: only businesses that
+  link socials on their site; no website → no socials). Mention this if the user expects 100%.
+
 **Shortcuts (prefer these for common cases):**
 - One keyword: `scripts/scrape.sh "<keyword>" <lat> <lon> [depth]` (bash) — create→poll→download in one go.
 - Auto-geocode (no coords): `python3 scripts/scrape.py "<keyword>" --city "<City, ST>" [--depth N]` — resolves

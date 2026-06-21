@@ -12,6 +12,10 @@ Use the `google-maps-scraper` skill. Execute:
 4. **Poll to completion in the BACKGROUND** (the Bash tool blocks foreground `sleep` — use `run_in_background: true` and read the output file when notified). Then download the CSV.
 5. **Present ONLY money-useful lead fields** in a clean markdown table: `name (title), phone, emails, website, category, address, review_rating, review_count`. **Drop everything else** — especially `latitude`/`longitude`, IDs, hours, images, review blobs. Save to a file on disk; do NOT dump the full 34-column CSV into chat. (Include dropped fields only if the user explicitly asks.)
 
+**Socials (if asked):** if the user wants Instagram/Facebook/LinkedIn, run `scripts/scrape.py … --socials`.
+Tell them the cost: extraction is **0 LLM tokens** (runs in code); it only adds ~40–50 tokens/business if you
+load rows into chat. **Never** WebFetch each website yourself to find socials — that costs thousands of tokens.
+
 **Warn, don't block:** if the request is high-volume (high `depth`, many keywords, or repeated runs),
 print ONE short warning that over-use can get their IP temporarily rate-limited by Google and suggest
 adding proxies — then **proceed with the scrape anyway**. Do not gate or demand confirmation just for a

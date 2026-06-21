@@ -15,7 +15,8 @@ Notes:
 - Geocoding uses OpenStreetMap Nominatim (free, no key). Please be gentle: it allows ~1 request/sec
   and requires a descriptive User-Agent (set below). Don't loop it aggressively.
 """
-import argparse, csv, io, json, os, sys, time, urllib.request, urllib.parse, urllib.error
+import argparse, csv, io, json, os, re, sys, time, urllib.request, urllib.parse, urllib.error
+from concurrent.futures import ThreadPoolExecutor
 
 BASE = os.environ.get("SCRAPER_BASE_URL", "http://localhost:8080")
 KEY = os.environ.get("SCRAPER_API_KEY", "")
@@ -67,6 +68,60 @@ def collect_keywords(a):
     return out
 
 
+# ── Optional social enrichment (Instagram / Facebook / LinkedIn) ──────────────
+# Pure code (HTTP + regex) → ZERO LLM tokens. Visits each business website once.
+SOCIAL_RE = {
+    "instagram": re.compile(r"https?://(?:www\.)?instagram\.com/([A-Za-z0-9_.]+)", re.I),
+    "facebook":  re.compile(r"https?://(?:www\.|m\.|web\.)?facebook\.com/([A-Za-z0-9_.\-]+)", re.I),
+    "linkedin":  re.compile(r"https?://(?:[a-z]{2,3}\.)?linkedin\.com/(?:company|in|school)/([A-Za-z0-9_.\-%]+)", re.I),
+}
+_SKIP_HANDLE = {"", "home", "pages", "people", "help", "about", "policies", "policy",
+                "legal", "tos", "privacy", "settings", "sharer", "tr", "profile.php",
+                "plugins", "dialog", "intent", "login", "share.php", "permalink.php",
+                "p", "reel", "reels", "explore", "stories", "tv", "watch", "events",
+                "groups", "marketplace", "gaming", "photo", "hashtag", "search"}
+
+def _fetch_html(url, timeout=10):
+    if not url:
+        return ""
+    if not url.startswith(("http://", "https://")):
+        url = "http://" + url
+    try:
+        r = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (compatible; " + UA + ")", "Accept": "text/html"})
+        with urllib.request.urlopen(r, timeout=timeout) as resp:
+            return resp.read(400_000).decode("utf-8", "replace")
+    except Exception:
+        return ""
+
+def _find_socials(html):
+    out = {"instagram": "", "facebook": "", "linkedin": ""}
+    for plat, rx in SOCIAL_RE.items():
+        for m in rx.finditer(html or ""):
+            h = m.group(1).lower()
+            if h in _SKIP_HANDLE:
+                continue
+            if plat == "facebook" and (h.isdigit() or len(h) < 3):  # skip junk like /2008
+                continue
+            out[plat] = m.group(0).rstrip('"\'/').replace("\\", "")
+            break
+    return out
+
+def enrich_socials(results, workers=8):
+    """Add instagram/facebook/linkedin to each lead by scanning its website. Zero LLM tokens."""
+    for r in results:                       # make sure every row has the keys
+        r.setdefault("instagram", ""); r.setdefault("facebook", ""); r.setdefault("linkedin", "")
+    todo = [r for r in results if r.get("website")]
+    done = 0
+    def work(r):
+        r.update(_find_socials(_fetch_html(r["website"])))
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for _ in ex.map(work, todo):
+            done += 1
+            print(f"\r  socials: {done}/{len(todo)} sites checked", end="", flush=True)
+    print()
+
+
 def main():
     ap = argparse.ArgumentParser(description="Scrape Google Maps business listings.")
     ap.add_argument("keyword", nargs="?", help='e.g. "coffee shops in Austin TX"')
@@ -81,6 +136,8 @@ def main():
     ap.add_argument("--out", default=None, help="write parsed JSON results here")
     ap.add_argument("--full", action="store_true", help="keep ALL raw columns (default: lean lead fields)")
     ap.add_argument("--fields", help="comma-separated columns to keep (overrides the default lead set)")
+    ap.add_argument("--socials", action="store_true",
+                    help="also find Instagram/Facebook/LinkedIn from each website (0 LLM tokens; slower)")
     a = ap.parse_args()
 
     keywords = collect_keywords(a)
@@ -151,12 +208,22 @@ def main():
     results = [{k: r.get(k, "") for k in fields} for r in rows]
     print(f"✓ Done — {len(results)} businesses (fields: {', '.join(fields)}).")
 
+    if a.socials:
+        print("▶ Finding socials (Instagram / Facebook / LinkedIn) on each website…")
+        print("  ℹ Cost: this runs in CODE = 0 LLM tokens. It only adds ~40–50 tokens per business")
+        print("    IF you load the results into an AI's context (negligible if you keep the file on disk).")
+        enrich_socials(results)
+        fields = fields + ["instagram", "facebook", "linkedin"]
+        found = sum(1 for r in results if r.get("instagram") or r.get("facebook") or r.get("linkedin"))
+        print(f"  socials found for {found}/{len(results)} businesses")
+
     out = a.out or f"results-{job_id[:8]}.json"
     with open(out, "w") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     print(f"  saved → {out}")
     for r in results[:5]:
-        print(f"  • {r.get('title','')} | {r.get('phone','')} | {r.get('emails','')} | {r.get('website','')}")
+        tail = f" | IG:{r.get('instagram','') or '—'}" if a.socials else f" | {r.get('website','')}"
+        print(f"  • {r.get('title','')} | {r.get('phone','')} | {r.get('emails','')}{tail}")
 
 
 if __name__ == "__main__":
