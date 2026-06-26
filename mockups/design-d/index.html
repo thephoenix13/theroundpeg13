@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postgres 1st — PostgreSQL specialists for Indian enterprise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f2744;
+      --navy-mid: #1a3a5c;
+      --navy-light: #243d5e;
+      --orange: #f97316;
+      --orange-dark: #ea6c0a;
+      --white: #ffffff;
+      --off-white: #f8fafc;
+      --bg2: #f1f5f9;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --text-light: #94a3b8;
+      --border: #e2e8f0;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    body { font-family: var(--sans); color: var(--text); background: var(--white); line-height: 1.6; }
+
+    /* MOCKUP NAV */
+    .mockup-nav {
+      background: #111827; color: #6b7280; text-align: center; padding: 10px 20px;
+      font-size: 12.5px; font-family: system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;
+      border-bottom: 1px solid #1f2937;
+    }
+    .mockup-nav span.label { color: #9ca3af; font-weight: 600; letter-spacing: .02em; }
+    .mockup-nav span.sep { color: #374151; }
+    .mockup-nav a { color: #f9fafb; text-decoration: none; font-weight: 600; }
+    .mockup-nav a.dim { color: #9ca3af; font-weight: 400; }
+
+    /* SITE NAV */
+    .site-nav {
+      background: var(--navy); position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between; height: 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark {
+      width: 34px; height: 34px; background: var(--orange); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--white);
+      letter-spacing: -0.5px;
+    }
+    .logo-text { color: var(--white); font-weight: 700; font-size: 16px; letter-spacing: -0.3px; }
+    .logo-text span { color: var(--orange); }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      background: var(--orange); color: var(--white); text-decoration: none;
+      padding: 9px 20px; border-radius: 6px; font-size: 14px; font-weight: 600;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--orange-dark); }
+
+    /* HERO */
+    .hero {
+      background: var(--navy);
+      padding: 96px 24px 80px;
+      text-align: center;
+    }
+    .hero-inner { max-width: 860px; margin: 0 auto; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 100px; padding: 5px 14px; margin-bottom: 28px;
+      font-size: 13px; font-weight: 600; color: #fb923c; font-family: var(--mono);
+    }
+    .hero-badge::before { content: ''; width: 7px; height: 7px; background: var(--orange); border-radius: 50%; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.1;
+      color: var(--white); letter-spacing: -1.5px; margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--orange); font-style: normal; }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: rgba(255,255,255,0.65);
+      max-width: 620px; margin: 0 auto 40px; line-height: 1.65;
+    }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 52px; }
+    .btn-primary {
+      background: var(--orange); color: var(--white); text-decoration: none;
+      padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 8px; transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--orange-dark); }
+    .btn-secondary {
+      background: transparent; color: var(--white); text-decoration: none;
+      padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,0.25); transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); }
+    .persona-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .chip {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px; padding: 6px 14px; font-size: 13px; color: rgba(255,255,255,0.6);
+    }
+    .chip strong { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* LOGO STRIP */
+    .logo-strip {
+      background: var(--white); border-bottom: 1px solid var(--border);
+      padding: 32px 24px;
+    }
+    .logo-strip-inner { max-width: 1100px; margin: 0 auto; }
+    .logo-strip-label {
+      text-align: center; font-size: 12px; font-weight: 600; color: var(--text-light);
+      text-transform: uppercase; letter-spacing: .12em; margin-bottom: 24px;
+    }
+    .logo-grid {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; flex-wrap: wrap;
+    }
+    .client-logo {
+      font-family: var(--mono); font-size: 13px; font-weight: 500;
+      color: #94a3b8; letter-spacing: 0.03em; white-space: nowrap;
+    }
+
+    /* METRICS BAND */
+    .metrics-band { background: var(--navy-mid); padding: 40px 24px; }
+    .metrics-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    }
+    .metric {
+      text-align: center; padding: 20px 16px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .metric:last-child { border-right: none; }
+    .metric-num {
+      font-size: 2.4rem; font-weight: 800; color: var(--orange);
+      font-family: var(--mono); line-height: 1; margin-bottom: 6px; display: block;
+    }
+    .metric-label { font-size: 13px; color: rgba(255,255,255,0.55); }
+
+    /* SECTION HELPERS */
+    .section { padding: 80px 24px; }
+    .section--bg2 { background: var(--bg2); }
+    .section--dark { background: var(--navy); }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 500;
+      text-transform: uppercase; letter-spacing: .12em; color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .section-tag--light { color: rgba(249,115,22,0.8); }
+    .section-h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.6px; color: var(--text);
+    }
+    .section-h2--white { color: var(--white); }
+    .section-sub { font-size: 1.05rem; color: var(--text-muted); max-width: 560px; margin-top: 12px; line-height: 1.65; }
+    .section-sub--light { color: rgba(255,255,255,0.55); }
+
+    /* WHY TABS */
+    .tabs-wrapper { margin-top: 48px; }
+    .tab-bar { display: flex; gap: 4px; border-bottom: 2px solid var(--border); margin-bottom: 40px; }
+    .tab-btn {
+      background: none; border: none; cursor: pointer; padding: 12px 20px;
+      font-family: var(--sans); font-size: 14px; font-weight: 600; color: var(--text-muted);
+      border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s;
+    }
+    .tab-btn.active { color: var(--navy); border-bottom-color: var(--orange); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .tab-points { display: flex; flex-direction: column; gap: 20px; }
+    .tab-point { display: flex; gap: 14px; }
+    .tab-point-icon {
+      width: 36px; height: 36px; border-radius: 8px; background: rgba(249,115,22,0.1);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+      font-size: 16px;
+    }
+    .tab-point h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .tab-point p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+    .tab-visual {
+      background: var(--navy); border-radius: 16px; padding: 36px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .tab-visual-label { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: .08em; }
+    .tab-visual-stat { display: flex; justify-content: space-between; align-items: center; }
+    .tab-visual-key { font-size: 14px; color: rgba(255,255,255,0.65); }
+    .tab-visual-val { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--orange); }
+    .tab-visual-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin-top: 4px; }
+    .tab-visual-fill { height: 100%; background: var(--orange); border-radius: 2px; }
+
+    /* SERVICES GRID */
+    .services-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px;
+    }
+    .service-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; transition: box-shadow .2s;
+    }
+    .service-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .service-card--dark { background: var(--navy); border-color: transparent; }
+    .service-card-num {
+      font-family: var(--mono); font-size: 11px; color: var(--text-light); margin-bottom: 14px; display: block;
+    }
+    .service-card--dark .service-card-num { color: rgba(255,255,255,0.35); }
+    .service-card h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .service-card--dark h3 { color: var(--white); }
+    .service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .service-card--dark p { color: rgba(255,255,255,0.55); }
+    .service-badge {
+      display: inline-block; background: var(--orange); color: var(--white);
+      font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-bottom: 14px;
+    }
+
+    /* PGF PLATFORM */
+    .pgf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .pgf-tools { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+    .pgf-tool {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 14px;
+    }
+    .pgf-tool-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--orange); flex-shrink: 0; margin-top: 5px;
+    }
+    .pgf-tool h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .pgf-tool p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.55; }
+    .pgf-visual {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 28px; font-family: var(--mono); font-size: 13px;
+    }
+    .pgf-vis-header {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 20px;
+      color: rgba(255,255,255,0.4); font-size: 12px;
+    }
+    .pgf-vis-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .pgf-row { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; }
+    .pgf-row:last-child { border-bottom: none; }
+    .pgf-row-key { color: rgba(255,255,255,0.45); font-size: 12px; }
+    .pgf-row-val { font-size: 12px; }
+    .val-ok { color: #4ade80; }
+    .val-warn { color: #fbbf24; }
+    .val-alert { color: #f87171; }
+    .pgf-alert {
+      margin-top: 16px; background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 8px; padding: 12px 14px; font-size: 12px; color: #fb923c; line-height: 1.5;
+    }
+
+    /* CASE STUDIES */
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .case-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden;
+    }
+    .case-card-top { background: var(--navy); padding: 28px; }
+    .case-sector {
+      font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 16px; display: block;
+    }
+    .case-stat { font-size: 2.6rem; font-weight: 800; color: var(--orange); font-family: var(--mono); line-height: 1; }
+    .case-stat-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+    .case-card-body { padding: 24px; }
+    .case-card-body h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .case-card-body p { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+    .case-tag {
+      display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 600;
+      color: var(--orange); background: rgba(249,115,22,0.08); border-radius: 4px;
+      padding: 3px 10px;
+    }
+
+    /* TRUST BADGES */
+    .trust-row {
+      display: flex; align-items: center; justify-content: center; gap: 40px;
+      flex-wrap: wrap; margin-top: 48px; padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .trust-badge {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; font-weight: 600; color: var(--text-muted);
+    }
+    .trust-badge-icon {
+      width: 36px; height: 36px; background: var(--bg2); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+    }
+
+    /* CTA SECTION */
+    .cta-section { background: var(--orange); padding: 80px 24px; text-align: center; }
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--white);
+      letter-spacing: -0.8px; line-height: 1.15; max-width: 640px; margin: 0 auto 16px;
+    }
+    .cta-section p { font-size: 1.05rem; color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto 36px; }
+    .cta-section .btn-white {
+      background: var(--white); color: var(--orange); text-decoration: none;
+      padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .cta-section .btn-ghost-white {
+      background: transparent; color: var(--white); text-decoration: none;
+      padding: 14px 28px; border-radius: 8px; font-size: 15px; font-weight: 600;
+      border: 1.5px solid rgba(255,255,255,0.5);
+    }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .cta-meta { margin-top: 24px; font-size: 13px; color: rgba(255,255,255,0.65); }
+
+    /* FOOTER */
+    .footer { background: var(--navy); padding: 56px 24px 32px; }
+    .footer-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.45); margin-top: 12px; line-height: 1.6; }
+    .footer-col h5 { font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: color .2s; }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: 1100px; margin: 0 auto; padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px; color: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .metrics-inner { grid-template-columns: repeat(2, 1fr); }
+      .tab-panel.active { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .pgf-grid { grid-template-columns: 1fr; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- MOCKUP NAV BAR -->
+<div class="mockup-nav">
+  <span class="label">Postgres 1st — design mockups</span>
+  <span class="sep">|</span>
+  <a href="/theroundpeg13/mockups/design-a/">Design A</a>
+  <a href="/theroundpeg13/mockups/design-b/">Design B</a>
+  <a href="/theroundpeg13/mockups/design-c/">Design C</a>
+  <a href="/theroundpeg13/mockups/design-d/">Design D</a>
+  <span class="sep">|</span>
+  <a class="dim" href="/theroundpeg13/mockups/design-c/kb.html">KB</a>
+  <a class="dim" href="/theroundpeg13/mockups/design-c/docs.html">Docs</a>
+  <a class="dim" href="/theroundpeg13/mockups/design-c/resources.html">Resources</a>
+</div>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">P1</div>
+      <span class="logo-text">Postgres <span>1st</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Platform</a></li>
+      <li><a href="#">Migration</a></li>
+      <li><a href="#">Case Studies</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a class="nav-cta" href="#">Schedule a call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">India's PostgreSQL company</div>
+    <h1>Your database<br>deserves <em>specialists.</em></h1>
+    <p class="hero-sub">
+      Postgres 1st gives you PostgreSQL engineers and tooling built for one database.
+      IST-aligned, India-based, priced in rupees.
+    </p>
+    <div class="hero-ctas">
+      <a class="btn-primary" href="#">
+        Schedule a call
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <a class="btn-secondary" href="#">See how it works</a>
+    </div>
+    <div class="persona-chips">
+      <span class="chip">For <strong>Engineering teams</strong> running Oracle migrations</span>
+      <span class="chip">For <strong>CTOs</strong> managing database risk</span>
+      <span class="chip">For <strong>Infra leads</strong> scaling Postgres clusters</span>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<div class="logo-strip">
+  <div class="logo-strip-inner">
+    <p class="logo-strip-label">Trusted by engineering teams across India</p>
+    <div class="logo-grid">
+      <span class="client-logo">Axis Bank</span>
+      <span class="client-logo">Tata Digital</span>
+      <span class="client-logo">PharmEasy</span>
+      <span class="client-logo">Razorpay</span>
+      <span class="client-logo">Juspay</span>
+      <span class="client-logo">Nykaa</span>
+      <span class="client-logo">Zepto</span>
+    </div>
+  </div>
+</div>
+
+<!-- METRICS BAND -->
+<div class="metrics-band">
+  <div class="metrics-inner">
+    <div class="metric">
+      <span class="metric-num">47+</span>
+      <span class="metric-label">Production clusters managed</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num">99.97%</span>
+      <span class="metric-label">Uptime across managed clusters</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num">₹2.3Cr</span>
+      <span class="metric-label">Oracle licence cost eliminated</span>
+    </div>
+    <div class="metric">
+      <span class="metric-num">&lt;4hr</span>
+      <span class="metric-label">Guaranteed incident response</span>
+    </div>
+  </div>
+</div>
+
+<!-- WHY SECTION — TABS -->
+<section class="section section--bg2">
+  <div class="container">
+    <span class="section-tag">Why Postgres 1st</span>
+    <h2 class="section-h2">Built differently,<br>on purpose.</h2>
+    <p class="section-sub">Every other database company covers 12 databases. We cover one. Here is what that means in practice.</p>
+
+    <div class="tabs-wrapper">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(event, 'tab-platform')">Platform</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-team')">Team</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-value')">Value</button>
+        <button class="tab-btn" onclick="switchTab(event, 'tab-india')">India-first</button>
+      </div>
+
+      <div class="tab-panel active" id="tab-platform">
+        <div class="tab-points">
+          <div class="tab-point">
+            <div class="tab-point-icon">🔭</div>
+            <div>
+              <h4>Built for PostgreSQL's failure modes</h4>
+              <p>WatchTower, DataGuardian, and CopyCascade watch autovacuum bloat, replication lag, and connection pool exhaustion — the things that actually take Postgres clusters down.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">🤖</div>
+            <div>
+              <h4>AI co-pilot with cluster memory</h4>
+              <p>PGF Pal has been watching your cluster's history. It surfaces anomalies before they become incidents, and tells you which indexes to add and why.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">📊</div>
+            <div>
+              <h4>One dashboard, not 12 integrations</h4>
+              <p>Everything in PGF is wired to PostgreSQL's own metrics and logs. No stitching together APM tools that weren't built for this database.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-visual-label">PGF WatchTower — cluster health</div>
+          <div class="tab-visual-stat">
+            <span class="tab-visual-key">Autovacuum lag</span>
+            <span class="tab-visual-val">12ms</span>
+          </div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:12%"></div></div>
+          <div class="tab-visual-stat" style="margin-top:12px">
+            <span class="tab-visual-key">Replication lag</span>
+            <span class="tab-visual-val">0.2s</span>
+          </div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:8%"></div></div>
+          <div class="tab-visual-stat" style="margin-top:12px">
+            <span class="tab-visual-key">Connection pool used</span>
+            <span class="tab-visual-val">61%</span>
+          </div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:61%"></div></div>
+          <div class="tab-visual-stat" style="margin-top:12px">
+            <span class="tab-visual-key">p99 query latency</span>
+            <span class="tab-visual-val">34ms</span>
+          </div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:24%"></div></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-team">
+        <div class="tab-points">
+          <div class="tab-point">
+            <div class="tab-point-icon">🧑‍💻</div>
+            <div>
+              <h4>Every engineer is a database specialist</h4>
+              <p>No generalists pulled into on-call rotation. Every person on your account has worked with PostgreSQL internals — not just query tuning, but vacuuming, WAL, and logical replication.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">🕐</div>
+            <div>
+              <h4>IST-aligned, same timezone as you</h4>
+              <p>Your 2AM incident in India is our 2AM too. We're not routing support tickets through a team eight time zones away.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">📋</div>
+            <div>
+              <h4>Weekly reports, not just dashboards</h4>
+              <p>Every managed cluster gets a weekly summary in plain English — what changed, what we caught, what we fixed. Your team stays in the loop without being in the weeds.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-visual-label">Team coverage model</div>
+          <div class="tab-visual-stat"><span class="tab-visual-key">On-call timezone</span><span class="tab-visual-val">IST</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">Response SLA</span><span class="tab-visual-val">&lt;4 hours</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">DBA specialists per account</span><span class="tab-visual-val">2 dedicated</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">Weekly report</span><span class="tab-visual-val">Included</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">Migration review</span><span class="tab-visual-val">Pre-deploy check</span></div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-value">
+        <div class="tab-points">
+          <div class="tab-point">
+            <div class="tab-point-icon">💸</div>
+            <div>
+              <h4>Oracle licence cost, eliminated</h4>
+              <p>Most of our clients are running Oracle in production because they haven't found a credible path off it. We've run 30+ migrations. We know where the traps are.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">📉</div>
+            <div>
+              <h4>Rupee-priced, no FX exposure</h4>
+              <p>All contracts are in INR. Your finance team isn't hedging against dollar movement when budgeting database operations.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">🔒</div>
+            <div>
+              <h4>No surprise invoices</h4>
+              <p>Fixed monthly retainers. No per-incident billing, no minimum-hours-plus-overages structure. One number, every month.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-visual-label">Typical cost comparison — 500GB cluster</div>
+          <div class="tab-visual-stat"><span class="tab-visual-key">Oracle Standard + support</span><span class="tab-visual-val" style="color:#f87171">₹22L/yr</span></div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:100%;background:#f87171"></div></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">Postgres 1st managed + platform</span><span class="tab-visual-val" style="color:#4ade80">₹6.8L/yr</span></div>
+          <div class="tab-visual-bar"><div class="tab-visual-fill" style="width:31%;background:#4ade80"></div></div>
+          <div style="margin-top:20px;font-size:12px;color:rgba(255,255,255,0.35)">Estimate based on Standard Edition 2. Enterprise Edition costs are higher.</div>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-india">
+        <div class="tab-points">
+          <div class="tab-point">
+            <div class="tab-point-icon">🇮🇳</div>
+            <div>
+              <h4>Built for Indian enterprise compliance</h4>
+              <p>DPDPA-ready data residency configurations. RBI co-location guidelines. SEBI's audit trail requirements. These aren't afterthoughts — they're in our standard runbooks.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">☁️</div>
+            <div>
+              <h4>Familiar with Indian cloud footprints</h4>
+              <p>AWS Mumbai, Azure India Central, GCP Mumbai. We know the latency characteristics, the egress costs, and the AZ constraints of each.</p>
+            </div>
+          </div>
+          <div class="tab-point">
+            <div class="tab-point-icon">🤝</div>
+            <div>
+              <h4>No contract in US dollars</h4>
+              <p>Every engagement is in INR. Your procurement team doesn't need to approve a foreign vendor. GST-compliant invoicing, standard Indian payment terms.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tab-visual">
+          <div class="tab-visual-label">Compliance frameworks covered</div>
+          <div class="tab-visual-stat"><span class="tab-visual-key">DPDPA data residency</span><span class="tab-visual-val">Supported</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">RBI co-location</span><span class="tab-visual-val">Documented</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">SEBI audit trail</span><span class="tab-visual-val">Included</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">GST invoicing</span><span class="tab-visual-val">Standard</span></div>
+          <div class="tab-visual-stat" style="margin-top:12px"><span class="tab-visual-key">Contract currency</span><span class="tab-visual-val">INR only</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section">
+  <div class="container">
+    <span class="section-tag">Services</span>
+    <h2 class="section-h2">Everything your database<br>actually needs.</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-card-num">01</span>
+        <h3>Managed DBA</h3>
+        <p>24×7 database management without hiring a full DBA team. We watch your cluster, respond to incidents, and send you weekly reports. You don't page us first — we page you.</p>
+      </div>
+      <div class="service-card service-card--dark">
+        <span class="service-badge">Most popular</span>
+        <span class="service-card-num">02</span>
+        <h3>Oracle Migration</h3>
+        <p>Schema conversion, data migration, application cutover, post-migration validation. We've run 30+ Oracle-to-Postgres migrations across banking, pharma, and manufacturing.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">03</span>
+        <h3>Performance Tuning</h3>
+        <p>Query plans, index strategy, autovacuum configuration, connection pooling. We come in, profile your cluster, and leave it measurably faster. Typically a 2–3 day engagement.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">04</span>
+        <h3>High Availability Setup</h3>
+        <p>Streaming replication, logical replication, failover automation, backup validation. RTO and RPO numbers you can actually commit to in your SLA.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">05</span>
+        <h3>Architecture Review</h3>
+        <p>One-week engagement. We audit your cluster topology, query patterns, backup strategy, and disaster recovery plan. You get a written report and a prioritised remediation list.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-card-num">06</span>
+        <h3>PGF Platform</h3>
+        <p>Our monitoring and observability stack — WatchTower, DataGuardian, CopyCascade, and PGF Pal — available as a standalone SaaS or included in managed engagements.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PGF PLATFORM — dark section -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="pgf-grid">
+      <div>
+        <span class="section-tag section-tag--light">PGF Platform</span>
+        <h2 class="section-h2 section-h2--white">Tools built for<br>production Postgres.</h2>
+        <p class="section-sub section-sub--light" style="margin-bottom:0">Not generic APM. Every PGF tool is built around PostgreSQL's actual failure modes — autovacuum bloat, replication lag, connection pool exhaustion.</p>
+        <div class="pgf-tools">
+          <div class="pgf-tool">
+            <div class="pgf-tool-dot"></div>
+            <div>
+              <h4>PGF WatchTower</h4>
+              <p>Cluster health, query latency, replication lag, connection pools — all in one Postgres-native dashboard.</p>
+            </div>
+          </div>
+          <div class="pgf-tool">
+            <div class="pgf-tool-dot"></div>
+            <div>
+              <h4>PGF DataGuardian</h4>
+              <p>Continuous backup verification. It doesn't just take backups — it restores them and validates the data on a schedule.</p>
+            </div>
+          </div>
+          <div class="pgf-tool">
+            <div class="pgf-tool-dot"></div>
+            <div>
+              <h4>PGF CopyCascade</h4>
+              <p>Logical replication management across environments. Replication slot lag, subscriber health, conflict detection.</p>
+            </div>
+          </div>
+          <div class="pgf-tool">
+            <div class="pgf-tool-dot"></div>
+            <div>
+              <h4>PGF Pal — AI co-pilot</h4>
+              <p>PGF Pal knows PostgreSQL internals and has been watching your cluster's own history. It surfaces what your team would otherwise miss — and tells you exactly what to run to fix it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pgf-visual">
+        <div class="pgf-vis-header">
+          <div class="pgf-vis-dot" style="background:#f87171"></div>
+          <div class="pgf-vis-dot" style="background:#fbbf24"></div>
+          <div class="pgf-vis-dot" style="background:#4ade80"></div>
+          <span style="margin-left:8px">pgf-pal — cluster analysis</span>
+        </div>
+        <div class="pgf-row"><span class="pgf-row-key">connections_used</span><span class="pgf-row-val val-warn">187 / 200</span></div>
+        <div class="pgf-row"><span class="pgf-row-key">autovacuum_lag</span><span class="pgf-row-val val-ok">12ms</span></div>
+        <div class="pgf-row"><span class="pgf-row-key">replication_lag</span><span class="pgf-row-val val-ok">0.2s</span></div>
+        <div class="pgf-row"><span class="pgf-row-key">bloat_ratio_orders</span><span class="pgf-row-val val-alert">38%</span></div>
+        <div class="pgf-row"><span class="pgf-row-key">longest_running_query</span><span class="pgf-row-val val-warn">4m 12s</span></div>
+        <div class="pgf-row"><span class="pgf-row-key">cache_hit_ratio</span><span class="pgf-row-val val-ok">99.2%</span></div>
+        <div class="pgf-alert">
+          ⚠ PGF Pal: orders table is 38% bloat. Recommend manual VACUUM FULL in next maintenance window.
+          Connection pool at 93% — consider pgBouncer transaction-mode configuration.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section section--bg2">
+  <div class="container">
+    <span class="section-tag">Case studies</span>
+    <h2 class="section-h2">Results, not testimonials.</h2>
+    <p class="section-sub">Numbers from actual client engagements. Sector names used with permission; company names withheld at client request.</p>
+    <div class="cases-grid">
+      <div class="case-card">
+        <div class="case-card-top">
+          <span class="case-sector">BFSI — Core banking platform</span>
+          <div class="case-stat">₹18L</div>
+          <div class="case-stat-label">Annual Oracle licence cost eliminated</div>
+        </div>
+        <div class="case-card-body">
+          <h4>Oracle to Postgres migration — 8TB schema</h4>
+          <p>14-month Oracle contract was up for renewal. We ran a parallel migration over 11 weeks, validated with live traffic replay, and completed cutover with zero unplanned downtime.</p>
+          <span class="case-tag">Migration</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-card-top">
+          <span class="case-sector">Pharma — Order management system</span>
+          <div class="case-stat">40%</div>
+          <div class="case-stat-label">Reduction in p99 query latency</div>
+        </div>
+        <div class="case-card-body">
+          <h4>Performance tuning — degraded checkout path</h4>
+          <p>The orders table had grown to 380M rows with 38% bloat. Two sequential scans on every checkout. We rebuilt the index strategy, scheduled VACUUM FULL, and introduced a read replica for reporting queries.</p>
+          <span class="case-tag">Performance</span>
+        </div>
+      </div>
+      <div class="case-card">
+        <div class="case-card-top">
+          <span class="case-sector">Fintech — Payment processing cluster</span>
+          <div class="case-stat">0</div>
+          <div class="case-stat-label">Unplanned outages in 18 months of managed DBA</div>
+        </div>
+        <div class="case-card-body">
+          <h4>Managed DBA — high-availability cluster</h4>
+          <p>Took over from a team where the DBA had left. Stabilised the replication setup, introduced automated failover, and moved backup validation from monthly manual checks to daily automated restores.</p>
+          <span class="case-tag">Managed DBA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-row">
+      <div class="trust-badge"><div class="trust-badge-icon">🔒</div> SOC 2 aligned practices</div>
+      <div class="trust-badge"><div class="trust-badge-icon">🏦</div> RBI guidelines compliant</div>
+      <div class="trust-badge"><div class="trust-badge-icon">🇮🇳</div> DPDPA data residency ready</div>
+      <div class="trust-badge"><div class="trust-badge-icon">📜</div> GST registered, INR invoicing</div>
+      <div class="trust-badge"><div class="trust-badge-icon">🐘</div> PostgreSQL community contributors</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <h2>Your Postgres cluster shouldn't keep you up at night.</h2>
+  <p>Postgres 1st gives you PostgreSQL engineers and tooling built for production clusters. India-based, IST-aligned, priced in rupees.</p>
+  <div class="cta-btns">
+    <a class="btn-white" href="#">
+      Schedule a call
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+    </a>
+    <a class="btn-ghost-white" href="#">See the platform</a>
+  </div>
+  <p class="cta-meta">No commitment required. We come back within one business day.</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="#" style="text-decoration:none">
+        <div class="logo-mark">P1</div>
+        <span class="logo-text">Postgres <span>1st</span></span>
+      </a>
+      <p>India's PostgreSQL specialists. One database, done right. IST-aligned, rupee-priced.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="#">Managed DBA</a></li>
+        <li><a href="#">Oracle Migration</a></li>
+        <li><a href="#">Performance Tuning</a></li>
+        <li><a href="#">HA Setup</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <ul>
+        <li><a href="#">WatchTower</a></li>
+        <li><a href="#">DataGuardian</a></li>
+        <li><a href="#">CopyCascade</a></li>
+        <li><a href="#">PGF Pal</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Knowledge Base</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Postgres 1st. All rights reserved.</span>
+    <span>Privacy · Terms</span>
+  </div>
+</footer>
+
+<script>
+  function switchTab(e, id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+</body>
+</html>
