@@ -1,1 +1,514 @@
-	K���)���ڵ��q�Szji��ho�q
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resource Centre — Postgres 1st</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:#1a1a2e;background:#fff;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+:root{--navy:#0f2744;--orange:#f97316;--bg:#f8f9fc;--line:#e8eaf0;--muted:#64748b}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 32px;gap:32px}
+.nav-logo{display:flex;align-items:center;gap:10px;margin-right:8px;flex-shrink:0}
+.nav-logo-mark{width:36px;height:36px;background:var(--navy);border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.nav-logo-name{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.nav-links{display:flex;align-items:center;gap:28px;flex:1}
+.nav-link{font-size:14px;font-weight:500;color:var(--muted);transition:color .15s}
+.nav-link:hover,.nav-link.active{color:var(--navy)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.nav-cta{background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:8px 20px;border-radius:999px;transition:background .15s}
+.nav-cta:hover{background:#ea6c0a}
+
+/* HERO */
+.rc-hero{margin-top:64px;background:var(--navy);padding:56px 40px}
+.rc-hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.rc-hero-tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
+.rc-hero h1{font-size:clamp(28px,3.5vw,44px);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1}
+.rc-hero-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.75;margin-bottom:24px;max-width:440px}
+.rc-hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.rc-stat{text-align:left}
+.rc-stat-num{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.03em}
+.rc-stat-lbl{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+.rc-hero-featured{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:24px;position:relative;overflow:hidden;cursor:pointer;transition:background .2s}
+.rc-hero-featured:hover{background:rgba(255,255,255,.1)}
+.rc-hero-featured::before{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;background:rgba(249,115,22,.2);border-radius:50%;filter:blur(30px)}
+.rfeat-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--orange);color:#fff;padding:3px 10px;border-radius:999px;margin-bottom:14px}
+.rfeat-title{font-size:20px;font-weight:800;color:#fff;letter-spacing:-.015em;margin-bottom:10px;line-height:1.3}
+.rfeat-desc{font-size:13.5px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:18px}
+.rfeat-meta{display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.rfeat-meta-item{font-size:12px;color:rgba(255,255,255,.35);display:flex;align-items:center;gap:5px}
+.rfeat-cta{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;transition:background .15s}
+.rfeat-cta:hover{background:#ea6c0a}
+
+/* TABS & FILTERS */
+.rc-filters{background:var(--bg);border-bottom:1px solid var(--line);padding:16px 40px;position:sticky;top:64px;z-index:100}
+.rc-filters-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap}
+.tab-row{display:flex;align-items:center;gap:6px}
+.tab-btn{font-size:13px;font-weight:600;color:var(--muted);padding:7px 16px;border-radius:8px;cursor:pointer;transition:all .15s;border:none;background:transparent;font-family:inherit;display:flex;align-items:center;gap:7px}
+.tab-btn:hover{background:#fff;color:var(--navy)}
+.tab-btn.active{background:#fff;color:var(--navy);box-shadow:0 1px 4px rgba(0,0,0,.08);border:1px solid var(--line)}
+.tab-count{font-size:11px;font-weight:700;background:var(--bg);color:var(--muted);border-radius:999px;padding:1px 7px;border:1px solid var(--line)}
+.tab-btn.active .tab-count{background:var(--navy);color:#fff;border-color:var(--navy)}
+.rc-search{flex:1;max-width:320px;display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:7px 14px}
+.rc-search input{border:none;outline:none;font-size:13px;color:var(--navy);font-family:inherit;flex:1;background:transparent}
+.rc-search input::placeholder{color:#bbb}
+.sort-row{display:flex;align-items:center;gap:8px;margin-left:auto}
+.sort-label{font-size:12px;color:var(--muted)}
+.sort-select{font-size:13px;font-weight:500;color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px 12px;outline:none;cursor:pointer;font-family:inherit}
+
+/* MAIN LAYOUT */
+.rc-body{max-width:1200px;margin:0 auto;padding:40px 40px 80px;display:grid;grid-template-columns:1fr 260px;gap:48px;align-items:start}
+
+/* RESOURCE GRID */
+.rc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.rc-card{border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:all .2s;background:#fff}
+.rc-card:hover{border-color:#cbd5e1;box-shadow:0 8px 24px rgba(0,0,0,.08);transform:translateY(-3px)}
+.rc-card-img{height:176px;overflow:hidden;position:relative}
+.rc-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.rc-card:hover .rc-card-img img{transform:scale(1.04)}
+.rc-card-type-bar{position:absolute;top:14px;left:14px;display:flex;gap:6px}
+.rc-type-tag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.rtt-white{background:#ea580c;color:#fff}
+.rtt-navy{background:var(--navy);color:#fff}
+.rtt-green{background:#16a34a;color:#fff}
+.rtt-purple{background:#7c3aed;color:#fff}
+.rtt-blue{background:#0284c7;color:#fff}
+.rc-card-body{padding:18px 20px 20px}
+.rc-card-title{font-size:15px;font-weight:700;color:var(--navy);line-height:1.45;margin-bottom:8px;letter-spacing:-.01em}
+.rc-card-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.rc-card-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.rc-card-meta{display:flex;align-items:center;gap:10px;font-size:12px;color:#bbb}
+.rc-download-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--navy);border:1px solid var(--line);border-radius:7px;padding:6px 13px;transition:all .15s}
+.rc-download-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* DOWNLOADS TABLE VARIANT */
+.rc-card-wide{border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:14px;overflow:hidden}
+.dl-row{display:flex;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+.dl-row:last-child{border-bottom:none}
+.dl-row:hover{background:var(--bg)}
+.dl-icon{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.dli-bg-navy{background:#e8eef7}
+.dl-info{flex:1;min-width:0}
+.dl-name{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.dl-meta{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+.dl-version{font-family:'JetBrains Mono',monospace;font-size:11.5px;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:1px 7px;color:var(--navy)}
+.dl-badge-stable{font-size:10px;font-weight:700;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;padding:2px 8px;border-radius:999px}
+.dl-badge-lts{font-size:10px;font-weight:700;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;padding:2px 8px;border-radius:999px}
+.dl-badge-eol{font-size:10px;font-weight:700;background:#fff1f2;color:#b91c1c;border:1px solid #fecaca;padding:2px 8px;border-radius:999px}
+.dl-size{font-size:12px;color:#bbb;flex-shrink:0}
+.dl-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--navy);border:1px solid var(--line);border-radius:7px;padding:6px 13px;transition:all .15s;flex-shrink:0;background:#fff}
+.dl-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* SECTION HEADER */
+.rc-section-hd{display:flex;align-items:center;justify-content:space-between;margin:28px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--line)}
+.rc-sh-title{font-size:16px;font-weight:800;color:var(--navy)}
+.rc-sh-link{font-size:13px;font-weight:600;color:var(--orange);border-bottom:1px solid var(--orange)}
+.rc-sh-link:hover{color:#ea6c0a}
+
+/* SIDEBAR */
+.rc-sidebar{}
+.sdb-card{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:18px}
+.sdb-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.sdb-list{display:flex;flex-direction:column;gap:8px}
+.sdb-item{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:8px;border-radius:8px;transition:background .15s}
+.sdb-item:hover{background:#fff}
+.sdb-num{font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0;width:20px;margin-top:1px}
+.sdb-item-title{font-size:13px;font-weight:500;color:var(--navy);line-height:1.45;margin-bottom:2px}
+.sdb-item-type{font-size:11px;color:var(--muted)}
+
+/* NEWSLETTER */
+.newsletter-card{background:var(--navy);border-radius:12px;padding:22px;margin-bottom:18px}
+.nc-tag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px}
+.nc-title{font-size:16px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-.01em}
+.nc-desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:16px}
+.nc-form{display:flex;flex-direction:column;gap:8px}
+.nc-input{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:9px 13px;font-size:13px;color:#fff;outline:none;font-family:inherit;transition:border-color .15s}
+.nc-input::placeholder{color:rgba(255,255,255,.3)}
+.nc-input:focus{border-color:rgba(255,255,255,.35)}
+.nc-btn{background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:10px;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:background .15s}
+.nc-btn:hover{background:#ea6c0a}
+.nc-privacy{font-size:11px;color:rgba(255,255,255,.25);margin-top:4px;line-height:1.5}
+
+.design-label{position:fixed;bottom:20px;right:20px;z-index:9999;background:var(--navy);color:#fff;font-size:11px;font-weight:600;padding:7px 18px;border-radius:999px}
+
+@media(max-width:1024px){.rc-body{grid-template-columns:1fr}}
+@media(max-width:768px){
+  nav{padding:0 16px}.nav-links{display:none}
+  .rc-hero{padding:36px 20px}.rc-hero-inner{grid-template-columns:1fr}
+  .rc-hero-featured{display:none}
+  .rc-filters{padding:12px 16px}.tab-row{gap:4px}
+  .rc-body{padding:24px 16px 60px}.rc-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="design-label">Design B — Resource Centre</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">P1</div>
+    <div class="nav-logo-name">Postgres 1st</div>
+  </div>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">Platform</a>
+    <a class="nav-link" href="index.html">Services</a>
+    <a class="nav-link" href="kb.html">Knowledge Base</a>
+    <a class="nav-link" href="docs.html">Documentation</a>
+    <a class="nav-link active" href="#">Resources</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="index.html#contact">Talk to an Expert</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="rc-hero">
+  <div class="rc-hero-inner">
+    <div>
+      <div class="rc-hero-tag">Resource Centre</div>
+      <h1>PostgreSQL knowledge for<br>enterprise teams.</h1>
+      <p class="rc-hero-sub">Whitepapers, migration guides, datasheets, and case studies from the Postgres 1st team. No email gate on any of it.</p>
+      <div class="rc-hero-stats">
+        <div class="rc-stat"><div class="rc-stat-num">34</div><div class="rc-stat-lbl">Resources</div></div>
+        <div class="rc-stat"><div class="rc-stat-num">8</div><div class="rc-stat-lbl">Whitepapers</div></div>
+        <div class="rc-stat"><div class="rc-stat-num">6</div><div class="rc-stat-lbl">Case Studies</div></div>
+      </div>
+    </div>
+    <div class="rc-hero-featured">
+      <div class="rfeat-tag">★ Featured</div>
+      <div class="rfeat-title">The Enterprise Oracle-to-PostgreSQL Migration Framework</div>
+      <div class="rfeat-desc">The 23-point checklist our team uses in every Oracle migration engagement — pre-migration assessment through post-cutover sign-off.</div>
+      <div class="rfeat-meta">
+        <div class="rfeat-meta-item">📄 Whitepaper</div>
+        <div class="rfeat-meta-item">📖 28 pages</div>
+        <div class="rfeat-meta-item">📅 May 2025</div>
+      </div>
+      <a class="rfeat-cta" href="#">Download Free PDF →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="rc-filters">
+  <div class="rc-filters-inner">
+    <div class="tab-row">
+      <button class="tab-btn active" onclick="setTab(this)">All <span class="tab-count">34</span></button>
+      <button class="tab-btn" onclick="setTab(this)">Whitepapers <span class="tab-count">8</span></button>
+      <button class="tab-btn" onclick="setTab(this)">Case Studies <span class="tab-count">6</span></button>
+      <button class="tab-btn" onclick="setTab(this)">Datasheets <span class="tab-count">9</span></button>
+      <button class="tab-btn" onclick="setTab(this)">Downloads <span class="tab-count">11</span></button>
+    </div>
+    <div class="rc-search">
+      🔍 <input type="text" placeholder="Search resources...">
+    </div>
+    <div class="sort-row">
+      <span class="sort-label">Sort by:</span>
+      <select class="sort-select">
+        <option>Latest first</option>
+        <option>Most popular</option>
+        <option>A – Z</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="rc-body">
+
+  <div>
+    <!-- WHITEPAPERS -->
+    <div class="rc-section-hd">
+      <div class="rc-sh-title">Whitepapers</div>
+      <a class="rc-sh-link" href="#">View all →</a>
+    </div>
+    <div class="rc-grid">
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-white">Whitepaper</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">The Enterprise Oracle-to-PostgreSQL Migration Framework</div>
+          <div class="rc-card-desc">23-point checklist covering risk assessment, schema compatibility, phased cutover, and post-migration validation for large-scale migrations.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📖 28 pages · May 2025</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1488229297570-58520851e6ce?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-white">Whitepaper</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">PostgreSQL High Availability Architecture: Patterns for Indian Enterprise</div>
+          <div class="rc-card-desc">Design patterns for multi-node HA, Patroni vs. repmgr comparison, auto-failover configuration, and DR testing protocols.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📖 22 pages · April 2025</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-white">Whitepaper</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">The Cost of PostgreSQL Mismanagement: A 2025 Analysis</div>
+          <div class="rc-card-desc">Quantifying downtime cost, DBA talent scarcity premiums, Oracle licensing vs. PostgreSQL TCO, and incident cost benchmarks across Indian enterprises.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📖 18 pages · March 2025</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-white">Whitepaper</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">AI-Assisted Database Operations: How PGF Pal Reduces MTTR</div>
+          <div class="rc-card-desc">Technical overview of RAG-based query analysis, anomaly detection, and how profile-aware responses change incident resolution workflows.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📖 14 pages · Feb 2025</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDIES -->
+    <div class="rc-section-hd" style="margin-top:36px">
+      <div class="rc-sh-title">Case Studies</div>
+      <a class="rc-sh-link" href="#">View all →</a>
+    </div>
+    <div class="rc-grid">
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-green">Case Study</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">₹18L Oracle licence savings: Financial services firm moves to PostgreSQL in 8 weeks</div>
+          <div class="rc-card-desc">How a leading NBFC eliminated Oracle licensing costs with a phased migration — zero production downtime across 3 databases.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📄 Case Study · Fintech</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card">
+        <div class="rc-card-img">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="">
+          <div class="rc-card-type-bar"><span class="rc-type-tag rtt-green">Case Study</span></div>
+        </div>
+        <div class="rc-card-body">
+          <div class="rc-card-title">Zero unplanned outages in 14 months: Logistics platform's PostgreSQL reliability story</div>
+          <div class="rc-card-desc">From 3–4 unplanned outages per quarter to zero. How PGF WatchTower and a dedicated delivery manager transformed ops.</div>
+          <div class="rc-card-footer">
+            <div class="rc-card-meta">📄 Case Study · Logistics</div>
+            <a class="rc-download-btn" href="#">⬇ Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATASHEETS -->
+    <div class="rc-section-hd" style="margin-top:36px">
+      <div class="rc-sh-title">Datasheets</div>
+      <a class="rc-sh-link" href="#">View all →</a>
+    </div>
+    <div class="rc-grid">
+      <div class="rc-card" style="display:flex;flex-direction:row;gap:0;border-radius:12px;overflow:hidden">
+        <div style="background:#eff6ff;width:80px;display:grid;place-items:center;font-size:28px;flex-shrink:0">📊</div>
+        <div class="rc-card-body" style="padding:16px 18px">
+          <div style="margin-bottom:6px"><span class="rc-type-tag rtt-blue">Datasheet</span></div>
+          <div class="rc-card-title">PGF WatchTower — Product Overview</div>
+          <div class="rc-card-footer" style="margin-top:12px">
+            <div class="rc-card-meta">2 pages · PNG + PDF</div>
+            <a class="rc-download-btn" href="#">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card" style="display:flex;flex-direction:row;gap:0;border-radius:12px;overflow:hidden">
+        <div style="background:#f0fdf4;width:80px;display:grid;place-items:center;font-size:28px;flex-shrink:0">🛡️</div>
+        <div class="rc-card-body" style="padding:16px 18px">
+          <div style="margin-bottom:6px"><span class="rc-type-tag rtt-green">Datasheet</span></div>
+          <div class="rc-card-title">PGF DataGuardian — Backup & Recovery</div>
+          <div class="rc-card-footer" style="margin-top:12px">
+            <div class="rc-card-meta">2 pages · PNG + PDF</div>
+            <a class="rc-download-btn" href="#">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card" style="display:flex;flex-direction:row;gap:0;border-radius:12px;overflow:hidden">
+        <div style="background:#faf5ff;width:80px;display:grid;place-items:center;font-size:28px;flex-shrink:0">🤖</div>
+        <div class="rc-card-body" style="padding:16px 18px">
+          <div style="margin-bottom:6px"><span class="rc-type-tag rtt-purple">Datasheet</span></div>
+          <div class="rc-card-title">PGF Pal — AI Assistant Capabilities</div>
+          <div class="rc-card-footer" style="margin-top:12px">
+            <div class="rc-card-meta">2 pages · PNG + PDF</div>
+            <a class="rc-download-btn" href="#">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+      <div class="rc-card" style="display:flex;flex-direction:row;gap:0;border-radius:12px;overflow:hidden">
+        <div style="background:#e8eef7;width:80px;display:grid;place-items:center;font-size:28px;flex-shrink:0">🏢</div>
+        <div class="rc-card-body" style="padding:16px 18px">
+          <div style="margin-bottom:6px"><span class="rc-type-tag rtt-navy">Datasheet</span></div>
+          <div class="rc-card-title">Managed Operations — Service Tiers</div>
+          <div class="rc-card-footer" style="margin-top:12px">
+            <div class="rc-card-meta">2 pages · PNG + PDF</div>
+            <a class="rc-download-btn" href="#">⬇ Download</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DOWNLOADS -->
+    <div class="rc-section-hd" style="margin-top:36px">
+      <div class="rc-sh-title">Software Downloads</div>
+      <a class="rc-sh-link" href="#">View all →</a>
+    </div>
+    <div class="rc-card-wide">
+      <div class="dl-row">
+        <div class="dl-icon dli-bg-navy">📦</div>
+        <div class="dl-info">
+          <div class="dl-name">PGF WatchTower Agent</div>
+          <div class="dl-meta">
+            <span class="dl-version">v3.2.1</span>
+            <span class="dl-badge-stable">Stable</span>
+            <span style="color:#bbb">Released 14 Jun 2025</span>
+          </div>
+        </div>
+        <div class="dl-size">Linux x64 · 18 MB</div>
+        <a class="dl-btn" href="#">⬇ Download</a>
+      </div>
+      <div class="dl-row">
+        <div class="dl-icon dli-bg-navy">📦</div>
+        <div class="dl-info">
+          <div class="dl-name">PGF WatchTower Agent</div>
+          <div class="dl-meta">
+            <span class="dl-version">v3.1.4</span>
+            <span class="dl-badge-lts">LTS</span>
+            <span style="color:#bbb">Released 3 Mar 2025</span>
+          </div>
+        </div>
+        <div class="dl-size">Linux x64 · 17 MB</div>
+        <a class="dl-btn" href="#">⬇ Download</a>
+      </div>
+      <div class="dl-row">
+        <div class="dl-icon dli-bg-navy">🔗</div>
+        <div class="dl-info">
+          <div class="dl-name">PGF CLI</div>
+          <div class="dl-meta">
+            <span class="dl-version">v2.8.0</span>
+            <span class="dl-badge-stable">Stable</span>
+            <span style="color:#bbb">Released 28 May 2025</span>
+          </div>
+        </div>
+        <div class="dl-size">All platforms · 6 MB</div>
+        <a class="dl-btn" href="#">⬇ Download</a>
+      </div>
+      <div class="dl-row" style="opacity:.55">
+        <div class="dl-icon dli-bg-navy">📦</div>
+        <div class="dl-info">
+          <div class="dl-name">PGF WatchTower Agent</div>
+          <div class="dl-meta">
+            <span class="dl-version">v2.9.x</span>
+            <span class="dl-badge-eol">End of Life</span>
+            <span style="color:#bbb">Ended 1 Jan 2025</span>
+          </div>
+        </div>
+        <div class="dl-size">Linux x64 · 14 MB</div>
+        <a class="dl-btn" href="#">⬇ Archive</a>
+      </div>
+    </div>
+
+  </div><!-- /left col -->
+
+  <!-- SIDEBAR -->
+  <aside class="rc-sidebar">
+
+    <div class="newsletter-card">
+      <div class="nc-tag">📬 Newsletter</div>
+      <div class="nc-title">The PostgreSQL Briefing</div>
+      <div class="nc-desc">Monthly digest: PostgreSQL release notes, operational tips, and new resources from the Postgres 1st team.</div>
+      <div class="nc-form">
+        <input class="nc-input" type="email" placeholder="you@yourcompany.com">
+        <button class="nc-btn">Subscribe →</button>
+      </div>
+      <div class="nc-privacy">No spam. Unsubscribe anytime. Read by 1,200+ DBAs.</div>
+    </div>
+
+    <div class="sdb-card">
+      <div class="sdb-title">Most downloaded</div>
+      <div class="sdb-list">
+        <div class="sdb-item">
+          <div class="sdb-num">1</div>
+          <div>
+            <div class="sdb-item-title">Oracle-to-PostgreSQL Migration Framework</div>
+            <div class="sdb-item-type">Whitepaper · 2,340 downloads</div>
+          </div>
+        </div>
+        <div class="sdb-item">
+          <div class="sdb-num">2</div>
+          <div>
+            <div class="sdb-item-title">PGF WatchTower Agent v3.2.1</div>
+            <div class="sdb-item-type">Software · 1,890 downloads</div>
+          </div>
+        </div>
+        <div class="sdb-item">
+          <div class="sdb-num">3</div>
+          <div>
+            <div class="sdb-item-title">HA Architecture Patterns Whitepaper</div>
+            <div class="sdb-item-type">Whitepaper · 1,240 downloads</div>
+          </div>
+        </div>
+        <div class="sdb-item">
+          <div class="sdb-num">4</div>
+          <div>
+            <div class="sdb-item-title">NBFC Oracle Migration Case Study</div>
+            <div class="sdb-item-type">Case Study · 980 downloads</div>
+          </div>
+        </div>
+        <div class="sdb-item">
+          <div class="sdb-num">5</div>
+          <div>
+            <div class="sdb-item-title">PGF WatchTower Datasheet</div>
+            <div class="sdb-item-type">Datasheet · 820 downloads</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sdb-card" style="background:var(--navy);border-color:var(--navy)">
+      <div class="sdb-title" style="color:rgba(255,255,255,.35)">Need something specific?</div>
+      <p style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:14px">If you're evaluating Postgres 1st for an enterprise engagement and need a custom datasheet, RFP template, or architecture reference — our team will prepare it.</p>
+      <a href="index.html#contact" style="display:block;text-align:center;background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:10px 16px;border-radius:8px;transition:background .15s">Contact Us →</a>
+    </div>
+
+  </aside>
+
+</div>
+
+<script>
+function setTab(btn){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
