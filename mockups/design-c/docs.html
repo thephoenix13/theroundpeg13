@@ -1,1 +1,476 @@
-	K���)���ڵ��q�Szji��ho�q
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Documentation — Postgres 1st</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:#1a1a2e;background:#fff;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+:root{--navy:#0f2744;--orange:#f97316;--bg:#f8f9fc;--line:#e8eaf0;--muted:#64748b;--code-bg:#0d1117;--code-text:#e6edf3}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:64px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 24px;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-logo-mark{width:36px;height:36px;background:var(--navy);border-radius:8px;display:grid;place-items:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.nav-logo-name{font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.02em}
+.nav-divider{width:1px;height:24px;background:var(--line);flex-shrink:0}
+.nav-section{font-size:14px;font-weight:600;color:var(--navy)}
+.nav-links{display:flex;align-items:center;gap:24px;flex:1;margin-left:16px}
+.nav-link{font-size:14px;font-weight:500;color:var(--muted);transition:color .15s}
+.nav-link:hover,.nav-link.active{color:var(--navy)}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.nav-search{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:7px 14px;font-size:13px;color:var(--muted);width:180px;outline:none;font-family:inherit;display:flex;align-items:center;gap:8px;cursor:pointer}
+.nav-cta{background:var(--orange);color:#fff;font-size:13px;font-weight:700;padding:8px 20px;border-radius:999px}
+
+/* VERSION BANNER */
+.version-banner{margin-top:64px;background:var(--navy);padding:10px 24px;display:flex;align-items:center;gap:14px;font-size:13px;flex-wrap:wrap}
+.vb-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.version-selector{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:4px 12px;font-size:13px;font-weight:600;color:#fff;display:flex;align-items:center;gap:6px;cursor:pointer;transition:background .15s}
+.version-selector:hover{background:rgba(255,255,255,.18)}
+.version-selector select{background:transparent;border:none;color:#fff;font-family:inherit;font-weight:600;font-size:13px;cursor:pointer;outline:none;appearance:none}
+.vb-tag{background:#16a34a;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px}
+.vb-info{font-size:12px;color:rgba(255,255,255,.4);margin-left:auto}
+
+/* 3-COLUMN LAYOUT */
+.docs-layout{display:grid;grid-template-columns:260px 1fr 220px;min-height:calc(100vh - 64px - 39px);align-items:start}
+
+/* LEFT SIDEBAR */
+.docs-left{position:sticky;top:103px;height:calc(100vh - 103px);overflow-y:auto;border-right:1px solid var(--line);padding:24px 0;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.dl-search{margin:0 16px 20px;position:relative}
+.dl-search input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 14px 8px 34px;font-size:13px;color:var(--navy);outline:none;font-family:inherit}
+.dl-search input::placeholder{color:#bbb}
+.dl-search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:#bbb}
+.nav-group-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:8px 20px 4px;margin-top:8px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:7px 20px;font-size:13.5px;color:#555;cursor:pointer;transition:all .15s;border-left:2px solid transparent}
+.nav-item:hover{background:var(--bg);color:var(--navy)}
+.nav-item.active{background:#eff6ff;color:var(--navy);font-weight:600;border-left-color:var(--orange)}
+.nav-item-sub{padding-left:36px;font-size:13px;color:var(--muted)}
+.nav-item-sub.active{background:#eff6ff;color:var(--navy);font-weight:600;border-left-color:var(--orange)}
+
+/* MAIN CONTENT */
+.docs-main{padding:40px 56px;min-width:0}
+.doc-breadcrumb{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-bottom:24px}
+.doc-bc-link{color:var(--navy);font-weight:500}
+.doc-bc-link:hover{color:var(--orange)}
+.doc-bc-sep{color:#ccc}
+.doc-header{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--line)}
+.doc-version-tag{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:999px;padding:3px 10px;margin-bottom:12px}
+.doc-title{font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--navy);letter-spacing:-.025em;margin-bottom:8px}
+.doc-subtitle{font-size:16px;color:var(--muted);line-height:1.6;max-width:600px}
+.doc-meta{display:flex;align-items:center;gap:16px;margin-top:14px;flex-wrap:wrap}
+.doc-meta-item{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+
+/* CONTENT TYPOGRAPHY */
+.doc-body h2{font-size:22px;font-weight:800;color:var(--navy);letter-spacing:-.015em;margin:36px 0 14px;padding-top:8px;border-top:1px solid var(--line)}
+.doc-body h2:first-child{border-top:none;margin-top:0;padding-top:0}
+.doc-body h3{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 10px}
+.doc-body p{font-size:15px;color:#374151;line-height:1.8;margin-bottom:14px}
+.doc-body ul,.doc-body ol{margin:0 0 14px 20px}
+.doc-body li{font-size:15px;color:#374151;line-height:1.75;padding:2px 0}
+.doc-body strong{color:var(--navy);font-weight:700}
+.doc-body a{color:var(--orange);border-bottom:1px solid rgba(249,115,22,.3);padding-bottom:1px;transition:border-color .15s}
+.doc-body a:hover{border-color:var(--orange)}
+
+/* CALLOUT BOXES */
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;font-size:14px;line-height:1.7;display:flex;gap:12px;align-items:flex-start}
+.callout-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.callout.info{background:#eff6ff;border:1px solid #bfdbfe}
+.callout.info .callout-body{color:#1e40af}
+.callout.warning{background:#fffbeb;border:1px solid #fde68a}
+.callout.warning .callout-body{color:#92400e}
+.callout.tip{background:#f0fdf4;border:1px solid #bbf7d0}
+.callout.tip .callout-body{color:#14532d}
+
+/* CODE BLOCKS */
+.code-block{background:var(--code-bg);border-radius:10px;margin:18px 0;overflow:hidden}
+.cb-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.cb-lang{font-size:11px;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.06em;text-transform:uppercase}
+.cb-copy{font-size:12px;font-weight:600;color:rgba(255,255,255,.35);cursor:pointer;padding:3px 10px;border-radius:5px;border:1px solid rgba(255,255,255,.1);transition:all .15s;font-family:inherit;background:transparent}
+.cb-copy:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
+.cb-code{padding:18px 20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:var(--code-text);overflow-x:auto}
+.ck-comment{color:#8b949e}
+.ck-keyword{color:#ff7b72}
+.ck-string{color:#a5d6ff}
+.ck-number{color:#79c0ff}
+.ck-value{color:#56d364}
+.ck-key{color:#e6edf3}
+.ck-prompt{color:#8b949e;user-select:none}
+
+/* INLINE CODE */
+code{background:#f1f3f5;color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:12.5px;padding:2px 6px;border-radius:4px}
+
+/* PARAMETER TABLE */
+.param-table{width:100%;border-collapse:collapse;font-size:13.5px;margin:16px 0 24px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.param-table th{background:var(--bg);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.param-table td{padding:11px 14px;border-bottom:1px solid var(--line);color:#374151;line-height:1.5;vertical-align:top}
+.param-table tr:last-child td{border-bottom:none}
+.param-table tr:hover td{background:#fafbfd}
+.pt-param{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--navy)}
+.pt-type{font-size:11px;font-weight:600;background:#eff6ff;color:var(--navy);border-radius:999px;padding:2px 8px;white-space:nowrap}
+.pt-required{font-size:11px;font-weight:700;color:#dc2626;background:#fff1f2;border-radius:999px;padding:2px 8px}
+.pt-optional{font-size:11px;font-weight:600;color:var(--muted);background:var(--bg);border-radius:999px;padding:2px 8px}
+
+/* PREV / NEXT NAV */
+.doc-nav{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:48px;padding-top:28px;border-top:1px solid var(--line)}
+.doc-nav-card{border:1px solid var(--line);border-radius:10px;padding:14px 18px;cursor:pointer;transition:all .2s}
+.doc-nav-card:hover{border-color:#cbd5e1;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.doc-nav-dir{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
+.doc-nav-title{font-size:14px;font-weight:600;color:var(--navy)}
+
+/* RIGHT TOC */
+.docs-right{position:sticky;top:103px;height:calc(100vh - 103px);overflow-y:auto;border-left:1px solid var(--line);padding:28px 20px 24px 24px}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.toc-item{font-size:12.5px;color:var(--muted);padding:5px 0;cursor:pointer;transition:color .15s;display:block;border-left:2px solid transparent;padding-left:10px;line-height:1.45}
+.toc-item:hover{color:var(--navy)}
+.toc-item.active{color:var(--navy);font-weight:600;border-left-color:var(--orange)}
+.toc-item-sub{padding-left:22px;font-size:12px}
+.toc-divider{height:1px;background:var(--line);margin:16px 0}
+.toc-cta{background:var(--navy);color:#fff;border-radius:10px;padding:14px 16px;margin-top:4px}
+.toc-cta-title{font-size:13px;font-weight:700;margin-bottom:5px}
+.toc-cta-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.55;margin-bottom:12px}
+.toc-cta-btn{display:block;text-align:center;background:var(--orange);color:#fff;font-size:12px;font-weight:700;padding:7px 12px;border-radius:7px;transition:background .15s}
+.toc-cta-btn:hover{background:#ea6c0a}
+
+.design-label{position:fixed;bottom:20px;right:20px;z-index:9999;background:var(--navy);color:#fff;font-size:11px;font-weight:600;padding:7px 18px;border-radius:999px}
+
+@media(max-width:1100px){
+  .docs-right{display:none}
+  .docs-layout{grid-template-columns:240px 1fr}
+}
+@media(max-width:768px){
+  nav{padding:0 16px}
+  .nav-links,.nav-search{display:none}
+  .docs-layout{grid-template-columns:1fr}
+  .docs-left{display:none}
+  .docs-main{padding:28px 20px}
+  .version-banner{padding:8px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="design-label">Design B — Documentation</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-mark">P1</div>
+    <div class="nav-logo-name">Postgres 1st</div>
+  </div>
+  <div class="nav-divider"></div>
+  <div class="nav-section">Documentation</div>
+  <div class="nav-links">
+    <a class="nav-link" href="kb.html">Knowledge Base</a>
+    <a class="nav-link" href="resources.html">Resources</a>
+    <a class="nav-link" href="index.html">Website</a>
+  </div>
+  <div class="nav-right">
+    <div class="nav-search">🔍 &nbsp;Search docs...</div>
+    <a class="nav-cta" href="index.html#contact">Talk to an Expert</a>
+  </div>
+</nav>
+
+<!-- VERSION BANNER -->
+<div class="version-banner">
+  <span class="vb-label">Version</span>
+  <div class="version-selector">
+    <select>
+      <option selected>PGF v3.2 (latest)</option>
+      <option>PGF v3.1</option>
+      <option>PGF v3.0</option>
+      <option>PGF v2.x (legacy)</option>
+    </select>
+    ▾
+  </div>
+  <span class="vb-tag">Stable</span>
+  <span class="vb-info">Released 14 June 2025 · <a href="#" style="color:rgba(255,255,255,.5);text-decoration:underline">Changelog</a></span>
+</div>
+
+<!-- DOCS LAYOUT -->
+<div class="docs-layout">
+
+  <!-- LEFT NAV -->
+  <aside class="docs-left">
+    <div class="dl-search">
+      <span class="dl-search-icon">🔍</span>
+      <input type="text" placeholder="Search in docs...">
+    </div>
+
+    <div class="nav-group-label">Getting Started</div>
+    <div class="nav-item">Introduction</div>
+    <div class="nav-item">Quick Start Guide</div>
+    <div class="nav-item">Architecture Overview</div>
+    <div class="nav-item">System Requirements</div>
+
+    <div class="nav-group-label">Installation</div>
+    <div class="nav-item">Installing PGF Platform</div>
+    <div class="nav-item active">Connecting a Cluster</div>
+    <div class="nav-item nav-item-sub">Prerequisites</div>
+    <div class="nav-item nav-item-sub active">Connection Configuration</div>
+    <div class="nav-item nav-item-sub">Verifying the Connection</div>
+    <div class="nav-item nav-item-sub">Troubleshooting</div>
+    <div class="nav-item">Installing WatchTower Agent</div>
+    <div class="nav-item">Configuring DataGuardian</div>
+    <div class="nav-item">Setting Up CopyCascade</div>
+
+    <div class="nav-group-label">Configuration</div>
+    <div class="nav-item">Authentication & Access</div>
+    <div class="nav-item">Alerting & Thresholds</div>
+    <div class="nav-item">Retention Policies</div>
+    <div class="nav-item">Notification Channels</div>
+    <div class="nav-item">Role-Based Access Control</div>
+
+    <div class="nav-group-label">PGF WatchTower</div>
+    <div class="nav-item">Metrics Reference</div>
+    <div class="nav-item">Alert Rules</div>
+    <div class="nav-item">Custom Dashboards</div>
+    <div class="nav-item">Query Monitoring</div>
+
+    <div class="nav-group-label">PGF DataGuardian</div>
+    <div class="nav-item">Backup Policies</div>
+    <div class="nav-item">Restore Operations</div>
+    <div class="nav-item">Point-in-Time Recovery</div>
+
+    <div class="nav-group-label">PGF CopyCascade</div>
+    <div class="nav-item">Replication Setup</div>
+    <div class="nav-item">Failover Configuration</div>
+    <div class="nav-item">Promoting a Standby</div>
+
+    <div class="nav-group-label">PGF Pal (AI)</div>
+    <div class="nav-item">Using PGF Pal</div>
+    <div class="nav-item">Query Analysis</div>
+    <div class="nav-item">Anomaly Detection</div>
+
+    <div class="nav-group-label">API Reference</div>
+    <div class="nav-item">Authentication</div>
+    <div class="nav-item">Clusters API</div>
+    <div class="nav-item">Metrics API</div>
+    <div class="nav-item">Alerts API</div>
+    <div class="nav-item">Webhooks</div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="docs-main">
+    <div class="doc-breadcrumb">
+      <a class="doc-bc-link" href="index.html">Postgres 1st</a>
+      <span class="doc-bc-sep">›</span>
+      <a class="doc-bc-link" href="#">Installation</a>
+      <span class="doc-bc-sep">›</span>
+      <span>Connecting a Cluster</span>
+    </div>
+
+    <div class="doc-header">
+      <div class="doc-version-tag">✓ PGF v3.2 (latest)</div>
+      <h1 class="doc-title">Connecting a PostgreSQL Cluster</h1>
+      <p class="doc-subtitle">Connect your PostgreSQL cluster to PGF WatchTower. Takes about 10 minutes, assuming the monitoring role is already created.</p>
+      <div class="doc-meta">
+        <div class="doc-meta-item">📅 Updated 3 June 2025</div>
+        <div class="doc-meta-item">⏱ 12 min read</div>
+        <div class="doc-meta-item">🔖 Installation</div>
+      </div>
+    </div>
+
+    <div class="doc-body">
+
+      <h2 id="prereqs">Prerequisites</h2>
+      <p>Before connecting your cluster, verify the following:</p>
+      <ul>
+        <li>PostgreSQL <strong>12, 13, 14, 15, or 16</strong> is running and accessible from the PGF Agent host</li>
+        <li>The PGF WatchTower agent is installed on the same host or a host with network access to port <code>5432</code></li>
+        <li>You have a PostgreSQL superuser account, or a dedicated monitoring role with the required grants (see below)</li>
+        <li>Outbound HTTPS (port 443) is open from the agent host to <code>api.postgresfirst.com</code></li>
+      </ul>
+
+      <div class="callout info">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">We recommend creating a dedicated <code>pgf_monitor</code> role rather than connecting as a superuser. This limits blast radius in the event of a credentials compromise.</div>
+      </div>
+
+      <h3>Creating the monitoring role</h3>
+      <p>Run the following SQL on your PostgreSQL cluster to create the minimum-privilege monitoring role:</p>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">SQL</span>
+          <button class="cb-copy" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="cb-code"><span class="ck-comment">-- Create the dedicated monitoring role</span>
+<span class="ck-keyword">CREATE</span> <span class="ck-keyword">ROLE</span> pgf_monitor <span class="ck-keyword">WITH</span> <span class="ck-keyword">LOGIN</span> <span class="ck-keyword">PASSWORD</span> <span class="ck-string">'your-secure-password'</span>;
+
+<span class="ck-comment">-- Grant required permissions</span>
+<span class="ck-keyword">GRANT</span> pg_monitor <span class="ck-keyword">TO</span> pgf_monitor;
+<span class="ck-keyword">GRANT</span> <span class="ck-keyword">CONNECT</span> <span class="ck-keyword">ON</span> <span class="ck-keyword">DATABASE</span> postgres <span class="ck-keyword">TO</span> pgf_monitor;
+
+<span class="ck-comment">-- Required for query statistics (pg_stat_statements)</span>
+<span class="ck-keyword">GRANT</span> <span class="ck-keyword">SELECT</span> <span class="ck-keyword">ON</span> pg_stat_activity <span class="ck-keyword">TO</span> pgf_monitor;
+<span class="ck-keyword">GRANT</span> <span class="ck-keyword">SELECT</span> <span class="ck-keyword">ON</span> pg_stat_replication <span class="ck-keyword">TO</span> pgf_monitor;
+<span class="ck-keyword">GRANT</span> pg_read_all_stats <span class="ck-keyword">TO</span> pgf_monitor;</div>
+      </div>
+
+      <h2 id="connection-config">Connection Configuration</h2>
+      <p>Open the PGF WatchTower agent configuration file. The default location is <code>/etc/pgf/watchtower.yaml</code>.</p>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">YAML</span>
+          <button class="cb-copy" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="cb-code"><span class="ck-comment"># /etc/pgf/watchtower.yaml</span>
+<span class="ck-key">cluster</span>:
+  <span class="ck-key">name</span>: <span class="ck-string">"production-primary"</span>
+  <span class="ck-key">host</span>: <span class="ck-string">"db.yourcompany.internal"</span>
+  <span class="ck-key">port</span>: <span class="ck-number">5432</span>
+  <span class="ck-key">database</span>: <span class="ck-string">"postgres"</span>
+  <span class="ck-key">username</span>: <span class="ck-string">"pgf_monitor"</span>
+  <span class="ck-key">password</span>: <span class="ck-string">"${PGF_MONITOR_PASSWORD}"</span>  <span class="ck-comment"># use env var, not plaintext</span>
+  <span class="ck-key">ssl_mode</span>: <span class="ck-string">"require"</span>
+
+<span class="ck-key">collection</span>:
+  <span class="ck-key">interval_seconds</span>: <span class="ck-number">30</span>
+  <span class="ck-key">query_stats</span>: <span class="ck-value">true</span>
+  <span class="ck-key">replication_stats</span>: <span class="ck-value">true</span>
+  <span class="ck-key">vacuum_stats</span>: <span class="ck-value">true</span>
+
+<span class="ck-key">pgf_api</span>:
+  <span class="ck-key">endpoint</span>: <span class="ck-string">"https://api.postgresfirst.com/v3"</span>
+  <span class="ck-key">api_key</span>: <span class="ck-string">"${PGF_API_KEY}"</span></div>
+      </div>
+
+      <h3>Configuration parameters</h3>
+      <table class="param-table">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Required?</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pt-param">cluster.name</span></td>
+            <td><span class="pt-type">string</span></td>
+            <td><span class="pt-required">Required</span></td>
+            <td>Display name for this cluster in the PGF dashboard. Must be unique per workspace.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-param">cluster.host</span></td>
+            <td><span class="pt-type">string</span></td>
+            <td><span class="pt-required">Required</span></td>
+            <td>Hostname or IP address of the primary PostgreSQL instance.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-param">cluster.ssl_mode</span></td>
+            <td><span class="pt-type">string</span></td>
+            <td><span class="pt-optional">Optional</span></td>
+            <td>SSL mode for the connection. Accepts <code>disable</code>, <code>require</code>, <code>verify-ca</code>, or <code>verify-full</code>. Default: <code>require</code>.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-param">collection.interval_seconds</span></td>
+            <td><span class="pt-type">integer</span></td>
+            <td><span class="pt-optional">Optional</span></td>
+            <td>Metric collection interval. Minimum 15, maximum 300. Default: 30.</td>
+          </tr>
+          <tr>
+            <td><span class="pt-param">collection.query_stats</span></td>
+            <td><span class="pt-type">boolean</span></td>
+            <td><span class="pt-optional">Optional</span></td>
+            <td>Enable collection of query statistics via <code>pg_stat_statements</code>. Requires the extension to be installed. Default: true.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body"><strong>Do not put passwords in plaintext in the config file.</strong> Use environment variables (<code>${VAR_NAME}</code> syntax) or a secrets manager. The agent reads env vars at startup.</div>
+      </div>
+
+      <h2 id="verify">Verifying the Connection</h2>
+      <p>After saving the configuration, restart the agent and check the connection status:</p>
+
+      <div class="code-block">
+        <div class="cb-header">
+          <span class="cb-lang">Shell</span>
+          <button class="cb-copy" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="cb-code"><span class="ck-prompt">$</span> sudo systemctl restart pgf-watchtower
+<span class="ck-prompt">$</span> pgf status
+
+<span class="ck-comment"># Expected output:</span>
+<span class="ck-value">✓  production-primary  connected  PostgreSQL 15.4  last seen 2s ago</span>
+<span class="ck-value">✓  api.postgresfirst.com  reachable  latency 42ms</span></div>
+      </div>
+
+      <p>If the connection is successful, the cluster will appear in your PGF dashboard within 60 seconds. The first metric collection runs immediately after connection.</p>
+
+      <div class="callout tip">
+        <span class="callout-icon">✅</span>
+        <div class="callout-body">Once connected, navigate to <strong>WatchTower → Clusters</strong> in the dashboard. You should see your cluster listed with a green status dot and live metric graphs within 2 minutes.</div>
+      </div>
+
+      <h2 id="troubleshoot">Troubleshooting</h2>
+      <p>If the agent fails to connect, run <code>pgf diagnose</code> for a detailed report of what passed and what failed. Common issues:</p>
+      <ul>
+        <li><strong>Authentication failure:</strong> Verify the <code>pgf_monitor</code> password and that the role has <code>LOGIN</code> privilege.</li>
+        <li><strong>Connection timeout:</strong> Check that port 5432 is accessible from the agent host. Test with <code>psql -h {host} -U pgf_monitor -p 5432 postgres</code>.</li>
+        <li><strong>SSL error:</strong> If your cluster requires client certificates, see <a href="#">Advanced SSL Configuration</a>.</li>
+        <li><strong>API key rejected:</strong> Confirm the key in your PGF workspace settings. Keys are workspace-scoped — don't mix production and staging keys.</li>
+      </ul>
+
+    </div>
+
+    <!-- PREV / NEXT -->
+    <div class="doc-nav">
+      <div class="doc-nav-card">
+        <div class="doc-nav-dir">← Previous</div>
+        <div class="doc-nav-title">Installing the WatchTower Agent</div>
+      </div>
+      <div class="doc-nav-card" style="text-align:right">
+        <div class="doc-nav-dir">Next →</div>
+        <div class="doc-nav-title">Configuring Alert Thresholds</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- RIGHT TOC -->
+  <aside class="docs-right">
+    <div class="toc-label">On this page</div>
+    <a class="toc-item active" href="#prereqs">Prerequisites</a>
+    <a class="toc-item toc-item-sub" href="#prereqs">Creating the monitoring role</a>
+    <a class="toc-item" href="#connection-config">Connection Configuration</a>
+    <a class="toc-item toc-item-sub" href="#connection-config">Configuration parameters</a>
+    <a class="toc-item" href="#verify">Verifying the Connection</a>
+    <a class="toc-item" href="#troubleshoot">Troubleshooting</a>
+    <div class="toc-divider"></div>
+    <div class="toc-cta">
+      <div class="toc-cta-title">Need help?</div>
+      <div class="toc-cta-desc">Our engineers answer connection issues within 4 business hours.</div>
+      <a href="index.html#contact" class="toc-cta-btn">Talk to an Expert</a>
+    </div>
+  </aside>
+
+</div>
+
+<script>
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('.cb-code').innerText;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 2000);
+  });
+}
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', function(){
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
