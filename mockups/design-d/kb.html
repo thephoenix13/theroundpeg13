@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knowledge Base — Postgres 1st</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;color:#1a1a2e;background:#fff;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+:root{--navy:#0f2744;--orange:#f97316;--orange-light:#fff7f0;--bg:#f8f9fc;--line:#e8eaf0;--muted:#64748b}
+
+/* NAV — Design D dark navy */
+nav.site-nav {
+  background: rgba(15,39,68,.96); position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,.07); backdrop-filter: blur(12px);
+  height: 66px; display: flex; align-items: center;
+}
+.nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-mark { width: 36px; height: 36px; background: #f97316; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono',monospace; font-weight: 700; font-size: 13px; color: #fff; }
+.logo-text { color: #fff; font-weight: 700; font-size: 17px; letter-spacing: -.3px; }
+.logo-text span { color: #f97316; }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: rgba(255,255,255,.7); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-cta { background: #f97316; color: #fff; text-decoration: none; padding: 9px 20px; border-radius: 7px; font-size: 14px; font-weight: 700; transition: background .2s; }
+.nav-cta:hover { background: #ea6c0a; }
+
+/* KB HERO */
+.kb-hero{background:var(--navy);padding:56px 40px;text-align:center}
+.kb-hero-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
+.kb-hero h1{font-size:clamp(28px,3.5vw,44px);font-weight:800;color:#fff;letter-spacing:-.025em;margin-bottom:8px}
+.kb-hero p{font-size:16px;color:rgba(255,255,255,.5);margin-bottom:28px;font-weight:400}
+.kb-search-wrap{max-width:540px;margin:0 auto;position:relative}
+.kb-search{width:100%;background:#fff;border:none;border-radius:12px;padding:14px 52px 14px 18px;font-size:15px;font-family:'Plus Jakarta Sans',sans-serif;color:var(--navy);outline:none;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+.kb-search::placeholder{color:#aaa}
+.kb-search-btn{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:var(--orange);border:none;border-radius:8px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;color:#fff;font-size:16px}
+.kb-stats{display:flex;justify-content:center;gap:28px;margin-top:22px;flex-wrap:wrap}
+.kb-stat{font-size:13px;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:6px}
+.kb-stat strong{color:rgba(255,255,255,.7);font-weight:600}
+
+/* BREADCRUMB */
+.breadcrumb{padding:14px 40px;background:var(--bg);border-bottom:1px solid var(--line);font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.bc-link{color:var(--navy);font-weight:500}
+.bc-link:hover{color:var(--orange)}
+.bc-sep{color:#ccc}
+
+/* MAIN LAYOUT */
+.kb-body{max-width:1200px;margin:0 auto;padding:40px 40px 80px;display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start}
+.kb-sidebar{position:sticky;top:82px}
+.sidebar-section{margin-bottom:32px}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;padding:0 8px}
+.sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:14px;font-weight:500;color:#444;cursor:pointer;transition:all .15s;border-left:2px solid transparent}
+.sidebar-link:hover{background:rgba(249,115,22,.05);color:var(--navy);border-left-color:rgba(249,115,22,.3)}
+.sidebar-link.active{background:rgba(249,115,22,.08);color:var(--navy);font-weight:600;border-left:2px solid #f97316}
+.sidebar-link .sl-icon{width:28px;height:28px;border-radius:6px;background:var(--bg);display:grid;place-items:center;font-size:14px;flex-shrink:0;border:1px solid var(--line)}
+.sidebar-link.active .sl-icon{background:var(--navy);border-color:var(--navy);color:#fff}
+.sidebar-count{margin-left:auto;font-size:11px;font-weight:600;color:var(--muted);background:var(--bg);border-radius:999px;padding:2px 8px}
+
+/* CONTENT AREA */
+.kb-main{}
+.kb-main-header{margin-bottom:28px}
+.kb-main-title{font-size:24px;font-weight:800;color:var(--navy);letter-spacing:-.02em;margin-bottom:6px}
+.kb-main-sub{font-size:14px;color:var(--muted)}
+.kb-filter-row{display:flex;align-items:center;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.kb-filter-btn{font-size:12px;font-weight:600;padding:5px 14px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fff;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.kb-filter-btn:hover{border-color:var(--navy);color:var(--navy)}
+.kb-filter-btn.on{background:#0f2744;color:#fff;border-color:#0f2744}
+
+/* ARTICLE CARDS */
+.article-grid{display:grid;gap:14px}
+.article-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;align-items:flex-start;gap:16px;transition:all .2s;cursor:pointer}
+.article-card:hover{border-color:#cbd5e1;box-shadow:0 4px 16px rgba(0,0,0,.06);transform:translateX(4px)}
+.ac-icon{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.ac-icon-blue{background:#eff6ff}
+.ac-icon-green{background:#f0fdf4}
+.ac-icon-orange{background:#fff7f0}
+.ac-icon-purple{background:#faf5ff}
+.ac-icon-red{background:#fff1f2}
+.ac-body{flex:1;min-width:0}
+.ac-title{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:5px;line-height:1.4}
+.ac-desc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.ac-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ac-tag{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:999px}
+.tag-beginner{background:#f0fdf4;color:#16a34a}
+.tag-intermediate{background:#fff7f0;color:#ea580c}
+.tag-advanced{background:#faf5ff;color:#7c3aed}
+.ac-time{font-size:12px;color:#bbb;display:flex;align-items:center;gap:4px}
+.ac-updated{font-size:12px;color:#bbb}
+.ac-arrow{font-size:18px;color:#ddd;flex-shrink:0;margin-top:10px;transition:color .15s}
+.article-card:hover .ac-arrow{color:var(--orange)}
+
+/* CATEGORY SECTION HEADER */
+.cat-section-hd{display:flex;align-items:center;justify-content:space-between;margin:32px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--orange)}
+.csh-title{font-size:16px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:8px}
+.csh-count{font-size:13px;color:var(--muted);font-weight:400}
+.csh-link{font-size:13px;font-weight:600;color:var(--orange);border-bottom:1px solid var(--orange)}
+.csh-link:hover{color:#ea6c0a}
+
+/* POPULAR STRIP */
+.popular-strip{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:28px}
+.ps-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.ps-list{display:flex;flex-direction:column;gap:10px}
+.ps-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer;padding:8px 10px;border-radius:8px;transition:background .15s}
+.ps-item:hover{background:#fff}
+.ps-num{font-size:13px;font-weight:800;color:var(--orange);flex-shrink:0;width:20px;margin-top:1px}
+.ps-item-title{font-size:13.5px;font-weight:500;color:var(--navy);line-height:1.45}
+.ps-item-tag{font-size:11px;color:var(--muted)}
+
+/* FEEDBACK WIDGET */
+.feedback-bar{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-top:32px;flex-wrap:wrap}
+.fb-label{font-size:14px;color:var(--muted);flex:1}
+.fb-btn{padding:6px 18px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:'Plus Jakarta Sans',sans-serif}
+.fb-btn:hover{border-color:var(--navy);color:var(--navy)}
+.fb-btn.yes:hover{border-color:#16a34a;color:#16a34a;background:#f0fdf4}
+.fb-btn.no:hover{border-color:#dc2626;color:#dc2626;background:#fff1f2}
+
+/* GETTING STARTED HIGHLIGHT */
+.gs-highlight{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);border-radius:14px;padding:28px;margin-bottom:28px;position:relative;overflow:hidden}
+.gs-highlight::after{content:'';position:absolute;right:-20px;top:-20px;width:120px;height:120px;background:rgba(249,115,22,.15);border-radius:50%}
+.gs-h-tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+.gs-h-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.gs-h-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.65;margin-bottom:18px}
+.gs-h-links{display:flex;flex-direction:column;gap:8px}
+.gs-h-link{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.8);padding:8px 12px;background:rgba(255,255,255,.07);border-radius:8px;border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:background .15s}
+.gs-h-link:hover{background:rgba(255,255,255,.14);color:#fff}
+.gs-h-link-num{width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size:10px;font-weight:800;display:grid;place-items:center;flex-shrink:0}
+
+@media(max-width:900px){
+  .nav-links{display:none}
+  .kb-body{grid-template-columns:1fr;padding:24px 16px 60px}
+  .kb-sidebar{position:static}
+  .breadcrumb{padding:12px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- MOCKUP NAV BAR -->
+<div style="background:#111827;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:10px 20px;font-size:12.5px;font-family:system-ui,sans-serif;border-bottom:1px solid #1f2937">
+  <span style="color:#9ca3af;font-weight:600;letter-spacing:.02em">Postgres 1st — design mockups</span>
+  <span style="color:#374151">|</span>
+  <a href="/theroundpeg13/mockups/design-a/" style="color:#f9fafb;text-decoration:none;font-weight:600">Design A</a>
+  <a href="/theroundpeg13/mockups/design-b/" style="color:#f9fafb;text-decoration:none;font-weight:600">Design B</a>
+  <a href="/theroundpeg13/mockups/design-c/" style="color:#f9fafb;text-decoration:none;font-weight:600">Design C</a>
+  <a href="/theroundpeg13/mockups/design-d/" style="color:#f9fafb;text-decoration:none;font-weight:600">Design D</a>
+  <span style="color:#374151">|</span>
+  <a href="/theroundpeg13/mockups/design-d/kb.html" style="color:#9ca3af;text-decoration:none">KB</a>
+  <a href="/theroundpeg13/mockups/design-d/docs.html" style="color:#9ca3af;text-decoration:none">Docs</a>
+  <a href="/theroundpeg13/mockups/design-d/resources.html" style="color:#9ca3af;text-decoration:none">Resources</a>
+</div>
+
+<!-- SITE NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-mark">P1</div>
+      <div class="logo-text">Postgres <span>1st</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="index.html">Services</a></li>
+      <li><a class="active" href="#">Knowledge Base</a></li>
+      <li><a href="docs.html">Documentation</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <a class="nav-cta" href="index.html#contact">Talk to an Expert</a>
+  </div>
+</nav>
+
+<!-- KB HERO -->
+<div class="kb-hero">
+  <div class="kb-hero-tag">Knowledge Base</div>
+  <h1>How can we help you?</h1>
+  <p>120+ articles written by the engineers who manage production PostgreSQL clusters.</p>
+  <div class="kb-search-wrap">
+    <input class="kb-search" type="text" placeholder="Search — e.g. "replication lag", "autovacuum", "connection pooling"...">
+    <button class="kb-search-btn">→</button>
+  </div>
+  <div class="kb-stats">
+    <div class="kb-stat"><strong>120+</strong> articles</div>
+    <div class="kb-stat"><strong>5</strong> categories</div>
+    <div class="kb-stat">Updated <strong>weekly</strong></div>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a class="bc-link" href="index.html">Home</a>
+  <span class="bc-sep">›</span>
+  <span>Knowledge Base</span>
+</div>
+
+<!-- BODY -->
+<div class="kb-body">
+
+  <!-- SIDEBAR -->
+  <aside class="kb-sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Categories</div>
+      <div class="sidebar-link active">
+        <div class="sl-icon">📚</div>
+        All Articles
+        <span class="sidebar-count">120</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">🚀</div>
+        Getting Started
+        <span class="sidebar-count">18</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">⚙️</div>
+        Configuration
+        <span class="sidebar-count">26</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">🔧</div>
+        Deployment
+        <span class="sidebar-count">22</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">🔍</div>
+        Troubleshooting
+        <span class="sidebar-count">31</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">🔄</div>
+        Migration
+        <span class="sidebar-count">19</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon">⚡</div>
+        Performance
+        <span class="sidebar-count">14</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Difficulty</div>
+      <div class="sidebar-link">
+        <div class="sl-icon" style="font-size:11px;font-weight:700;color:#16a34a">BEG</div>
+        Beginner
+        <span class="sidebar-count">44</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon" style="font-size:11px;font-weight:700;color:#ea580c">MID</div>
+        Intermediate
+        <span class="sidebar-count">52</span>
+      </div>
+      <div class="sidebar-link">
+        <div class="sl-icon" style="font-size:11px;font-weight:700;color:#7c3aed">ADV</div>
+        Advanced
+        <span class="sidebar-count">24</span>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Popular right now</div>
+      <div class="ps-list">
+        <div class="ps-item">
+          <div class="ps-num">1</div>
+          <div>
+            <div class="ps-item-title">How to fix autovacuum bloat</div>
+            <div class="ps-item-tag">Troubleshooting · Intermediate</div>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">2</div>
+          <div>
+            <div class="ps-item-title">Setting up streaming replication</div>
+            <div class="ps-item-tag">Deployment · Beginner</div>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">3</div>
+          <div>
+            <div class="ps-item-title">Connection pooling with PgBouncer</div>
+            <div class="ps-item-tag">Configuration · Intermediate</div>
+          </div>
+        </div>
+        <div class="ps-item">
+          <div class="ps-num">4</div>
+          <div>
+            <div class="ps-item-title">Oracle to PostgreSQL data type mapping</div>
+            <div class="ps-item-tag">Migration · Beginner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="kb-main">
+
+    <!-- Getting started highlight -->
+    <div class="gs-highlight">
+      <div class="gs-h-tag">New to Postgres 1st?</div>
+      <div class="gs-h-title">Start here — the 4-step onboarding path</div>
+      <div class="gs-h-desc">Four articles. Most teams are connected and running a first verified backup in under an hour.</div>
+      <div class="gs-h-links">
+        <div class="gs-h-link"><div class="gs-h-link-num">1</div> Connect your first PostgreSQL cluster to PGF WatchTower</div>
+        <div class="gs-h-link"><div class="gs-h-link-num">2</div> Configure your first backup policy with PGF DataGuardian</div>
+        <div class="gs-h-link"><div class="gs-h-link-num">3</div> Enable streaming replication and set up a standby</div>
+        <div class="gs-h-link"><div class="gs-h-link-num">4</div> Invite your team and assign roles in the admin dashboard</div>
+      </div>
+    </div>
+
+    <!-- Filter row -->
+    <div class="kb-filter-row">
+      <span style="font-size:13px;font-weight:500;color:var(--muted);margin-right:4px">Filter:</span>
+      <div class="kb-filter-btn on">All</div>
+      <div class="kb-filter-btn">Beginner</div>
+      <div class="kb-filter-btn">Intermediate</div>
+      <div class="kb-filter-btn">Advanced</div>
+    </div>
+
+    <!-- GETTING STARTED -->
+    <div class="cat-section-hd">
+      <div class="csh-title">🚀 Getting Started <span class="csh-count">18 articles</span></div>
+      <a class="csh-link" href="#">View all →</a>
+    </div>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="ac-icon ac-icon-blue">🗄️</div>
+        <div class="ac-body">
+          <div class="ac-title">Connect your PostgreSQL cluster to PGF WatchTower</div>
+          <div class="ac-desc">Step-by-step guide to onboarding your first production cluster — connection string setup, metric collection, and your first alert.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-beginner">Beginner</span>
+            <span class="ac-time">⏱ 8 min read</span>
+            <span class="ac-updated">Updated 3 days ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+      <div class="article-card">
+        <div class="ac-icon ac-icon-green">🛡️</div>
+        <div class="ac-body">
+          <div class="ac-title">Your first backup policy with PGF DataGuardian</div>
+          <div class="ac-desc">Configure automated backups, set your retention policy, and run your first restore test to verify your RPO is achievable.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-beginner">Beginner</span>
+            <span class="ac-time">⏱ 12 min read</span>
+            <span class="ac-updated">Updated 1 week ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+      <div class="article-card">
+        <div class="ac-icon ac-icon-orange">👤</div>
+        <div class="ac-body">
+          <div class="ac-title">Setting up roles and permissions for your team</div>
+          <div class="ac-desc">Invite engineers, DBAs, and read-only viewers. Understand what each role can see and modify in the PGF platform.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-beginner">Beginner</span>
+            <span class="ac-time">⏱ 6 min read</span>
+            <span class="ac-updated">Updated 2 weeks ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div class="cat-section-hd">
+      <div class="csh-title">🔍 Troubleshooting <span class="csh-count">31 articles</span></div>
+      <a class="csh-link" href="#">View all →</a>
+    </div>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="ac-icon ac-icon-red">🔥</div>
+        <div class="ac-body">
+          <div class="ac-title">Diagnosing and fixing autovacuum bloat</div>
+          <div class="ac-desc">Table bloat from stale dead tuples is the most common cause of degraded PostgreSQL performance. This guide walks through identification, root cause analysis, and configuration fixes.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-intermediate">Intermediate</span>
+            <span class="ac-time">⏱ 18 min read</span>
+            <span class="ac-updated">Updated 5 days ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+      <div class="article-card">
+        <div class="ac-icon ac-icon-orange">📊</div>
+        <div class="ac-body">
+          <div class="ac-title">High connection count: diagnosing connection pool exhaustion</div>
+          <div class="ac-desc">When max_connections is hit, new queries fail immediately. Learn how to identify the source, configure PgBouncer, and set safe per-role limits.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-intermediate">Intermediate</span>
+            <span class="ac-time">⏱ 14 min read</span>
+            <span class="ac-updated">Updated 2 weeks ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+      <div class="article-card">
+        <div class="ac-icon ac-icon-purple">🔁</div>
+        <div class="ac-body">
+          <div class="ac-title">Replication lag: causes, thresholds, and resolution steps</div>
+          <div class="ac-desc">Streaming replication lag above your threshold means your standby can't promote cleanly. This article covers wal_level, network saturation, and replica query conflicts.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-advanced">Advanced</span>
+            <span class="ac-time">⏱ 22 min read</span>
+            <span class="ac-updated">Updated 1 week ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+    </div>
+
+    <!-- MIGRATION -->
+    <div class="cat-section-hd">
+      <div class="csh-title">🔄 Migration <span class="csh-count">19 articles</span></div>
+      <a class="csh-link" href="#">View all →</a>
+    </div>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="ac-icon ac-icon-blue">📋</div>
+        <div class="ac-body">
+          <div class="ac-title">Oracle to PostgreSQL data type mapping reference</div>
+          <div class="ac-desc">A complete mapping of Oracle data types to their PostgreSQL equivalents, with conversion notes for edge cases like CLOB, RAW, and NVARCHAR2.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-beginner">Beginner</span>
+            <span class="ac-time">⏱ 10 min read</span>
+            <span class="ac-updated">Updated 3 weeks ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+      <div class="article-card">
+        <div class="ac-icon ac-icon-green">✅</div>
+        <div class="ac-body">
+          <div class="ac-title">Pre-migration assessment checklist: 23 questions to answer before you move</div>
+          <div class="ac-desc">The assessment framework used across all Postgres 1st migration engagements. Use this to scope risk, identify incompatible objects, and plan your cutover window.</div>
+          <div class="ac-meta">
+            <span class="ac-tag tag-intermediate">Intermediate</span>
+            <span class="ac-time">⏱ 20 min read</span>
+            <span class="ac-updated">Updated 1 month ago</span>
+          </div>
+        </div>
+        <div class="ac-arrow">›</div>
+      </div>
+    </div>
+
+    <!-- Feedback -->
+    <div class="feedback-bar">
+      <div class="fb-label">Was this page helpful?</div>
+      <button class="fb-btn yes">👍 Yes, thanks</button>
+      <button class="fb-btn no">👎 Not really</button>
+      <a href="#" style="margin-left:auto;font-size:13px;font-weight:600;color:var(--orange);border-bottom:1px solid var(--orange)">Suggest an article →</a>
+    </div>
+
+  </main>
+</div>
+
+<script>
+document.querySelectorAll('.sidebar-link').forEach(link => {
+  link.addEventListener('click', function(){
+    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+document.querySelectorAll('.kb-filter-btn').forEach(btn => {
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.kb-filter-btn').forEach(b => b.classList.remove('on'));
+    this.classList.add('on');
+  });
+});
+</script>
+</body>
+</html>
