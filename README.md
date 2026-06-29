@@ -1,4 +1,4 @@
-# Google Maps Scraper Kit 🗺️
+# Google Maps Scraper Kit
 
 <p align="center">
   <img src="assets/banner.svg" alt="Google Maps Scraper Kit — run a free Google Maps scraper locally, let Claude drive it on autopilot" width="100%">
