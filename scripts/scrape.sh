@@ -21,8 +21,9 @@ if ! curl -s -m 5 "${AUTH[@]}" "$BASE/api/v1/jobs" >/dev/null 2>&1; then
   exit 1
 fi
 
-echo "▶ Creating job: \"$KEYWORD\" @ $LAT,$LON depth=$DEPTH"
-BODY=$(printf '{"name":"scrape-cli","keywords":["%s"],"lang":"en","zoom":15,"lat":"%s","lon":"%s","fast_mode":false,"radius":10000,"depth":%s,"email":false,"max_time":600}' \
+echo "▶ Creating job: \"$KEYWORD\" @ $LAT,$LON depth=$DEPTH (email extraction ON)"
+# email:true → the scraper visits each business website to pull emails (the key lead field). A bit slower.
+BODY=$(printf '{"name":"scrape-cli","keywords":["%s"],"lang":"en","zoom":15,"lat":"%s","lon":"%s","fast_mode":false,"radius":10000,"depth":%s,"email":true,"max_time":600}' \
   "$KEYWORD" "$LAT" "$LON" "$DEPTH")
 ID=$(curl -s -X POST "$BASE/api/v1/jobs" "${AUTH[@]}" -H "Content-Type: application/json" -d "$BODY" \
      | grep -oE '[a-f0-9-]{36}' | head -1 || true)

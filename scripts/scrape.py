@@ -131,9 +131,15 @@ def main():
     ap.add_argument("--keywords-file", help="file with one keyword per line (batch)")
     ap.add_argument("--city", help="city/place to auto-geocode for lat/lon")
     ap.add_argument("--depth", type=int, default=5)
-    ap.add_argument("--email", action="store_true", help="also extract emails (much slower)")
+    # Emails are ON by default (they're the most valuable lead field). Visits each business
+    # website to find an address — a bit slower. Use --no-email to skip for a fast run.
+    ap.add_argument("--email", dest="email", action="store_true", default=True, help=argparse.SUPPRESS)
+    ap.add_argument("--no-email", dest="email", action="store_false",
+                    help="skip email extraction for a faster run (emails are on by default)")
     ap.add_argument("--max-time", type=int, default=600, help="job time limit in SECONDS")
-    ap.add_argument("--out", default=None, help="write parsed JSON results here")
+    ap.add_argument("--out", default=None, help="output file path (default: results-<id>.csv). "
+                    "The extension picks the format: .csv (default) or .json")
+    ap.add_argument("--json", action="store_true", help="write JSON instead of the default CSV")
     ap.add_argument("--full", action="store_true", help="keep ALL raw columns (default: lean lead fields)")
     ap.add_argument("--fields", help="comma-separated columns to keep (overrides the default lead set)")
     ap.add_argument("--socials", action="store_true",
@@ -155,9 +161,13 @@ def main():
         lat, lon = coords
         print(f"  → {lat}, {lon}")
 
+    if a.email:
+        print("ℹ Email extraction is ON (visits each business website; a bit slower). "
+              "Use --no-email for a fast run.")
+
     # --- WARN, don't block: flag high-volume jobs (proceed anyway) ---
-    if a.depth >= 15 or len(keywords) >= 10 or a.email:
-        print("⚠️  Heads-up: this is a large/slow job (high depth, many keywords, or email extraction).")
+    if a.depth >= 15 or len(keywords) >= 10:
+        print("⚠️  Heads-up: this is a large job (high depth or many keywords).")
         print("    Running it back-to-back without proxies can get your IP temporarily rate-limited by")
         print("    Google (clears in minutes–hours; returns empty/failed jobs meanwhile). For big or")
         print("    repeated runs, add proxies. Proceeding…\n")
@@ -217,9 +227,17 @@ def main():
         found = sum(1 for r in results if r.get("instagram") or r.get("facebook") or r.get("linkedin"))
         print(f"  socials found for {found}/{len(results)} businesses")
 
-    out = a.out or f"results-{job_id[:8]}.json"
-    with open(out, "w") as f:
-        json.dump(results, f, indent=2, ensure_ascii=False)
+    # Default output is a CSV file (opens in Excel / Google Sheets). Use --json (or a .json --out path) for JSON.
+    as_json = a.json or (a.out and a.out.lower().endswith(".json"))
+    out = a.out or f"results-{job_id[:8]}.{'json' if as_json else 'csv'}"
+    if as_json:
+        with open(out, "w") as f:
+            json.dump(results, f, indent=2, ensure_ascii=False)
+    else:
+        with open(out, "w", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=fields)
+            w.writeheader()
+            w.writerows(results)
     print(f"  saved → {out}")
     for r in results[:5]:
         tail = f" | IG:{r.get('instagram','') or '—'}" if a.socials else f" | {r.get('website','')}"

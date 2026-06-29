@@ -27,16 +27,23 @@ the user to `SETUP.md`.
 
 **Recommended fields:**
 - `depth` (default 10) — how far to scroll → roughly how many listings per keyword. Start at `5`.
-- `lang` `"en"`, `zoom` `15` (city level), `radius` `10000` (meters), `fast_mode` `false`, `email` `false`.
+- `lang` `"en"`, `zoom` `15` (city level), `radius` `10000` (meters), `fast_mode` `false`.
+- **`email` `true` — ON by default in this kit.** Emails are the #1 lead field; the scraper visits each
+  business website to find them (a bit slower). Only set `false` for a deliberately fast, no-email run.
 
 ```bash
 curl -s -X POST http://localhost:8080/api/v1/jobs \
   -H "Content-Type: application/json" \
   -d '{"name":"job","keywords":["coffee shops in Austin TX"],"lang":"en","zoom":15,
        "lat":"30.2672","lon":"-97.7431","fast_mode":false,"radius":10000,
-       "depth":5,"email":false,"max_time":300}'
+       "depth":5,"email":true,"max_time":300}'
 # → {"id":"<uuid>"}   (HTTP 201; note: lowercase "id")
 ```
+
+> **Two things to handle on every scrape:**
+> 1. **Emails: on by default** (`email:true`). Don't turn them off unless the user wants a fast run.
+> 2. **Socials: ASK first.** Before creating the job, ask the user once whether they also want
+>    Instagram/Facebook/LinkedIn (see "Social profiles" below). Don't silently skip it.
 
 ## Step 2 — Poll until done  (`GET /api/v1/jobs/{id}`)
 The response field is `"Status"` (capital S): `working` → `ok` (success) or `failed`.
@@ -79,12 +86,14 @@ outreach), `link`, `plus_code`, `cid`, `data_id`, `place_id`, `open_hours`, `pop
 `user_reviews`, `user_reviews_extended`.
 
 `scripts/scrape.py` already returns exactly this lead set (use `--full` to keep all columns, or
-`--fields "a,b,c"` to customize). If you call the API directly, **strip to the lead fields yourself** before
-presenting — never dump the full 34-column row at the user.
+`--fields "a,b,c"` to customize) and **saves a CSV file by default** (`results-<id>.csv`; pass `--json` for
+JSON). If you call the API directly, **strip to the lead fields yourself** before presenting — never dump the
+full 34-column row at the user.
 
-### Social profiles — optional (Instagram / Facebook / LinkedIn)
+### Social profiles — ALWAYS ASK the user (Instagram / Facebook / LinkedIn)
 Google Maps has no social links, so this is an enrichment: visit each business's `website` and regex out its
-IG/FB/LinkedIn URLs. **Use the script:** `python3 scripts/scrape.py … --socials`.
+IG/FB/LinkedIn URLs. **Before scraping, ask the user once** whether they want socials too (unless they already
+said). If yes → **use the script:** `python3 scripts/scrape.py … --socials`.
 
 - **Token cost — say this to the user when they ask for socials:** the extraction itself is **0 LLM tokens**
   (pure HTTP + regex in the script). It only adds **~40–50 tokens per business** to *your* context **if** you
@@ -99,6 +108,7 @@ IG/FB/LinkedIn URLs. **Use the script:** `python3 scripts/scrape.py … --social
 - One keyword: `scripts/scrape.sh "<keyword>" <lat> <lon> [depth]` (bash) — create→poll→download in one go.
 - Auto-geocode (no coords): `python3 scripts/scrape.py "<keyword>" --city "<City, ST>" [--depth N]` — resolves
   lat/lon via OpenStreetMap Nominatim. You can also geocode the city yourself and pass coords.
+  **Emails come back by default** (use `--no-email` to skip); add `--socials` if the user asked for socials.
 - **Batch (many keywords, ONE job):** `python3 scripts/scrape.py --keywords-file <file> --city "<City, ST>"`.
   The API takes a `keywords` array, so put all terms in a single job rather than firing many jobs.
 Do the manual curl flow only for custom job bodies (e.g. setting `proxies`).
@@ -110,7 +120,8 @@ Do the manual curl flow only for custom job bodies (e.g. setting `proxies`).
 ## Best practices (from the upstream docs)
 - **Depth:** higher `depth` = more results but slower and more block-prone. Start low (5), raise as needed.
 - **One job at a time** locally. Many concurrent jobs without proxies → throttling/blocks by Google.
-- **Email extraction (`email:true`)** visits each business's website → *significantly* slower. Only when needed.
+- **Email extraction (`email:true`)** visits each business's website → slower, but it's **on by default** here
+  because emails are the key lead field. Pass `--no-email` (script) or `email:false` (raw API) for a fast run.
 - **`fast_mode:true`** returns reduced data, up to ~21 results/query, faster — good for quick lookups.
 - **Proxies:** for large/repeated jobs, set `"proxies"` (array of `socks5://`/`http://`/`https://` URLs,
   auth supported). The scraper has built-in rotation. This is the main defense against rate-limiting.
