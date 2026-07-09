@@ -126,25 +126,14 @@
     .vol-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
     @media (max-width: 640px) { .vol-roles { grid-template-columns: 1fr; } }
 
-    /* FORMS */
-    .form-wrap { background: white; border-radius: 16px; padding: 48px 44px; border: 1.5px solid var(--border); }
-    .form-wrap h3 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .form-wrap .form-subtext { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .form-grid .full { grid-column: 1 / -1; }
-    .form-field { display: flex; flex-direction: column; gap: 6px; }
-    .form-field label { font-size: 13px; font-weight: 600; color: var(--text); }
-    .form-field input,
-    .form-field select,
-    .form-field textarea { padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: white; transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(30,92,58,.09); }
-    .form-field textarea { resize: vertical; min-height: 110px; }
-    .form-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b5e4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
-    .form-submit { margin-top: 8px; }
-    .form-submit .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 28px; }
-    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-wrap { padding: 32px 22px; } }
+    /* DIRECT CONTACT BOXES */
+    .direct-contact-box { background: white; border-radius: 16px; padding: 44px; border: 1.5px solid var(--border); display: flex; gap: 28px; align-items: flex-start; }
+    .direct-contact-box .dc-icon { width: 56px; height: 56px; border-radius: 14px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--green); flex-shrink: 0; }
+    .dc-body h3 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .dc-body > p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 22px; }
+    .dc-links { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+    .dc-note { font-size: 13px; color: var(--muted); margin-bottom: 0; }
+    @media (max-width: 640px) { .direct-contact-box { flex-direction: column; padding: 28px 22px; } .dc-links { flex-direction: column; } }
 
     /* CSR SECTION */
     .csr-section { background: #0c2218; padding: 96px 0 88px; }
@@ -165,24 +154,15 @@
     .csr-tier ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--green); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
     .csr-tier.featured { border: 2px solid var(--green); }
     .csr-tier.featured .csr-tier-badge { background: var(--green); color: white; }
-    .csr-form-wrap { max-width: 760px; margin: 0 auto; }
-    .csr-form-wrap .form-wrap { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.12); }
-    .csr-form-wrap .form-wrap h3 { color: white; }
-    .csr-form-wrap .form-wrap .form-subtext { color: rgba(255,255,255,.5); }
-    .csr-form-wrap .form-field label { color: rgba(255,255,255,.75); }
-    .csr-form-wrap .form-field input,
-    .csr-form-wrap .form-field select,
-    .csr-form-wrap .form-field textarea { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); color: white; }
-    .csr-form-wrap .form-field input::placeholder,
-    .csr-form-wrap .form-field textarea::placeholder { color: rgba(255,255,255,.3); }
-    .csr-form-wrap .form-field input:focus,
-    .csr-form-wrap .form-field select:focus,
-    .csr-form-wrap .form-field textarea:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,122,80,.2); }
-    .csr-form-wrap .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
-    .csr-form-wrap .form-field select option { background: #1a1204; color: white; }
-    .csr-note { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.45); text-align: center; }
-    .csr-note i { color: var(--orange); margin-right: 4px; }
+    .csr-direct-contact { max-width: 760px; margin: 0 auto; }
+    .cdc-inner { background: rgba(255,255,255,.06); border: 1.5px solid rgba(255,255,255,.12); border-radius: 16px; padding: 48px 44px; }
+    .cdc-text h3 { font-size: 26px; font-weight: 700; color: white; margin-bottom: 12px; }
+    .cdc-text p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.75; margin-bottom: 16px; }
+    .cdc-note { font-size: 13px; color: rgba(255,255,255,.4); margin-bottom: 0; }
+    .cdc-note i { color: var(--orange); margin-right: 6px; }
+    .cdc-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
     @media (max-width: 840px) { .csr-tiers { grid-template-columns: 1fr; max-width: 480px; } }
+    @media (max-width: 580px) { .cdc-inner { padding: 28px 22px; } .cdc-actions { flex-direction: column; } }
 
     /* FAQ SECTION */
     .faq-section { background: white; padding: 96px 0 88px; }
@@ -413,52 +393,18 @@
         </div>
       </div>
 
-      <!-- Volunteer Form -->
-      <div class="form-wrap fade-up">
-        <h3>Register as a volunteer</h3>
-        <p class="form-subtext">Fill in your details and we will reach out within 3 working days with the right opportunity for you.</p>
-        <form action="#" method="post">
-          <div class="form-grid">
-            <div class="form-field">
-              <label for="vol-name">Full Name</label>
-              <input type="text" id="vol-name" name="full_name" placeholder="Your full name" required />
-            </div>
-            <div class="form-field">
-              <label for="vol-email">Email Address</label>
-              <input type="email" id="vol-email" name="email" placeholder="you@example.com" required />
-            </div>
-            <div class="form-field">
-              <label for="vol-phone">Phone Number</label>
-              <input type="tel" id="vol-phone" name="phone" placeholder="+91 XXXXX XXXXX" />
-            </div>
-            <div class="form-field">
-              <label for="vol-city">City</label>
-              <input type="text" id="vol-city" name="city" placeholder="Where are you based?" />
-            </div>
-            <div class="form-field full">
-              <label for="vol-skills">Skills / Profession</label>
-              <input type="text" id="vol-skills" name="skills" placeholder="e.g. Paediatrician, Graphic Designer, Retired Banker, Student..." />
-            </div>
-            <div class="form-field">
-              <label for="vol-role">Role Interested In</label>
-              <select id="vol-role" name="role">
-                <option value="" disabled selected>Select a role</option>
-                <option value="medical">Medical</option>
-                <option value="education">Education</option>
-                <option value="field-ops">Field Operations</option>
-                <option value="remote">Remote Support</option>
-                <option value="any">Any / Open to suggestions</option>
-              </select>
-            </div>
-            <div class="form-field full">
-              <label for="vol-message">Message (Optional)</label>
-              <textarea id="vol-message" name="message" placeholder="Tell us a little about yourself or what kind of involvement you&apos;re looking for..."></textarea>
-            </div>
-            <div class="form-field full form-submit">
-              <button type="submit" class="btn btn-orange"><i class="fa-solid fa-paper-plane"></i> Submit Volunteer Registration</button>
-            </div>
+      <!-- Volunteer Contact -->
+      <div class="direct-contact-box fade-up">
+        <div class="dc-icon"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="dc-body">
+          <h3>Ready to volunteer?</h3>
+          <p>Drop us a WhatsApp message or email with your name, profession, and the role you are interested in. We will respond within 3 working days.</p>
+          <div class="dc-links">
+            <a href="mailto:samarthfoundation@gmail.com" class="btn btn-outline-green"><i class="fa-solid fa-envelope"></i> samarthfoundation@gmail.com</a>
+            <a href="https://wa.me/91XXXXXXXXXX" class="btn btn-orange" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
           </div>
-        </form>
+          <p class="dc-note">Mention &ldquo;Volunteer &mdash; [Role]&rdquo; in your message so we can connect you to the right team quickly.</p>
+        </div>
       </div>
 
     </div>
@@ -514,68 +460,18 @@
         </div>
       </div>
 
-      <!-- CSR Form -->
-      <div class="csr-form-wrap fade-up">
-        <div class="form-wrap">
-          <h3>CSR Enquiry</h3>
-          <p class="form-subtext">Tell us about your company and CSR goals. We will design an initial proposal at no obligation and respond within 48 hours.</p>
-          <form action="#" method="post">
-            <div class="form-grid">
-              <div class="form-field">
-                <label for="csr-company">Company Name</label>
-                <input type="text" id="csr-company" name="company_name" placeholder="Your organisation" required />
-              </div>
-              <div class="form-field">
-                <label for="csr-contact">Contact Person</label>
-                <input type="text" id="csr-contact" name="contact_person" placeholder="Full name" required />
-              </div>
-              <div class="form-field">
-                <label for="csr-designation">Designation</label>
-                <input type="text" id="csr-designation" name="designation" placeholder="e.g. Head of CSR, CFO..." />
-              </div>
-              <div class="form-field">
-                <label for="csr-email">Email Address</label>
-                <input type="email" id="csr-email" name="email" placeholder="work@company.com" required />
-              </div>
-              <div class="form-field">
-                <label for="csr-phone">Phone Number</label>
-                <input type="tel" id="csr-phone" name="phone" placeholder="+91 XXXXX XXXXX" />
-              </div>
-              <div class="form-field">
-                <label for="csr-budget">CSR Budget Range</label>
-                <select id="csr-budget" name="budget_range">
-                  <option value="" disabled selected>Select a range</option>
-                  <option value="lt5l">Below &#x20B9;5 Lakhs</option>
-                  <option value="5l-25l">&#x20B9;5 Lakhs &ndash; &#x20B9;25 Lakhs</option>
-                  <option value="25l-1cr">&#x20B9;25 Lakhs &ndash; &#x20B9;1 Crore</option>
-                  <option value="1cr+">&#x20B9;1 Crore+</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="csr-program">Program Interested In</label>
-                <select id="csr-program" name="program">
-                  <option value="" disabled selected>Select a program area</option>
-                  <option value="education">Education</option>
-                  <option value="healthcare">Healthcare</option>
-                  <option value="women">Women Empowerment</option>
-                  <option value="environment">Environment</option>
-                  <option value="any">Any / Open to suggestions</option>
-                </select>
-              </div>
-              <div class="form-field">
-                <label for="csr-source">How did you hear about us?</label>
-                <input type="text" id="csr-source" name="source" placeholder="LinkedIn, colleague, web search..." />
-              </div>
-              <div class="form-field full">
-                <label for="csr-message">Message</label>
-                <textarea id="csr-message" name="message" placeholder="Share any specific goals, timelines, or questions you have about the partnership..."></textarea>
-              </div>
-              <div class="form-field full form-submit">
-                <button type="submit" class="btn btn-orange"><i class="fa-solid fa-paper-plane"></i> Submit CSR Enquiry</button>
-              </div>
-            </div>
-          </form>
-          <p class="csr-note"><i class="fa-solid fa-circle-info"></i> We respond to all CSR enquiries within 48 hours. For urgent matters, WhatsApp <strong>+91 XXXXX XXXXX</strong>.</p>
+      <!-- CSR Contact -->
+      <div class="csr-direct-contact fade-up">
+        <div class="cdc-inner">
+          <div class="cdc-text">
+            <h3>Start a conversation</h3>
+            <p>Write to us with your company name, CSR budget range, and the program area you are interested in. We will come back with an initial proposal within 48 hours &mdash; no obligation.</p>
+            <p class="cdc-note"><i class="fa-solid fa-circle-info"></i> Mention &ldquo;CSR Enquiry&rdquo; in your subject line for priority response.</p>
+          </div>
+          <div class="cdc-actions">
+            <a href="mailto:samarthfoundation@gmail.com?subject=CSR%20Enquiry%20%E2%80%94%20Shri%20Samarth%20Foundation" class="btn btn-orange"><i class="fa-solid fa-envelope"></i> samarthfoundation@gmail.com</a>
+            <a href="https://wa.me/91XXXXXXXXXX" class="btn btn-outline-white" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp for urgent queries</a>
+          </div>
         </div>
       </div>
 

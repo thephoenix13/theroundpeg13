@@ -70,35 +70,20 @@
 
     /* CONTACT LAYOUT */
     .contact-main { padding: 90px 0; background: white; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: start; }
     .contact-info h2 { font-size: 42px; font-weight: 700; color: var(--text); margin-bottom: 18px; }
-    .contact-info p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 40px; }
-    .info-items { display: flex; flex-direction: column; gap: 26px; margin-bottom: 40px; }
-    .info-item { display: flex; gap: 18px; align-items: flex-start; }
+    .contact-info > p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 48px; max-width: 620px; }
+    .info-items { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-bottom: 48px; }
+    .info-item { display: flex; gap: 18px; align-items: flex-start; background: var(--cream); border-radius: 14px; padding: 24px; }
     .info-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 17px; flex-shrink: 0; }
-    .info-item h4 { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .info-item h4 { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
     .info-item p { font-size: 15px; color: var(--text); font-weight: 500; margin-bottom: 0; line-height: 1.5; }
     .info-item a { color: var(--green); }
     .info-item a:hover { color: var(--orange); }
     .social-row { display: flex; gap: 10px; }
     .social-row a { width: 38px; height: 38px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--green); transition: all .2s; }
     .social-row a:hover { background: var(--orange); color: white; }
-
-    /* CONTACT FORM */
-    .contact-form-wrap { background: var(--cream); border-radius: 20px; padding: 48px; }
-    .contact-form-wrap h3 { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
-    .contact-form-wrap > p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
-    .form-group label { font-size: 12px; font-weight: 700; letter-spacing: .5px; color: var(--text); margin-bottom: 8px; }
-    .form-group input, .form-group select, .form-group textarea {
-      padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px;
-      font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text);
-      background: white; transition: border-color .2s; outline: none;
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green); }
-    .form-group textarea { resize: vertical; min-height: 120px; }
-    .form-submit { width: 100%; justify-content: center; padding: 16px; font-size: 16px; margin-top: 8px; }
+    @media (max-width: 760px) { .info-items { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .info-items { grid-template-columns: 1fr; } }
 
     /* REGISTRATION BOX */
     .reg-section { padding: 80px 0; background: var(--green-light); }
@@ -148,14 +133,11 @@
     .footer-social a:hover { background: var(--orange); color: white; }
 
     @media (max-width: 900px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
       .reg-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
     }
     @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
       .reg-grid { grid-template-columns: 1fr; }
-      .contact-form-wrap { padding: 28px 20px; }
     }
     @media (max-width: 500px) {
       .footer-grid { grid-template-columns: 1fr; }
@@ -198,104 +180,61 @@
 <!-- MAIN CONTACT SECTION -->
 <section class="contact-main">
   <div class="container">
-    <div class="contact-grid">
+    <div class="contact-info fade-up">
+      <h2>Get in touch</h2>
+      <p>Shri Samarth Foundation operates from Khed Taluka, Pune. Our team is in the field most weekdays &mdash; the best way to reach us is email or WhatsApp. We respond to every message.</p>
 
-      <!-- LEFT: Info -->
-      <div class="contact-info fade-up">
-        <h2>Get in touch</h2>
-        <p>Shri Samarth Foundation operates from Khed Taluka, Pune. Our team is in the field most weekdays &mdash; the best way to reach us is email or WhatsApp.</p>
-
-        <div class="info-items">
-          <div class="info-item">
-            <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-            <div>
-              <h4>Address</h4>
-              <p>Khed Taluka, Pune District<br>Maharashtra &ndash; 410505</p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
-            <div>
-              <h4>Email</h4>
-              <p><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
-            <div>
-              <h4>WhatsApp</h4>
-              <p>+91 XXXXX XXXXX<br><small style="font-size:12px;color:var(--muted);font-weight:400;">For donation receipts &amp; program queries</small></p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
-            <div>
-              <h4>Website</h4>
-              <p><a href="https://samarthfoundation.net" target="_blank" rel="noopener">samarthfoundation.net</a></p>
-            </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
-            <div>
-              <h4>Response time</h4>
-              <p>Within 24 hours on weekdays<br><small style="font-size:12px;color:var(--muted);font-weight:400;">CSR enquiries within 48 hours</small></p>
-            </div>
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <h4>Address</h4>
+            <p>Khed Taluka, Pune District<br>Maharashtra &ndash; 410505</p>
           </div>
         </div>
-
-        <div class="social-row">
-          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <h4>WhatsApp</h4>
+            <p>+91 XXXXX XXXXX<br><small style="font-size:12px;color:var(--muted);font-weight:400;">Donation receipts &amp; program queries</small></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
+          <div>
+            <h4>Website</h4>
+            <p><a href="https://samarthfoundation.net" target="_blank" rel="noopener">samarthfoundation.net</a></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <h4>Response time</h4>
+            <p>Within 24 hours on weekdays<br><small style="font-size:12px;color:var(--muted);font-weight:400;">CSR enquiries within 48 hours</small></p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div>
+            <h4>CSR &amp; Partnerships</h4>
+            <p><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a><br><small style="font-size:12px;color:var(--muted);font-weight:400;">Mention &ldquo;CSR Enquiry&rdquo; in subject</small></p>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: Form -->
-      <div class="contact-form-wrap fade-up d1">
-        <h3>Send us a message</h3>
-        <p>For donation enquiries, volunteer sign-ups, or anything else &mdash; fill in the form and we will get back to you.</p>
-        <form action="#" method="post" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="c-name">Full Name *</label>
-              <input type="text" id="c-name" name="name" placeholder="Your name" required />
-            </div>
-            <div class="form-group">
-              <label for="c-email">Email *</label>
-              <input type="email" id="c-email" name="email" placeholder="your@email.com" required />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="c-phone">Phone</label>
-              <input type="tel" id="c-phone" name="phone" placeholder="+91 XXXXX XXXXX" />
-            </div>
-            <div class="form-group">
-              <label for="c-org">Organisation (if any)</label>
-              <input type="text" id="c-org" name="org" placeholder="Company / NGO / Individual" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="c-subject">Subject</label>
-            <select id="c-subject" name="subject">
-              <option value="">Select a topic</option>
-              <option value="donate">Donation enquiry</option>
-              <option value="csr">CSR partnership</option>
-              <option value="volunteer">Volunteering</option>
-              <option value="media">Media / Press</option>
-              <option value="visit">Field visit request</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="c-message">Message *</label>
-            <textarea id="c-message" name="message" placeholder="Tell us how we can help..." required></textarea>
-          </div>
-          <button type="submit" class="btn btn-orange form-submit">Send Message &nbsp;<i class="fa-solid fa-paper-plane"></i></button>
-        </form>
+      <div class="social-row">
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       </div>
-
     </div>
   </div>
 </section>
