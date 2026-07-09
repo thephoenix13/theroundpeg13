@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact | Shri Samarth Foundation</title>
+  <meta name="description" content="Nine years of measurable impact across 21+ villages in Khed Taluka. Every number drawn from program records, field reports, and verified beneficiary data." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #1e5c3a; --green-mid: #2d7a50; --green-light: #edf6f0; --orange: #e07b2a; --orange-light: #fef3e8; --cream: #fdf8f0; --earth: #7a3e1a; --text: #1a1204; --muted: #6b5e4a; --border: #e5ddd0; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.22s ease; border: 2px solid transparent; }
+    .btn-orange { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-orange:hover { background: #c96d20; border-color: #c96d20; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(224,123,42,.35); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: white; }
+    .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,.55); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: inline-block; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 22px 0; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: white; box-shadow: 0 2px 24px rgba(0,0,0,.08); padding: 13px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: white; line-height: 1.2; transition: color 0.3s; }
+    .nav-brand small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; opacity: 0.6; letter-spacing: .5px; }
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+    .nav-links a:hover { color: white; }
+    .nav-links a.active { color: white; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--text); }
+    .nav-cta .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; margin: 5px 0; transition: all .3s; }
+    nav.scrolled .nav-toggle span { background: var(--text); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,.1); } .nav-links.open a { color: var(--muted); } }
+
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 90px; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url('assets/brochure_p6_img2_640x427.jpeg') center/cover no-repeat; opacity: 0.13; }
+    .page-hero .container { position: relative; }
+    .page-hero h1 { font-size: clamp(40px,5.5vw,68px); font-weight: 700; color: white; margin-bottom: 16px; }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.72); max-width: 580px; font-weight: 300; line-height: 1.7; }
+
+    /* STATS STRIP */
+    .stats-strip { background: #0c2218; padding: 80px 0; }
+    .stats-strip-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+    .stat-item { text-align: center; padding: 32px 20px; border-right: 1px solid rgba(255,255,255,.08); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 700; color: white; line-height: 1; display: block; margin-bottom: 10px; min-height: 72px; }
+    .stat-label { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: 1.5px; display: block; }
+    .stat-accent { display: block; width: 28px; height: 2px; background: var(--orange); margin: 10px auto 0; }
+    @media (max-width: 900px) { .stats-strip-grid { grid-template-columns: repeat(3, 1fr); } .stat-item { border-right: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); } .stat-item:nth-child(3n) { border-right: none; } .stat-item:nth-last-child(-n+3) { border-bottom: none; } .stat-num { font-size: 52px; } }
+    @media (max-width: 500px) { .stats-strip-grid { grid-template-columns: repeat(2, 1fr); } .stat-item:nth-child(3n) { border-right: 1px solid rgba(255,255,255,.08); } .stat-item:nth-child(2n) { border-right: none; } .stat-item:nth-last-child(-n+2) { border-bottom: none; } }
+
+    /* TIMELINE */
+    .timeline-section { padding: 100px 0; background: var(--cream); }
+    .timeline-header { text-align: center; margin-bottom: 80px; }
+    .timeline-header h2 { font-size: clamp(32px, 4vw, 52px); font-weight: 700; color: var(--text); }
+    .timeline-header p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 14px auto 0; }
+    .timeline { position: relative; max-width: 860px; margin: 0 auto; }
+    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--border); transform: translateX(-50%); }
+    .timeline-entry { display: flex; align-items: flex-start; gap: 48px; margin-bottom: 56px; position: relative; }
+    .timeline-entry:last-child { margin-bottom: 0; }
+    .timeline-entry.left { flex-direction: row; }
+    .timeline-entry.right { flex-direction: row-reverse; }
+    .timeline-card { flex: 1; background: white; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 20px rgba(0,0,0,.06); border: 1px solid var(--border); position: relative; }
+    .timeline-entry.left .timeline-card { text-align: right; }
+    .timeline-entry.right .timeline-card { text-align: left; }
+    .timeline-year { font-family: 'Cormorant Garamond', serif; font-size: 46px; font-weight: 700; color: var(--green); line-height: 1; }
+    .timeline-entry.left .timeline-year { color: var(--orange); }
+    .timeline-event { font-size: 15px; color: var(--text); line-height: 1.7; margin-top: 8px; font-weight: 400; }
+    .timeline-dot { width: 16px; height: 16px; border-radius: 50%; background: var(--green); border: 3px solid white; box-shadow: 0 0 0 2px var(--green); flex-shrink: 0; margin-top: 20px; position: relative; z-index: 1; }
+    .timeline-entry.left .timeline-dot { background: var(--orange); box-shadow: 0 0 0 2px var(--orange); }
+    .timeline-spacer { flex: 1; }
+    @media (max-width: 700px) {
+      .timeline::before { left: 18px; }
+      .timeline-entry, .timeline-entry.left, .timeline-entry.right { flex-direction: row !important; gap: 20px; }
+      .timeline-dot { margin-top: 18px; }
+      .timeline-spacer { display: none; }
+      .timeline-card { text-align: left !important; }
+      .timeline-entry.left .timeline-year { color: var(--orange); }
+    }
+
+    /* SDG SECTION */
+    .sdg-section { padding: 100px 0; background: white; }
+    .sdg-header { text-align: center; margin-bottom: 60px; }
+    .sdg-header h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; color: var(--text); }
+    .sdg-header p { font-size: 16px; color: var(--muted); max-width: 580px; margin: 14px auto 0; }
+    .sdg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .sdg-card { background: white; border-radius: 12px; border: 1px solid var(--border); padding: 28px 28px 28px 36px; position: relative; overflow: hidden; transition: box-shadow .25s, transform .25s; }
+    .sdg-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; border-radius: 12px 0 0 12px; }
+    .sdg-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .sdg-card.c-green::before { background: var(--green); }
+    .sdg-card.c-earth::before { background: var(--earth); }
+    .sdg-card.c-orange::before { background: var(--orange); }
+    .sdg-card.c-green-mid::before { background: var(--green-mid); }
+    .sdg-badge { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .sdg-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; line-height: 1; }
+    .sdg-card.c-green .sdg-num { color: var(--green); }
+    .sdg-card.c-earth .sdg-num { color: var(--earth); }
+    .sdg-card.c-orange .sdg-num { color: var(--orange); }
+    .sdg-card.c-green-mid .sdg-num { color: var(--green-mid); }
+    .sdg-tag { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; align-self: center; }
+    .sdg-card.c-green .sdg-tag { background: var(--green-light); color: var(--green); }
+    .sdg-card.c-earth .sdg-tag { background: #f5ece4; color: var(--earth); }
+    .sdg-card.c-orange .sdg-tag { background: var(--orange-light); color: var(--orange); }
+    .sdg-card.c-green-mid .sdg-tag { background: #e5f4ec; color: var(--green-mid); }
+    .sdg-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .sdg-programs { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .sdg-programs strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+    @media (max-width: 900px) { .sdg-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .sdg-grid { grid-template-columns: 1fr; } }
+
+    /* MEDIA SECTION */
+    .media-section { padding: 100px 0; background: var(--cream); }
+    .media-header { text-align: center; margin-bottom: 60px; }
+    .media-header h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; color: var(--text); }
+    .media-header p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 14px auto 0; }
+    .media-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 900px; margin: 0 auto; }
+    .clipping-card { background: white; border: 1px solid var(--border); border-radius: 4px; padding: 14px; box-shadow: 4px 6px 28px rgba(0,0,0,.1); position: relative; }
+    .clipping-card:first-child { transform: rotate(-1.5deg); }
+    .clipping-card:last-child { transform: rotate(1.2deg); }
+    .clipping-card:hover { transform: rotate(0deg) scale(1.02); box-shadow: 6px 10px 36px rgba(0,0,0,.14); transition: all .3s ease; }
+    .clipping-img-wrap { border: 1px solid #e0d8cc; overflow: hidden; border-radius: 2px; background: #f5f0e8; }
+    .clipping-img-wrap img { width: 100%; height: 280px; object-fit: cover; filter: sepia(12%) contrast(1.05); display: block; }
+    .clipping-footer { padding: 12px 8px 6px; }
+    .clipping-badge { display: inline-block; background: var(--text); color: white; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px; border-radius: 3px; margin-bottom: 8px; }
+    .clipping-caption { font-size: 12px; color: var(--muted); line-height: 1.6; font-style: italic; }
+    @media (max-width: 680px) { .media-grid { grid-template-columns: 1fr; gap: 48px; } .clipping-card:first-child, .clipping-card:last-child { transform: rotate(0); } }
+
+    /* TRUST SECTION */
+    .trust-section { padding: 90px 0; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); }
+    .trust-header { text-align: center; margin-bottom: 60px; }
+    .trust-header h2 { font-size: clamp(30px, 4vw, 48px); font-weight: 700; color: white; }
+    .trust-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; overflow: hidden; background: rgba(255,255,255,.03); }
+    .trust-item { padding: 40px 28px; text-align: center; border-right: 1px solid rgba(255,255,255,.09); }
+    .trust-item:last-child { border-right: none; }
+    .trust-icon { width: 52px; height: 52px; background: rgba(255,255,255,.07); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; font-size: 20px; color: var(--orange); }
+    .trust-item h4 { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: white; margin-bottom: 7px; line-height: 1.4; }
+    .trust-item p { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.6; }
+    @media (max-width: 900px) { .trust-row { grid-template-columns: repeat(2, 1fr); } .trust-item:nth-child(2) { border-right: none; } .trust-item:nth-child(1), .trust-item:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.09); } }
+    @media (max-width: 500px) { .trust-row { grid-template-columns: 1fr; } .trust-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,.09); } .trust-item:last-child { border-bottom: none; } }
+
+    /* CTA BAND */
+    .cta-band { padding: 100px 0; background: var(--orange-light); text-align: center; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(224,123,42,.12) 0%, transparent 70%); pointer-events: none; }
+    .cta-band .container { position: relative; }
+    .cta-band h2 { font-size: clamp(30px, 4.5vw, 54px); font-weight: 700; color: var(--text); margin-bottom: 16px; }
+    .cta-band p { font-size: 16px; color: var(--muted); max-width: 460px; margin: 0 auto 36px; }
+    .cta-band-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: #0c1a10; color: rgba(255,255,255,.5); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-row img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+    .footer-brand-name small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .4px; }
+    .footer-about { font-size: 13px; line-height: 1.8; max-width: 270px; }
+    .footer-reg { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,.25); }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 33px; height: 33px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,.45); transition: all .2s; }
+    .footer-social a:hover { background: var(--orange); color: white; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 14px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+          <div class="nav-brand">Shri Samarth Foundation <small>Khed Taluka, Pune</small></div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="stories.html">Stories</a></li>
+          <li><a href="impact.html" class="active">Impact</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta"><a href="get-involved.html" class="btn btn-orange">Support Us</a></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-label fade-up">Impact Report</div>
+      <h1 class="fade-up d1">Nine years of work.<br>Here are the numbers.</h1>
+      <p class="fade-up d2">We believe in radical transparency. Every number here is drawn from program records, field reports, and verified beneficiary data.</p>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="stats-strip">
+    <div class="container">
+      <div class="stats-strip-grid">
+        <div class="stat-item fade-up d1">
+          <span class="stat-num counter" data-target="21" data-suffix="+">21+</span>
+          <span class="stat-label">Villages Reached</span>
+          <span class="stat-accent"></span>
+        </div>
+        <div class="stat-item fade-up d2">
+          <span class="stat-num counter" data-target="15000" data-suffix="+">15,000+</span>
+          <span class="stat-label">Students Served</span>
+          <span class="stat-accent"></span>
+        </div>
+        <div class="stat-item fade-up d3">
+          <span class="stat-num counter" data-target="10000" data-suffix="+">10,000+</span>
+          <span class="stat-label">Patients Treated</span>
+          <span class="stat-accent"></span>
+        </div>
+        <div class="stat-item fade-up d1">
+          <span class="stat-num counter" data-target="7000" data-suffix="+">7,000+</span>
+          <span class="stat-label">Crisis Families</span>
+          <span class="stat-accent"></span>
+        </div>
+        <div class="stat-item fade-up d2">
+          <span class="stat-num counter" data-target="50">50</span>
+          <span class="stat-label">Arogya Sewikas</span>
+          <span class="stat-accent"></span>
+        </div>
+        <div class="stat-item fade-up d3">
+          <span class="stat-num counter" data-target="9" data-suffix=" yrs">9 yrs</span>
+          <span class="stat-label">Years of Service</span>
+          <span class="stat-accent"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="timeline-header fade-up">
+        <div class="section-label">Year by Year</div>
+        <h2>A decade in the making</h2>
+        <p>From our first school bag distribution to Project Samruddhi &mdash; every year, a deeper commitment.</p>
+      </div>
+      <div class="timeline">
+
+        <!-- 2016 -->
+        <div class="timeline-entry left fade-up">
+          <div class="timeline-card">
+            <div class="timeline-year">2016</div>
+            <p class="timeline-event">Foundation established. First school bag distribution &mdash; 200 students across 5 villages receive stationery, bags, and learning materials.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <!-- 2017 -->
+        <div class="timeline-entry right fade-up">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-year">2017</div>
+            <p class="timeline-event">Maha Arogya Shibir inaugural edition &mdash; 800 patients receive free specialist consultations across 3 villages in a single-day medical camp.</p>
+          </div>
+        </div>
+
+        <!-- 2018 -->
+        <div class="timeline-entry left fade-up">
+          <div class="timeline-card">
+            <div class="timeline-year">2018</div>
+            <p class="timeline-event">Ambulance deployed for rural emergency response &mdash; 47 emergency trips completed in the first year of operation, bridging villages to the nearest hospitals.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <!-- 2019 -->
+        <div class="timeline-entry right fade-up">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-year">2019</div>
+            <p class="timeline-event">Mahila Asmita Bhavan inaugurated &mdash; a dedicated centre for women&#39;s empowerment. First 32 women enrolled in vocational tailoring and livelihood skill programs.</p>
+          </div>
+        </div>
+
+        <!-- 2020 -->
+        <div class="timeline-entry left fade-up">
+          <div class="timeline-card">
+            <div class="timeline-year">2020</div>
+            <p class="timeline-event">COVID-19 emergency response &mdash; 7,100 grocery kits distributed across 82 villages in 23 days of continuous field operations during the national lockdown.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <!-- 2021 -->
+        <div class="timeline-entry right fade-up">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-year">2021</div>
+            <p class="timeline-event">Water purification plants installed in Dondkarwadi, Ghogari, and Pabal. 2,400 residents gain access to safe, clean drinking water for the first time.</p>
+          </div>
+        </div>
+
+        <!-- 2022 -->
+        <div class="timeline-entry left fade-up">
+          <div class="timeline-card">
+            <div class="timeline-year">2022</div>
+            <p class="timeline-event">Solar panels installed in 4 schools, reducing energy costs and enabling evening study hours. Annual Maha Arogya Shibir expands to serve 1,200 patients in a single event.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="timeline-entry right fade-up">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-year">2023</div>
+            <p class="timeline-event">Animal welfare program expanded &mdash; 3 veterinary camps conducted, 500+ animals treated. Tree plantation drive plants 1,200 saplings across the Khed Taluka region.</p>
+          </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="timeline-entry left fade-up">
+          <div class="timeline-card">
+            <div class="timeline-year">2024</div>
+            <p class="timeline-event">Arogya Sewika program launched &mdash; 50 community health workers trained, equipped with tablets and field kits, and deployed across all 21 villages for preventive healthcare outreach.</p>
+          </div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-spacer"></div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="timeline-entry right fade-up">
+          <div class="timeline-spacer"></div>
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-year">2025</div>
+            <p class="timeline-event">Project Samruddhi commences &mdash; a &#8377;1.25 Crore, three-year integrated development initiative spanning 10 villages, covering health, education, livelihoods, and infrastructure.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SDG SECTION -->
+  <section class="sdg-section">
+    <div class="container">
+      <div class="sdg-header fade-up">
+        <div class="section-label">Global Goals</div>
+        <h2>Our work in the language of global development</h2>
+        <p>Shri Samarth Foundation&#39;s programs align with 6 United Nations Sustainable Development Goals.</p>
+      </div>
+      <div class="sdg-grid">
+
+        <div class="sdg-card c-green fade-up d1">
+          <div class="sdg-badge">
+            <span class="sdg-num">3</span>
+            <span class="sdg-tag">SDG&nbsp;3</span>
+          </div>
+          <h3>Good Health &amp; Well-being</h3>
+          <p class="sdg-programs"><strong>Programs</strong>Free specialist health camps (Maha Arogya Shibir), Arogya Sewika community health workers, ambulance emergency response, preventive health screenings in 21 villages.</p>
+        </div>
+
+        <div class="sdg-card c-earth fade-up d2">
+          <div class="sdg-badge">
+            <span class="sdg-num">4</span>
+            <span class="sdg-tag">SDG&nbsp;4</span>
+          </div>
+          <h3>Quality Education</h3>
+          <p class="sdg-programs"><strong>Programs</strong>Annual school bag &amp; stationery drives, digital device distribution, solar electrification of rural schools, digital literacy workshops for students and teachers.</p>
+        </div>
+
+        <div class="sdg-card c-orange fade-up d3">
+          <div class="sdg-badge">
+            <span class="sdg-num">5</span>
+            <span class="sdg-tag">SDG&nbsp;5</span>
+          </div>
+          <h3>Gender Equality</h3>
+          <p class="sdg-programs"><strong>Programs</strong>Mahila Asmita Bhavan vocational centre, women&#39;s health camps, tailoring &amp; livelihood training, Bachat Gat (self-help group) linkages for financial independence.</p>
+        </div>
+
+        <div class="sdg-card c-green-mid fade-up d1">
+          <div class="sdg-badge">
+            <span class="sdg-num">6</span>
+            <span class="sdg-tag">SDG&nbsp;6</span>
+          </div>
+          <h3>Clean Water &amp; Sanitation</h3>
+          <p class="sdg-programs"><strong>Programs</strong>RO water purification plant installation, emergency water tanker supply during drought, hygiene awareness campaigns in schools and village panchayats.</p>
+        </div>
+
+        <div class="sdg-card c-green fade-up d2">
+          <div class="sdg-badge">
+            <span class="sdg-num">15</span>
+            <span class="sdg-tag">SDG&nbsp;15</span>
+          </div>
+          <h3>Life on Land</h3>
+          <p class="sdg-programs"><strong>Programs</strong>Annual tree plantation drives (1,200+ saplings), veterinary camps for livestock and stray animals, biodiversity and conservation awareness programs in schools.</p>
+        </div>
+
+        <div class="sdg-card c-orange fade-up d3">
+          <div class="sdg-badge">
+            <span class="sdg-num">1</span>
+            <span class="sdg-tag">SDG&nbsp;1</span>
+          </div>
+          <h3>No Poverty</h3>
+          <p class="sdg-programs"><strong>Programs</strong>Crisis grocery relief (7,100+ families served), skill development and livelihood training, emergency food distribution during natural disasters and community emergencies.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MEDIA SECTION -->
+  <section class="media-section">
+    <div class="container">
+      <div class="media-header fade-up">
+        <div class="section-label">Press Coverage</div>
+        <h2>The press has noticed</h2>
+        <p>Our programs have been covered in regional Marathi media, validating impact on the ground.</p>
+      </div>
+      <div class="media-grid">
+
+        <div class="clipping-card fade-up d1">
+          <div class="clipping-img-wrap">
+            <img src="assets/brochure_p7_img2_1010x843.jpeg" alt="Prabhat newspaper coverage of Shri Samarth Foundation water filter plant" />
+          </div>
+          <div class="clipping-footer">
+            <span class="clipping-badge">Prabhat &mdash; Pune</span>
+            <p class="clipping-caption">Coverage of the water filter plant installation in Dondkarwadi, 2021 &mdash; bringing safe drinking water to 2,400 rural residents.</p>
+          </div>
+        </div>
+
+        <div class="clipping-card fade-up d2">
+          <div class="clipping-img-wrap">
+            <img src="assets/brochure_p9_img1_517x392.jpeg" alt="Lokmat newspaper coverage of Maha Arogya Shibir medical camp" />
+          </div>
+          <div class="clipping-footer">
+            <span class="clipping-badge">Lokmat &mdash; Pune</span>
+            <p class="clipping-caption">Maha Arogya Shibir coverage, 2022 &mdash; reporting on the Foundation&#39;s annual free healthcare camp serving 1,200 patients in a single day.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+  <section class="trust-section">
+    <div class="container">
+      <div class="trust-header fade-up">
+        <div class="section-label" style="justify-content:center; color:rgba(255,255,255,.55);">Accountability</div>
+        <h2>An accountable organisation</h2>
+      </div>
+      <div class="trust-row fade-up d1">
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-file-shield"></i></div>
+          <h4>Registered Trust</h4>
+          <p>Registered under Maharashtra Public Trusts Act, 1950. Reg. No. F48181/Pune.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-calendar-check"></i></div>
+          <h4>Annual Reports</h4>
+          <p>Activity reports filed annually with the Charity Commissioner, Pune &mdash; every year, on record.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-magnifying-glass-dollar"></i></div>
+          <h4>Independent Audit</h4>
+          <p>Accounts audited each year by an independent Chartered Accountant. Financials available on request.</p>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon"><i class="fa-solid fa-users"></i></div>
+          <h4>Open to Donors</h4>
+          <p>We welcome donor site visits during program activities. See the work firsthand, in the field.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="section-label fade-up" style="justify-content:center;">Join Us</div>
+      <h2 class="fade-up d1">Ready to add your chapter<br>to this story?</h2>
+      <p class="fade-up d2">Nine years of numbers represent thousands of individual lives changed. Your support writes the next milestone.</p>
+      <div class="cta-band-btns fade-up d3">
+        <a href="get-involved.html" class="btn btn-orange">Partner with Us <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="contact.html" class="btn btn-outline-green">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+            <div class="footer-brand-name">Shri Samarth Foundation<small>Khed Taluka, Pune, Maharashtra</small></div>
+          </div>
+          <p class="footer-about">Empowering Change &amp; Enriching Lives across 21+ villages in Khed Taluka since 2016. Education &middot; Health &middot; Women &middot; Environment.</p>
+          <div class="footer-reg">Reg. No. F48181/Pune &nbsp;&middot;&nbsp; samarthfoundation.net</div>
+        </div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="programs.html">Education</a></li><li><a href="programs.html">Healthcare</a></li><li><a href="programs.html">Women Empowerment</a></li><li><a href="programs.html">Crisis Relief</a></li><li><a href="programs.html">Animal Welfare</a></li><li><a href="programs.html">Environment</a></li></ul></div>
+        <div class="footer-col"><h4>Organisation</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="stories.html">Village Stories</a></li><li><a href="impact.html">Impact</a></li><li><a href="get-involved.html">CSR Partnerships</a></li><li><a href="get-involved.html">Donate</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Khed Taluka, Pune</a></li><li><a href="contact.html">Maharashtra 410505</a></li><li><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Shri Samarth Foundation &middot; Reg. F48181/Pune</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+    // Fade-up
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Counter animation
+    function animateCount(el, target, suffix, dur) {
+      dur = dur || 1800;
+      var start = performance.now();
+      function step(now) {
+        var p = Math.min((now - start) / dur, 1);
+        var ease = 1 - Math.pow(1 - p, 3);
+        var val = Math.floor(ease * target);
+        el.textContent = (val >= 1000 ? val.toLocaleString('en-IN') : val) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    const counterObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          var el = e.target;
+          animateCount(el, parseInt(el.dataset.target), el.dataset.suffix || '');
+          counterObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+  </script>
+
+</body>
+</html>

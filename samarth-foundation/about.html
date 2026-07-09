@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Shri Samarth Foundation</title>
+  <meta name="description" content="Learn the story of Shri Samarth Foundation &mdash; born in Khed Taluka, Pune in 2016, serving 21+ villages through education, healthcare, and women empowerment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #1e5c3a; --green-mid: #2d7a50; --green-light: #edf6f0; --orange: #e07b2a; --orange-light: #fef3e8; --cream: #fdf8f0; --earth: #7a3e1a; --text: #1a1204; --muted: #6b5e4a; --border: #e5ddd0; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.22s ease; border: 2px solid transparent; }
+    .btn-orange { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-orange:hover { background: #c96d20; border-color: #c96d20; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(224,123,42,.35); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: white; }
+    .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,.55); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: inline-block; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 22px 0; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: white; box-shadow: 0 2px 24px rgba(0,0,0,.08); padding: 13px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: white; line-height: 1.2; transition: color 0.3s; }
+    .nav-brand small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; opacity: 0.6; letter-spacing: .5px; }
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+    .nav-links a:hover { color: white; }
+    .nav-links a.active { color: white; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--text); }
+    .nav-cta .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; margin: 5px 0; transition: all .3s; }
+    nav.scrolled .nav-toggle span { background: var(--text); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,.1); } .nav-links.open a { color: var(--muted); } }
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 90px; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url('assets/brochure_p5_img2_640x427.jpeg') center/cover no-repeat; opacity: 0.12; }
+    .page-hero .container { position: relative; }
+    .page-hero h1 { font-size: clamp(40px,5.5vw,68px); font-weight: 700; color: white; margin-bottom: 16px; }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.72); max-width: 580px; font-weight: 300; line-height: 1.7; }
+    /* FOOTER */
+    footer { background: #0c1a10; color: rgba(255,255,255,.5); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-row img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+    .footer-brand-name small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .4px; }
+    .footer-about { font-size: 13px; line-height: 1.8; max-width: 270px; }
+    .footer-reg { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,.25); }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 33px; height: 33px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,.45); transition: all .2s; }
+    .footer-social a:hover { background: var(--orange); color: white; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 14px; text-align: center; } }
+
+    /* =========================================================
+       PAGE-SPECIFIC STYLES
+       ========================================================= */
+
+    /* SECTION 1: OUR STORY */
+    .story-section { padding: 96px 0; background: var(--cream); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .story-text h2 { font-size: clamp(32px, 4vw, 50px); font-weight: 700; color: var(--green); margin-bottom: 24px; }
+    .story-text p { font-size: 16px; color: var(--muted); line-height: 1.85; margin-bottom: 20px; }
+    .story-text p:last-child { margin-bottom: 0; }
+    .story-img-wrap { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 64px rgba(30,92,58,.18); }
+    .story-img-wrap img { width: 100%; height: 420px; object-fit: cover; }
+    .story-img-badge { position: absolute; bottom: 24px; left: 24px; background: white; border-radius: 12px; padding: 14px 20px; box-shadow: 0 8px 28px rgba(0,0,0,.14); display: flex; align-items: center; gap: 14px; }
+    .story-img-badge .badge-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--green); line-height: 1; }
+    .story-img-badge .badge-text { font-size: 12px; color: var(--muted); font-weight: 500; line-height: 1.4; }
+    @media (max-width: 900px) { .story-grid { grid-template-columns: 1fr; gap: 40px; } .story-img-wrap img { height: 300px; } }
+
+    /* SECTION 2: TIMELINE */
+    .timeline-section { padding: 96px 0; background: linear-gradient(160deg, #0f2d1c 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .timeline-section::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; background: rgba(255,255,255,.03); }
+    .timeline-section::after { content: ''; position: absolute; bottom: -80px; left: -60px; width: 350px; height: 350px; border-radius: 50%; background: rgba(255,255,255,.025); }
+    .timeline-section .container { position: relative; }
+    .timeline-header { text-align: center; margin-bottom: 64px; }
+    .timeline-header .section-label { color: #f4a862; }
+    .timeline-header .section-label::before { background: #f4a862; }
+    .timeline-header h2 { font-size: clamp(30px, 4vw, 48px); color: white; }
+    .timeline { position: relative; padding-left: 0; }
+    .timeline::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: rgba(255,255,255,.15); transform: translateX(-50%); }
+    .tl-item { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 0; align-items: start; }
+    .tl-item:nth-child(odd) .tl-content { text-align: right; padding-right: 40px; }
+    .tl-item:nth-child(even) .tl-content { text-align: left; padding-left: 40px; grid-column: 3; }
+    .tl-item:nth-child(even) .tl-spacer { grid-column: 1; grid-row: 1; }
+    .tl-item:nth-child(even) .tl-dot-col { grid-column: 2; grid-row: 1; }
+    .tl-item:nth-child(even) .tl-content { grid-column: 3; grid-row: 1; }
+    .tl-item:nth-child(odd) .tl-content { grid-column: 1; grid-row: 1; }
+    .tl-item:nth-child(odd) .tl-dot-col { grid-column: 2; grid-row: 1; }
+    .tl-item:nth-child(odd) .tl-spacer { grid-column: 3; grid-row: 1; }
+    .tl-dot-col { display: flex; flex-direction: column; align-items: center; padding-top: 8px; }
+    .tl-dot { width: 44px; height: 44px; border-radius: 50%; background: var(--orange); border: 3px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 11px; font-weight: 700; color: white; flex-shrink: 0; z-index: 2; position: relative; }
+    .tl-line { width: 2px; flex: 1; min-height: 40px; background: rgba(255,255,255,.1); }
+    .tl-item:last-child .tl-line { display: none; }
+    .tl-content { padding-bottom: 48px; }
+    .tl-year { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #f4a862; text-transform: uppercase; margin-bottom: 6px; }
+    .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px; line-height: 1.2; }
+    .tl-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.75; }
+    @media (max-width: 900px) {
+      .timeline::before { left: 22px; transform: none; }
+      .tl-item { grid-template-columns: 44px 1fr; grid-template-rows: auto; gap: 0 16px; }
+      .tl-item:nth-child(odd) .tl-content,
+      .tl-item:nth-child(even) .tl-content { text-align: left; padding-left: 0; padding-right: 0; grid-column: 2; grid-row: 1; }
+      .tl-item:nth-child(odd) .tl-dot-col,
+      .tl-item:nth-child(even) .tl-dot-col { grid-column: 1; grid-row: 1; }
+      .tl-item:nth-child(odd) .tl-spacer,
+      .tl-item:nth-child(even) .tl-spacer { display: none; }
+      .tl-dot-col { align-items: center; }
+    }
+
+    /* SECTION 3: VALUES */
+    .values-section { padding: 96px 0; background: var(--cream); }
+    .values-header { text-align: center; margin-bottom: 56px; }
+    .values-header h2 { font-size: clamp(30px, 4vw, 48px); color: var(--green); }
+    .values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    .value-card { background: white; border-radius: 16px; padding: 36px 28px; border: 1px solid var(--border); transition: all 0.28s ease; position: relative; overflow: hidden; }
+    .value-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, var(--green-light) 0%, transparent 60%); opacity: 0; transition: opacity 0.28s; }
+    .value-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(30,92,58,.12); border-color: var(--green-mid); }
+    .value-card:hover::before { opacity: 1; }
+    .value-icon { width: 52px; height: 52px; border-radius: 14px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--green); margin-bottom: 20px; position: relative; transition: background 0.28s; }
+    .value-card:hover .value-icon { background: var(--green); color: white; }
+    .value-card h3 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 12px; position: relative; }
+    .value-card p { font-size: 14px; color: var(--muted); line-height: 1.8; position: relative; }
+    @media (max-width: 900px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .values-grid { grid-template-columns: 1fr; } }
+
+    /* SECTION 4: LEADERSHIP */
+    .leadership-section { padding: 96px 0; background: white; }
+    .leadership-header { text-align: center; margin-bottom: 56px; }
+    .leadership-header h2 { font-size: clamp(30px, 4vw, 48px); color: var(--green); }
+    .leadership-header p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 16px auto 0; }
+    .leadership-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; align-items: start; }
+    .leader-card { background: var(--cream); border-radius: 16px; padding: 32px 28px; border: 1px solid var(--border); text-align: center; transition: all 0.28s; }
+    .leader-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(30,92,58,.1); }
+    .leader-card.featured { background: var(--green-light); border-color: var(--green-mid); }
+    .leader-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--green); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; color: white; margin: 0 auto 20px; }
+    .leader-card.featured .leader-avatar { width: 88px; height: 88px; font-size: 32px; }
+    .leader-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+    .leader-card.featured .leader-name { font-size: 24px; }
+    .leader-title { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--orange); text-transform: uppercase; margin-bottom: 16px; }
+    .leader-bio { font-size: 13.5px; color: var(--muted); line-height: 1.8; text-align: left; }
+    .leader-card:not(.featured) .leader-bio { font-size: 13px; }
+    @media (max-width: 900px) { .leadership-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .leadership-grid { grid-template-columns: 1fr; } }
+
+    /* SECTION 5: REGISTRATION */
+    .registration-section { padding: 80px 0; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); }
+    .registration-inner { text-align: center; margin-bottom: 48px; }
+    .registration-inner .section-label { color: #f4a862; }
+    .registration-inner .section-label::before { background: #f4a862; }
+    .registration-inner h2 { font-size: clamp(28px, 3.5vw, 44px); color: white; margin-bottom: 8px; }
+    .reg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,.08); border-radius: 16px; overflow: hidden; }
+    .reg-item { background: rgba(255,255,255,.04); padding: 28px 32px; transition: background 0.2s; }
+    .reg-item:hover { background: rgba(255,255,255,.08); }
+    .reg-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 8px; }
+    .reg-value { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: white; line-height: 1.3; }
+    .reg-value a { color: #f4a862; transition: opacity .2s; }
+    .reg-value a:hover { opacity: 0.8; }
+    @media (max-width: 900px) { .reg-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .reg-grid { grid-template-columns: 1fr; } }
+
+    /* CTA BAND */
+    .cta-band { padding: 80px 0; background: var(--orange); position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,.08); }
+    .cta-band::after { content: ''; position: absolute; bottom: -80px; left: 10%; width: 220px; height: 220px; border-radius: 50%; background: rgba(0,0,0,.06); }
+    .cta-band-inner { text-align: center; position: relative; }
+    .cta-band-inner h2 { font-size: clamp(30px, 4vw, 50px); color: white; margin-bottom: 16px; }
+    .cta-band-inner p { font-size: 16px; color: rgba(255,255,255,.8); max-width: 480px; margin: 0 auto 36px; font-weight: 300; }
+    .cta-band-inner .btn-outline-white { font-size: 16px; padding: 16px 36px; }
+
+    /* HERO BREADCRUMB */
+    .hero-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,.45); margin-bottom: 20px; }
+    .hero-breadcrumb a { color: rgba(255,255,255,.55); transition: color .2s; }
+    .hero-breadcrumb a:hover { color: rgba(255,255,255,.9); }
+    .hero-breadcrumb span { color: rgba(255,255,255,.3); }
+
+    /* STAT ROW below hero */
+    .hero-stat-row { display: flex; gap: 0; border-top: 1px solid rgba(255,255,255,.12); margin-top: 60px; padding-top: 0; }
+    .hero-stat { flex: 1; padding: 28px 32px 0 0; border-right: 1px solid rgba(255,255,255,.1); }
+    .hero-stat:last-child { border-right: none; padding-right: 0; }
+    .hero-stat .num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: white; line-height: 1; }
+    .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 6px; font-weight: 400; }
+    @media (max-width: 600px) { .hero-stat-row { flex-wrap: wrap; } .hero-stat { flex: 1 1 50%; border-right: none; padding: 20px 0 0 0; border-top: 1px solid rgba(255,255,255,.08); } .hero-stat:nth-child(odd) { padding-right: 16px; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+          <div class="nav-brand">Shri Samarth Foundation <small>Khed Taluka, Pune</small></div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="stories.html">Stories</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta"><a href="get-involved.html" class="btn btn-orange">Support Us</a></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="hero-breadcrumb">
+        <a href="index.html">Home</a>
+        <span>&#8250;</span>
+        <span>About Us</span>
+      </div>
+      <div class="section-label fade-up">Our Story</div>
+      <h1 class="fade-up d1">Nine years of service.<br>Twenty-one villages. One promise.</h1>
+      <p class="fade-up d2">Shri Samarth Foundation was born in Khed Taluka not from boardrooms but from the fields, the ration queues, and the quiet suffering of farming families. Every program we run is rooted in that origin.</p>
+      <div class="hero-stat-row fade-up d3">
+        <div class="hero-stat">
+          <div class="num">9</div>
+          <div class="lbl">Years of service</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">21<span style="font-size:24px">+</span></div>
+          <div class="lbl">Villages reached</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">6</div>
+          <div class="lbl">Active programs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">7K<span style="font-size:24px">+</span></div>
+          <div class="lbl">Families supported</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: OUR STORY -->
+  <section class="story-section">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-text">
+          <div class="section-label fade-up">Our Story</div>
+          <h2 class="fade-up d1">Born from the fields of Khed</h2>
+          <p class="fade-up d2">In 2016, a group of social activists and legal professionals in Khed Taluka, Pune district, witnessed what data could never fully capture &mdash; farming families unable to afford school bags for their children, elderly women walking kilometres for basic healthcare, drought survivors with nothing to fall back on.</p>
+          <p class="fade-up d3">Shri Samarth Foundation was registered (F48181/Pune) that year with a single conviction: systemic change must be built ground-up, one village at a time. Every program was shaped not by policy papers but by conversations held in the fields, at wells, and in the cramped homes of Khed&rsquo;s farming families.</p>
+          <p class="fade-up d4">Today, nine years and 21+ villages later, the foundation runs six active programs, operates a mobile health unit, has deployed one ambulance, and is mid-way through Project Samruddhi &mdash; a three-year infrastructure, education, and digital health initiative connecting doorstep healthcare to every enrolled village.</p>
+        </div>
+        <div class="story-img-wrap fade-up d2">
+          <img src="assets/brochure_p6_img1_591x396.jpeg" alt="Food distribution program, Khed Taluka" />
+          <div class="story-img-badge">
+            <div class="badge-num">2016</div>
+            <div class="badge-text">Founded in<br>Khed Taluka</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: TIMELINE -->
+  <section class="timeline-section">
+    <div class="container">
+      <div class="timeline-header fade-up">
+        <div class="section-label">Journey</div>
+        <h2>A decade in the making</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="tl-item fade-up">
+          <div class="tl-content">
+            <div class="tl-year">2016</div>
+            <div class="tl-title">Foundation Registered</div>
+            <div class="tl-body">Shri Samarth Foundation receives registration F48181/Pune. First school bag distribution reaches 200+ students across Khed Taluka, marking the beginning of a lasting commitment to rural education.</div>
+          </div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-seedling" style="font-size:14px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-heart-pulse" style="font-size:14px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-year">2017</div>
+            <div class="tl-title">Maha Arogya Shibir Launched</div>
+            <div class="tl-body">First large-scale free health camp covering eye care, dental treatment, and general medicine. Specialist doctors travel to remote villages for a full day of consultations &mdash; a model that continues today.</div>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-content">
+            <div class="tl-year">2018</div>
+            <div class="tl-title">Ambulance Deployed</div>
+            <div class="tl-body">The foundation&rsquo;s first ambulance begins serving remote villages with 24/7 emergency transport. For many families in Khed&rsquo;s interior villages, this is the first reliable access to emergency medical evacuation.</div>
+          </div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-truck-medical" style="font-size:12px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-venus" style="font-size:14px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-year">2019</div>
+            <div class="tl-title">Mahila Asmita Bhavan Established</div>
+            <div class="tl-body">Women&rsquo;s empowerment centre inaugurated, offering tailoring, skill training, and entrepreneurship support for rural women. The centre transforms the economic independence of dozens of families in its first year.</div>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-content">
+            <div class="tl-year">2020</div>
+            <div class="tl-title">COVID-19 Relief Operation</div>
+            <div class="tl-body">During the pandemic lockdown, the foundation distributes 7,000+ grocery kits and essential supplies across 80+ villages &mdash; one of the largest grassroots relief operations in Khed Taluka during the crisis.</div>
+          </div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-box-open" style="font-size:12px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-droplet" style="font-size:14px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-year">2021</div>
+            <div class="tl-title">Clean Water Infrastructure</div>
+            <div class="tl-body">Water filter plants installed in 3 villages, directly addressing waterborne illness. Clean drinking water infrastructure reaches households that previously relied on unsafe open water sources throughout the year.</div>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-content">
+            <div class="tl-year">2022</div>
+            <div class="tl-title">Solar School Initiative</div>
+            <div class="tl-body">Solar panels installed at rural schools in the region, cutting electricity bills and ensuring uninterrupted learning. Schools that once faced power cuts during exam periods can now study consistently after dark.</div>
+          </div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-sun" style="font-size:13px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-cow" style="font-size:12px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-year">2023</div>
+            <div class="tl-title">Animal Welfare Expansion</div>
+            <div class="tl-body">Cattle feeding drives and veterinary camps extended to 15+ villages. For farming families whose livelihoods depend on their livestock, healthy animals are not a luxury &mdash; they are the household&rsquo;s financial backbone.</div>
+          </div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-content">
+            <div class="tl-year">2024</div>
+            <div class="tl-title">Arogya Sewika Program Launched</div>
+            <div class="tl-body">50 trained female health workers equipped with tablets for doorstep digital healthcare in 21 villages. The Sewika model brings preventive care, health tracking, and tele-medicine access directly into rural homes.</div>
+          </div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-tablet-screen-button" style="font-size:12px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-spacer"></div>
+        </div>
+
+        <div class="tl-item fade-up">
+          <div class="tl-spacer"></div>
+          <div class="tl-dot-col">
+            <div class="tl-dot"><i class="fa-solid fa-rocket" style="font-size:12px"></i></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-year">2025</div>
+            <div class="tl-title">Project Samruddhi Launched</div>
+            <div class="tl-body">The foundation&rsquo;s most ambitious program yet: a three-pillar initiative combining infrastructure development, expanded education, and a full digital health network. Samruddhi represents a generational shift in how Shri Samarth serves Khed Taluka.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: VALUES -->
+  <section class="values-section">
+    <div class="container">
+      <div class="values-header fade-up">
+        <div class="section-label">Our Principles</div>
+        <h2>What we stand for</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card fade-up d1">
+          <div class="value-icon"><i class="fa-solid fa-hands-holding-heart"></i></div>
+          <h3>Dignity, not charity</h3>
+          <p>We design every program so recipients feel empowered, not dependent. From distributing school bags in ceremonies to running health camps with specialists &mdash; the dignity of the community comes first.</p>
+        </div>
+        <div class="value-card fade-up d2">
+          <div class="value-icon"><i class="fa-solid fa-seedling"></i></div>
+          <h3>Ground-up solutions</h3>
+          <p>No program gets launched without understanding the village first. Our team walks the land, meets the sarpanch, and listens before proposing any intervention. Communities design their own progress.</p>
+        </div>
+        <div class="value-card fade-up d3">
+          <div class="value-icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Radical transparency</h3>
+          <p>We publish our activities, impact numbers, and registrations openly. Every supporter deserves to know exactly where their contribution went and how it changed a life in Khed Taluka.</p>
+        </div>
+        <div class="value-card fade-up d4">
+          <div class="value-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+          <h3>Long-term commitment</h3>
+          <p>We do not run one-time camps and leave. Villages like Ningoan, Kanersar, and Retawadi have seen Shri Samarth year after year, program after program &mdash; building trust that cannot be imported from outside.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: LEADERSHIP -->
+  <section class="leadership-section">
+    <div class="container">
+      <div class="leadership-header fade-up">
+        <div class="section-label">The People Behind the Work</div>
+        <h2>Leadership</h2>
+        <p>Shri Samarth Foundation is governed by trustees who are rooted in the communities they serve &mdash; advocates, social workers, and professionals who give their time because they believe in the mission.</p>
+      </div>
+      <div class="leadership-grid">
+
+        <div class="leader-card featured fade-up d1">
+          <div class="leader-avatar">VS</div>
+          <div class="leader-name">Adv. Vijaysinh Shinde Patil</div>
+          <div class="leader-title">Founder &amp; Trustee</div>
+          <p class="leader-bio">An advocate and social activist from Khed Taluka, Adv. Shinde Patil founded Shri Samarth Foundation after years of working with marginalised farming communities in Pune district. His legal background informs the foundation&rsquo;s strong governance practices; his roots in Khed ensure every program remains community-led and community-accountable. He continues to personally oversee field operations across all 21+ villages.</p>
+        </div>
+
+        <div class="leader-card fade-up d2">
+          <div class="leader-avatar" style="background: var(--green-mid);">RP</div>
+          <div class="leader-name">Rajendra Patil</div>
+          <div class="leader-title">Trustee</div>
+          <p class="leader-bio">A seasoned administrator with deep ties to Khed Taluka&rsquo;s gram panchayat network. Rajendra brings governance experience and village-level relationships that are essential to executing programs on the ground.</p>
+        </div>
+
+        <div class="leader-card fade-up d3">
+          <div class="leader-avatar" style="background: var(--earth);">SS</div>
+          <div class="leader-name">Sunanda Shinde</div>
+          <div class="leader-title">Trustee &mdash; Women&rsquo;s Programs</div>
+          <p class="leader-bio">Leading the Mahila Asmita Bhavan and all women&rsquo;s empowerment initiatives, Sunanda has spent over a decade advocating for rural women&rsquo;s economic independence in Pune district.</p>
+        </div>
+
+        <div class="leader-card fade-up d4">
+          <div class="leader-avatar" style="background: #3d7a5a;">MK</div>
+          <div class="leader-name">Mahesh Kale</div>
+          <div class="leader-title">Trustee &mdash; Health Programs</div>
+          <p class="leader-bio">Oversees the Arogya Shibir program and the Arogya Sewika network. Mahesh coordinates the mobile health unit and ambulance operations across 21 villages with logistics expertise built over a decade.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: REGISTRATION -->
+  <section class="registration-section">
+    <div class="container">
+      <div class="registration-inner fade-up">
+        <div class="section-label">Governance</div>
+        <h2>Legal &amp; Registration Details</h2>
+      </div>
+      <div class="reg-grid fade-up d1">
+        <div class="reg-item">
+          <div class="reg-label">Registration Number</div>
+          <div class="reg-value">F48181/Pune</div>
+        </div>
+        <div class="reg-item">
+          <div class="reg-label">Registered Under</div>
+          <div class="reg-value">Maharashtra Public Trusts Act, 1950</div>
+        </div>
+        <div class="reg-item">
+          <div class="reg-label">Jurisdiction</div>
+          <div class="reg-value">Khed Taluka, Pune District, Maharashtra</div>
+        </div>
+        <div class="reg-item">
+          <div class="reg-label">Year of Establishment</div>
+          <div class="reg-value">2016</div>
+        </div>
+        <div class="reg-item">
+          <div class="reg-label">Email</div>
+          <div class="reg-value"><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></div>
+        </div>
+        <div class="reg-item">
+          <div class="reg-label">Website</div>
+          <div class="reg-value"><a href="https://samarthfoundation.net" target="_blank" rel="noopener">samarthfoundation.net</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="cta-band-inner fade-up">
+        <h2>Ready to be part of this story?</h2>
+        <p>Nine years of work have shown us what is possible when communities and supporters commit together. Your partnership &mdash; as a donor, a CSR partner, or a volunteer &mdash; extends that reach further.</p>
+        <a href="get-involved.html" class="btn btn-outline-white">Get Involved <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+            <div class="footer-brand-name">Shri Samarth Foundation<small>Khed Taluka, Pune, Maharashtra</small></div>
+          </div>
+          <p class="footer-about">Empowering Change &amp; Enriching Lives across 21+ villages in Khed Taluka since 2016. Education &middot; Health &middot; Women &middot; Environment.</p>
+          <div class="footer-reg">Reg. No. F48181/Pune &nbsp;&middot;&nbsp; samarthfoundation.net</div>
+        </div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="programs.html">Education</a></li><li><a href="programs.html">Healthcare</a></li><li><a href="programs.html">Women Empowerment</a></li><li><a href="programs.html">Crisis Relief</a></li><li><a href="programs.html">Animal Welfare</a></li><li><a href="programs.html">Environment</a></li></ul></div>
+        <div class="footer-col"><h4>Organisation</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="stories.html">Village Stories</a></li><li><a href="impact.html">Impact</a></li><li><a href="get-involved.html">CSR Partnerships</a></li><li><a href="get-involved.html">Donate</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Khed Taluka, Pune</a></li><li><a href="contact.html">Maharashtra 410505</a></li><li><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Shri Samarth Foundation &middot; Reg. F48181/Pune</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>

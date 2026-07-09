@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Involved | Shri Samarth Foundation</title>
+  <meta name="description" content="Support Shri Samarth Foundation — donate, volunteer, or partner through CSR. Empowering 21+ villages in Khed Taluka, Pune since 2016." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #1e5c3a; --green-mid: #2d7a50; --green-light: #edf6f0; --orange: #e07b2a; --orange-light: #fef3e8; --cream: #fdf8f0; --earth: #7a3e1a; --text: #1a1204; --muted: #6b5e4a; --border: #e5ddd0; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.22s ease; border: 2px solid transparent; }
+    .btn-orange { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-orange:hover { background: #c96d20; border-color: #c96d20; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(224,123,42,.35); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: white; }
+    .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,.55); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: inline-block; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 22px 0; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: white; box-shadow: 0 2px 24px rgba(0,0,0,.08); padding: 13px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: white; line-height: 1.2; transition: color 0.3s; }
+    .nav-brand small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; opacity: 0.6; letter-spacing: .5px; }
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+    .nav-links a:hover { color: white; }
+    .nav-links a.active { color: white; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--text); }
+    .nav-cta .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; margin: 5px 0; transition: all .3s; }
+    nav.scrolled .nav-toggle span { background: var(--text); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,.1); } .nav-links.open a { color: var(--muted); } }
+
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 90px; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url('assets/brochure_p5_img2_640x427.jpeg') center/cover no-repeat; opacity: 0.13; }
+    .page-hero .container { position: relative; }
+    .page-hero h1 { font-size: clamp(40px,5.5vw,68px); font-weight: 700; color: white; margin-bottom: 16px; }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.72); max-width: 580px; font-weight: 300; line-height: 1.7; }
+
+    /* 3-WAY SELECTOR */
+    .way-selector { background: var(--cream); padding: 80px 0 72px; }
+    .way-selector-heading { text-align: center; margin-bottom: 48px; }
+    .way-selector-heading h2 { font-size: clamp(30px, 3.5vw, 44px); font-weight: 700; color: var(--text); }
+    .way-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .way-card { background: white; border-radius: 16px; padding: 44px 36px; text-align: center; border: 1.5px solid var(--border); cursor: pointer; transition: all 0.28s ease; position: relative; overflow: hidden; }
+    .way-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--green); transform: scaleX(0); transition: transform 0.28s ease; }
+    .way-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(30,92,58,.12); border-color: var(--green-mid); }
+    .way-card:hover::after { transform: scaleX(1); }
+    .way-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 22px; font-size: 28px; color: var(--green); transition: background 0.28s, color 0.28s; }
+    .way-card:hover .way-icon { background: var(--green); color: white; }
+    .way-card h3 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .way-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .way-card .way-cta { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; font-size: 13px; font-weight: 600; color: var(--green); }
+    .way-card .way-cta i { font-size: 11px; transition: transform 0.2s; }
+    .way-card:hover .way-cta i { transform: translateX(4px); }
+    @media (max-width: 760px) { .way-cards { grid-template-columns: 1fr; } }
+
+    /* DONATE SECTION */
+    .donate-section { background: white; padding: 96px 0 88px; }
+    .donate-section-inner { }
+    .donate-header { margin-bottom: 56px; }
+    .donate-header h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .donate-header p { font-size: 16px; color: var(--muted); max-width: 520px; }
+    .donate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .bank-card { background: var(--green-light); border-left: 4px solid var(--green); border-radius: 12px; padding: 36px 32px; }
+    .bank-card h3 { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .bank-card h3 i { font-size: 18px; }
+    .bank-row { display: flex; flex-direction: column; gap: 14px; }
+    .bank-item { display: flex; flex-direction: column; gap: 2px; }
+    .bank-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+    .bank-value { font-size: 15px; font-weight: 500; color: var(--text); }
+    .bank-divider { height: 1px; background: rgba(30,92,58,.15); margin: 6px 0; }
+    .bank-upi { background: white; border-radius: 8px; padding: 14px 18px; margin-top: 16px; display: flex; align-items: center; gap: 12px; border: 1.5px solid rgba(30,92,58,.2); }
+    .bank-upi i { font-size: 22px; color: var(--green); }
+    .bank-upi-text { font-size: 15px; font-weight: 600; color: var(--text); }
+    .bank-upi-label { font-size: 11px; color: var(--muted); }
+    .bank-note { margin-top: 18px; font-size: 13px; color: var(--muted); line-height: 1.6; background: white; border-radius: 8px; padding: 14px 16px; border: 1px solid var(--border); }
+    .bank-note i { color: var(--orange); margin-right: 4px; }
+
+    .donation-impact h3 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 24px; }
+    .impact-amounts { display: flex; flex-direction: column; gap: 0; }
+    .impact-row { display: flex; align-items: flex-start; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .impact-row:last-child { border-bottom: none; }
+    .impact-amount { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; color: var(--green); min-width: 110px; }
+    .impact-desc { font-size: 14px; color: var(--muted); line-height: 1.6; padding-top: 3px; }
+
+    .tax-note { margin-top: 32px; background: var(--orange-light); border-left: 4px solid var(--orange); border-radius: 8px; padding: 18px 20px; font-size: 13px; color: var(--earth); line-height: 1.6; }
+    .tax-note strong { color: var(--orange); }
+    @media (max-width: 780px) { .donate-grid { grid-template-columns: 1fr; } }
+
+    /* VOLUNTEER SECTION */
+    .volunteer-section { background: var(--cream); padding: 96px 0 88px; }
+    .volunteer-header { margin-bottom: 16px; }
+    .volunteer-header h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .volunteer-header p { font-size: 16px; color: var(--muted); max-width: 620px; line-height: 1.7; }
+    .vol-roles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 48px 0 56px; }
+    .vol-card { background: white; border-radius: 14px; padding: 32px 28px; border: 1.5px solid var(--border); transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s; }
+    .vol-card:hover { box-shadow: 0 10px 32px rgba(30,92,58,.10); transform: translateY(-4px); border-color: var(--green-mid); }
+    .vol-card-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--green); margin-bottom: 18px; }
+    .vol-card h3 { font-size: 21px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .vol-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    @media (max-width: 640px) { .vol-roles { grid-template-columns: 1fr; } }
+
+    /* FORMS */
+    .form-wrap { background: white; border-radius: 16px; padding: 48px 44px; border: 1.5px solid var(--border); }
+    .form-wrap h3 { font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .form-wrap .form-subtext { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-grid .full { grid-column: 1 / -1; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 13px; font-weight: 600; color: var(--text); }
+    .form-field input,
+    .form-field select,
+    .form-field textarea { padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: white; transition: border-color 0.2s, box-shadow 0.2s; outline: none; width: 100%; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(30,92,58,.09); }
+    .form-field textarea { resize: vertical; min-height: 110px; }
+    .form-field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b5e4a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+    .form-submit { margin-top: 8px; }
+    .form-submit .btn { width: 100%; justify-content: center; font-size: 15px; padding: 15px 28px; }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .form-wrap { padding: 32px 22px; } }
+
+    /* CSR SECTION */
+    .csr-section { background: #0c2218; padding: 96px 0 88px; }
+    .csr-section .section-label { color: var(--orange); }
+    .csr-section .section-label::before { background: var(--orange); }
+    .csr-header { margin-bottom: 16px; }
+    .csr-header h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 700; color: white; margin-bottom: 12px; }
+    .csr-header p { font-size: 16px; color: rgba(255,255,255,.62); max-width: 560px; line-height: 1.7; }
+    .csr-tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 52px 0 60px; }
+    .csr-tier { background: white; border-radius: 16px; padding: 36px 30px; position: relative; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s; }
+    .csr-tier:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,.25); }
+    .csr-tier-badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green); background: var(--green-light); padding: 5px 12px; border-radius: 20px; margin-bottom: 18px; }
+    .csr-tier h3 { font-size: 24px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .csr-tier .csr-amount { font-size: 13px; font-weight: 600; color: var(--orange); margin-bottom: 16px; }
+    .csr-tier p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .csr-tier ul { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .csr-tier ul li { font-size: 13px; color: var(--muted); display: flex; align-items: flex-start; gap: 8px; }
+    .csr-tier ul li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--green); font-size: 11px; margin-top: 3px; flex-shrink: 0; }
+    .csr-tier.featured { border: 2px solid var(--green); }
+    .csr-tier.featured .csr-tier-badge { background: var(--green); color: white; }
+    .csr-form-wrap { max-width: 760px; margin: 0 auto; }
+    .csr-form-wrap .form-wrap { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.12); }
+    .csr-form-wrap .form-wrap h3 { color: white; }
+    .csr-form-wrap .form-wrap .form-subtext { color: rgba(255,255,255,.5); }
+    .csr-form-wrap .form-field label { color: rgba(255,255,255,.75); }
+    .csr-form-wrap .form-field input,
+    .csr-form-wrap .form-field select,
+    .csr-form-wrap .form-field textarea { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.15); color: white; }
+    .csr-form-wrap .form-field input::placeholder,
+    .csr-form-wrap .form-field textarea::placeholder { color: rgba(255,255,255,.3); }
+    .csr-form-wrap .form-field input:focus,
+    .csr-form-wrap .form-field select:focus,
+    .csr-form-wrap .form-field textarea:focus { border-color: var(--green-mid); box-shadow: 0 0 0 3px rgba(45,122,80,.2); }
+    .csr-form-wrap .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
+    .csr-form-wrap .form-field select option { background: #1a1204; color: white; }
+    .csr-note { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.45); text-align: center; }
+    .csr-note i { color: var(--orange); margin-right: 4px; }
+    @media (max-width: 840px) { .csr-tiers { grid-template-columns: 1fr; max-width: 480px; } }
+
+    /* FAQ SECTION */
+    .faq-section { background: white; padding: 96px 0 88px; }
+    .faq-header { text-align: center; margin-bottom: 52px; }
+    .faq-header h2 { font-size: clamp(30px, 3.5vw, 46px); font-weight: 700; color: var(--text); }
+    .faq-list { max-width: 740px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 4px; text-align: left; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); transition: color 0.2s; }
+    .faq-q:hover { color: var(--green); }
+    .faq-item.open .faq-q { color: var(--green); }
+    .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--green); flex-shrink: 0; transition: background 0.2s, transform 0.3s; }
+    .faq-item.open .faq-icon { background: var(--green); color: white; transform: rotate(45deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner { padding: 0 4px 22px; font-size: 15px; color: var(--muted); line-height: 1.75; }
+
+    /* CTA BAND */
+    .cta-band { background: var(--orange); padding: 72px 0; text-align: center; }
+    .cta-band h2 { font-size: clamp(28px, 3.5vw, 42px); font-weight: 700; color: white; margin-bottom: 10px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.8); margin-bottom: 32px; font-weight: 300; }
+    .cta-band .btn-outline-white { font-size: 15px; padding: 15px 34px; }
+    .cta-band .btn-outline-white:hover { border-color: white; }
+
+    /* FOOTER */
+    footer { background: #0c1a10; color: rgba(255,255,255,.5); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-row img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+    .footer-brand-name small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .4px; }
+    .footer-about { font-size: 13px; line-height: 1.8; max-width: 270px; }
+    .footer-reg { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,.25); }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 33px; height: 33px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,.45); transition: all .2s; }
+    .footer-social a:hover { background: var(--orange); color: white; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 14px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+          <div class="nav-brand">Shri Samarth Foundation <small>Khed Taluka, Pune</small></div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="stories.html">Stories</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="get-involved.html" class="active">Get Involved</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta"><a href="get-involved.html" class="btn btn-orange">Support Us</a></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" id="donate">
+    <div class="container">
+      <div class="section-label fade-up">Get Involved</div>
+      <h1 class="fade-up d1">Join us.<br>However you can.</h1>
+      <p class="fade-up d2">Whether you write a cheque, give your weekend, or bring your company&rsquo;s CSR mandate &mdash; there is a place for you in this work.</p>
+    </div>
+  </section>
+
+  <!-- 3-WAY SELECTOR -->
+  <section class="way-selector">
+    <div class="container">
+      <div class="way-selector-heading fade-up">
+        <div class="section-label" style="justify-content:center;">Three ways to help</div>
+        <h2>Choose how you want to make a difference</h2>
+      </div>
+      <div class="way-cards">
+        <div class="way-card fade-up d1" onclick="document.getElementById('donate-section').scrollIntoView({behavior:'smooth'})">
+          <div class="way-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <h3>Donate</h3>
+          <p>Fund a school bag. Fund an ambulance trip. Fund an Arogya Sewika&rsquo;s tablet. Your money goes directly to field programs.</p>
+          <span class="way-cta">Make a donation <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="way-card fade-up d2" onclick="document.getElementById('volunteer').scrollIntoView({behavior:'smooth'})">
+          <div class="way-icon"><i class="fa-solid fa-person-circle-check"></i></div>
+          <h3>Volunteer</h3>
+          <p>Medical professionals, educators, legal experts, logistics volunteers. Come to the field or work remotely.</p>
+          <span class="way-cta">See volunteer roles <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+        <div class="way-card fade-up d3" onclick="document.getElementById('csr').scrollIntoView({behavior:'smooth'})">
+          <div class="way-icon"><i class="fa-solid fa-building-columns"></i></div>
+          <h3>CSR Partner</h3>
+          <p>Section 35AC / 80G eligible programs. End-to-end CSR project design. Co-branded impact reports.</p>
+          <span class="way-cta">Explore CSR partnership <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE SECTION -->
+  <section class="donate-section" id="donate-section">
+    <div class="container">
+      <div class="donate-header fade-up">
+        <div class="section-label">Donate</div>
+        <h2>Your support reaches the field in days</h2>
+        <p>Every rupee is tracked, acknowledged, and put to work in one of our active programs.</p>
+      </div>
+      <div class="donate-grid">
+
+        <!-- Bank Details -->
+        <div class="fade-up d1">
+          <div class="bank-card">
+            <h3><i class="fa-solid fa-landmark"></i> Bank Transfer Details</h3>
+            <div class="bank-row">
+              <div class="bank-item">
+                <span class="bank-label">Account Name</span>
+                <span class="bank-value">Shri Samarth Foundation</span>
+              </div>
+              <div class="bank-divider"></div>
+              <div class="bank-item">
+                <span class="bank-label">Bank</span>
+                <span class="bank-value">State Bank of India</span>
+              </div>
+              <div class="bank-item">
+                <span class="bank-label">Account Number</span>
+                <span class="bank-value">XXXXXXXXXXXX</span>
+              </div>
+              <div class="bank-item">
+                <span class="bank-label">IFSC Code</span>
+                <span class="bank-value">SBIN0XXXXXX</span>
+              </div>
+              <div class="bank-item">
+                <span class="bank-label">Branch</span>
+                <span class="bank-value">Khed, Pune</span>
+              </div>
+            </div>
+            <div class="bank-upi">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+              <div>
+                <div class="bank-upi-label">UPI / Google Pay / PhonePe</div>
+                <div class="bank-upi-text">samarthfoundation@sbi</div>
+              </div>
+            </div>
+            <div class="bank-note">
+              <i class="fa-solid fa-circle-info"></i>
+              After transfer, please WhatsApp the transaction screenshot to <strong>+91 XXXXX XXXXX</strong> for your receipt and acknowledgement.
+            </div>
+          </div>
+        </div>
+
+        <!-- Impact Amounts -->
+        <div class="donation-impact fade-up d2">
+          <h3>What your donation does</h3>
+          <div class="impact-amounts">
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;500</span>
+              <span class="impact-desc">School bag + stationery for one child for a full academic year</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;1,200</span>
+              <span class="impact-desc">Covers one patient end-to-end at a Maha Arogya Shibir camp &mdash; consultation, medicines, tests</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;5,000</span>
+              <span class="impact-desc">Provides clean water filters for one household for 5 years</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;10,000</span>
+              <span class="impact-desc">Funds one Arogya Sewika&rsquo;s tablet and 3 months of field operations</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;25,000</span>
+              <span class="impact-desc">Sponsors one ambulance trip per month for an entire year</span>
+            </div>
+            <div class="impact-row">
+              <span class="impact-amount">&#x20B9;1,00,000</span>
+              <span class="impact-desc">Co-funds a village water RO plant, benefiting 200&ndash;500 residents</span>
+            </div>
+          </div>
+          <div class="tax-note">
+            <strong><i class="fa-solid fa-file-invoice"></i> 80G Tax Benefit:</strong> Shri Samarth Foundation is registered under the Maharashtra Public Trusts Act (F48181/Pune). Our 80G application is in process. Please contact us for the latest status of tax deductibility.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER SECTION -->
+  <section class="volunteer-section" id="volunteer">
+    <div class="container">
+      <div class="volunteer-header fade-up">
+        <div class="section-label">Volunteer</div>
+        <h2>We need people, not just money</h2>
+        <p>Whether you are a doctor, a teacher, a logistics coordinator, or simply someone who wants to spend a Saturday in a village &mdash; we have a place for you.</p>
+      </div>
+
+      <div class="vol-roles">
+        <div class="vol-card fade-up d1">
+          <div class="vol-card-icon"><i class="fa-solid fa-stethoscope"></i></div>
+          <h3>Medical Volunteer</h3>
+          <p>Specialists and general practitioners for Maha Arogya Shibir camps. Ophthalmologists, dentists, and gynaecologists are especially needed.</p>
+        </div>
+        <div class="vol-card fade-up d2">
+          <div class="vol-card-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <h3>Education Support</h3>
+          <p>Conduct workshops at rural schools. Help teachers with digital tools. Provide career guidance to Class 9&ndash;12 students from villages.</p>
+        </div>
+        <div class="vol-card fade-up d3">
+          <div class="vol-card-icon"><i class="fa-solid fa-truck-moving"></i></div>
+          <h3>Field Operations</h3>
+          <p>Help coordinate distribution camps, transport logistics, and village-level communication. Get hands-on in the field.</p>
+        </div>
+        <div class="vol-card fade-up d4">
+          <div class="vol-card-icon"><i class="fa-solid fa-laptop-code"></i></div>
+          <h3>Remote Support</h3>
+          <p>Content writing, design, data entry, grant writing, social media management. Contribute meaningfully from anywhere in the world.</p>
+        </div>
+      </div>
+
+      <!-- Volunteer Form -->
+      <div class="form-wrap fade-up">
+        <h3>Register as a volunteer</h3>
+        <p class="form-subtext">Fill in your details and we will reach out within 3 working days with the right opportunity for you.</p>
+        <form action="#" method="post">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="vol-name">Full Name</label>
+              <input type="text" id="vol-name" name="full_name" placeholder="Your full name" required />
+            </div>
+            <div class="form-field">
+              <label for="vol-email">Email Address</label>
+              <input type="email" id="vol-email" name="email" placeholder="you@example.com" required />
+            </div>
+            <div class="form-field">
+              <label for="vol-phone">Phone Number</label>
+              <input type="tel" id="vol-phone" name="phone" placeholder="+91 XXXXX XXXXX" />
+            </div>
+            <div class="form-field">
+              <label for="vol-city">City</label>
+              <input type="text" id="vol-city" name="city" placeholder="Where are you based?" />
+            </div>
+            <div class="form-field full">
+              <label for="vol-skills">Skills / Profession</label>
+              <input type="text" id="vol-skills" name="skills" placeholder="e.g. Paediatrician, Graphic Designer, Retired Banker, Student..." />
+            </div>
+            <div class="form-field">
+              <label for="vol-role">Role Interested In</label>
+              <select id="vol-role" name="role">
+                <option value="" disabled selected>Select a role</option>
+                <option value="medical">Medical</option>
+                <option value="education">Education</option>
+                <option value="field-ops">Field Operations</option>
+                <option value="remote">Remote Support</option>
+                <option value="any">Any / Open to suggestions</option>
+              </select>
+            </div>
+            <div class="form-field full">
+              <label for="vol-message">Message (Optional)</label>
+              <textarea id="vol-message" name="message" placeholder="Tell us a little about yourself or what kind of involvement you&apos;re looking for..."></textarea>
+            </div>
+            <div class="form-field full form-submit">
+              <button type="submit" class="btn btn-orange"><i class="fa-solid fa-paper-plane"></i> Submit Volunteer Registration</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CSR SECTION -->
+  <section class="csr-section" id="csr">
+    <div class="container">
+      <div class="csr-header fade-up">
+        <div class="section-label">CSR Partnership</div>
+        <h2>CSR that works. Visibly.</h2>
+        <p>We design CSR programs for companies that want real ground impact &mdash; not just a compliance checkbox. Every partnership is documented, co-branded, and reported.</p>
+      </div>
+
+      <div class="csr-tiers">
+        <div class="csr-tier fade-up d1">
+          <span class="csr-tier-badge">Project Support</span>
+          <h3>Project Support</h3>
+          <div class="csr-amount">&#x20B9;5 Lakhs &ndash; &#x20B9;25 Lakhs</div>
+          <p>Fund a specific program &mdash; a health camp series, school infrastructure, or a village water plant.</p>
+          <ul>
+            <li>Full program documentation</li>
+            <li>Co-branding on all collateral</li>
+            <li>Post-program impact report</li>
+            <li>Photo and video from the field</li>
+          </ul>
+        </div>
+        <div class="csr-tier featured fade-up d2">
+          <span class="csr-tier-badge">Anchor Partner</span>
+          <h3>Anchor Partner</h3>
+          <div class="csr-amount">&#x20B9;25 Lakhs &ndash; &#x20B9;1 Crore</div>
+          <p>Own a village or a pillar of Project Samruddhi. Sustained, visible, and deeply reported.</p>
+          <ul>
+            <li>Plaque recognition at site</li>
+            <li>Joint press release</li>
+            <li>Co-branded impact video</li>
+            <li>Dedicated program manager</li>
+            <li>Bi-annual site visits for your team</li>
+          </ul>
+        </div>
+        <div class="csr-tier fade-up d3">
+          <span class="csr-tier-badge">Strategic CSR</span>
+          <h3>Strategic CSR</h3>
+          <div class="csr-amount">&#x20B9;1 Crore+</div>
+          <p>Design a custom multi-year CSR program with the Foundation aligned to your company&rsquo;s goals and ESG commitments.</p>
+          <ul>
+            <li>Governance seat on the program</li>
+            <li>Quarterly leadership briefings</li>
+            <li>Shared impact tracking dashboard</li>
+            <li>Custom SDG-aligned reporting</li>
+            <li>Field visits and team volunteering</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CSR Form -->
+      <div class="csr-form-wrap fade-up">
+        <div class="form-wrap">
+          <h3>CSR Enquiry</h3>
+          <p class="form-subtext">Tell us about your company and CSR goals. We will design an initial proposal at no obligation and respond within 48 hours.</p>
+          <form action="#" method="post">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="csr-company">Company Name</label>
+                <input type="text" id="csr-company" name="company_name" placeholder="Your organisation" required />
+              </div>
+              <div class="form-field">
+                <label for="csr-contact">Contact Person</label>
+                <input type="text" id="csr-contact" name="contact_person" placeholder="Full name" required />
+              </div>
+              <div class="form-field">
+                <label for="csr-designation">Designation</label>
+                <input type="text" id="csr-designation" name="designation" placeholder="e.g. Head of CSR, CFO..." />
+              </div>
+              <div class="form-field">
+                <label for="csr-email">Email Address</label>
+                <input type="email" id="csr-email" name="email" placeholder="work@company.com" required />
+              </div>
+              <div class="form-field">
+                <label for="csr-phone">Phone Number</label>
+                <input type="tel" id="csr-phone" name="phone" placeholder="+91 XXXXX XXXXX" />
+              </div>
+              <div class="form-field">
+                <label for="csr-budget">CSR Budget Range</label>
+                <select id="csr-budget" name="budget_range">
+                  <option value="" disabled selected>Select a range</option>
+                  <option value="lt5l">Below &#x20B9;5 Lakhs</option>
+                  <option value="5l-25l">&#x20B9;5 Lakhs &ndash; &#x20B9;25 Lakhs</option>
+                  <option value="25l-1cr">&#x20B9;25 Lakhs &ndash; &#x20B9;1 Crore</option>
+                  <option value="1cr+">&#x20B9;1 Crore+</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="csr-program">Program Interested In</label>
+                <select id="csr-program" name="program">
+                  <option value="" disabled selected>Select a program area</option>
+                  <option value="education">Education</option>
+                  <option value="healthcare">Healthcare</option>
+                  <option value="women">Women Empowerment</option>
+                  <option value="environment">Environment</option>
+                  <option value="any">Any / Open to suggestions</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="csr-source">How did you hear about us?</label>
+                <input type="text" id="csr-source" name="source" placeholder="LinkedIn, colleague, web search..." />
+              </div>
+              <div class="form-field full">
+                <label for="csr-message">Message</label>
+                <textarea id="csr-message" name="message" placeholder="Share any specific goals, timelines, or questions you have about the partnership..."></textarea>
+              </div>
+              <div class="form-field full form-submit">
+                <button type="submit" class="btn btn-orange"><i class="fa-solid fa-paper-plane"></i> Submit CSR Enquiry</button>
+              </div>
+            </div>
+          </form>
+          <p class="csr-note"><i class="fa-solid fa-circle-info"></i> We respond to all CSR enquiries within 48 hours. For urgent matters, WhatsApp <strong>+91 XXXXX XXXXX</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="faq-header fade-up">
+        <div class="section-label" style="justify-content:center;">FAQ</div>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list fade-up d1">
+
+        <div class="faq-item">
+          <button class="faq-q">
+            Is my donation tax deductible?
+            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Shri Samarth Foundation is registered under the Maharashtra Public Trusts Act (Registration No. F48181/Pune). Our 80G application is currently in process. Please contact us directly for the current status of tax deductibility before making your donation if this is important to you.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            How do I know my money reached the field?
+            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              We send all donors a WhatsApp acknowledgement with a photo from the relevant program activity within 7 days of the next camp or distribution event. For larger donations, we share a brief written update on how funds were deployed.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            Can I donate in-kind &mdash; goods, materials, or equipment?
+            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Yes. We regularly need school bags, stationery, medicines, and dry food rations. Please contact us before sending goods so we can coordinate logistics and ensure your donation reaches the right location without delay.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            Can a foreign national or NRI donate?
+            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              FCRA registration is currently in progress, which means we can only accept domestic Indian donations at this time. NRIs who hold Indian NRO bank accounts may be able to donate &mdash; please confirm the current rules with your bank before initiating a transfer.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q">
+            How can my company arrange a field visit?
+            <span class="faq-icon"><i class="fa-solid fa-plus"></i></span>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              We welcome corporate field visits and organise structured village tours for CSR teams where you can see programs in action &mdash; health camps, school activities, women&rsquo;s self-help groups, and water infrastructure. Write to us at <a href="mailto:samarthfoundation@gmail.com" style="color:var(--green);font-weight:600;">samarthfoundation@gmail.com</a> to plan a visit.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <h2 class="fade-up">Still have questions? Just reach out.</h2>
+      <p class="fade-up d1">Our team responds to every message, usually within 24 hours.</p>
+      <a href="contact.html" class="btn btn-outline-white fade-up d2"><i class="fa-solid fa-envelope"></i> Contact Us</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+            <div class="footer-brand-name">Shri Samarth Foundation<small>Khed Taluka, Pune, Maharashtra</small></div>
+          </div>
+          <p class="footer-about">Empowering Change &amp; Enriching Lives across 21+ villages in Khed Taluka since 2016. Education &middot; Health &middot; Women &middot; Environment.</p>
+          <div class="footer-reg">Reg. No. F48181/Pune &nbsp;&middot;&nbsp; samarthfoundation.net</div>
+        </div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="programs.html">Education</a></li><li><a href="programs.html">Healthcare</a></li><li><a href="programs.html">Women Empowerment</a></li><li><a href="programs.html">Crisis Relief</a></li><li><a href="programs.html">Animal Welfare</a></li><li><a href="programs.html">Environment</a></li></ul></div>
+        <div class="footer-col"><h4>Organisation</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="stories.html">Village Stories</a></li><li><a href="impact.html">Impact</a></li><li><a href="get-involved.html">CSR Partnerships</a></li><li><a href="get-involved.html">Donate</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Khed Taluka, Pune</a></li><li><a href="contact.html">Maharashtra 410505</a></li><li><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Shri Samarth Foundation &middot; Reg. F48181/Pune</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NAV scroll behaviour
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Fade-up intersection observer
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { io.observe(el); });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(function(q) {
+      q.addEventListener('click', function() {
+        var item = q.parentElement;
+        var isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(function(el) { el.classList.remove('open'); });
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>

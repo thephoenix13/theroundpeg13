@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs | Shri Samarth Foundation</title>
+  <meta name="description" content="Six programs, one promise to every village. Education, Healthcare, Women Empowerment, Crisis Relief, Animal Welfare, and Environment initiatives across 21+ villages in Khed Taluka." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #1e5c3a; --green-mid: #2d7a50; --green-light: #edf6f0; --orange: #e07b2a; --orange-light: #fef3e8; --cream: #fdf8f0; --earth: #7a3e1a; --text: #1a1204; --muted: #6b5e4a; --border: #e5ddd0; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.22s ease; border: 2px solid transparent; }
+    .btn-orange { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-orange:hover { background: #c96d20; border-color: #c96d20; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(224,123,42,.35); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: white; }
+    .btn-outline-white { background: transparent; color: white; border-color: rgba(255,255,255,.55); }
+    .btn-outline-white:hover { background: rgba(255,255,255,.12); }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: inline-block; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 22px 0; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: white; box-shadow: 0 2px 24px rgba(0,0,0,.08); padding: 13px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: white; line-height: 1.2; transition: color 0.3s; }
+    .nav-brand small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; opacity: 0.6; letter-spacing: .5px; }
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+    .nav-links a:hover { color: white; }
+    .nav-links a.active { color: white; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--text); }
+    .nav-cta .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; margin: 5px 0; transition: all .3s; }
+    nav.scrolled .nav-toggle span { background: var(--text); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,.1); } .nav-links.open a { color: var(--muted); } }
+
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 90px; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url('assets/brochure_p3_img1_512x384.jpeg') center/cover no-repeat; opacity: 0.12; }
+    .page-hero .container { position: relative; }
+    .page-hero h1 { font-size: clamp(40px,5.5vw,68px); font-weight: 700; color: white; margin-bottom: 16px; }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.72); max-width: 580px; font-weight: 300; line-height: 1.7; }
+
+    /* PROGRAM NAV BAR */
+    .prog-nav-wrap { position: sticky; top: 67px; z-index: 900; background: white; border-bottom: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+    .prog-nav { display: flex; align-items: center; gap: 6px; padding: 14px 0; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+    .prog-nav::-webkit-scrollbar { display: none; }
+    .prog-nav a { display: inline-flex; align-items: center; gap: 7px; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; color: var(--muted); background: var(--cream); border: 1.5px solid var(--border); white-space: nowrap; transition: all .22s; }
+    .prog-nav a i { font-size: 12px; }
+    .prog-nav a:hover { color: var(--green); border-color: var(--green); background: var(--green-light); }
+    .prog-nav a.prog-active { color: white; background: var(--green); border-color: var(--green); }
+
+    /* PROGRAM SECTIONS */
+    .prog-section { padding: 100px 0; }
+    .prog-section.bg-white { background: var(--white); }
+    .prog-section.bg-cream { background: var(--cream); }
+    .prog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .prog-grid.reverse { direction: rtl; }
+    .prog-grid.reverse > * { direction: ltr; }
+    .prog-img-wrap { position: relative; }
+    .prog-img-wrap img { width: 100%; height: 420px; object-fit: cover; border-radius: 16px; }
+    .prog-img-badge { position: absolute; bottom: -20px; left: 24px; background: var(--orange); color: white; padding: 12px 22px; border-radius: 50px; font-size: 13px; font-weight: 700; box-shadow: 0 6px 24px rgba(224,123,42,.40); white-space: nowrap; }
+    .prog-content { padding: 8px 0; }
+    .prog-content h2 { font-size: clamp(30px, 3.5vw, 44px); font-weight: 700; color: var(--text); margin-bottom: 18px; line-height: 1.18; }
+    .prog-content p { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 28px; }
+    .interventions { list-style: none; margin-bottom: 32px; }
+    .interventions li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text); padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .interventions li:last-child { border-bottom: none; }
+    .interventions li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--green); font-size: 13px; margin-top: 3px; flex-shrink: 0; }
+    .prog-link { display: inline-flex; align-items: center; gap: 8px; color: var(--green); font-weight: 600; font-size: 14px; transition: gap .2s; }
+    .prog-link:hover { gap: 13px; }
+
+    /* SAMRUDDHI SECTION */
+    .samruddhi { background: #0c2218; padding: 100px 0; }
+    .samruddhi-head { text-align: center; margin-bottom: 60px; }
+    .samruddhi-head .section-label { justify-content: center; }
+    .samruddhi-head .section-label::before { display: none; }
+    .samruddhi-head h2 { font-size: clamp(34px, 4.5vw, 54px); color: white; margin-bottom: 16px; }
+    .samruddhi-head .subtitle { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: rgba(255,255,255,.60); font-style: italic; margin-bottom: 24px; }
+    .samruddhi-head p { font-size: 15px; color: rgba(255,255,255,.58); max-width: 680px; margin: 0 auto; line-height: 1.85; }
+    .samruddhi-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 52px; }
+    .sam-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10); border-radius: 16px; padding: 36px 32px; transition: transform .25s, background .25s; }
+    .sam-card:hover { transform: translateY(-4px); background: rgba(255,255,255,.10); }
+    .sam-card-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--orange); display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; margin-bottom: 22px; }
+    .sam-card h3 { font-size: 22px; color: white; margin-bottom: 12px; }
+    .sam-card p { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.85; margin-bottom: 20px; }
+    .sam-card .invest { display: inline-flex; align-items: center; gap: 7px; background: rgba(224,123,42,.18); color: var(--orange); font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 50px; }
+    .sam-total { text-align: center; padding: 32px 40px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.10); border-radius: 16px; max-width: 560px; margin: 0 auto; }
+    .sam-total p { font-size: 14px; color: rgba(255,255,255,.50); margin-bottom: 8px; }
+    .sam-total .total-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 700; color: white; line-height: 1; }
+    .sam-total .total-num span { color: var(--orange); }
+    .sam-total small { font-size: 13px; color: rgba(255,255,255,.35); display: block; margin-top: 4px; }
+
+    /* CTA BAND */
+    .cta-band { background: var(--green-light); padding: 80px 0; text-align: center; border-top: 1px solid var(--border); }
+    .cta-band .section-label { justify-content: center; }
+    .cta-band .section-label::before { display: none; }
+    .cta-band h2 { font-size: clamp(28px, 3.5vw, 42px); color: var(--text); margin-bottom: 16px; }
+    .cta-band p { font-size: 16px; color: var(--muted); max-width: 500px; margin: 0 auto 36px; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { background: #0c1a10; color: rgba(255,255,255,.5); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-row img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+    .footer-brand-name small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .4px; }
+    .footer-about { font-size: 13px; line-height: 1.8; max-width: 270px; }
+    .footer-reg { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,.25); }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 33px; height: 33px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,.45); transition: all .2s; }
+    .footer-social a:hover { background: var(--orange); color: white; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .prog-grid { grid-template-columns: 1fr; gap: 40px; }
+      .prog-grid.reverse { direction: ltr; }
+      .samruddhi-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .prog-section { padding: 72px 0; }
+      .prog-img-wrap img { height: 280px; }
+      .samruddhi { padding: 72px 0; }
+      .cta-band { padding: 64px 0; }
+    }
+    @media (max-width: 500px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+          <div class="nav-brand">Shri Samarth Foundation <small>Khed Taluka, Pune</small></div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html" class="active">Programs</a></li>
+          <li><a href="stories.html">Stories</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta"><a href="get-involved.html" class="btn btn-orange">Support Us</a></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-label fade-up">Our Work</div>
+      <h1 class="fade-up d1">Six programs.<br>One promise to every village.</h1>
+      <p class="fade-up d2">From school bags to ambulances, from clean water to women&rsquo;s skill centres &mdash; every program Shri Samarth Foundation runs is grounded in direct, long-term community need.</p>
+    </div>
+  </section>
+
+  <!-- PROGRAM NAV BAR -->
+  <div class="prog-nav-wrap" id="progNavWrap">
+    <div class="container">
+      <div class="prog-nav" id="progNav">
+        <a href="#education" id="pn-education"><i class="fa-solid fa-book-open"></i> Education</a>
+        <a href="#healthcare" id="pn-healthcare"><i class="fa-solid fa-heart-pulse"></i> Healthcare</a>
+        <a href="#women" id="pn-women"><i class="fa-solid fa-hand-holding-heart"></i> Women Empowerment</a>
+        <a href="#crisis" id="pn-crisis"><i class="fa-solid fa-hands-holding-circle"></i> Crisis Relief</a>
+        <a href="#animals" id="pn-animals"><i class="fa-solid fa-paw"></i> Animal Welfare</a>
+        <a href="#environment" id="pn-environment"><i class="fa-solid fa-leaf"></i> Environment</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRAM 1 — EDUCATION -->
+  <section class="prog-section bg-white" id="education">
+    <div class="container">
+      <div class="prog-grid">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p3_img1_512x384.jpeg" alt="School bag distribution for children in Khed Taluka" />
+          <div class="prog-img-badge"><i class="fa-solid fa-users"></i>&nbsp; 15,000+ Students reached</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 01</div>
+          <h2>Every child deserves a schoolbag and a future</h2>
+          <p>Since 2016, Shri Samarth Foundation has distributed thousands of school bags, stationery sets, and uniforms to students across Khed Taluka. The initiative targets children from Below Poverty Line (BPL) families where the cost of school supplies forces difficult choices. Beyond materials, the foundation has facilitated device distribution &mdash; tablets and computers &mdash; at rural schools to bridge the digital divide.</p>
+          <ul class="interventions">
+            <li>School bag &amp; stationery distribution (annual)</li>
+            <li>Digital device distribution &mdash; tablets &amp; computers</li>
+            <li>School infrastructure support &mdash; solar panels, murals, plaque projects</li>
+            <li>Scholarship linkages for meritorious BPL students</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Education <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM 2 — HEALTHCARE -->
+  <section class="prog-section bg-cream" id="healthcare">
+    <div class="container">
+      <div class="prog-grid reverse">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p5_img1_640x427.jpeg" alt="Mobile health van and eye clinic camp in rural village" />
+          <div class="prog-img-badge"><i class="fa-solid fa-stethoscope"></i>&nbsp; 10,000+ Patients served</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 02</div>
+          <h2>Healthcare that comes to you</h2>
+          <p>The flagship Maha Arogya Shibir (Great Health Camp) brings together specialist doctors &mdash; ophthalmologists, dentists, gynaecologists, and general physicians &mdash; into remote villages for single-day comprehensive camps. The foundation deployed one ambulance in 2018 for emergency transport, and in 2024 launched the Arogya Sewika program &mdash; 50 trained female health workers equipped with tablets for doorstep digital health consultations.</p>
+          <ul class="interventions">
+            <li>Maha Arogya Shibir &mdash; annual multi-specialist health camps</li>
+            <li>24/7 Emergency Ambulance service</li>
+            <li>Arogya Sewika program &mdash; 50 workers across 21 villages</li>
+            <li>Eye camps &amp; cataract surgeries for elderly villagers</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Healthcare <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM 3 — WOMEN EMPOWERMENT -->
+  <section class="prog-section bg-white" id="women">
+    <div class="container">
+      <div class="prog-grid">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p5_img2_640x427.jpeg" alt="Women in colourful saris at health and skill camp" />
+          <div class="prog-img-badge"><i class="fa-solid fa-star"></i>&nbsp; 2,000+ Women trained</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 03</div>
+          <h2>Skill. Confidence. Independence.</h2>
+          <p>The Mahila Asmita Bhavan is a dedicated women&rsquo;s centre that runs tailoring, embroidery, and entrepreneurship training for rural women. The foundation also runs health awareness programs specifically for women &mdash; menstrual hygiene, maternal health, and nutritional counselling &mdash; in partnership with local ANMs (Auxiliary Nurse Midwives). Women&rsquo;s savings groups (Bachat Gat linkages) have been formed in multiple villages.</p>
+          <ul class="interventions">
+            <li>Mahila Asmita Bhavan dedicated skill centre</li>
+            <li>Tailoring, embroidery &amp; vocational training programs</li>
+            <li>Women&rsquo;s health awareness &mdash; menstrual hygiene, maternal health</li>
+            <li>Bachat Gat / self-help group linkages across villages</li>
+            <li>Maternal &amp; child health programs with ANM support</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Women Empowerment <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM 4 — CRISIS RELIEF -->
+  <section class="prog-section bg-cream" id="crisis">
+    <div class="container">
+      <div class="prog-grid reverse">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p6_img1_591x396.jpeg" alt="Food and grocery kit distribution during crisis relief" />
+          <div class="prog-img-badge"><i class="fa-solid fa-box-open"></i>&nbsp; 7,000+ Families in crisis relief</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 04</div>
+          <h2>First on the ground when disaster strikes</h2>
+          <p>In 2020, when COVID-19 lockdowns stripped farming families of their only income, Shri Samarth Foundation distributed over 7,000 grocery kits across 80+ villages in Khed Taluka &mdash; the foundation&rsquo;s largest single operation. The crisis response team also responds to drought years with water tanker runs and dry ration distribution, and supports families during flood events along the Bhima River basin.</p>
+          <ul class="interventions">
+            <li>COVID-19 relief &mdash; 7,000+ grocery kits across 80+ villages</li>
+            <li>Drought relief &mdash; water tankers to affected households</li>
+            <li>Flood response along the Bhima River basin</li>
+            <li>Dry ration distribution in crisis years</li>
+            <li>Emergency medicine kits for remote households</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Crisis Relief <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM 5 — ANIMAL WELFARE -->
+  <section class="prog-section bg-white" id="animals">
+    <div class="container">
+      <div class="prog-grid">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p4_img1_443x591.jpeg" alt="Cattle feeding drive for farming families in drought" />
+          <div class="prog-img-badge"><i class="fa-solid fa-paw"></i>&nbsp; 500+ Animals treated</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 05</div>
+          <h2>Because farming families depend on their animals too</h2>
+          <p>In agrarian Khed Taluka, cattle are livelihood. The foundation runs regular veterinary camps, cattle feeding drives during lean drought months, and awareness campaigns on foot-and-mouth disease prevention. Animal welfare is treated as economic welfare &mdash; a sick or dying animal can destroy a small farmer&rsquo;s entire season.</p>
+          <ul class="interventions">
+            <li>Veterinary camps across 15+ villages</li>
+            <li>Cattle feeding drives during drought months</li>
+            <li>FMD (foot-and-mouth disease) vaccination awareness campaigns</li>
+            <li>Fodder distribution in crisis years for struggling farmers</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Animal Welfare <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM 6 — ENVIRONMENT -->
+  <section class="prog-section bg-cream" id="environment">
+    <div class="container">
+      <div class="prog-grid reverse">
+        <div class="prog-img-wrap fade-up">
+          <img src="assets/brochure_p8_img2_768x576.jpeg" alt="School plaque and colourful murals representing community environment projects" />
+          <div class="prog-img-badge"><i class="fa-solid fa-seedling"></i>&nbsp; 5,000+ Saplings planted</div>
+        </div>
+        <div class="prog-content fade-up d2">
+          <div class="section-label">Program 06</div>
+          <h2>Roots in the ground, eyes on the future</h2>
+          <p>The foundation runs tree plantation drives across Khed Taluka, targeting 1,000+ saplings per season. Solar panel installations at rural schools reduce electricity dependency and save school budgets for books and teachers. Clean drinking water installations &mdash; reverse osmosis filter plants &mdash; have been set up in three villages, eliminating waterborne illness.</p>
+          <ul class="interventions">
+            <li>Tree plantation drives &mdash; 1,000+ saplings per year</li>
+            <li>Solar panel installation at rural schools</li>
+            <li>Rainwater harvesting awareness across villages</li>
+            <li>RO water filter plants installed in 3 villages</li>
+            <li>Plastic-free village campaigns and awareness drives</li>
+          </ul>
+          <a href="get-involved.html" class="prog-link">Support Environment <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT SAMRUDDHI -->
+  <section class="samruddhi" id="samruddhi">
+    <div class="container">
+      <div class="samruddhi-head fade-up">
+        <div class="section-label">Flagship Initiative</div>
+        <h2>Project Samruddhi</h2>
+        <p class="subtitle">The foundation&rsquo;s most ambitious initiative &mdash; 2025 onwards</p>
+        <p>Project Samruddhi (Prosperity) is a three-year, three-pillar initiative designed to create sustainable, long-term change in 10 target villages of Khed Taluka. Supported by CSR partnerships and community co-investment.</p>
+      </div>
+      <div class="samruddhi-cards">
+        <div class="sam-card fade-up d1">
+          <div class="sam-card-icon"><i class="fa-solid fa-road"></i></div>
+          <h3>Village Infrastructure</h3>
+          <p>Repair of village roads and drainage. School building renovation. Public toilet construction. Drinking water pipeline extension to last-mile households ensuring every family has access to safe, piped water.</p>
+          <div class="invest"><i class="fa-solid fa-indian-rupee-sign"></i> Estimated: &#8377;45 Lakhs</div>
+        </div>
+        <div class="sam-card fade-up d2">
+          <div class="sam-card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+          <h3>Education &amp; Schools</h3>
+          <p>Construction of school libraries. Provision of laboratory equipment. Teacher training in digital pedagogy. Tablet program for Class 5&ndash;8 students. Scholarship fund for meritorious students from BPL families.</p>
+          <div class="invest"><i class="fa-solid fa-indian-rupee-sign"></i> Estimated: &#8377;38 Lakhs</div>
+        </div>
+        <div class="sam-card fade-up d3">
+          <div class="sam-card-icon"><i class="fa-solid fa-laptop-medical"></i></div>
+          <h3>Digital Healthcare</h3>
+          <p>Expansion of the Arogya Sewika program to 30 villages. Telemedicine connectivity for remote health consultations. Digital health records for 10,000+ patients. Mobile diagnostic unit with basic pathology.</p>
+          <div class="invest"><i class="fa-solid fa-indian-rupee-sign"></i> Estimated: &#8377;42 Lakhs</div>
+        </div>
+      </div>
+      <div class="sam-total fade-up d4">
+        <p>Total 3-year investment</p>
+        <div class="total-num">&#8377;<span>1.25 Crore</span></div>
+        <small>Across 10 villages &middot; 3-year phased rollout &middot; CSR &amp; community co-funded</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="container">
+      <div class="section-label fade-up">Get Involved</div>
+      <h2 class="fade-up d1">Support a specific program</h2>
+      <p class="fade-up d2">Whether you want to fund a single school bag drive or partner on a multi-year CSR program, we&rsquo;re ready to collaborate.</p>
+      <div class="cta-btns fade-up d3">
+        <a href="get-involved.html" class="btn btn-orange"><i class="fa-solid fa-hand-holding-dollar"></i> Fund a Program</a>
+        <a href="get-involved.html#csr" class="btn btn-outline-green"><i class="fa-solid fa-handshake"></i> Become a CSR Partner</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+            <div class="footer-brand-name">Shri Samarth Foundation<small>Khed Taluka, Pune, Maharashtra</small></div>
+          </div>
+          <p class="footer-about">Empowering Change &amp; Enriching Lives across 21+ villages in Khed Taluka since 2016. Education &middot; Health &middot; Women &middot; Environment.</p>
+          <div class="footer-reg">Reg. No. F48181/Pune &nbsp;&middot;&nbsp; samarthfoundation.net</div>
+        </div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="programs.html">Education</a></li><li><a href="programs.html">Healthcare</a></li><li><a href="programs.html">Women Empowerment</a></li><li><a href="programs.html">Crisis Relief</a></li><li><a href="programs.html">Animal Welfare</a></li><li><a href="programs.html">Environment</a></li></ul></div>
+        <div class="footer-col"><h4>Organisation</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="stories.html">Village Stories</a></li><li><a href="impact.html">Impact</a></li><li><a href="get-involved.html">CSR Partnerships</a></li><li><a href="get-involved.html">Donate</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Khed Taluka, Pune</a></li><li><a href="contact.html">Maharashtra 410505</a></li><li><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Shri Samarth Foundation &middot; Reg. F48181/Pune</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll behaviour
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+    // Mobile nav toggle
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+    // Fade-up on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Program nav: highlight active pill as sections scroll into view
+    const sections = ['education', 'healthcare', 'women', 'crisis', 'animals', 'environment'];
+    const progNavHeight = document.getElementById('progNavWrap').offsetHeight;
+
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const id = entry.target.id;
+        const link = document.getElementById('pn-' + id);
+        if (!link) return;
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.prog-nav a').forEach(a => a.classList.remove('prog-active'));
+          link.classList.add('prog-active');
+          // Scroll pill into view within the nav bar
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      });
+    }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) sectionObserver.observe(el);
+    });
+
+    // Smooth scroll for program nav links, accounting for fixed nav + prog nav bar height
+    document.querySelectorAll('.prog-nav a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        const navH = nav.offsetHeight;
+        const progBarH = document.getElementById('progNavWrap').offsetHeight;
+        const top = target.getBoundingClientRect().top + window.scrollY - navH - progBarH - 16;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

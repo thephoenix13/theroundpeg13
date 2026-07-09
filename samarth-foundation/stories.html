@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Village Stories | Shri Samarth Foundation</title>
+  <meta name="description" content="Real stories from 21+ villages in Khed Taluka — education, healthcare, women empowerment, and crisis relief told as honestly as we can." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --green: #1e5c3a; --green-mid: #2d7a50; --green-light: #edf6f0; --orange: #e07b2a; --orange-light: #fef3e8; --cream: #fdf8f0; --earth: #7a3e1a; --text: #1a1204; --muted: #6b5e4a; --border: #e5ddd0; --white: #ffffff; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+    h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.15; }
+    img { max-width: 100%; display: block; } a { text-decoration: none; color: inherit; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.22s ease; border: 2px solid transparent; }
+    .btn-orange { background: var(--orange); color: white; border-color: var(--orange); }
+    .btn-orange:hover { background: #c96d20; border-color: #c96d20; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(224,123,42,.35); }
+    .btn-outline-green { background: transparent; color: var(--green); border-color: var(--green); }
+    .btn-outline-green:hover { background: var(--green); color: white; }
+    .section-label { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 12px; }
+    .section-label::before { content: ''; width: 24px; height: 2px; background: var(--orange); display: inline-block; }
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 22px 0; transition: background 0.3s, box-shadow 0.3s, padding 0.3s; }
+    nav.scrolled { background: white; box-shadow: 0 2px 24px rgba(0,0,0,.08); padding: 13px 0; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 11px; }
+    .nav-logo img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: white; line-height: 1.2; transition: color 0.3s; }
+    .nav-brand small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; opacity: 0.6; letter-spacing: .5px; }
+    nav.scrolled .nav-brand { color: var(--text); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; right: 0; height: 1.5px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .25s; }
+    .nav-links a:hover { color: white; }
+    .nav-links a.active { color: white; }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+    nav.scrolled .nav-links a { color: var(--muted); }
+    nav.scrolled .nav-links a:hover, nav.scrolled .nav-links a.active { color: var(--text); }
+    .nav-cta .btn { padding: 10px 20px; font-size: 13px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; margin: 5px 0; transition: all .3s; }
+    nav.scrolled .nav-toggle span { background: var(--text); }
+    @media (max-width: 900px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: block; } .nav-links.open { display: flex; flex-direction: column; gap: 14px; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px 28px; box-shadow: 0 8px 24px rgba(0,0,0,.1); } .nav-links.open a { color: var(--muted); } }
+
+    /* PAGE HERO */
+    .page-hero { padding: 150px 0 90px; background: linear-gradient(135deg, #0c2218 0%, #1e5c3a 100%); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: url('assets/brochure_p6_img1_591x396.jpeg') center/cover no-repeat; opacity: 0.15; }
+    .page-hero .container { position: relative; }
+    .page-hero h1 { font-size: clamp(40px,5.5vw,68px); font-weight: 700; color: white; margin-bottom: 16px; }
+    .page-hero p { font-size: 17px; color: rgba(255,255,255,.72); max-width: 580px; font-weight: 300; line-height: 1.7; }
+
+    /* FOOTER */
+    footer { background: #0c1a10; color: rgba(255,255,255,.5); padding: 72px 0 32px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+    .footer-logo-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logo-row img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; }
+    .footer-brand-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+    .footer-brand-name small { display: block; font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 400; color: rgba(255,255,255,.35); letter-spacing: .4px; }
+    .footer-about { font-size: 13px; line-height: 1.8; max-width: 270px; }
+    .footer-reg { margin-top: 14px; font-size: 11px; color: rgba(255,255,255,.25); }
+    .footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: white; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.45); transition: color .2s; }
+    .footer-col a:hover { color: var(--orange); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 26px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a { width: 33px; height: 33px; border-radius: 8px; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 13px; color: rgba(255,255,255,.45); transition: all .2s; }
+    .footer-social a:hover { background: var(--orange); color: white; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; } }
+    @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 14px; text-align: center; } }
+
+    /* ── INTRO SECTION ── */
+    .intro-section { padding: 80px 0 64px; background: var(--white); }
+    .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; margin-bottom: 48px; }
+    .intro-pull-quote { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 600; color: var(--green); line-height: 1.25; position: relative; padding-left: 28px; }
+    .intro-pull-quote::before { content: ''; position: absolute; left: 0; top: 6px; bottom: 6px; width: 4px; background: var(--orange); border-radius: 2px; }
+    .intro-body { font-size: 16px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+    .intro-body strong { color: var(--text); font-weight: 500; }
+
+    /* FILTER PILLS */
+    .filter-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+    .pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 100px; border: 1.5px solid var(--border); font-size: 13px; font-weight: 500; color: var(--muted); background: var(--cream); cursor: pointer; transition: all 0.2s ease; }
+    .pill:hover { border-color: var(--green-mid); color: var(--green); }
+    .pill.active { background: var(--green); border-color: var(--green); color: white; }
+    .pill i { font-size: 11px; }
+
+    @media (max-width: 768px) { .intro-grid { grid-template-columns: 1fr; gap: 36px; } }
+
+    /* ── FEATURED STORY ── */
+    .featured-section { padding: 0 0 72px; background: var(--white); }
+    .featured-card { position: relative; border-radius: 20px; overflow: hidden; min-height: 560px; display: flex; align-items: flex-end; box-shadow: 0 24px 80px rgba(0,0,0,.18); }
+    .featured-card-img { position: absolute; inset: 0; }
+    .featured-card-img img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,20,10,0.95) 0%, rgba(10,30,18,0.72) 45%, rgba(0,0,0,0.1) 100%); }
+    .featured-card-content { position: relative; z-index: 2; padding: 48px 52px; width: 100%; }
+    .featured-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+    .cat-pill { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .cat-pill.healthcare { background: rgba(46,160,100,.2); color: #6fdeaa; border: 1px solid rgba(46,160,100,.3); }
+    .cat-pill.education { background: rgba(66,133,244,.2); color: #93c4ff; border: 1px solid rgba(66,133,244,.3); }
+    .cat-pill.crisis { background: rgba(234,67,53,.18); color: #f9a8a1; border: 1px solid rgba(234,67,53,.3); }
+    .cat-pill.animal { background: rgba(251,188,5,.18); color: #fde68a; border: 1px solid rgba(251,188,5,.3); }
+    .cat-pill.women { background: rgba(196,77,186,.18); color: #f0abfc; border: 1px solid rgba(196,77,186,.3); }
+    .cat-pill.environment { background: rgba(30,200,100,.18); color: #6ee7b7; border: 1px solid rgba(30,200,100,.3); }
+    .featured-village { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); }
+    .featured-year { font-size: 12px; color: rgba(255,255,255,.35); }
+    .featured-card-content h2 { font-size: clamp(26px, 3.5vw, 44px); font-weight: 700; color: white; max-width: 720px; margin-bottom: 20px; line-height: 1.18; }
+    .featured-body { font-size: 15px; color: rgba(255,255,255,.72); max-width: 680px; line-height: 1.78; font-weight: 300; margin-bottom: 28px; }
+    .featured-body p + p { margin-top: 14px; }
+    .featured-stats { display: flex; flex-wrap: wrap; gap: 24px; }
+    .featured-stat { display: flex; align-items: center; gap: 8px; }
+    .featured-stat i { color: var(--orange); font-size: 13px; }
+    .featured-stat span { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.8); }
+    @media (max-width: 700px) { .featured-card-content { padding: 32px 28px; } .featured-card { min-height: 480px; } }
+
+    /* ── STORY GRID ── */
+    .stories-section { padding: 72px 0; background: var(--cream); }
+    .stories-section-header { margin-bottom: 48px; }
+    .stories-section-header h2 { font-size: clamp(30px, 3.5vw, 44px); font-weight: 700; color: var(--text); margin-top: 8px; }
+    .story-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .story-card { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,.06); transition: transform 0.25s ease, box-shadow 0.25s ease; display: flex; flex-direction: column; }
+    .story-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,.12); }
+    .story-card-img { position: relative; height: 220px; overflow: hidden; flex-shrink: 0; }
+    .story-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .story-card:hover .story-card-img img { transform: scale(1.04); }
+    .story-card-body { padding: 24px 24px 28px; display: flex; flex-direction: column; flex: 1; }
+    .story-card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+    .story-card-village { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); }
+    .story-card-year { font-size: 11px; color: var(--border); font-weight: 400; }
+    .story-card-year::before { content: '\B7'; margin-right: 6px; }
+    .story-card h3 { font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.22; margin-bottom: 12px; }
+    .story-card-excerpt { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; flex: 1; }
+    .story-card-footer { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 6px; }
+    .story-card-footer i { color: var(--orange); font-size: 12px; }
+    .story-card-footer span { font-size: 12px; font-weight: 600; color: var(--green); }
+
+    /* Hidden state for filter */
+    .story-card[data-hidden="true"] { display: none; }
+    .featured-wrapper[data-hidden="true"] { display: none; }
+
+    @media (max-width: 1000px) { .story-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .story-grid { grid-template-columns: 1fr; } }
+
+    /* ── QUOTE BAND ── */
+    .quote-band { background: var(--green); padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+    .quote-band::before { content: '\201C'; font-family: 'Cormorant Garamond', serif; font-size: 320px; color: rgba(255,255,255,.04); position: absolute; top: -60px; left: 50%; transform: translateX(-50%); line-height: 1; pointer-events: none; }
+    .quote-band blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 3.2vw, 38px); font-style: italic; font-weight: 400; color: white; line-height: 1.5; max-width: 820px; margin: 0 auto 24px; position: relative; z-index: 1; }
+    .quote-band cite { font-family: 'DM Sans', sans-serif; font-size: 13px; font-style: normal; font-weight: 500; color: rgba(255,255,255,.5); letter-spacing: 0.5px; }
+    .quote-band cite strong { color: rgba(255,255,255,.75); font-weight: 600; }
+
+    /* ── CTA SECTION ── */
+    .cta-section { padding: 96px 0; background: var(--cream); text-align: center; }
+    .cta-section .section-label { justify-content: center; }
+    .cta-section h2 { font-size: clamp(30px, 4vw, 50px); font-weight: 700; color: var(--text); margin: 10px 0 20px; }
+    .cta-section p { font-size: 17px; color: var(--muted); max-width: 540px; margin: 0 auto 40px; font-weight: 300; line-height: 1.75; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* No results state */
+    .no-results { display: none; text-align: center; padding: 56px 24px; color: var(--muted); }
+    .no-results.visible { display: block; }
+    .no-results i { font-size: 36px; color: var(--border); margin-bottom: 14px; }
+    .no-results p { font-size: 15px; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <a class="nav-logo" href="index.html">
+          <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+          <div class="nav-brand">Shri Samarth Foundation <small>Khed Taluka, Pune</small></div>
+        </a>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="about.html">About</a></li>
+          <li><a href="programs.html">Programs</a></li>
+          <li><a href="stories.html" class="active">Stories</a></li>
+          <li><a href="impact.html">Impact</a></li>
+          <li><a href="get-involved.html">Get Involved</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-cta"><a href="get-involved.html" class="btn btn-orange">Support Us</a></div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="section-label fade-up">Village Stories</div>
+      <h1 class="fade-up d1">From the villages themselves.</h1>
+      <p class="fade-up d2">These are not case studies. These are real places, real families, and real change &mdash; told as honestly as we can.</p>
+    </div>
+  </section>
+
+  <!-- INTRO SECTION -->
+  <section class="intro-section">
+    <div class="container">
+      <div class="intro-grid fade-up">
+        <div class="intro-pull-quote">
+          &ldquo;We do not help communities. We become part of them.&rdquo;
+        </div>
+        <div class="intro-body">
+          Nine years of fieldwork has taught us one thing &mdash; real change happens slowly, intimately, and only when the community trusts you. These village stories are our progress report. They are also our <strong>accountability</strong>.
+        </div>
+      </div>
+      <div class="filter-pills fade-up d2" id="filterPills">
+        <button class="pill active" data-filter="all"><i class="fa-solid fa-border-all"></i> All</button>
+        <button class="pill" data-filter="education"><i class="fa-solid fa-book-open"></i> Education</button>
+        <button class="pill" data-filter="healthcare"><i class="fa-solid fa-heart-pulse"></i> Healthcare</button>
+        <button class="pill" data-filter="women"><i class="fa-solid fa-venus"></i> Women</button>
+        <button class="pill" data-filter="crisis"><i class="fa-solid fa-hand-holding-heart"></i> Crisis Relief</button>
+        <button class="pill" data-filter="animal"><i class="fa-solid fa-cow"></i> Animal Welfare</button>
+        <button class="pill" data-filter="environment"><i class="fa-solid fa-leaf"></i> Environment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED STORY -->
+  <section class="featured-section" id="featuredSection">
+    <div class="container">
+      <div class="featured-wrapper fade-up" data-category="healthcare">
+        <div class="featured-card">
+          <div class="featured-card-img">
+            <img src="assets/brochure_p5_img2_640x427.jpeg" alt="Women at health camp in Ningoan" />
+          </div>
+          <div class="featured-card-overlay"></div>
+          <div class="featured-card-content">
+            <div class="featured-meta">
+              <span class="cat-pill healthcare"><i class="fa-solid fa-heart-pulse"></i> Healthcare</span>
+              <span class="featured-village">Ningoan, Khed Taluka</span>
+              <span class="featured-year">2022</span>
+            </div>
+            <h2>Ningoan&rsquo;s women hadn&rsquo;t seen a doctor in three years</h2>
+            <div class="featured-body">
+              <p>The last time a doctor visited Ningoan, it was a brief primary health centre outreach that covered little beyond blood pressure checks. For the women of this farming village &mdash; many of whom have never travelled to Pune city &mdash; this was simply how things were.</p>
+              <p>When the Maha Arogya Shibir arrived in October 2022, 340 women were examined by gynaecologists, ophthalmologists, and dentists in a single day. Seventeen were diagnosed with cataracts and referred for free surgery. Four children were found severely anaemic and enrolled in a supplementary nutrition program. The camp did not just treat illness &mdash; it gave the village a vocabulary for health.</p>
+            </div>
+            <div class="featured-stats">
+              <div class="featured-stat"><i class="fa-solid fa-users"></i><span>340 patients examined</span></div>
+              <div class="featured-stat"><i class="fa-solid fa-eye"></i><span>17 cataract referrals</span></div>
+              <div class="featured-stat"><i class="fa-solid fa-child"></i><span>4 children in nutrition program</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY GRID -->
+  <section class="stories-section">
+    <div class="container">
+      <div class="stories-section-header fade-up">
+        <div class="section-label">More Villages, More Stories</div>
+        <h2>Stories from the field</h2>
+      </div>
+
+      <div class="story-grid" id="storyGrid">
+
+        <!-- Card 1: Kanersar — Education -->
+        <div class="story-card fade-up d1" data-category="education">
+          <div class="story-card-img">
+            <img src="assets/brochure_p3_img1_512x384.jpeg" alt="School bag distribution in Kanersar" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill education"><i class="fa-solid fa-book-open"></i> Education</span>
+              <span class="story-card-village">Kanersar</span>
+              <span class="story-card-year">2019</span>
+            </div>
+            <h3>&ldquo;The school bags changed what the children believed was possible&rdquo;</h3>
+            <p class="story-card-excerpt">Kanersar has one Zilla Parishad school serving 180 students. For families earning under &#x20B9;8,000 per month, school bags and supplies represent a month&rsquo;s discretionary budget. The foundation&rsquo;s annual distribution here now spans three years &mdash; and teachers report consistent improvement in attendance since the program began. Children who receive bags on day one of the academic year, they say, are less likely to drop out by March.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>180+ students annually</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Retawadi — Crisis Relief -->
+        <div class="story-card fade-up d2" data-category="crisis">
+          <div class="story-card-img">
+            <img src="assets/brochure_p6_img1_591x396.jpeg" alt="Grocery kit distribution in Retawadi" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill crisis"><i class="fa-solid fa-hand-holding-heart"></i> Crisis Relief</span>
+              <span class="story-card-village">Retawadi</span>
+              <span class="story-card-year">2020</span>
+            </div>
+            <h3>&ldquo;Three weeks without income, five mouths to feed&rdquo;</h3>
+            <p class="story-card-excerpt">The COVID lockdown hit Retawadi the same week the rabi harvest was due. With trucks banned from moving grain, farmers watched their crop sit in fields. The foundation reached Retawadi on the 11th day of the lockdown with 85 grocery kits &mdash; basic dal, rice, oil, and salt &mdash; enough for two weeks. For many families, this was the bridge between hunger and survival.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>85 families in crisis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Wadgaon Sopan — Animal Welfare -->
+        <div class="story-card fade-up d3" data-category="animal">
+          <div class="story-card-img">
+            <img src="assets/brochure_p4_img1_443x591.jpeg" alt="Cattle camp in Wadgaon Sopan" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill animal"><i class="fa-solid fa-cow"></i> Animal Welfare</span>
+              <span class="story-card-village">Wadgaon Sopan</span>
+              <span class="story-card-year">2023</span>
+            </div>
+            <h3>&ldquo;A cattle camp in a drought year is not charity &mdash; it is economic survival&rdquo;</h3>
+            <p class="story-card-excerpt">The summer of 2023 was particularly brutal for livestock in Khed Taluka. Fodder prices tripled; water sources dried up a month earlier than usual. Wadgaon Sopan&rsquo;s farmers &mdash; most with 2&ndash;4 cattle each &mdash; faced the prospect of distress-selling their animals. The foundation ran three fodder distribution camps and one veterinary visit in four months. Sixty cattle recovered from foot-and-mouth; forty were saved from premature sale.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>60+ cattle treated</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Nimgaon — Women Empowerment -->
+        <div class="story-card fade-up d1" data-category="women">
+          <div class="story-card-img">
+            <img src="assets/brochure_p5_img2_640x427.jpeg" alt="Women empowerment training in Nimgaon" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill women"><i class="fa-solid fa-venus"></i> Women</span>
+              <span class="story-card-village">Nimgaon (Khed)</span>
+              <span class="story-card-year">2021</span>
+            </div>
+            <h3>&ldquo;Sixteen women who learned to stitch built their own Bachat Gat&rdquo;</h3>
+            <p class="story-card-excerpt">The Mahila Asmita Bhavan training in Nimgaon started with 16 women who wanted to learn tailoring. Within eight months, twelve had taken small orders from neighbouring villages. By year two, they had collectively contributed enough to form a registered Bachat Gat &mdash; a women&rsquo;s savings group &mdash; with a corpus of &#x20B9;48,000. What began as a skill class became a financial institution in miniature.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>16 women trained, 1 Bachat Gat formed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Dondkarwadi — Environment -->
+        <div class="story-card fade-up d2" data-category="environment">
+          <div class="story-card-img">
+            <img src="assets/brochure_p8_img1_648x668.jpeg" alt="Water tanker and clean water in Dondkarwadi" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill environment"><i class="fa-solid fa-leaf"></i> Environment</span>
+              <span class="story-card-village">Dondkarwadi</span>
+              <span class="story-card-year">2021</span>
+            </div>
+            <h3>&ldquo;Clean water arrived before the monsoon. And stayed.&rdquo;</h3>
+            <p class="story-card-excerpt">Dondkarwadi had a functioning borewell, but no treatment plant &mdash; meaning the water was technically available but biologically unsafe. After two children were hospitalised with waterborne illness in 2020, the sarpanch formally approached the foundation. An RO filter plant was installed in March 2021. Since then, waterborne illness cases at the primary health sub-centre have dropped to near zero during the dry season.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>800+ residents served, waterborne illness near zero</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Ghogari — Healthcare -->
+        <div class="story-card fade-up d3" data-category="healthcare">
+          <div class="story-card-img">
+            <img src="assets/brochure_p7_img1_640x480.jpeg" alt="Arogya Sewika with tablet in Ghogari" />
+          </div>
+          <div class="story-card-body">
+            <div class="story-card-meta">
+              <span class="cat-pill healthcare"><i class="fa-solid fa-heart-pulse"></i> Healthcare</span>
+              <span class="story-card-village">Ghogari</span>
+              <span class="story-card-year">2024</span>
+            </div>
+            <h3>&ldquo;Arogya Sewika Savita checks in every Tuesday&rdquo;</h3>
+            <p class="story-card-excerpt">Savita Mane is one of 50 Arogya Sewikas trained and deployed by the foundation in 2024. Armed with a tablet, a basic diagnostic kit, and telemedicine connectivity to a doctor in Pune, she covers 47 households in Ghogari every week. In her first six months, she flagged 3 cases of high blood pressure that were previously undiagnosed, referred 1 woman for gestational diabetes care, and vaccinated 22 children who had missed immunisation.</p>
+            <div class="story-card-footer">
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>47 households, 3 BP cases flagged</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- No results -->
+      <div class="no-results" id="noResults">
+        <i class="fa-regular fa-folder-open"></i>
+        <p>No stories match this filter yet. More coming soon.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUOTE BAND -->
+  <section class="quote-band">
+    <div class="container">
+      <blockquote class="fade-up">
+        &ldquo;Change in a village is quiet. You notice it in the school attendance register, in the weight of a malnourished child, in whether a woman earns her own money.&rdquo;
+      </blockquote>
+      <cite class="fade-up d1"><strong>Adv. Vijaysinh Shinde Patil</strong>, Founder &mdash; Shri Samarth Foundation</cite>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="section-label fade-up">Join the Work</div>
+      <h2 class="fade-up d1">Every village has more to tell</h2>
+      <p class="fade-up d2">Twenty-one villages. Nine years. These six are just the stories we could fit on a page.</p>
+      <div class="cta-buttons fade-up d3">
+        <a href="get-involved.html" class="btn btn-orange">Support this work <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="impact.html" class="btn btn-outline-green">See our impact numbers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-row">
+            <img src="assets/logo.jpeg" alt="Shri Samarth Foundation" />
+            <div class="footer-brand-name">Shri Samarth Foundation<small>Khed Taluka, Pune, Maharashtra</small></div>
+          </div>
+          <p class="footer-about">Empowering Change &amp; Enriching Lives across 21+ villages in Khed Taluka since 2016. Education &middot; Health &middot; Women &middot; Environment.</p>
+          <div class="footer-reg">Reg. No. F48181/Pune &nbsp;&middot;&nbsp; samarthfoundation.net</div>
+        </div>
+        <div class="footer-col"><h4>Programs</h4><ul><li><a href="programs.html">Education</a></li><li><a href="programs.html">Healthcare</a></li><li><a href="programs.html">Women Empowerment</a></li><li><a href="programs.html">Crisis Relief</a></li><li><a href="programs.html">Animal Welfare</a></li><li><a href="programs.html">Environment</a></li></ul></div>
+        <div class="footer-col"><h4>Organisation</h4><ul><li><a href="about.html">Our Story</a></li><li><a href="stories.html">Village Stories</a></li><li><a href="impact.html">Impact</a></li><li><a href="get-involved.html">CSR Partnerships</a></li><li><a href="get-involved.html">Donate</a></li></ul></div>
+        <div class="footer-col"><h4>Contact</h4><ul><li><a href="contact.html">Khed Taluka, Pune</a></li><li><a href="contact.html">Maharashtra 410505</a></li><li><a href="mailto:samarthfoundation@gmail.com">samarthfoundation@gmail.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 Shri Samarth Foundation &middot; Reg. F48181/Pune</span>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll behaviour
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+
+    // Intersection observer for fade-up animations
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.13 });
+    document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+    // Filter logic
+    const pills = document.querySelectorAll('#filterPills .pill');
+    const storyCards = document.querySelectorAll('#storyGrid .story-card');
+    const featuredWrapper = document.querySelector('.featured-wrapper');
+    const noResults = document.getElementById('noResults');
+
+    function applyFilter(filter) {
+      let visibleCount = 0;
+
+      // Featured story
+      if (filter === 'all' || featuredWrapper.dataset.category === filter) {
+        featuredWrapper.removeAttribute('data-hidden');
+        visibleCount++;
+      } else {
+        featuredWrapper.setAttribute('data-hidden', 'true');
+      }
+
+      // Grid cards
+      storyCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.removeAttribute('data-hidden');
+          visibleCount++;
+        } else {
+          card.setAttribute('data-hidden', 'true');
+        }
+      });
+
+      noResults.classList.toggle('visible', visibleCount === 0);
+    }
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        applyFilter(pill.dataset.filter);
+      });
+    });
+  </script>
+</body>
+</html>
