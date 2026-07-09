@@ -129,17 +129,13 @@
     .pc-btn-wa:hover { background: #25d366; border-color: #25d366; transform: translateY(-2px); }
     .pc-note { font-size: 12px; color: rgba(255,255,255,.38); line-height: 1.6; }
 
-    /* SECONDARY GRID */
-    .secondary-grid {
-      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
-    }
-
     /* ANIKET SHAH CARD */
-    .contact-person-secondary {
-      background: var(--cream); border-radius: 16px; padding: 32px 28px;
-      border: 1.5px solid var(--border); display: flex; flex-direction: column; gap: 16px;
+    .aniket-card {
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      background: var(--cream); border: 1.5px solid var(--border);
+      border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
     }
-    .cps-top { display: flex; align-items: center; gap: 16px; }
+    .ac-left { display: flex; align-items: center; gap: 18px; }
     .cps-avatar {
       width: 52px; height: 52px; border-radius: 50%;
       background: var(--green-light); border: 2px solid var(--green);
@@ -147,12 +143,12 @@
       font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 700;
       color: var(--green); flex-shrink: 0;
     }
-    .cps-name { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
-    .cps-title { font-size: 11px; color: var(--muted); font-weight: 400; }
-    .cps-actions { display: flex; flex-direction: column; gap: 8px; }
+    .cps-name { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .cps-title { font-size: 12px; color: var(--muted); }
+    .ac-right { display: flex; gap: 10px; flex-wrap: wrap; }
     .cps-btn {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 16px; border-radius: 9px;
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 11px 20px; border-radius: 9px;
       font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
       transition: all 0.2s ease;
     }
@@ -160,15 +156,20 @@
     .cps-btn-call:hover { background: var(--green); color: white; }
     .cps-btn-wa { background: rgba(37,211,102,.1); color: #1a9048; }
     .cps-btn-wa:hover { background: #25d366; color: white; }
-
-    /* INFO CARDS */
-    .info-card {
-      background: var(--cream); border-radius: 16px; padding: 28px 24px;
-      border: 1.5px solid var(--border);
-      display: flex; gap: 16px; align-items: flex-start;
+    @media (max-width: 640px) {
+      .aniket-card { flex-direction: column; align-items: flex-start; }
     }
-    .info-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 16px; flex-shrink: 0; }
-    .info-card h4 { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+
+    /* INFO ROW */
+    .info-row { display: flex; flex-wrap: wrap; gap: 16px; }
+    .info-card {
+      flex: 1; min-width: 210px;
+      background: var(--cream); border-radius: 14px; padding: 22px 20px;
+      border: 1.5px solid var(--border);
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .info-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--green-light); display: flex; align-items: center; justify-content: center; color: var(--green); font-size: 15px; flex-shrink: 0; }
+    .info-card h4 { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
     .info-card p { font-size: 14px; color: var(--text); font-weight: 500; line-height: 1.55; }
     .info-card a { color: var(--green); }
     .info-card a:hover { color: var(--orange); }
@@ -307,29 +308,27 @@
       </div>
     </div>
 
-    <!-- SECONDARY GRID: Aniket + Info Cards -->
-    <div class="secondary-grid fade-up d2">
-
-      <!-- ANIKET SHAH -->
-      <div class="contact-person-secondary">
-        <div class="cps-top">
-          <div class="cps-avatar">AN</div>
-          <div>
-            <div class="cps-name">Aniket Shah</div>
-            <div class="cps-title">Samarth Foundation</div>
-          </div>
-        </div>
-        <div class="cps-actions">
-          <a href="tel:+919145172777" class="cps-btn cps-btn-call">
-            <i class="fa-solid fa-phone"></i> +91 91451 72777
-          </a>
-          <a href="https://wa.me/919145172777" class="cps-btn cps-btn-wa" target="_blank" rel="noopener">
-            <i class="fa-brands fa-whatsapp"></i> WhatsApp
-          </a>
+    <!-- ANIKET SHAH -->
+    <div class="aniket-card fade-up d2">
+      <div class="ac-left">
+        <div class="cps-avatar">AN</div>
+        <div>
+          <div class="cps-name">Aniket Shah</div>
+          <div class="cps-title">Samarth Foundation</div>
         </div>
       </div>
+      <div class="ac-right">
+        <a href="tel:+919145172777" class="cps-btn cps-btn-call">
+          <i class="fa-solid fa-phone"></i> +91 91451 72777
+        </a>
+        <a href="https://wa.me/919145172777" class="cps-btn cps-btn-wa" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i> WhatsApp
+        </a>
+      </div>
+    </div>
 
-      <!-- ADDRESS -->
+    <!-- INFO ROW -->
+    <div class="info-row fade-up d3">
       <div class="info-card">
         <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
         <div>
@@ -337,8 +336,6 @@
           <p>Khed Taluka, Pune District<br>Maharashtra &ndash; 410505</p>
         </div>
       </div>
-
-      <!-- EMAIL -->
       <div class="info-card">
         <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
         <div>
@@ -346,8 +343,6 @@
           <p><a href="mailto:hello@samarthfoundation.net">hello@samarthfoundation.net</a></p>
         </div>
       </div>
-
-      <!-- RESPONSE TIME -->
       <div class="info-card">
         <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
         <div>
@@ -355,8 +350,6 @@
           <p>Within 24 hours on weekdays<br><small>CSR enquiries within 48 hours</small></p>
         </div>
       </div>
-
-      <!-- CSR -->
       <div class="info-card">
         <div class="info-icon"><i class="fa-solid fa-handshake"></i></div>
         <div>
@@ -364,8 +357,6 @@
           <p><a href="mailto:hello@samarthfoundation.net">hello@samarthfoundation.net</a><br><small>Mention &ldquo;CSR Enquiry&rdquo; in subject</small></p>
         </div>
       </div>
-
-      <!-- WEBSITE -->
       <div class="info-card">
         <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
         <div>
@@ -373,7 +364,6 @@
           <p><a href="https://samarthfoundation.net" target="_blank" rel="noopener">samarthfoundation.net</a></p>
         </div>
       </div>
-
     </div>
 
     <div class="social-row fade-up d3">
