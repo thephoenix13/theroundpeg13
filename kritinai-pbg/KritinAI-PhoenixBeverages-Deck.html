@@ -218,6 +218,117 @@
   /* Good-status pills (SLA / guarantee) */
   .pill-good { background:rgba(34,197,94,.11); color:var(--good); border-color:rgba(34,197,94,.28); }
 
+  /* ── TABLET ─────────────────────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    h1 { font-size: 3.2rem; }
+    h2 { font-size: 2.1rem; }
+    .hero h1 { font-size: 3.6rem; }
+    .cols-4 { grid-template-columns: repeat(2,1fr); }
+    .res-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .res-table { min-width: 700px; }
+  }
+
+  /* ── MOBILE ──────────────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    /* Slides scroll internally on mobile */
+    .deck { height: 100dvh; }
+    .slide {
+      height: 100dvh;
+      padding: 6vw 5vw 68px;
+      justify-content: flex-start;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Typography */
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.5rem; margin-bottom: .8rem; }
+    h3 { font-size: .95rem; }
+    p  { font-size: .92rem; }
+    p.lead { font-size: 1rem; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero .tag { font-size: .98rem; margin-top: .9rem; max-width: none; }
+    .eyebrow { font-size: .68rem; margin-bottom: .65rem; }
+
+    /* Grids → single column */
+    .cols, .cols-2, .cols-3 { grid-template-columns: 1fr; gap: 1rem; }
+    .cols-4   { grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .scope-grid    { grid-template-columns: 1fr !important; gap: .75rem !important; }
+    .showcase-grid { grid-template-columns: 1fr !important; gap: .65rem !important; }
+
+    /* Cards */
+    .card { padding: .9rem 1rem; border-radius: 12px; }
+    .card .ico { width: 36px; height: 36px; font-size: 1.1rem; margin-bottom: .6rem; }
+
+    /* Steps */
+    .step { gap: .8rem; margin-bottom: .9rem; }
+    .step .num { width: 36px; height: 36px; font-size: 1rem; border-radius: 9px; }
+    .step p { font-size: .9rem; }
+
+    /* Stats */
+    .stat { padding: 1rem 1.1rem; }
+    .stat .big { font-size: 2.4rem; }
+    .stat .big .unit { font-size: 1.2rem; }
+    .stat .lbl { font-size: .85rem; }
+    .cols-3 .stat { /* stat row in slide 8 */ }
+
+    /* Pills */
+    .pill { font-size: .78rem; padding: .28rem .7rem; }
+    .pill-sm { font-size: .68rem; }
+    .badge-row { gap: .4rem; margin-top: .9rem; }
+
+    /* Callout */
+    .callout { padding: .85rem 1rem; }
+    .callout p { font-size: .92rem; }
+
+    /* Requirement rows: collapse 4-col → 2-col with deliver spanning full width */
+    .req-row {
+      grid-template-columns: 1.2rem 1fr;
+      gap: .25rem .5rem;
+      padding: .5rem .75rem;
+    }
+    .req-name   { grid-column: 2; font-size: .88rem; }
+    .req-phases { grid-column: 2; }
+    .req-deliver {
+      grid-column: 1 / -1;
+      font-size: .8rem;
+      padding-top: .35rem;
+      border-top: 1px solid rgba(56,189,248,.08);
+      margin-top: .1rem;
+    }
+
+    /* Resource table: horizontal scroll */
+    .res-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
+    .res-table { min-width: 600px; }
+
+    /* Showcase cards on mobile: tighten the stat number */
+    .showcase-grid .card { padding: .65rem .8rem; }
+
+    /* Phase blocks */
+    .phase-hd { padding: .7rem 1rem; }
+    .phase-body { padding: .6rem 1rem; }
+
+    /* Lists */
+    ul.feat li, ul.cross li { font-size: .9rem; padding-top: .35rem; padding-bottom: .35rem; }
+
+    /* Hero contact bar: stack on mobile */
+    .hero [style*="inline-flex"] {
+      flex-direction: column !important;
+      gap: .5rem !important;
+      align-items: flex-start !important;
+    }
+
+    /* Footnote: hide second span, reduce size */
+    .footnote { font-size: .66rem; bottom: 2vh; }
+    .footnote span:last-child { display: none; }
+
+    /* Chrome */
+    .nav { bottom: 10px; right: 12px; gap: 6px; }
+    .nav button { width: 34px; height: 34px; font-size: 1rem; }
+    .counter { font-size: .7rem; bottom: 14px; left: 14px; }
+    .progress { height: 3px; }
+  }
+
   @media print {
     @page { size:1280px 720px; margin:0; }
     body { background:#1A2E4A; }
@@ -343,7 +454,7 @@
   <section class="slide sand">
     <div class="eyebrow">What we bring</div>
     <h2>Six pillars. One engineering partnership.</h2>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:.4rem;">
+    <div class="scope-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; margin-top:.4rem;">
       <div class="card scope-card">
         <h3>01 · Dedicated Developer</h3>
         <p>3–4, 4–6, or 6+ years' experience, matched to PBG's requirement. Full-time, India-based, remote. Exclusively dedicated to Phoenix Beverages.</p>
@@ -381,7 +492,7 @@
   <section class="slide">
     <div class="eyebrow">Sample profiles</div>
     <h2 style="margin-bottom:.9rem;">Representative profiles. Illustrative of our bench.</h2>
-    <table class="res-table">
+    <div class="res-table-wrap"><table class="res-table">
       <thead>
         <tr>
           <th style="width:148px;">Resource</th>
@@ -426,7 +537,7 @@
           <td style="font-size:.8rem; color:var(--muted);">Manufacturing / Operations</td>
         </tr>
       </tbody>
-    </table>
+    </table></div>
     <div class="callout" style="margin-top:1rem; padding:.75rem 1.15rem;">
       <p>These are illustrative of our bench. Confirmed profiles — matched to PBG's selected experience band — will be shared upon shortlisting.</p>
     </div>
@@ -629,7 +740,7 @@
   <section class="slide sand">
     <div class="eyebrow">Project showcase</div>
     <h2 style="margin-bottom:.75rem;">Delivered. Not just proposed.</h2>
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem;">
+    <div class="showcase-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem;">
 
       <!-- Column 1: Power Platform & Workflow -->
       <div style="display:flex; flex-direction:column; gap:.55rem;">
@@ -775,6 +886,13 @@
   }
   document.getElementById('next').onclick = () => show(i + 1);
   document.getElementById('prev').onclick = () => show(i - 1);
+  // Touch swipe
+  let _tx = 0;
+  document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive: true});
+  document.addEventListener('touchend', e => {
+    const dx = _tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 48) dx > 0 ? show(i + 1) : show(i - 1);
+  }, {passive: true});
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(i + 1); }
     if (e.key === 'ArrowLeft'  || e.key === 'PageUp')                    { e.preventDefault(); show(i - 1); }
