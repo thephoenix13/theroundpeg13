@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KritinAI Technologies — Enterprise Solutions Deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-900: #060F1A;
+    --green-800: #0F1C2D;
+    --green-700: #1A2E4A;
+    --green-600: #243F6B;
+    --green-400: #38BDF8;
+    --green-200: #BAE6FD;
+    --green-100: rgba(56,189,248,.22);
+    --green-50:  rgba(56,189,248,.09);
+    --terra:     #38BDF8;
+    --terra-100: #BAE6FD;
+    --terra-50:  rgba(56,189,248,.08);
+    --sand:   #0F1C2D;
+    --ink:    #F0F6FF;
+    --charcoal: #D1E0F0;
+    --muted:  #94A3B8;
+    --line:   rgba(56,189,248,.18);
+    --good:    #22C55E;
+    --good-50: rgba(34,197,94,.12);
+    --warn:    #F59E0B;
+    --warn-50: rgba(245,158,11,.12);
+    --bad:     #EF4444;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { height:100%; }
+  body { font-family:"DM Sans",-apple-system,sans-serif; color:var(--charcoal); background:#0A1525; -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
+
+  .deck { height:100vh; overflow:hidden; }
+  .slide { display:none; height:100vh; width:100vw; padding:6vh 7vw; flex-direction:column; justify-content:center; position:relative; background:var(--green-700); overflow:hidden; }
+  .slide.active { display:flex; }
+  .slide.sand   { background:var(--sand); }
+  .slide::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--terra) 0%,#2563EB 50%,var(--warn) 100%); z-index:2; }
+  .hero { background: radial-gradient(120% 80% at 78% 18%,rgba(56,189,248,.10) 0%,rgba(56,189,248,0) 55%), radial-gradient(90% 70% at 12% 92%,rgba(245,158,11,.07) 0%,rgba(245,158,11,0) 50%), #1A2E4A; }
+
+  .eyebrow { text-transform:uppercase; letter-spacing:.18em; font-size:.78rem; font-weight:700; color:var(--terra); margin-bottom:1.1rem; }
+  h1 { font-size:4.2rem; line-height:1.04; font-weight:800; color:#fff; letter-spacing:-.03em; }
+  h2 { font-size:2.7rem; line-height:1.08; font-weight:800; color:#fff; letter-spacing:-.02em; margin-bottom:1.4rem; }
+  h3 { font-size:1.2rem; font-weight:700; color:var(--green-200); letter-spacing:-.01em; }
+  p  { font-size:1.22rem; line-height:1.6; color:var(--charcoal); max-width:62ch; }
+  p.lead { font-size:1.5rem; line-height:1.5; color:var(--muted); max-width:54ch; }
+  .hero h1 { font-size:4.7rem; }
+  .hero .tag { font-size:1.45rem; color:var(--green-200); margin-top:1.4rem; max-width:52ch; line-height:1.45; }
+  .muted { color:var(--muted); }
+
+  .cols   { display:grid; grid-template-columns:1.05fr .95fr; gap:3rem; align-items:center; }
+  .cols-top { align-items:start; }
+  .cols-2 { display:grid; grid-template-columns:1fr 1fr;       gap:1.3rem; margin-top:.4rem; }
+  .cols-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1.3rem; margin-top:.4rem; }
+
+  .card { background:rgba(255,255,255,.055); border:1px solid var(--line); border-radius:16px; padding:1.5rem 1.45rem; box-shadow:0 1px 8px rgba(0,0,0,.18); }
+  .slide.sand .card { background:rgba(255,255,255,.07); }
+  .card .ico { width:44px; height:44px; border-radius:11px; background:rgba(56,189,248,.12); color:var(--terra); display:grid; place-items:center; font-size:1.35rem; margin-bottom:.85rem; }
+  .card h3 { margin-bottom:.4rem; color:#fff; }
+  .card p  { font-size:1.02rem; color:var(--muted); line-height:1.5; }
+
+  .pill    { display:inline-flex; align-items:center; background:rgba(56,189,248,.10); color:var(--terra); border:1px solid rgba(56,189,248,.28); border-radius:999px; padding:.4rem 1rem; font-size:.95rem; font-weight:600; }
+  .pill-sm { font-size:.74rem; padding:.22rem .65rem; }
+  .pill-warn { background:rgba(245,158,11,.12); color:var(--warn); border-color:rgba(245,158,11,.35); }
+  .pill-good { background:rgba(34,197,94,.11); color:var(--good); border-color:rgba(34,197,94,.28); }
+  .badge-row { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1.6rem; }
+
+  .step { display:flex; gap:1.1rem; align-items:flex-start; margin-bottom:1.25rem; }
+  .step .num { flex:none; width:46px; height:46px; border-radius:12px; background:rgba(56,189,248,.14); border:1px solid rgba(56,189,248,.35); color:var(--terra); display:grid; place-items:center; font-weight:800; font-size:1.2rem; }
+  .step h3 { margin-bottom:.15rem; color:#fff; }
+  .step p  { font-size:1.08rem; color:var(--muted); }
+
+  ul.feat { list-style:none; margin-top:.4rem; }
+  ul.feat li { font-size:1.02rem; padding:.45rem 0 .45rem 2rem; position:relative; color:var(--charcoal); }
+  ul.feat li::before { content:"✓"; position:absolute; left:0; color:var(--green-400); font-weight:800; }
+  ul.cross li::before { content:"✕"; color:var(--bad); }
+
+  .stat { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:18px; padding:1.6rem 1.5rem; }
+  .stat .big  { font-size:3.4rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; }
+  .stat .big .unit { font-size:1.6rem; font-weight:800; color:var(--warn); }
+  .stat .lbl  { margin-top:.6rem; font-size:1rem; color:var(--muted); line-height:1.4; }
+  .stat.feature { background:rgba(56,189,248,.12); border-color:rgba(56,189,248,.3); }
+  .stat.feature .big { color:var(--terra); }
+  .stat.feature .lbl { color:var(--green-200); }
+
+  .callout { border-left:4px solid var(--terra); background:rgba(56,189,248,.07); border-radius:0 14px 14px 0; padding:1.1rem 1.3rem; }
+  .callout p { font-size:1.05rem; color:#fff; font-weight:600; line-height:1.55; margin:0; max-width:none; }
+
+  /* Challenge cards */
+  .challenge-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:.6rem; }
+  .ch-card { background:rgba(239,68,68,.07); border:1px solid rgba(239,68,68,.22); border-radius:14px; padding:1.1rem 1.2rem; }
+  .ch-card .ico { font-size:1.6rem; margin-bottom:.6rem; }
+  .ch-card h3 { font-size:1rem; color:#fff; margin-bottom:.3rem; }
+  .ch-card p  { font-size:.88rem; color:var(--muted); line-height:1.45; }
+
+  /* Outcome cards */
+  .outcome-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:.6rem; }
+  .oc-card { background:rgba(34,197,94,.06); border:1px solid rgba(34,197,94,.2); border-radius:14px; padding:1.1rem 1.2rem; }
+  .oc-num  { font-size:2.6rem; font-weight:900; color:var(--good); line-height:1; letter-spacing:-.04em; }
+  .oc-unit { font-size:1.3rem; color:var(--warn); font-weight:800; }
+  .oc-lbl  { font-size:.8rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin:.3rem 0 .5rem; }
+  .oc-desc { font-size:.87rem; color:var(--charcoal); line-height:1.45; }
+
+  /* Industry tab grid */
+  .ind-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:.5rem; }
+  .ind-card { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px; padding:1rem 1.2rem; }
+  .ind-hd   { display:flex; align-items:center; gap:.7rem; margin-bottom:.7rem; }
+  .ind-ico  { font-size:1.3rem; }
+  .ind-name { font-size:1rem; font-weight:800; color:#fff; }
+  .ind-uses { display:flex; flex-direction:column; gap:.3rem; }
+  .ind-use  { display:flex; align-items:flex-start; gap:.5rem; font-size:.85rem; color:var(--charcoal); }
+  .ind-use::before { content:"→"; color:var(--terra); font-weight:700; flex:none; }
+
+  /* Success story cards */
+  .story-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem; margin-top:.6rem; }
+  .story-card { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:16px; padding:1.2rem 1.3rem; }
+  .story-tag  { font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:var(--terra); margin-bottom:.5rem; }
+  .story-h    { font-size:1.05rem; font-weight:800; color:#fff; margin-bottom:.5rem; line-height:1.3; }
+  .story-outcome { display:flex; gap:1rem; margin-bottom:.6rem; flex-wrap:wrap; }
+  .story-kpi  { background:rgba(56,189,248,.10); border:1px solid rgba(56,189,248,.22); border-radius:8px; padding:.35rem .75rem; }
+  .story-kpi .kv { font-size:1.3rem; font-weight:900; color:var(--terra); line-height:1; }
+  .story-kpi .kl { font-size:.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }
+  .story-body { font-size:.85rem; color:var(--muted); line-height:1.5; }
+
+  /* Showcase cards (use cases) */
+  .showcase-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin-top:.5rem; }
+  .sc-card { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:14px; padding:1rem 1.1rem; display:grid; grid-template-columns:4.5rem 1fr; gap:0 1rem; align-items:start; }
+  .sc-num  { font-size:2.2rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.04em; }
+  .sc-label { font-size:.72rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.07em; margin-top:.15rem; }
+  .sc-title { font-size:.95rem; font-weight:700; color:#fff; line-height:1.3; }
+  .sc-tags  { display:flex; flex-wrap:wrap; gap:.3rem; margin-top:.5rem; grid-column:1/-1; }
+  .sc-tag   { font-size:.68rem; font-weight:700; background:rgba(56,189,248,.10); color:var(--terra); border:1px solid rgba(56,189,248,.25); border-radius:6px; padding:.14rem .45rem; }
+
+  /* Governance items */
+  .gov-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem; margin-top:.5rem; }
+  .gov-card { background:rgba(34,197,94,.06); border:1px solid rgba(34,197,94,.18); border-radius:14px; padding:1rem 1.1rem; }
+  .gov-ico  { font-size:1.4rem; margin-bottom:.5rem; }
+  .gov-card h3 { font-size:.95rem; color:#fff; margin-bottom:.3rem; }
+  .gov-card p  { font-size:.82rem; color:var(--muted); line-height:1.45; }
+
+  /* KPI metric cards */
+  .kpi-section { margin-bottom:1rem; }
+  .kpi-label   { font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--terra); margin-bottom:.5rem; }
+  .kpi-row     { display:grid; grid-template-columns:repeat(4,1fr); gap:.7rem; }
+  .kpi-card    { background:rgba(255,255,255,.05); border:1px solid var(--line); border-radius:12px; padding:.9rem 1rem; text-align:center; }
+  .kpi-num     { font-size:2rem; font-weight:900; color:var(--terra); line-height:1; letter-spacing:-.03em; }
+  .kpi-unit    { font-size:1rem; color:var(--warn); font-weight:800; }
+  .kpi-desc    { font-size:.78rem; color:var(--muted); margin-top:.3rem; line-height:1.4; }
+
+  /* Comparison table */
+  .cmp-table   { width:100%; border-collapse:collapse; margin-top:.8rem; }
+  .cmp-table th { font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:.07em; padding:.7rem 1rem; text-align:left; }
+  .cmp-table th:first-child { color:var(--muted); }
+  .cmp-table th:nth-child(2) { background:rgba(56,189,248,.12); color:var(--terra); border-radius:10px 10px 0 0; }
+  .cmp-table th:nth-child(3), .cmp-table th:nth-child(4) { color:var(--muted); }
+  .cmp-table td { font-size:.9rem; padding:.65rem 1rem; border-top:1px solid rgba(56,189,248,.10); color:var(--charcoal); }
+  .cmp-table td:first-child { color:var(--muted); font-weight:600; }
+  .cmp-table td:nth-child(2) { background:rgba(56,189,248,.07); color:#fff; font-weight:600; }
+  .cmp-yes { color:var(--good); font-weight:700; }
+  .cmp-no  { color:var(--bad); }
+  .cmp-part { color:var(--warn); }
+
+  /* Cert badge */
+  .cert-badge { background:rgba(34,197,94,.10); border:1px solid rgba(34,197,94,.28); border-radius:10px; padding:.5rem 1rem; font-size:.9rem; font-weight:700; color:var(--good); }
+  .cert-row   { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:.6rem; }
+
+  /* Resource table */
+  .res-table-wrap { border-radius:12px; overflow:hidden; }
+  .res-table { width:100%; border-collapse:collapse; }
+  .res-table thead tr { background:var(--green-800); }
+  .res-table th { color:var(--terra); font-size:.74rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:.65rem 1rem; text-align:left; border-bottom:1px solid rgba(56,189,248,.25); }
+  .res-table td { font-size:.88rem; padding:.62rem 1rem; border-bottom:1px solid rgba(56,189,248,.10); color:var(--charcoal); vertical-align:top; }
+  .res-table tbody tr:nth-child(even) td { background:rgba(255,255,255,.03); }
+  .res-table tbody tr:last-child td { border-bottom:none; }
+  .res-name { font-weight:700; color:#fff; }
+  .res-role { font-size:.76rem; color:var(--muted); margin-top:.15rem; }
+  .res-cert { display:inline-block; background:rgba(245,158,11,.13); color:var(--warn); border:1px solid rgba(245,158,11,.35); border-radius:6px; font-size:.68rem; font-weight:700; padding:.14rem .5rem; margin:.15rem .1rem 0 0; }
+
+  /* Chrome */
+  .footnote { position:absolute; bottom:3.2vh; left:7vw; right:7vw; font-size:.78rem; color:var(--muted); display:flex; justify-content:space-between; align-items:center; }
+  .progress  { position:fixed; top:0; left:0; height:3px; background:var(--terra); z-index:60; transition:width .25s ease; }
+  .counter   { position:fixed; bottom:20px; left:24px; color:var(--muted); font-size:.82rem; z-index:50; font-family:"DM Mono",monospace; }
+  .nav       { position:fixed; bottom:16px; right:22px; display:flex; gap:8px; z-index:50; }
+  .nav button { background:rgba(255,255,255,.07); border:1px solid rgba(56,189,248,.28); color:var(--terra); border-radius:9px; width:40px; height:40px; font-size:1.2rem; cursor:pointer; }
+  .nav button:hover { background:rgba(56,189,248,.14); }
+
+  @media (max-width:1100px) {
+    h1 { font-size:3.2rem; } h2 { font-size:2.1rem; } .hero h1 { font-size:3.6rem; }
+    .kpi-row { grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width:768px) {
+    .deck { height:100dvh; }
+    .slide { height:100dvh; padding:6vw 5vw 68px; justify-content:flex-start; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    h1 { font-size:2.1rem; } h2 { font-size:1.5rem; margin-bottom:.8rem; }
+    h3 { font-size:.95rem; } p { font-size:.92rem; }
+    .hero h1 { font-size:2.4rem; } .hero .tag { font-size:.98rem; margin-top:.9rem; }
+    .eyebrow { font-size:.68rem; margin-bottom:.65rem; }
+    .cols, .cols-2, .cols-3 { grid-template-columns:1fr; gap:1rem; }
+    .challenge-grid, .outcome-grid, .gov-grid, .showcase-grid { grid-template-columns:1fr !important; }
+    .ind-grid, .story-grid { grid-template-columns:1fr; }
+    .kpi-row { grid-template-columns:1fr 1fr; gap:.5rem; }
+    .cmp-table { font-size:.78rem; } .cmp-table th, .cmp-table td { padding:.5rem .6rem; }
+    .card { padding:.9rem 1rem; }
+    .stat { padding:1rem 1.1rem; } .stat .big { font-size:2.4rem; }
+    .pill { font-size:.78rem; padding:.28rem .7rem; }
+    .badge-row { gap:.4rem; margin-top:.9rem; }
+    .callout { padding:.85rem 1rem; } .callout p { font-size:.92rem; }
+    .res-table-wrap { overflow-x:auto; } .res-table { min-width:600px; }
+    .footnote { font-size:.66rem; bottom:2vh; }
+    .footnote span:last-child { display:none; }
+    .nav { bottom:10px; right:12px; }
+    .nav button { width:34px; height:34px; font-size:1rem; }
+    .counter { font-size:.7rem; bottom:14px; left:14px; }
+  }
+  @media print {
+    @page { size:1280px 720px; margin:0; }
+    .deck { height:auto; overflow:visible; }
+    .slide { display:flex !important; page-break-after:always; height:100vh; }
+    .nav,.counter,.progress { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="deck">
+
+  <!-- ══ 01 COVER ══════════════════════════════════════════════════════════ -->
+  <section class="slide hero active">
+    <div style="margin:auto 0; position:relative; z-index:1;">
+      <div class="eyebrow">Enterprise Solutions · KritinAI Technologies</div>
+      <h1>From Manual Chaos<br/><span style="color:var(--warn);">to Intelligent Operations.</span></h1>
+      <p class="tag">Power Platform, RPA, AI, and enterprise application delivery — for teams that need less friction, better data, and faster decisions.</p>
+      <div class="badge-row">
+        <span class="pill">Power Apps &amp; Power Automate</span>
+        <span class="pill">RPA &amp; AI</span>
+        <span class="pill">Enterprise Engineering</span>
+        <span class="pill">ISO 27001:2022</span>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. · CIN: U62020PN2025PTC245276</span>
+      <span>connectus@kritinai.com · +91 8446878088</span>
+    </div>
+  </section>
+
+  <!-- ══ 02 CUSTOMER CHALLENGES ════════════════════════════════════════════ -->
+  <section class="slide sand">
+    <div class="eyebrow">Do any of these sound familiar?</div>
+    <h2 style="margin-bottom:.9rem;">The problems most enterprise teams live with.</h2>
+    <div class="challenge-grid">
+      <div class="ch-card">
+        <div class="ico">📧</div>
+        <h3>Approvals by email</h3>
+        <p>Finance, HR, and procurement approvals happen over email chains with no audit trail, no status visibility, and no accountability.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ico">🧩</div>
+        <h3>Fragmented systems</h3>
+        <p>ERP, HR, finance, and operations run on separate platforms that don't talk to each other. Data lives in silos, reconciliation is manual.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ico">⏳</div>
+        <h3>Delayed decisions</h3>
+        <p>Reports take days to compile from different spreadsheets. By the time leadership has the data, the moment to act has passed.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ico">🔁</div>
+        <h3>Repetitive manual work</h3>
+        <p>Teams spend hours on data entry, copy-pasting between systems, and generating routine reports that should be fully automated.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ico">📋</div>
+        <h3>Compliance gaps</h3>
+        <p>Audit requests reveal missing documentation, incomplete approval trails, and no systematic way to prove process adherence.</p>
+      </div>
+      <div class="ch-card">
+        <div class="ico">👁</div>
+        <h3>No real-time visibility</h3>
+        <p>Management has no single view of supplier status, project progress, budget utilisation, or operational KPIs without asking someone.</p>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>These are solvable. All of them.</span>
+    </div>
+  </section>
+
+  <!-- ══ 03 BUSINESS OUTCOMES ══════════════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">What changes when we engage</div>
+    <h2 style="margin-bottom:.9rem;">Measurable outcomes, not just delivery.</h2>
+    <div class="outcome-grid">
+      <div class="oc-card">
+        <div class="oc-num">70<span class="oc-unit">%</span></div>
+        <div class="oc-lbl">faster approvals</div>
+        <div class="oc-desc">Multi-tier approval workflows replace email chains. Every request has a status, a timeline, and an audit trail.</div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-num">85<span class="oc-unit">%</span></div>
+        <div class="oc-lbl">less manual data entry</div>
+        <div class="oc-desc">RPA and Power Automate handle data movement between systems. Staff time shifts from processing to decision-making.</div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-num">Real<span style="font-size:1.4rem; color:var(--warn);">-time</span></div>
+        <div class="oc-lbl">operational visibility</div>
+        <div class="oc-desc">Live Power BI dashboards replace weekly Excel reports. Leadership sees what's happening as it happens.</div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-num">40<span class="oc-unit">%</span></div>
+        <div class="oc-lbl">reduced operational cost</div>
+        <div class="oc-desc">Automated processes eliminate redundant headcount spend on routine tasks across procurement, finance, and HR.</div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-num">100<span class="oc-unit">%</span></div>
+        <div class="oc-lbl">audit-ready documentation</div>
+        <div class="oc-desc">Every approval, exception, and data change is logged automatically. Compliance evidence is generated, not scrambled for.</div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-num">6<span class="oc-unit">wk</span></div>
+        <div class="oc-lbl">avg time to first go-live</div>
+        <div class="oc-desc">Agile delivery with pre-built accelerators means your first live solution is weeks away, not quarters.</div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. — Outcomes based on delivered client engagements</span>
+    </div>
+  </section>
+
+  <!-- ══ 04 COMPANY PROFILE ════════════════════════════════════════════════ -->
+  <section class="slide sand">
+    <div class="eyebrow">Company profile</div>
+    <h2 style="margin-bottom:.9rem;">Twenty years of enterprise engineering,<br/>built into one firm.</h2>
+    <div class="cols cols-top">
+      <div>
+        <p style="margin-bottom:1.1rem;">KritinAI Technologies Pvt. Ltd. was founded by Awanish Kumar Prajapati — Co-Founder and Director — after two decades of enterprise delivery inside Morgan Stanley, Barclays, Deutsche Bank, Citi, UBS, and Fiserv. Our team includes Solution Architects, senior developers, QA engineers, RPA specialists, and AI engineers.</p>
+        <p style="margin-bottom:1.3rem;">Pune-based, ISO 27001:2022 and ISO 9001:2015 certified, PCI-DSS, SOX, and RBI compliant. Our professionals have delivered for teams at EY, Deloitte, KPMG, and Accenture — the same rigour now available at competitive India market rates.</p>
+        <div class="callout">
+          <p>We are not a staffing agency. Every resource we field has a Solution Architect backstop, CoE governance, and a 1-month replacement guarantee.</p>
+        </div>
+      </div>
+      <div>
+        <div class="cols-2" style="margin-top:0;">
+          <div class="stat feature">
+            <div class="big">20<span class="unit">+</span></div>
+            <div class="lbl">Years of enterprise engineering by our founding team</div>
+          </div>
+          <div class="stat">
+            <div class="big">ISO</div>
+            <div class="lbl">27001:2022 · 9001:2015 · PCI-DSS · SOX · RBI compliant</div>
+          </div>
+          <div class="stat">
+            <div class="big">6<span class="unit">+</span></div>
+            <div class="lbl">Tier-one global BFSI institutions in our delivery heritage</div>
+          </div>
+          <div class="stat">
+            <div class="big">₹80<span class="unit">k</span></div>
+            <div class="lbl">Starting rate per month — resource engagements, based on experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. · Pune, India</span>
+      <span>GSTIN: 27AAMCK1105B1Z2 · CIN: U62020PN2025PTC245276</span>
+    </div>
+  </section>
+
+  <!-- ══ 05 WHAT WE DO ═════════════════════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">What we do</div>
+    <h2 style="margin-bottom:1rem;">Technology across the full enterprise stack.</h2>
+    <div class="cols-2" style="gap:1rem;">
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">⚡</div>
+        <h3>Power Apps &amp; Power Automate</h3>
+        <p>Canvas and Model-Driven apps, approval workflows, Dataverse, SharePoint, Custom Connectors — full ALM from Dev to Production.</p>
+      </div>
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">📊</div>
+        <h3>Power BI &amp; ETL / Data</h3>
+        <p>KPI dashboards, operational reports, embedded analytics, Azure Data Factory pipelines, and ETL from SAP, ERP, or legacy sources.</p>
+      </div>
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">🤖</div>
+        <h3>RPA &amp; Intelligent Automation</h3>
+        <p>UiPath, Automation Anywhere, Power Automate Desktop — attended and unattended bots, process mining, intelligent document processing.</p>
+      </div>
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">🧠</div>
+        <h3>AI &amp; Copilot Studio</h3>
+        <p>Azure OpenAI, document intelligence, LLM-powered agents, and Copilot Studio enterprise bots grounded in your data.</p>
+      </div>
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">🏗</div>
+        <h3>Enterprise Application Development</h3>
+        <p>React, Node.js, .NET Core, Java, Python — custom applications with ERP, CRM, and legacy system integration.</p>
+      </div>
+      <div class="card" style="padding:1.1rem 1.2rem;">
+        <div class="ico">🏛</div>
+        <h3>Solution Architecture</h3>
+        <p>Enterprise architects for platform design, integration patterns, cloud strategy, ALM governance, and CoE setup.</p>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>Microsoft · Azure · UiPath · AA · OpenAI · SAP · Salesforce</span>
+    </div>
+  </section>
+
+  <!-- ══ 06 INDUSTRY USE CASES ═════════════════════════════════════════════ -->
+  <section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+    <div class="eyebrow">Industry use cases</div>
+    <h2 style="margin-bottom:.8rem;">Relevant across your industry — and beyond.</h2>
+    <div class="ind-grid">
+      <div class="ind-card">
+        <div class="ind-hd"><div class="ind-ico">🏭</div><div class="ind-name">Manufacturing &amp; FMCG</div></div>
+        <div class="ind-uses">
+          <div class="ind-use">ERP warehouse management — stock movements, GRN, dispatch via Power Apps</div>
+          <div class="ind-use">CAPEX / OPEX approval routing with budget tracking and Power BI dashboards</div>
+          <div class="ind-use">Supplier onboarding, due diligence, and vendor performance scorecards</div>
+          <div class="ind-use">Production quality capture and non-conformance reporting app</div>
+          <div class="ind-use">RPA bots for invoice processing and purchase order reconciliation</div>
+        </div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-hd"><div class="ind-ico">🛒</div><div class="ind-name">Retail &amp; Distribution</div></div>
+        <div class="ind-uses">
+          <div class="ind-use">Store performance dashboards — real-time sales, shrinkage, and footfall</div>
+          <div class="ind-use">Inventory reconciliation automation — ERP to warehouse, zero manual keying</div>
+          <div class="ind-use">Vendor claim management and trade promotion tracking</div>
+          <div class="ind-use">Field force activity capture — visits, orders, competitor intel</div>
+          <div class="ind-use">Returns and credit note approval workflows with audit trail</div>
+        </div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-hd"><div class="ind-ico">🏦</div><div class="ind-name">BFSI &amp; FinTech</div></div>
+        <div class="ind-uses">
+          <div class="ind-use">Loan origination and processing workflows — KYC, credit, disbursement</div>
+          <div class="ind-use">Bank reconciliation RPA bots — thousands of transactions daily</div>
+          <div class="ind-use">Regulatory reporting extraction from legacy core banking systems</div>
+          <div class="ind-use">Branch operations app — account services, complaint capture, audit</div>
+          <div class="ind-use">AI-powered document extraction for onboarding and compliance packs</div>
+        </div>
+      </div>
+      <div class="ind-card">
+        <div class="ind-hd"><div class="ind-ico">🏥</div><div class="ind-name">Healthcare &amp; Pharma</div></div>
+        <div class="ind-uses">
+          <div class="ind-use">Patient onboarding and appointment management workflows</div>
+          <div class="ind-use">Medical supply procurement and inventory tracking app</div>
+          <div class="ind-use">Clinical compliance documentation — audit-ready, role-gated</div>
+          <div class="ind-use">HR automation — staff scheduling, leave, policy acknowledgements</div>
+          <div class="ind-use">AI-assisted clinical report summarisation and flagging</div>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. — Use cases delivered across all verticals listed</span>
+    </div>
+  </section>
+
+  <!-- ══ 07 RPA & AI ═══════════════════════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">RPA &amp; AI — what we've built</div>
+    <h2 style="margin-bottom:.9rem;">Automation that runs without people in the loop.</h2>
+    <div class="cols cols-top">
+      <div>
+        <h3 style="color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em;">Robotic Process Automation</h3>
+        <ul class="feat" style="margin-top:0; margin-bottom:1.3rem;">
+          <li>Invoice extraction and ERP posting — zero manual keying</li>
+          <li>Bank reconciliation bots — 3,000+ transactions processed daily</li>
+          <li>HR onboarding automation — AD provisioning, email, payroll triggers</li>
+          <li>Regulatory report extraction from legacy banking core systems</li>
+          <li>Vendor statement reconciliation across multiple supplier portals</li>
+        </ul>
+        <h3 style="color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em;">Tools deployed</h3>
+        <div class="badge-row" style="margin-top:0;">
+          <span class="pill pill-sm">UiPath</span>
+          <span class="pill pill-sm">Automation Anywhere</span>
+          <span class="pill pill-sm">Power Automate Desktop</span>
+          <span class="pill pill-sm">Blue Prism</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:var(--terra); margin-bottom:.7rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.08em;">AI Implementations</h3>
+        <ul class="feat" style="margin-top:0; margin-bottom:1.3rem;">
+          <li>AI contract review agent — clause extraction, deviation flagging, routing</li>
+          <li>Intelligent document processing — invoices, KYC, onboarding packs</li>
+          <li>Copilot Studio HR bot — policy Q&amp;A grounded in SharePoint knowledge base</li>
+          <li>Procurement spend intelligence — anomaly detection, vendor recommendations</li>
+          <li>Customer service AI agent — intent classification, CRM write-back</li>
+        </ul>
+        <div class="callout">
+          <p>All AI implementations include data residency controls, no client data into public models, and audit logging throughout — standard on every engagement.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>Azure OpenAI · Copilot Studio · UiPath · Power Automate</span>
+    </div>
+  </section>
+
+  <!-- ══ 08 SUCCESS STORIES ════════════════════════════════════════════════ -->
+  <section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
+    <div class="eyebrow">Customer success stories</div>
+    <h2 style="margin-bottom:.8rem;">Real outcomes from delivered engagements.</h2>
+    <div class="story-grid">
+
+      <div class="story-card">
+        <div class="story-tag">Manufacturing · Power Platform</div>
+        <div class="story-h">Supplier onboarding transformed from 3-week email process to 4-day automated workflow</div>
+        <div class="story-outcome">
+          <div class="story-kpi"><div class="kv">68%</div><div class="kl">faster onboarding</div></div>
+          <div class="story-kpi"><div class="kv">4d</div><div class="kl">avg cycle time</div></div>
+          <div class="story-kpi"><div class="kv">0</div><div class="kl">lost documents</div></div>
+        </div>
+        <div class="story-body">Built a Canvas App + Power Automate workflow replacing email-based supplier due diligence. Integrated with ERP via Custom Connector. Full audit trail from day one. Procurement team freed from manual follow-up.</div>
+      </div>
+
+      <div class="story-card">
+        <div class="story-tag">BFSI · RPA</div>
+        <div class="story-h">Bank reconciliation automated — from 6 hours daily to 20 minutes with zero errors</div>
+        <div class="story-outcome">
+          <div class="story-kpi"><div class="kv">94%</div><div class="kl">time saved</div></div>
+          <div class="story-kpi"><div class="kv">3k+</div><div class="kl">txns/day</div></div>
+          <div class="story-kpi"><div class="kv">0</div><div class="kl">manual errors</div></div>
+        </div>
+        <div class="story-body">UiPath unattended bot handles daily bank statement extraction, matching, and exception flagging. Exceptions route automatically to the finance team via Power Automate with full context attached.</div>
+      </div>
+
+      <div class="story-card">
+        <div class="story-tag">Logistics · Power BI &amp; ETL</div>
+        <div class="story-h">40+ Excel reports replaced by a live enterprise data platform across 14 offices</div>
+        <div class="story-outcome">
+          <div class="story-kpi"><div class="kv">40+</div><div class="kl">reports gone</div></div>
+          <div class="story-kpi"><div class="kv">14</div><div class="kl">offices live</div></div>
+          <div class="story-kpi"><div class="kv">1</div><div class="kl">source of truth</div></div>
+        </div>
+        <div class="story-body">Azure Data Factory pipelines consolidating data from 6 source systems into a Dataverse-linked Power BI Premium workspace. Management reporting shifted from weekly emails to live dashboards visible on any device.</div>
+      </div>
+
+      <div class="story-card">
+        <div class="story-tag">Legal Tech · AI</div>
+        <div class="story-h">Contract review time cut from 2 hours to 8 seconds per document with AI agent</div>
+        <div class="story-outcome">
+          <div class="story-kpi"><div class="kv">8s</div><div class="kl">per document</div></div>
+          <div class="story-kpi"><div class="kv">90%</div><div class="kl">less review time</div></div>
+          <div class="story-kpi"><div class="kv">100%</div><div class="kl">deviation flagged</div></div>
+        </div>
+        <div class="story-body">Copilot Studio agent backed by Azure OpenAI and Document Intelligence. Extracts key clauses, flags deviations from standard templates, and routes to the right reviewer — no human first-pass required.</div>
+      </div>
+
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. — Full case studies available under NDA</span>
+    </div>
+  </section>
+
+  <!-- ══ 09 SECURITY & GOVERNANCE ══════════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">Security &amp; governance</div>
+    <h2 style="margin-bottom:.9rem;">Enterprise-grade security. Built in, not bolted on.</h2>
+    <div class="cols cols-top">
+      <div>
+        <div class="gov-grid" style="margin-bottom:1.2rem;">
+          <div class="gov-card">
+            <div class="gov-ico">🔐</div>
+            <h3>Role-based access</h3>
+            <p>Azure AD / Entra ID, RBAC, and Dataverse security roles — every user sees only what they're authorised to see.</p>
+          </div>
+          <div class="gov-card">
+            <div class="gov-ico">📋</div>
+            <h3>Full audit logging</h3>
+            <p>Every approval, data change, and exception is logged automatically. Audit evidence is generated, not scrambled for.</p>
+          </div>
+          <div class="gov-card">
+            <div class="gov-ico">🛡</div>
+            <h3>Data Loss Prevention</h3>
+            <p>DLP policies enforced across all Power Platform environments — no unauthorised connectors, no data leakage pathways.</p>
+          </div>
+          <div class="gov-card">
+            <div class="gov-ico">🌍</div>
+            <h3>Data residency</h3>
+            <p>Client data stays within approved environments. No data into public AI models without explicit sign-off and controls.</p>
+          </div>
+          <div class="gov-card">
+            <div class="gov-ico">⚙</div>
+            <h3>ALM pipeline governance</h3>
+            <p>Separate Dev, UAT, and Production environments with controlled promotion. No unreviewed code reaches production.</p>
+          </div>
+          <div class="gov-card">
+            <div class="gov-ico">📁</div>
+            <h3>IP &amp; documentation</h3>
+            <p>All solution artefacts, source code, and documentation are assigned to the client. Nothing leaves without it being yours.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:var(--terra); font-size:.9rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:.8rem;">Certifications &amp; compliance</h3>
+        <div class="cert-row" style="margin-bottom:1.4rem;">
+          <span class="cert-badge">ISO 27001:2022</span>
+          <span class="cert-badge">ISO 9001:2015</span>
+          <span class="cert-badge">PCI-DSS</span>
+          <span class="cert-badge">SOX Compliant</span>
+          <span class="cert-badge">RBI Guidelines</span>
+        </div>
+        <div class="card" style="margin-bottom:1rem;">
+          <h3 style="color:#fff; margin-bottom:.6rem;">Standard on every engagement</h3>
+          <ul class="feat" style="margin-top:0;">
+            <li>NDA signed before any profile or data is shared</li>
+            <li>No subcontracting without written client approval</li>
+            <li>Dedicated resource — not shared across multiple clients</li>
+            <li>Microsoft certifications on file — scans available before engagement</li>
+          </ul>
+        </div>
+        <div class="callout">
+          <p>Power Platform and other Microsoft licenses are to be procured directly by the client. KritinAI will advise on requirements but does not resell licenses.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>Security-first delivery · ISO 27001:2022 certified</span>
+    </div>
+  </section>
+
+  <!-- ══ 10 KPIs & SUCCESS METRICS ════════════════════════════════════════ -->
+  <section class="slide sand">
+    <div class="eyebrow">How we measure success</div>
+    <h2 style="margin-bottom:.9rem;">KPIs we track from day one.</h2>
+    <div class="kpi-section">
+      <div class="kpi-label">Adoption &amp; engagement</div>
+      <div class="kpi-row" style="margin-bottom:1rem;">
+        <div class="kpi-card">
+          <div class="kpi-num">95<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Target active user adoption within 60 days of go-live</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">&lt;2<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Process fallback rate — users returning to email or spreadsheets</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">↓70<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Reduction in support tickets related to the replaced process</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">&lt;5<span class="kpi-unit">d</span></div>
+          <div class="kpi-desc">Target time to trained and confident for new users on any solution</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-section">
+      <div class="kpi-label">Productivity &amp; efficiency</div>
+      <div class="kpi-row" style="margin-bottom:1rem;">
+        <div class="kpi-card">
+          <div class="kpi-num">↓70<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Approval turnaround time from submission to decision</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">↓85<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Manual effort hours on processes that are fully automated</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">↓90<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Data entry errors eliminated by system-to-system automation</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">↑40<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Staff time redirected from processing to value-added decision-making</div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-section">
+      <div class="kpi-label">Business &amp; cost impact</div>
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-num">↓40<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Operational cost reduction on automated process areas</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">6<span class="kpi-unit">wk</span></div>
+          <div class="kpi-desc">Average time to first production go-live from engagement start</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">100<span class="kpi-unit">%</span></div>
+          <div class="kpi-desc">Audit trail coverage — every action logged and reportable</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">&lt;6<span class="kpi-unit">mo</span></div>
+          <div class="kpi-desc">Typical ROI breakeven on Power Platform automation engagements</div>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd. — KPIs agreed and tracked per engagement</span>
+    </div>
+  </section>
+
+  <!-- ══ 11 WHY KRITINAI — COMPARISON ══════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">Why KritinAI</div>
+    <h2 style="margin-bottom:.8rem;">Accelerators, expertise, and speed — compared.</h2>
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>KritinAI</th>
+          <th>Build in-house</th>
+          <th>Large SI / Big Four</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Time to first go-live</td>
+          <td>⚡ 4–6 weeks</td>
+          <td class="cmp-no">3–6 months (hiring + ramp)</td>
+          <td class="cmp-part">2–4 months (SOW overhead)</td>
+        </tr>
+        <tr>
+          <td>Pre-built accelerators &amp; templates</td>
+          <td><span class="cmp-yes">Yes</span> — reusable app, flow &amp; ETL components</td>
+          <td class="cmp-no">Built from scratch each time</td>
+          <td class="cmp-part">Partial — often proprietary, locked-in</td>
+        </tr>
+        <tr>
+          <td>Domain expertise (BFSI, FMCG, Supply Chain)</td>
+          <td><span class="cmp-yes">Deep</span> — 20+ yrs in regulated industries</td>
+          <td class="cmp-no">Depends on hiring luck</td>
+          <td class="cmp-part">Available but rotated out frequently</td>
+        </tr>
+        <tr>
+          <td>Dedicated resource (not shared)</td>
+          <td><span class="cmp-yes">Always</span> — one resource, one client</td>
+          <td class="cmp-yes">Yes (internal hire)</td>
+          <td class="cmp-no">Often shared across accounts</td>
+        </tr>
+        <tr>
+          <td>Solution Architect oversight</td>
+          <td><span class="cmp-yes">Included</span> — backstop on every engagement</td>
+          <td class="cmp-no">Separate senior hire required</td>
+          <td class="cmp-part">Included but billed at senior rates</td>
+        </tr>
+        <tr>
+          <td>Replacement guarantee</td>
+          <td><span class="cmp-yes">1 month</span> — no conditions</td>
+          <td class="cmp-no">Full re-hire process (3–6 months)</td>
+          <td class="cmp-no">Contract renegotiation required</td>
+        </tr>
+        <tr>
+          <td>Cost (India market)</td>
+          <td><span class="cmp-yes">From ₹80,000/month</span></td>
+          <td class="cmp-part">₹1–2L/month + benefits + overhead</td>
+          <td class="cmp-no">3–5× the rate for equivalent output</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>Accelerators · Domain expertise · Guaranteed delivery</span>
+    </div>
+  </section>
+
+  <!-- ══ 12 TWO ENGAGEMENT MODELS ═══════════════════════════════════════════ -->
+  <section class="slide sand">
+    <div class="eyebrow">How we engage</div>
+    <h2 style="margin-bottom:1rem;">Two ways to work with us.</h2>
+    <div class="cols" style="gap:2.5rem; align-items:stretch;">
+      <div class="card" style="border-top:4px solid var(--terra); padding:1.5rem 1.6rem;">
+        <div style="display:flex; align-items:center; gap:.9rem; margin-bottom:1rem;">
+          <div class="ico" style="margin-bottom:0; font-size:1.4rem; width:48px; height:48px;">🏗</div>
+          <div>
+            <h3 style="color:#fff; font-size:1.25rem;">Model A — We build it for you</h3>
+            <div style="font-size:.85rem; color:var(--muted);">Project delivery with full ownership</div>
+          </div>
+        </div>
+        <ul class="feat" style="margin-top:0; margin-bottom:1.2rem;">
+          <li>KritinAI owns scope, delivery, and quality end to end</li>
+          <li>Fixed-price, T&amp;M, or milestone-based commercial model</li>
+          <li>Solution Architect assigned to every project</li>
+          <li>Dev → UAT → Production handover with full documentation</li>
+          <li>Your internal team is trained before we exit</li>
+        </ul>
+        <div class="callout">
+          <p>Best when: you have use cases defined and want a firm to own delivery and accountability.</p>
+        </div>
+      </div>
+      <div class="card" style="border-top:4px solid var(--warn); padding:1.5rem 1.6rem;">
+        <div style="display:flex; align-items:center; gap:.9rem; margin-bottom:1rem;">
+          <div class="ico" style="margin-bottom:0; font-size:1.4rem; width:48px; height:48px; background:rgba(245,158,11,.12); color:var(--warn);">👥</div>
+          <div>
+            <h3 style="color:#fff; font-size:1.25rem;">Model B — We supply the developer, you manage</h3>
+            <div style="font-size:.85rem; color:var(--muted);">Dedicated resource deployment</div>
+          </div>
+        </div>
+        <ul class="feat" style="margin-top:0; margin-bottom:1.2rem;">
+          <li>You specify the role — developer, tester, architect, BA</li>
+          <li>KritinAI shortlists 2–3 pre-vetted profiles for your review</li>
+          <li>You interview and select the resource you want</li>
+          <li>NDA signed before any profile is shared</li>
+          <li>Resource works under your direction, day to day</li>
+          <li>KritinAI backstop: CoE oversight + 1-month replacement guarantee</li>
+        </ul>
+        <div class="callout" style="background:rgba(245,158,11,.06); border-color:var(--warn);">
+          <p>Best when: you have the technical capacity to manage but need the right people, fast.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>Minimum engagement: 6 months billing per resource</span>
+    </div>
+  </section>
+
+  <!-- ══ 13 TALENT SOURCING PROCESS ════════════════════════════════════════ -->
+  <section class="slide">
+    <div class="eyebrow">How we source</div>
+    <h2 style="margin-bottom:.9rem;">Interview responsibility stays with KritinAI.</h2>
+    <div class="cols cols-top" style="gap:2.5rem;">
+      <div>
+        <div class="step">
+          <div class="num">1</div>
+          <div><h3>You share the requirement</h3><p>Role type, experience level, skills needed, and start timeline. No headcount commitment required at this stage.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div><h3>KritinAI screens and shortlists</h3><p>We handle sourcing, technical screening, and interviews. You receive 2–3 pre-vetted profiles — not a pile of CVs.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div><h3>NDA signed, then profiles shared</h3><p>No profile is shared before an NDA is in place. All candidate data handled under ISO 27001 controls.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div><h3>You select, we onboard</h3><p>You interview and choose. KritinAI handles onboarding, tool access, and orientation within days of selection.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.1rem;">
+          <h3 style="color:#fff; margin-bottom:.8rem;">Roles we field</h3>
+          <div class="badge-row" style="margin-top:0; gap:.5rem;">
+            <span class="pill pill-sm">Power Apps Developer</span>
+            <span class="pill pill-sm">Power Automate Developer</span>
+            <span class="pill pill-sm">Power BI / ETL Developer</span>
+            <span class="pill pill-sm">RPA Developer</span>
+            <span class="pill pill-sm">Full-Stack Developer</span>
+            <span class="pill pill-sm">AI / ML Engineer</span>
+            <span class="pill pill-sm">QA / Test Engineer</span>
+            <span class="pill pill-sm">Solution Architect</span>
+            <span class="pill pill-sm">Business Analyst</span>
+            <span class="pill pill-sm">Azure Cloud Engineer</span>
+          </div>
+        </div>
+        <div class="callout">
+          <p>KritinAI is accountable for the quality of who we put forward. If the resource isn't working, we replace within one month — no arguments, no re-negotiation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>NDA · ISO 27001 data handling · 1-month replacement guarantee</span>
+    </div>
+  </section>
+
+  <!-- ══ 14 COMMERCIAL & TERMS ══════════════════════════════════════════════ -->
+  <section class="slide sand">
+    <div class="eyebrow">Commercial framework</div>
+    <h2 style="margin-bottom:1rem;">Transparent terms, no surprises.</h2>
+    <div class="cols cols-top" style="gap:2.5rem;">
+      <div>
+        <div class="step">
+          <div class="num" style="font-size:.9rem;">₹</div>
+          <div><h3>Rates from ₹80,000/month</h3><p>Starting rate per resource per month. Final rate depends on role, experience level, and technology specialisation — agreed before engagement.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">6</div>
+          <div><h3>Minimum 6-month billing per resource</h3><p>Ensures continuity of delivery and allows the resource to build deep context on your environment and processes.</p></div>
+        </div>
+        <div class="step">
+          <div class="num">1</div>
+          <div><h3>1-month replacement guarantee</h3><p>If a resource isn't working for any reason, raise it with us. Replacement is handled within one month at no additional cost.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:1.1rem;">
+          <h3 style="color:#fff; margin-bottom:.8rem;">Standard terms — every engagement</h3>
+          <ul class="feat" style="margin-top:0;">
+            <li>NDA signed before any profile or data is shared</li>
+            <li>IP and all deliverables assigned to client on exit</li>
+            <li>No subcontracting without written client approval</li>
+            <li>Resource dedicated — not shared across multiple clients</li>
+            <li>Data protection: client data within approved tools only</li>
+            <li>Full handover documentation before engagement closes</li>
+          </ul>
+        </div>
+        <div class="callout" style="border-color:var(--warn); background:rgba(245,158,11,.07);">
+          <p>Out of scope: Power Platform, Power BI, and Microsoft software licenses are to be procured directly by the client. KritinAI will advise on requirements but does not resell licenses.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footnote">
+      <span>KritinAI Technologies Pvt. Ltd.</span>
+      <span>connectus@kritinai.com · +91 8446878088</span>
+    </div>
+  </section>
+
+  <!-- ══ 15 CLOSING ════════════════════════════════════════════════════════ -->
+  <section class="slide hero">
+    <div style="margin:auto 0; position:relative; z-index:1; max-width:58ch;">
+      <div class="eyebrow">Ready when you are</div>
+      <h1>Let's talk about<br/><span style="color:var(--warn);">what you're building.</span></h1>
+      <p class="tag">Tell us what your team is working on. We'll tell you honestly whether we're the right fit — and how we'd approach it.</p>
+      <div class="badge-row">
+        <span class="pill">connectus@kritinai.com</span>
+        <span class="pill">+91 8446878088</span>
+        <span class="pill">www.kritinai.com</span>
+      </div>
+    </div>
+    <div style="position:absolute; bottom:0; left:0; right:0; background:var(--green-800); padding:1.1rem 7vw; display:flex; align-items:center; justify-content:space-between;">
+      <span style="color:var(--terra-100); font-size:.88rem; font-weight:600;">KritinAI Technologies Pvt. Ltd. · Pune, India</span>
+      <span style="color:var(--muted); font-size:.78rem;">CIN: U62020PN2025PTC245276 · GSTIN: 27AAMCK1105B1Z2</span>
+    </div>
+  </section>
+
+</div><!-- /.deck -->
+
+<div class="counter" id="counter">1 / 15</div>
+<div class="nav">
+  <button onclick="show(i-1)">&#8249;</button>
+  <button onclick="show(i+1)">&#8250;</button>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total  = slides.length;
+  let i = 0;
+
+  function show(n) {
+    slides[i].classList.remove('active');
+    i = (n + total) % total;
+    slides[i].classList.add('active');
+    document.getElementById('counter').textContent  = (i + 1) + ' / ' + total;
+    document.getElementById('progress').style.width = ((i + 1) / total * 100) + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show(i + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   show(i - 1);
+  });
+
+  let _tx = 0;
+  document.addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend',   e => {
+    const dx = _tx - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 48) dx > 0 ? show(i + 1) : show(i - 1);
+  }, {passive:true});
+
+  show(0);
+</script>
+</body>
+</html>
