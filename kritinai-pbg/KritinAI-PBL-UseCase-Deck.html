@@ -467,7 +467,7 @@
       </div>
       <div class="step" style="margin-bottom:.75rem;">
         <div class="num" style="width:38px;height:38px;font-size:1rem;">📈</div>
-        <div><h3 style="font-size:.92rem;">Stock turnover rate &amp; aging analysis</h3><p style="font-size:.85rem;">Slow-moving SKUs flagged. Aging stock — beyond standard shelf life — surfaced for review. Prevents write-offs from being discovered too late.</p></div>
+        <div><h3 style="font-size:.92rem;">Stock turnover rate &amp; aging analysis</h3><p style="font-size:.85rem;">Slow-moving SKUs flagged. Stock aging past shelf life surfaced before it reaches write-off territory.</p></div>
       </div>
       <div class="step" style="margin-bottom:0;">
         <div class="num" style="width:38px;height:38px;font-size:1rem;">🚨</div>
@@ -729,7 +729,7 @@
         </div>
       </div>
       <div class="callout warn">
-        <p>Push notifications configured for the metrics that matter most — stockout risk, OEE drop, RGB return shortfall. Leadership is alerted before the problem compounds.</p>
+        <p>Push notifications for the metrics that move the fastest — stockout risk, OEE drop, RGB return shortfall. Leadership sees it before it becomes a bigger issue.</p>
       </div>
     </div>
   </div>
@@ -764,46 +764,49 @@
 ══════════════════════════════════════════════════════════════════════════════ -->
 <section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
   <div class="eyebrow">Use Case 3 · Production Floor</div>
-  <h2 style="margin-bottom:.9rem;">From paper shift logs to a live OEE dashboard — in 6 weeks.</h2>
-  <div class="cols cols-top" style="gap:2.5rem;">
+  <h2 style="margin-bottom:.8rem;">From shift-end logs to a live OEE dashboard — in 6 weeks.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
     <div>
-      <div style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--terra); margin-bottom:.5rem;">Current Process</div>
-      <p style="font-size:1rem; margin-bottom:1rem; max-width:none; line-height:1.65;">Line operators log production output at shift end and QA records quality checks during the shift — a well-run process that PBL's team executes consistently. OEE is compiled from MES data each morning, giving plant managers a clear picture of the previous shift. The enhancement KritinAI proposes is to bring that same visibility into the shift as it runs — so managers can act on the data while there's still time to influence the outcome.<sup style="color:var(--terra); font-size:.65rem;">⁵</sup></p>
-      <div style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--terra); margin-bottom:.6rem;">What we'd build — 3 components</div>
-      <div class="step" style="margin-bottom:.75rem;">
-        <div class="num" style="width:38px;height:38px;font-size:.85rem;">①</div>
-        <div><h3 style="font-size:.9rem;">Production Logging App — Canvas App</h3><p style="font-size:.85rem;">Line operators tap output, downtime reason (coded list), and quality check result from a shared tablet at the machine. 60 seconds. Timestamped and shift-tagged automatically.</p></div>
+      <div style="font-size:.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--terra); margin-bottom:.6rem;">What we'd build</div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">①</div>
+        <div>
+          <h3 style="font-size:.9rem;">Production Logging App</h3>
+          <p style="font-size:.84rem;">Operator taps output, downtime reason, and quality result at the machine. 60 seconds per entry. Timestamped and shift-tagged automatically.</p>
+        </div>
       </div>
-      <div class="step" style="margin-bottom:.75rem;">
-        <div class="num" style="width:38px;height:38px;font-size:.85rem;">②</div>
-        <div><h3 style="font-size:.9rem;">Real-Time Threshold Alerts — Power Automate</h3><p style="font-size:.85rem;">If OEE drops below 80%, fill level variance exceeds ±2%, or carbonation check flags out-of-spec — alert fires to line manager and QA supervisor mid-shift, while there's still time to act.</p></div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">②</div>
+        <div>
+          <h3 style="font-size:.9rem;">Real-Time Threshold Alerts</h3>
+          <p style="font-size:.84rem;">OEE below 80%, fill variance beyond ±2%, or carbonation out-of-spec — alert fires to the line manager mid-shift, while the shift is still running.</p>
+        </div>
       </div>
-      <div class="step" style="margin-bottom:0;">
-        <div class="num" style="width:38px;height:38px;font-size:.85rem;">③</div>
-        <div><h3 style="font-size:.9rem;">Live OEE Dashboard — Power BI</h3><p style="font-size:.85rem;">Plant manager sees output vs. target, downtime by reason and machine, and quality rate by shift and line — refreshed every 15 minutes. Available on desktop, mobile, and boardroom screen.</p></div>
+      <div class="step" style="margin-bottom:.6rem;">
+        <div class="num" style="width:36px;height:36px;font-size:.85rem;">③</div>
+        <div>
+          <h3 style="font-size:.9rem;">Live OEE Dashboard</h3>
+          <p style="font-size:.84rem;">Output vs. target, downtime by reason and machine, quality rate by line — refreshed every 15 minutes on desktop, mobile, and boardroom screen.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:.6rem;">
+        <p>Power Apps and Power BI built as one connected system.<sup style="font-size:.65rem; color:var(--muted);">⁵</sup> A single developer with ETL knowledge owns both.</p>
       </div>
     </div>
     <div>
-      <div class="ba-grid" style="grid-template-columns:1fr; gap:.7rem; margin-top:0;">
+      <div class="ba-grid" style="grid-template-columns:1fr; gap:.65rem; margin-top:0;">
         <div class="ba-before">
           <div class="ba-label">📋 Current Process</div>
-          <div class="ba-item">Production log captured at shift end and entered into Excel for MES reconciliation</div>
-          <div class="ba-item">OEE compiled from MES data the following morning — a clear daily picture for plant managers</div>
-          <div class="ba-item">Quality checks recorded by QA during and after the shift</div>
-          <div class="ba-item">Downtime reasons noted at the line level by supervisors</div>
+          <div class="ba-item">Production logs captured at shift end, entered into Excel for MES reconciliation</div>
+          <div class="ba-item">OEE compiled from MES data the following morning — clear daily picture for plant managers</div>
           <div class="ba-item">Cross-line view prepared through daily report consolidation</div>
         </div>
         <div class="ba-after">
           <div class="ba-label">✓ Enhanced With KritinAI</div>
-          <div class="ba-item">Operator logs output and quality at the machine in real time — Dataverse updated instantly, no batch entry</div>
-          <div class="ba-item">OEE visible in Power BI within 15 minutes of each log entry — shift data available during the shift</div>
-          <div class="ba-item">Quality threshold alert fires mid-shift — teams can respond before the shift closes</div>
-          <div class="ba-item">Standardized downtime reason codes in the app — consistent data across all lines, patterns visible over time</div>
-          <div class="ba-item">All lines on one dashboard — cross-line view without manual consolidation</div>
+          <div class="ba-item">Operator logs output and quality at the machine — Dataverse updated instantly</div>
+          <div class="ba-item">OEE visible in Power BI within 15 minutes — shift data available during the shift</div>
+          <div class="ba-item">All lines on one dashboard — no manual consolidation step</div>
         </div>
-      </div>
-      <div class="callout good" style="margin-top:.8rem;">
-        <p>This is Power Apps and Power BI as one system — not two separate projects. One Power Apps developer with ETL knowledge builds and maintains both streams.</p>
       </div>
     </div>
   </div>
@@ -818,49 +821,45 @@
 ══════════════════════════════════════════════════════════════════════════════ -->
 <section class="slide" style="justify-content:flex-start; padding-top:5vh;">
   <div class="eyebrow">Use Case 3 · Production Floor · Outcomes</div>
-  <h2 style="margin-bottom:.9rem;">What changes after go-live.</h2>
-  <div class="cols cols-top" style="gap:2.5rem;">
+  <h2 style="margin-bottom:.8rem;">What changes after go-live.</h2>
+  <div class="cols cols-top" style="gap:2rem;">
     <div>
-      <div class="cols-2" style="margin-top:0; gap:.8rem; margin-bottom:1rem;">
+      <div class="cols-2" style="margin-top:0; gap:.8rem; margin-bottom:.9rem;">
         <div class="stat feature">
           <div class="big">0</div>
-          <div class="lbl">Paper production logs on the shop floor</div>
+          <div class="lbl">Paper logs on the shop floor</div>
         </div>
         <div class="stat gold">
           <div class="big" style="color:var(--warn);">15<span style="font-size:1.4rem;">m</span></div>
-          <div class="lbl" style="color:#FDE68A;">Data refresh — shift data visible while the shift runs</div>
+          <div class="lbl" style="color:#FDE68A;">Data refresh — live during the shift</div>
         </div>
         <div class="stat green">
           <div class="big" style="color:var(--good);">↓28<span style="font-size:1.4rem;">%</span></div>
-          <div class="lbl" style="color:#BBF7D0;">Reduction in unplanned downtime — first 3 months post go-live</div>
+          <div class="lbl" style="color:#BBF7D0;">Unplanned downtime — first 3 months post go-live</div>
         </div>
         <div class="stat feature">
           <div class="big">↑</div>
-          <div class="lbl">OEE visibility — from next-morning to mid-shift, every line</div>
+          <div class="lbl">OEE visibility — mid-shift, every line</div>
         </div>
       </div>
-      <div class="callout" style="margin-bottom:1rem;">
-        <p>Plant managers stopped waiting for morning reports. They watched the shift happen in Power BI — and intervened when downtime patterns emerged, not the next day.</p>
-      </div>
       <div class="card" style="padding:1rem;">
-        <h3 style="color:#fff; margin-bottom:.6rem;">What gets eliminated</h3>
+        <h3 style="color:#fff; margin-bottom:.55rem;">What goes away</h3>
         <ul class="feat cross" style="margin-top:0;">
           <li>Paper production log at each bottling line</li>
-          <li>Manual MES printout collection at shift end</li>
-          <li>Excel OEE template filled by shift supervisor</li>
+          <li>Excel OEE template filled at shift end</li>
           <li>Morning email with yesterday's numbers</li>
           <li>Weekly report consolidation across lines</li>
         </ul>
       </div>
     </div>
     <div>
-      <div class="card" style="padding:1.1rem; margin-bottom:1rem;">
-        <h3 style="color:#fff; margin-bottom:.7rem;">CSD, Beer &amp; Water — one dashboard, three line types</h3>
-        <p style="font-size:.92rem; color:var(--muted);">Each beverage line has different quality thresholds and production targets. The Power BI dashboard shows each line's OEE, fill accuracy, and carbonation compliance side-by-side — with line-specific alert thresholds configured per product type.</p>
+      <div class="card" style="padding:1.1rem; margin-bottom:.8rem;">
+        <h3 style="color:#fff; margin-bottom:.5rem;">One dashboard — CSD, Beer &amp; Water</h3>
+        <p style="font-size:.9rem; color:var(--muted);">Each line has different quality thresholds and targets. OEE, fill accuracy, and carbonation compliance shown side-by-side — alert thresholds set per product type.</p>
       </div>
       <div class="card" style="padding:1.1rem;">
-        <h3 style="color:#fff; margin-bottom:.7rem;">Shift handover — automated, not compiled</h3>
-        <p style="font-size:.92rem; color:var(--muted);">At shift end, Power Automate generates a handover summary — output vs. target, downtime events, quality flags, and open actions — and sends it to the incoming shift manager via Teams. No one writes it. No one forgets it.</p>
+        <h3 style="color:#fff; margin-bottom:.5rem;">Shift handover — automated</h3>
+        <p style="font-size:.9rem; color:var(--muted);">At shift end, Power Automate generates a summary — output vs. target, downtime events, quality flags — and sends it to the incoming shift manager via Teams. Written automatically, every time.</p>
       </div>
     </div>
   </div>
@@ -870,104 +869,7 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════════════════
-     16 · PHASED IMPLEMENTATION ROADMAP
-══════════════════════════════════════════════════════════════════════════════ -->
-<section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
-  <div class="eyebrow">Implementation plan</div>
-  <h2 style="margin-bottom:.9rem;">Three phases. Six months. Live in production at each stage.</h2>
-  <div class="phase-track">
-    <div class="phase-card p1">
-      <div class="phase-num">Phase 1 · Weeks 1–8</div>
-      <div class="phase-title">Smart Warehouse &amp; RGB Tracking</div>
-      <div class="phase-weeks">First go-live at week 6</div>
-      <div class="phase-items">
-        <div style="margin-bottom:.4rem;">Week 1–2 — Requirements workshop with warehouse and logistics teams. Process mapping and app wireframes signed off.</div>
-        <div style="margin-bottom:.4rem;">Week 3–5 — Canvas app build: Stock Take, GRN, Dispatch. Dataverse schema designed and configured. Barcode labels produced for pilot zone.</div>
-        <div style="margin-bottom:.4rem;">Week 6 — Pilot go-live in one warehouse zone. Operators trained. Feedback loop open.</div>
-        <div>Week 7–8 — RGB reconciliation dashboard in Power BI. Full warehouse rollout. Go-live review and sign-off.</div>
-      </div>
-    </div>
-    <div class="phase-card p2">
-      <div class="phase-num">Phase 2 · Weeks 6–16</div>
-      <div class="phase-title">ETL Pipeline &amp; Executive Control Tower</div>
-      <div class="phase-weeks">Runs parallel from week 6 · Dashboard live at week 14</div>
-      <div class="phase-items">
-        <div style="margin-bottom:.4rem;">Week 6–8 — Source audit: map all Excel files, SharePoint sources, and ERP exports. On-premises data gateway configured.</div>
-        <div style="margin-bottom:.4rem;">Week 9–11 — Azure Data Factory pipeline built. Power Query transformations written and tested against real PBL data.</div>
-        <div style="margin-bottom:.4rem;">Week 12–13 — Dataverse star schema loaded. DAX measures (Stock Turnover, Aging, MRO velocity) validated with PBL finance and operations.</div>
-        <div>Week 14–16 — Executive control tower built in Power BI. Alert thresholds configured. Leadership walkthrough and sign-off.</div>
-      </div>
-    </div>
-    <div class="phase-card p3">
-      <div class="phase-num">Phase 3 · Weeks 14–24</div>
-      <div class="phase-title">Production Floor Digitization</div>
-      <div class="phase-weeks">Pilot line live at week 18 · Full rollout at week 24</div>
-      <div class="phase-items">
-        <div style="margin-bottom:.4rem;">Week 14–16 — Process workshop with plant managers and shift supervisors. Define downtime reason codes, quality thresholds per line type.</div>
-        <div style="margin-bottom:.4rem;">Week 17–18 — Production logging app built on Canvas. Dataverse connected to ETL pipeline from Phase 2 for consolidated view. Pilot on one bottling line.</div>
-        <div style="margin-bottom:.4rem;">Week 19–21 — OEE Power BI dashboard built. Alert rules configured per line (CSD, beer, water thresholds differ). Automate shift handover report tested.</div>
-        <div>Week 22–24 — Full rollout across all lines. Plant manager training. Go-live review. Handover documentation delivered.</div>
-      </div>
-    </div>
-  </div>
-  <div class="footnote">
-    <span>KritinAI Technologies Pvt. Ltd.</span>
-    <span>Timeline indicative — confirmed on scope workshop · Phases overlap by design to reduce overall delivery time</span>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════════════
-     17 · TEAM WE'D DEPLOY
-══════════════════════════════════════════════════════════════════════════════ -->
-<section class="slide" style="justify-content:flex-start; padding-top:5vh;">
-  <div class="eyebrow">Team composition</div>
-  <h2 style="margin-bottom:.9rem;">Who we'd put on this engagement.</h2>
-  <div class="cols-3" style="gap:1rem; margin-bottom:1.2rem; margin-top:0;">
-    <div class="role-card">
-      <div style="font-size:1.8rem; margin-bottom:.5rem;">⚡</div>
-      <div class="role-title">Power Apps Developer</div>
-      <div class="role-exp">5+ years · PL-400 / PL-200 certified</div>
-      <div class="role-items">
-        Leads all three Canvas App builds — Stock Take, GRN/Dispatch, Production Logging<br/><br/>
-        Configures Dataverse schema, security roles, and offline sync for warehouse environments<br/><br/>
-        Designs Power Automate flows for alerts and shift handover reports<br/><br/>
-        Dedicated 160 hrs/month · exclusive to PBL
-      </div>
-    </div>
-    <div class="role-card" style="border-color:rgba(245,158,11,.3);">
-      <div style="font-size:1.8rem; margin-bottom:.5rem;">📊</div>
-      <div class="role-title">Power BI Developer + ETL</div>
-      <div class="role-exp">5+ years · PL-300 / AZ-900 certified</div>
-      <div class="role-items">
-        Owns the ETL pipeline — On-Premises Gateway, Azure Data Factory, Power Query transformation<br/><br/>
-        Designs and validates the Dataverse star schema and all DAX measures<br/><br/>
-        Builds all Power BI dashboards — warehouse, control tower, production OEE<br/><br/>
-        Dedicated 160 hrs/month · exclusive to PBL
-      </div>
-    </div>
-    <div class="role-card" style="border-color:rgba(34,197,94,.3);">
-      <div style="font-size:1.8rem; margin-bottom:.5rem;">🏗</div>
-      <div class="role-title">Solution Architect</div>
-      <div class="role-exp">20+ yrs enterprise engineering · Partial billing</div>
-      <div class="role-items">
-        Available on partial billing — 40–80 hrs/month oversight without a full dedicated hire<br/><br/>
-        Reviews architecture decisions at phase gates — data model, security, integration patterns<br/><br/>
-        Escalation point for both developers · backstops delivery quality<br/><br/>
-        Billed only for hours engaged — not a fixed monthly allocation
-      </div>
-    </div>
-  </div>
-  <div class="callout" style="margin-top:0;">
-    <p>Both full-time resources are exclusive to Phoenix Beverages — no context-switching between clients. The Solution Architect backstops without adding unnecessary billing overhead. A 1-month paid trial is available before committing to the full engagement.</p>
-  </div>
-  <div class="footnote">
-    <span>KritinAI Technologies Pvt. Ltd.</span>
-    <span>160 hrs/month · Dedicated · Exclusive · 1-month paid trial available</span>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════════════════════
-     18 · COMMERCIAL FRAMEWORK
+     16 · COMMERCIAL FRAMEWORK
 ══════════════════════════════════════════════════════════════════════════════ -->
 <section class="slide sand" style="justify-content:flex-start; padding-top:5vh;">
   <div class="eyebrow">Commercial terms</div>
@@ -1030,7 +932,7 @@
       </div>
       <div class="step" style="margin-bottom:.9rem;">
         <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
-        <div><h3>We understand RGB, bottling lines, and FMCG distribution</h3><p>Returnable glass bottle logistics, high-speed packaging line OEE, and beverage distribution route-to-market are domain knowledge we bring, not problems we'd be learning on your time.</p></div>
+        <div><h3>We understand RGB, bottling lines, and FMCG distribution</h3><p>Returnable glass bottle logistics, high-speed packaging line OEE, and beverage distribution route-to-market are domain knowledge KritinAI brings in — so the engagement starts at delivery, not discovery.</p></div>
       </div>
       <div class="step" style="margin-bottom:.9rem;">
         <div class="num" style="width:38px;height:38px;font-size:1rem;">✓</div>
@@ -1130,7 +1032,7 @@
   <div style="margin:auto 0; position:relative; z-index:1; max-width:58ch;">
     <div class="eyebrow">Phoenix Beverages Limited × KritinAI Technologies</div>
     <h1>Let's build this<br/><span style="color:var(--warn);">for Phoenix.</span></h1>
-    <p class="tag">Three use cases. Two dedicated resources. One month to see it working before you commit. The problems are real — the solution is ready.</p>
+    <p class="tag">Three use cases. Two dedicated resources. One month to see it working before you commit. Built for PBL's operations — ready to deploy.</p>
     <div class="badge-row">
       <span class="pill">1-month paid trial</span>
       <span class="pill pill-warn">160 hrs/month dedicated</span>
