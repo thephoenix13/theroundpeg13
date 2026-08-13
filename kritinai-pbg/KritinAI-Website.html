@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KritinAI Technologies — Enterprise Technology That Works</title>
+<meta name="description" content="End-to-end IT solutions built by engineers from Morgan Stanley, Barclays, Citi. Power Platform, RPA, AI, Enterprise App Dev. Pune, India.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #060F1A;
+    --surf-1: #0F1C2D;
+    --surf-2: #1A2E4A;
+    --surf-3: #243B55;
+    --blue: #38BDF8;
+    --blue-dim: rgba(56,189,248,0.12);
+    --blue-mid: #2563EB;
+    --gold: #F59E0B;
+    --gold-dim: rgba(245,158,11,0.12);
+    --text: #E8F0F8;
+    --muted: #7A9BB5;
+    --border: rgba(56,189,248,0.15);
+    --border-soft: rgba(255,255,255,0.06);
+    --grad: linear-gradient(90deg, #38BDF8, #2563EB, #F59E0B);
+    --r: 12px;
+    --r-lg: 20px;
+    --spring: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    letter-spacing: 0;          /* body: no tracking applied — let the font breathe */
+    font-optical-sizing: auto;  /* variable axis adjusts for size automatically */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ── SCROLL REVEALS ── */
+  /* Spring-like ease: fast-out, slow-settle — approximates critical damping */
+  --spring: cubic-bezier(0.16, 1, 0.3, 1);
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s var(--spring), transform 0.6s var(--spring);
+    will-change: opacity, transform;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.08s; }
+  .reveal-delay-2 { transition-delay: 0.16s; }
+  .reveal-delay-3 { transition-delay: 0.24s; }
+  .reveal-delay-4 { transition-delay: 0.32s; }
+  .reveal-delay-5 { transition-delay: 0.40s; }
+
+  /* ── GLOBAL ELEMENTS ── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--grad);
+  }
+  h2.section-heading {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    /* Negative tracking on large text — letters spread too far as size grows */
+    letter-spacing: -0.025em;
+    font-optical-sizing: auto;
+    margin-bottom: 16px;
+  }
+  .section-sub {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-bottom: 60px;
+  }
+  .grad-text {
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--blue);
+    background: var(--blue-dim);
+    white-space: nowrap;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: #060F1A;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1), box-shadow 0.25s cubic-bezier(0.16,1,0.3,1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(56,189,248,0.35);
+  }
+  /* Pointer-down response: instant scale, not waiting for hover */
+  .btn-primary:active {
+    transform: scale(0.96) translateY(0);
+    box-shadow: none;
+    transition: transform 80ms ease-out, box-shadow 80ms ease-out;
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 15px;
+    padding: 13px 28px;
+    border-radius: 100px;
+    border: 1px solid var(--border-soft);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .btn-ghost:active {
+    transform: scale(0.96);
+    transition: transform 80ms ease-out;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0;
+    /* Materialize: blur + bg arrive together, not a hard swap */
+    background: rgba(6,15,26,0);
+    backdrop-filter: blur(0px) saturate(100%);
+    -webkit-backdrop-filter: blur(0px) saturate(100%);
+    transition: background 0.4s cubic-bezier(0.16,1,0.3,1),
+                backdrop-filter 0.4s cubic-bezier(0.16,1,0.3,1),
+                -webkit-backdrop-filter 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  nav.scrolled {
+    background: rgba(6,15,26,0.82);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    /* Scroll edge: gradient shadow instead of hard border — content bleeds through */
+    box-shadow: 0 1px 0 rgba(56,189,248,0.12), 0 4px 24px rgba(0,0,0,0.4);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .nav-logo-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--grad);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+    color: #060F1A;
+    letter-spacing: -0.03em;
+  }
+  .nav-logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo-text span { color: var(--blue); }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    /* Nav link color: fast — information shouldn't lag behind intent */
+    transition: color 60ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:active { color: var(--blue); }
+  .nav-cta { display: flex; align-items: center; gap: 16px; }
+  .nav-contact {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s;
+  }
+  .nav-contact:hover { opacity: 0.8; }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .mobile-menu {
+    position: fixed;
+    inset: 68px 0 0 0;
+    background: rgba(6,15,26,0.96);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    z-index: 99;
+    padding: 40px 32px;
+    flex-direction: column;
+    gap: 28px;
+    /* Materialize in — opacity + scale from origin, not just display toggle */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.3s cubic-bezier(0.16,1,0.3,1),
+                transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    display: flex;
+  }
+  .mobile-menu.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .mobile-menu a {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 60ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-menu a:active { color: var(--blue); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0 80px;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 60% 40%, rgba(37,99,235,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(56,189,248,0.1) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 760px;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 16px 6px 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--blue);
+    margin-bottom: 32px;
+  }
+  .hero-badge-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  h1 {
+    font-size: clamp(36px, 5.5vw, 68px);
+    font-weight: 700;
+    line-height: 1.06;
+    /* Display text: tight negative tracking — at 68px letters read too far apart */
+    letter-spacing: -0.035em;
+    font-optical-sizing: auto;
+    margin-bottom: 24px;
+  }
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 560px;
+    margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .trust-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 24px;
+    white-space: nowrap;
+  }
+  .trust-logos {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .trust-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    transition: color 0.2s;
+  }
+  .trust-logo:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--surf-1);
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 28px 0;
+  }
+  .stats-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    flex: 1;
+    min-width: 120px;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border-soft);
+  }
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-desc {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ── PRODUCTS ── */
+  #products { padding: 100px 0; }
+  .plusai-block {
+    background: linear-gradient(135deg, var(--surf-1) 0%, rgba(37,99,235,0.15) 100%);
+    border: 1px solid rgba(37,99,235,0.3);
+    border-radius: var(--r-lg);
+    padding: 56px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .plusai-block::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .plusai-glow {
+    position: absolute;
+    bottom: -40px; right: 56px;
+    font-size: 120px;
+    font-weight: 900;
+    color: rgba(37,99,235,0.08);
+    letter-spacing: -0.05em;
+    font-family: 'DM Mono', monospace;
+    pointer-events: none;
+    user-select: none;
+  }
+  .plusai-inner { position: relative; z-index: 1; }
+  .plusai-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+  .plusai-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+  .plusai-tagline {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 8px;
+    max-width: 480px;
+  }
+  .plusai-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245,158,11,0.15);
+    border: 1px solid rgba(245,158,11,0.3);
+    color: var(--gold);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .plusai-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .plusai-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37,99,235,0.2);
+    border: 1px solid rgba(37,99,235,0.35);
+    color: #93C5FD;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .plusai-pill-icon { font-size: 16px; }
+  .plusai-sectors { display: flex; gap: 10px; flex-wrap: wrap; }
+  .sector-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border-soft);
+    color: var(--muted);
+  }
+
+  .mobile-suite-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .mobile-card {
+    background: var(--surf-1);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--spring), border-color 0.3s;
+    will-change: transform;
+  }
+  .mobile-card:hover { transform: translateY(-4px); }
+  .mobile-card:active {
+    transform: scale(0.97) translateY(0);
+    transition: transform 80ms ease-out;
+  }
+  .mobile-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .mobile-card.dmaac::before { background: linear-gradient(90deg, #EF4444, #DC2626); }
+  .mobile-card.dmaac { border-color: rgba(239,68,68,0.2); }
+  .mobile-card.dmaac:hover { border-color: rgba(239,68,68,0.4); }
+  .mobile-card.myfarm::before { background: linear-gradient(90deg, #22C55E, #16A34A); }
+  .mobile-card.myfarm { border-color: rgba(34,197,94,0.2); }
+  .mobile-card.myfarm:hover { border-color: rgba(34,197,94,0.4); }
+  .mobile-card.hellomate::before { background: linear-gradient(90deg, #A855F7, #7C3AED); }
+  .mobile-card.hellomate { border-color: rgba(168,85,247,0.2); }
+  .mobile-card.hellomate:hover { border-color: rgba(168,85,247,0.4); }
+  .mobile-card-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .dmaac .mobile-card-icon { background: rgba(239,68,68,0.15); }
+  .myfarm .mobile-card-icon { background: rgba(34,197,94,0.15); }
+  .hellomate .mobile-card-icon { background: rgba(168,85,247,0.15); }
+  .mobile-card-name {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .mobile-card-sector {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .mobile-card-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+  .mobile-card-tech {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── SERVICES ── */
+  #services { padding: 100px 0; background: var(--surf-1); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .service-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+    padding: 36px 32px;
+    transition: border-color 0.3s var(--spring), transform 0.3s var(--spring);
+    cursor: default;
+    will-change: transform;
+  }
+  .service-card:hover {
+    border-color: var(--border);
+    transform: translateY(-3px);
+  }
+  .service-card:active {
+    transform: scale(0.98) translateY(0);
+    transition: transform 80ms ease-out;
+  }
+  .service-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .service-name {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .service-desc { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 20px; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .service-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: var(--surf-1);
+    color: var(--muted);
+    border: 1px solid var(--border-soft);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── INDUSTRIES ── */
+  #industries { padding: 100px 0; }
+  .industry-tabs {
+    display: flex;
+    gap: 4px;
+    background: var(--surf-1);
+    border: 1px solid var(--border-soft);
+    border-radius: 100px;
+    padding: 4px;
+    margin-bottom: 48px;
+    width: fit-content;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  /* Sliding pill indicator — moves with CSS transform, not background-color swap */
+  .industry-tab-indicator {
+    position: absolute;
+    top: 4px;
+    height: calc(100% - 8px);
+    background: var(--surf-2);
+    border-radius: 100px;
+    pointer-events: none;
+    transition: left 0.35s var(--spring), width 0.35s var(--spring);
+    will-change: left, width;
+  }
+  .industry-tab {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    /* Color transition only — the indicator handles the surface */
+    transition: color 0.2s;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .industry-tab.active { color: var(--text); }
+  .industry-tab:active { color: var(--blue); }
+  /* Panel crossfade: spatial transition, not a hard swap */
+  .industry-panel {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s var(--spring);
+  }
+  .industry-panel.active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    animation: panelIn 0.35s var(--spring) both;
+  }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .industry-panel-left h3 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .industry-panel-left p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .use-case-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .use-case-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .use-case-list li::before {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .industry-panel-right {
+    background: var(--surf-1);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: 36px;
+  }
+  .industry-panel-right h4 {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .outcome-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r);
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .outcome-num {
+    font-size: 22px;
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .outcome-label { font-size: 13px; color: var(--muted); line-height: 1.4; }
+
+  /* ── CASE STUDIES ── */
+  #cases { padding: 100px 0; background: var(--surf-1); }
+  #cases .container { overflow: visible; }
+
+  .cases-scroll-outer {
+    position: relative;
+  }
+  .cases-scroll-wrapper {
+    /* Extend scroll edge to screen edge while keeping section padding */
+    margin: 0 -32px;
+    padding: 0 32px 24px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 32px;
+    /* Hide scrollbar visually but keep it functional */
+    scrollbar-width: none;
+    cursor: grab;
+  }
+  .cases-scroll-wrapper::-webkit-scrollbar { display: none; }
+  .cases-scroll-wrapper.dragging { cursor: grabbing; user-select: none; }
+  /* Right fade-out hint — tells the user there's more to scroll */
+  .cases-scroll-wrapper::after {
+    content: '';
+    position: sticky;
+    right: 0;
+    top: 0;
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, var(--surf-1));
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .cases-grid {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    padding-right: 32px; /* breathing room after last card */
+  }
+
+  .case-card {
+    width: 360px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--spring), border-color 0.3s;
+    will-change: transform;
+  }
+  .case-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border);
+  }
+  .case-card:active {
+    transform: scale(0.98) translateY(0);
+    transition: transform 80ms ease-out;
+  }
+  .case-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--grad);
+  }
+  .case-number {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 20px;
+  }
+  .case-industry-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--blue-dim);
+    color: var(--blue);
+    margin-bottom: 16px;
+  }
+  .case-title {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .case-stack {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 28px;
+  }
+  .case-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .case-stat-val {
+    font-size: 28px;
+    font-weight: 700;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .case-stat-label { font-size: 12px; color: var(--muted); }
+  .case-quote {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-style: italic;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  /* Scroll dots */
+  .cases-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+  .cases-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 100px;
+    background: var(--border-soft);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: width 0.3s var(--spring), background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .cases-dot.active {
+    width: 24px;
+    background: var(--blue);
+  }
+
+  /* ── WHY KRITINAI ── */
+  #why { padding: 100px 0; }
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .comparison-table th {
+    padding: 20px 28px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: left;
+  }
+  .comparison-table th:first-child { background: var(--surf-1); width: 35%; }
+  .comparison-table th.col-kritinai {
+    background: rgba(37,99,235,0.2);
+    color: var(--blue);
+    text-align: center;
+    border: 1px solid rgba(37,99,235,0.3);
+  }
+  .comparison-table th.col-other {
+    background: var(--surf-1);
+    color: var(--muted);
+    text-align: center;
+    border: 1px solid var(--border-soft);
+  }
+  .comparison-table td {
+    padding: 18px 28px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .comparison-table td:first-child {
+    background: var(--surf-1);
+    font-weight: 500;
+    border-right: 1px solid var(--border-soft);
+  }
+  .comparison-table td.col-kritinai {
+    background: rgba(37,99,235,0.08);
+    text-align: center;
+    border: 1px solid rgba(37,99,235,0.2);
+    border-top: none;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .comparison-table td.col-other {
+    background: var(--surf-1);
+    text-align: center;
+    border: 1px solid var(--border-soft);
+    border-top: none;
+    color: var(--muted);
+  }
+  .check { color: #22C55E; font-size: 18px; }
+  .cross { color: #EF4444; font-size: 18px; }
+  .partial { color: var(--gold); font-size: 14px; font-weight: 500; }
+
+  /* ── LEADERSHIP ── */
+  #leadership { padding: 100px 0; background: var(--surf-1); }
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .leader-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-lg);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .leader-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad);
+  }
+  .leader-monogram {
+    width: 80px; height: 80px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #1E3A5F, #2563EB);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    border: 1px solid rgba(37,99,235,0.4);
+  }
+  .leader-name {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .leader-title {
+    font-size: 14px;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .leader-bio { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+  .institution-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .inst-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-soft);
+    color: rgba(255,255,255,0.5);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.04em;
+  }
+  .certifications {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cert-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .cert-row:last-child { border-bottom: none; }
+  .cert-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--blue-dim);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cert-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .cert-desc { font-size: 12px; color: var(--muted); }
+
+  /* ── CTA ── */
+  #cta { padding: 100px 0; }
+  .cta-block {
+    background: linear-gradient(135deg, var(--surf-1) 0%, rgba(37,99,235,0.12) 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--r-lg);
+    padding: 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-block h2 {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    font-optical-sizing: auto;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .cta-block p {
+    font-size: 18px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto 48px;
+    position: relative;
+  }
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .contact-strip {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  .contact-item a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .contact-item a:hover { color: var(--blue); }
+  .contact-icon { font-size: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--surf-1);
+    border-top: 1px solid var(--border-soft);
+    padding: 60px 0 32px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 16px 0 20px;
+    max-width: 280px;
+  }
+  .footer-cert-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .footer-cert {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 5px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-soft);
+    color: rgba(255,255,255,0.35);
+    font-family: 'DM Mono', monospace;
+  }
+  .footer-col h5 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links li a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 60ms ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .footer-links li a:hover { color: var(--text); }
+  .footer-links li a:active { color: var(--blue); }
+  .footer-bottom {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-copy { font-size: 13px; color: var(--muted); }
+  .footer-reg {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    font-family: 'DM Mono', monospace;
+    text-align: right;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .mobile-suite-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    /* cases-grid is horizontal scroll — no grid override needed */
+    .leadership-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    h1 { font-size: 34px; }
+    .plusai-block { padding: 36px 28px; }
+    .plusai-header { flex-direction: column; }
+    .mobile-suite-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .industry-panel.active { grid-template-columns: 1fr; }
+    .cases-scroll-wrapper { margin: 0 -20px; padding: 0 20px 20px; scroll-padding-left: 20px; }
+    .case-card { width: 300px; }
+    .comparison-table { font-size: 13px; }
+    .comparison-table td, .comparison-table th { padding: 14px 16px; }
+    .cta-block { padding: 48px 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; }
+    .footer-reg { text-align: left; }
+    .stats-inner { justify-content: center; }
+    .stat-divider { display: none; }
+    .industry-tabs { border-radius: 16px; }
+    .industry-tab-indicator { border-radius: 12px; }
+  }
+
+  /* ── REDUCED MOTION ── */
+  /* Replace slides/springs with gentle opacity crossfades — no vestibular triggers */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 0;
+      transform: none !important;
+      transition: opacity 0.3s ease !important;
+    }
+    .reveal.visible { opacity: 1; }
+    .reveal-delay-1, .reveal-delay-2, .reveal-delay-3,
+    .reveal-delay-4, .reveal-delay-5 { transition-delay: 0s !important; }
+
+    nav, nav.scrolled { transition: none !important; }
+    .mobile-menu { transition: opacity 0.2s ease !important; transform: none !important; }
+    .industry-tab-indicator { transition: none !important; }
+    @keyframes panelIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .btn-primary, .btn-ghost,
+    .service-card, .mobile-card, .case-card {
+      transition: none !important;
+    }
+    .btn-primary:active, .btn-ghost:active,
+    .service-card:active, .mobile-card:active, .case-card:active {
+      transform: none !important;
+    }
+  }
+
+  /* ── REDUCED TRANSPARENCY ── */
+  /* Make translucent surfaces frostier — legibility over aesthetics */
+  @media (prefers-reduced-transparency: reduce) {
+    nav.scrolled {
+      background: rgba(6,15,26,0.98);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    .mobile-menu {
+      background: rgba(6,15,26,0.99);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  /* ── HIGH CONTRAST ── */
+  @media (prefers-contrast: more) {
+    .service-card, .case-card, .mobile-card {
+      border-color: rgba(255,255,255,0.25);
+    }
+    .nav-links a { color: var(--text); }
+    .section-sub { color: var(--text); }
+    .muted { color: var(--text); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">K</div>
+      <span class="nav-logo-text">Kritin<span>AI</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#cases">Case Studies</a></li>
+      <li><a href="#leadership">About</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="mailto:connectus@kritinai.com" class="nav-contact">
+        Contact us
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7.5 3.5L11 7l-3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#products" class="mobile-link">Products</a>
+  <a href="#services" class="mobile-link">Services</a>
+  <a href="#industries" class="mobile-link">Industries</a>
+  <a href="#cases" class="mobile-link">Case Studies</a>
+  <a href="#leadership" class="mobile-link">About</a>
+  <a href="mailto:connectus@kritinai.com" class="btn-primary" style="width:fit-content">Contact us</a>
+</div>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge reveal">
+        <div class="hero-badge-dot"></div>
+        Pune, India · Est. 2025
+      </div>
+      <h1 class="reveal reveal-delay-1">
+        Enterprise technology,<br>
+        built by engineers who<br>
+        <span class="grad-text">know what breaks.</span>
+      </h1>
+      <p class="hero-sub reveal reveal-delay-2">
+        End-to-end IT solutions from a team with two decades of delivery experience at the world's most demanding institutions. Power Platform, RPA, AI, and enterprise app development — without the large-SI overhead.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <a href="#cases" class="btn-primary">See our work</a>
+        <a href="mailto:connectus@kritinai.com" class="btn-ghost">Get in touch</a>
+      </div>
+      <div class="hero-trust reveal reveal-delay-4">
+        <span class="trust-label">Team alumni from</span>
+        <div class="trust-logos">
+          <span class="trust-logo">Morgan Stanley</span>
+          <span class="trust-logo">Barclays</span>
+          <span class="trust-logo">Citibank</span>
+          <span class="trust-logo">Deutsche Bank</span>
+          <span class="trust-logo">UBS</span>
+          <span class="trust-logo">Fiserv</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-num">20+</div>
+        <div class="stat-desc">Years enterprise experience</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-num">6</div>
+        <div class="stat-desc">Global banking institutions</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-num">3</div>
+        <div class="stat-desc">Inhouse products shipped</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-num">4</div>
+        <div class="stat-desc">Industry verticals</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRODUCTS ── -->
+<section id="products">
+  <div class="container">
+    <div class="section-label reveal">Products</div>
+    <h2 class="section-heading reveal reveal-delay-1">Built in-house. Production-grade.</h2>
+    <p class="section-sub reveal reveal-delay-2">We don't just implement other people's platforms. We build and ship our own products — which means we understand what it takes to take an idea from zero to enterprise-grade software.</p>
+
+    <!-- PlusAI -->
+    <div class="plusai-block reveal">
+      <div class="plusai-glow">+AI</div>
+      <div class="plusai-inner">
+        <div class="plusai-header">
+          <div>
+            <div class="plusai-title"><span class="grad-text">PlusAI</span></div>
+            <div class="plusai-tagline">Agentic AI platform for enterprise automation, intelligent workflows, and real-time analytics</div>
+          </div>
+          <div class="plusai-badge">
+            ✦ Flagship product
+          </div>
+        </div>
+        <div class="plusai-pills">
+          <div class="plusai-pill"><span class="plusai-pill-icon">🤖</span> Agentic AI</div>
+          <div class="plusai-pill"><span class="plusai-pill-icon">⚡</span> Intelligent Automation</div>
+          <div class="plusai-pill"><span class="plusai-pill-icon">📊</span> Real-time Analytics</div>
+          <div class="plusai-pill"><span class="plusai-pill-icon">🔒</span> Enterprise Security</div>
+          <div class="plusai-pill"><span class="plusai-pill-icon">🔗</span> API-first Integration</div>
+        </div>
+        <div class="plusai-sectors">
+          <div class="sector-tag">BFSI</div>
+          <div class="sector-tag">Healthcare</div>
+          <div class="sector-tag">Enterprise</div>
+          <div class="sector-tag">Manufacturing</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Suite -->
+    <div class="section-label reveal" style="margin-bottom:20px">AI Mobile Suite</div>
+    <div class="mobile-suite-grid">
+      <div class="mobile-card dmaac reveal">
+        <div class="mobile-card-icon">🛡️</div>
+        <div class="mobile-card-name">DMAAC</div>
+        <div class="mobile-card-sector">Defense · Security</div>
+        <div class="mobile-card-desc">Document Management &amp; Access Control — secure mobile solution for defense-grade document workflows and access governance.</div>
+        <div class="mobile-card-tech">Flutter · Azure AD · Encryption</div>
+      </div>
+      <div class="mobile-card myfarm reveal reveal-delay-1">
+        <div class="mobile-card-icon">🌾</div>
+        <div class="mobile-card-name">MyFarm</div>
+        <div class="mobile-card-sector">AgriTech · Rural</div>
+        <div class="mobile-card-desc">Farm management and advisory platform bringing precision agriculture tools, crop advisory, and market linkage to smallholder farmers.</div>
+        <div class="mobile-card-tech">Flutter · AI Advisory · Offline-first</div>
+      </div>
+      <div class="mobile-card hellomate reveal reveal-delay-2">
+        <div class="mobile-card-icon">🤝</div>
+        <div class="mobile-card-name">HelloMate</div>
+        <div class="mobile-card-sector">Community · Social</div>
+        <div class="mobile-card-desc">Hyperlocal community and services platform connecting neighborhoods, enabling peer services, and building community intelligence.</div>
+        <div class="mobile-card-tech">Flutter · Real-time · Location AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="container">
+    <div class="section-label reveal">Services</div>
+    <h2 class="section-heading reveal reveal-delay-1">The full stack of modern enterprise delivery</h2>
+    <p class="section-sub reveal reveal-delay-2">Six disciplines, one team. We cover the work from architecture through implementation — so you're not coordinating between vendors when something needs to connect.</p>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">⚙️</div>
+        <div class="service-name">Power Apps &amp; Power Automate</div>
+        <div class="service-desc">Canvas apps, model-driven apps, and automated workflows that replace manual processes and connect your systems without custom code.</div>
+        <div class="service-tags">
+          <span class="service-tag">Canvas App</span>
+          <span class="service-tag">MDA</span>
+          <span class="service-tag">Dataverse</span>
+          <span class="service-tag">Power Automate</span>
+          <span class="service-tag">SharePoint</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">📊</div>
+        <div class="service-name">Power BI &amp; ETL</div>
+        <div class="service-desc">Enterprise reporting, live operational dashboards, and data pipelines that turn raw system data into decisions your team can act on.</div>
+        <div class="service-tags">
+          <span class="service-tag">Power BI</span>
+          <span class="service-tag">Azure Data Factory</span>
+          <span class="service-tag">ETL Pipelines</span>
+          <span class="service-tag">DAX</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">🤖</div>
+        <div class="service-name">RPA &amp; Intelligent Automation</div>
+        <div class="service-desc">Robotic process automation for repetitive back-office work — payroll, reconciliation, compliance reporting — with exception handling built in.</div>
+        <div class="service-tags">
+          <span class="service-tag">UiPath</span>
+          <span class="service-tag">AA</span>
+          <span class="service-tag">Power Automate Desktop</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">🧠</div>
+        <div class="service-name">AI &amp; Copilot Studio</div>
+        <div class="service-desc">Custom AI agents, Copilots, and LLM integrations using Azure OpenAI — connected to your data, your processes, and your security policies.</div>
+        <div class="service-tags">
+          <span class="service-tag">Azure OpenAI</span>
+          <span class="service-tag">Copilot Studio</span>
+          <span class="service-tag">LLM Agents</span>
+        </div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏗️</div>
+        <div class="service-name">Enterprise App Development</div>
+        <div class="service-desc">Full-stack custom application development for business-critical workflows that outgrow off-the-shelf tools — built to production standards.</div>
+        <div class="service-tags">
+          <span class="service-tag">React</span>
+          <span class="service-tag">.NET Core</span>
+          <span class="service-tag">Node.js</span>
+          <span class="service-tag">Java</span>
+          <span class="service-tag">Python</span>
+        </div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">🗺️</div>
+        <div class="service-name">Solution Architecture</div>
+        <div class="service-desc">Architecture reviews, platform selection, and migration planning — with two decades of experience doing this inside institutions where mistakes are expensive.</div>
+        <div class="service-tags">
+          <span class="service-tag">Azure</span>
+          <span class="service-tag">M365</span>
+          <span class="service-tag">Integration</span>
+          <span class="service-tag">Cloud Migration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INDUSTRIES ── -->
+<section id="industries">
+  <div class="container">
+    <div class="section-label reveal">Industries</div>
+    <h2 class="section-heading reveal reveal-delay-1">Deep in four verticals</h2>
+    <p class="section-sub reveal reveal-delay-2">We've shipped production systems in Manufacturing, BFSI, Retail, and Healthcare. That's not category marketing — it means we know the compliance constraints, the process quirks, and the failure modes before we write a line of code.</p>
+
+    <div class="industry-tabs reveal reveal-delay-3" id="industry-tabs">
+      <span class="industry-tab-indicator" id="tab-indicator"></span>
+      <button class="industry-tab active" onclick="switchIndustry('manufacturing', this)">Manufacturing &amp; FMCG</button>
+      <button class="industry-tab" onclick="switchIndustry('bfsi', this)">BFSI &amp; FinTech</button>
+      <button class="industry-tab" onclick="switchIndustry('retail', this)">Retail &amp; Distribution</button>
+      <button class="industry-tab" onclick="switchIndustry('healthcare', this)">Healthcare &amp; Pharma</button>
+    </div>
+
+    <div class="industry-panel active" id="panel-manufacturing">
+      <div class="industry-panel-left">
+        <h3>Manufacturing &amp; FMCG</h3>
+        <p>From shop floor to C-suite reporting. We've built production workflows, quality systems, and OEE dashboards that connect plant data to management decisions in real time.</p>
+        <ul class="use-case-list">
+          <li>CAPEX approval workflows with multi-tier routing and live budget tracking</li>
+          <li>Quality NCR management — mobile defect capture to auto-assignment and resolution tracking</li>
+          <li>OEE dashboards pulling live data from plant systems via ETL</li>
+          <li>Supplier onboarding and vendor performance management</li>
+          <li>Contractor lifecycle and compliance document tracking</li>
+          <li>Procurement and purchase order automation</li>
+        </ul>
+      </div>
+      <div class="industry-panel-right">
+        <h4>Outcomes delivered</h4>
+        <div class="outcome-card">
+          <div class="outcome-num">9d → 2.5d</div>
+          <div class="outcome-label">CAPEX approval cycle, 6-tier routing, USD 200M+ tracked</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">−72%</div>
+          <div class="outcome-label">Quality escapes post NCR Management implementation</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">18 → 1</div>
+          <div class="outcome-label">Manual reports eliminated by OEE dashboard</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">90%</div>
+          <div class="outcome-label">Faster supplier onboarding across 400+ suppliers, 3 regions</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="industry-panel" id="panel-bfsi">
+      <div class="industry-panel-left">
+        <h3>BFSI &amp; FinTech</h3>
+        <p>Our team spent two decades inside Morgan Stanley, Barclays, Citi, Deutsche Bank, UBS, and Fiserv. We understand the compliance requirements, audit trails, and data governance standards that most vendors discover too late.</p>
+        <ul class="use-case-list">
+          <li>Regulatory reporting automation with full audit trail</li>
+          <li>Trade reconciliation and exception management workflows</li>
+          <li>KYC and onboarding process digitization</li>
+          <li>Risk dashboard consolidation across data sources</li>
+          <li>Policy acknowledgement and employee compliance tracking</li>
+          <li>Azure AD-integrated secure document management</li>
+        </ul>
+      </div>
+      <div class="industry-panel-right">
+        <h4>Why BFSI teams trust us</h4>
+        <div class="outcome-card">
+          <div class="outcome-num">PCI-DSS</div>
+          <div class="outcome-label">Payment card data security compliance</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">SOX</div>
+          <div class="outcome-label">Financial audit trail and controls</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">20+ yrs</div>
+          <div class="outcome-label">Direct institutional banking delivery experience</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="industry-panel" id="panel-retail">
+      <div class="industry-panel-left">
+        <h3>Retail &amp; Distribution</h3>
+        <p>Retail operations run on movement — of inventory, of orders, of people. We build the systems that track what's moving and surface the exceptions before they become problems.</p>
+        <ul class="use-case-list">
+          <li>Supplier and vendor onboarding portals with multi-region support</li>
+          <li>Inventory management and stock replenishment automation</li>
+          <li>Distributor performance and territory analytics dashboards</li>
+          <li>Order-to-delivery workflow automation</li>
+          <li>Field sales team management and reporting</li>
+          <li>Returns and claims processing workflows</li>
+        </ul>
+      </div>
+      <div class="industry-panel-right">
+        <h4>Outcomes delivered</h4>
+        <div class="outcome-card">
+          <div class="outcome-num">400+</div>
+          <div class="outcome-label">Suppliers onboarded across 3 regions in one deployment</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">3h → 45m</div>
+          <div class="outcome-label">Vendor performance reporting turnaround</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">100%</div>
+          <div class="outcome-label">Policy compliance completion in 5 days vs 3-week email chain</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="industry-panel" id="panel-healthcare">
+      <div class="industry-panel-left">
+        <h3>Healthcare &amp; Pharma</h3>
+        <p>Healthcare operations have zero tolerance for data loss and strict access control requirements. We build systems that respect both constraints without making the software unusable for the people who need it.</p>
+        <ul class="use-case-list">
+          <li>Patient intake and appointment workflow digitization</li>
+          <li>Clinical documentation and form automation</li>
+          <li>Regulatory and compliance reporting</li>
+          <li>Inventory and pharmacy management systems</li>
+          <li>Staff rostering and scheduling automation</li>
+          <li>Analytics dashboards for operational leadership</li>
+        </ul>
+      </div>
+      <div class="industry-panel-right">
+        <h4>Delivered with</h4>
+        <div class="outcome-card">
+          <div class="outcome-num">RBAC</div>
+          <div class="outcome-label">Role-based access control across all implementations</div>
+        </div>
+        <div class="outcome-card">
+          <div class="outcome-num">PlusAI</div>
+          <div class="outcome-label">Our AI platform extended for healthcare analytics</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDIES ── -->
+<section id="cases">
+  <div class="container">
+    <div class="section-label reveal">Case Studies</div>
+    <h2 class="section-heading reveal reveal-delay-1">Outcomes worth naming</h2>
+    <p class="section-sub reveal reveal-delay-2">Five engagements across Manufacturing, FMCG, and Retail. Real numbers from production systems.</p>
+
+    <div class="cases-scroll-wrapper reveal reveal-delay-3" id="cases-scroll">
+      <div class="cases-grid">
+
+        <div class="case-card">
+          <div class="case-number">Case 01 · Manufacturing</div>
+          <div class="case-industry-tag">Power Apps · Power Automate · Power BI</div>
+          <div class="case-title">CAPEX Approval Workflow Digitization</div>
+          <div class="case-stack">Canvas App + 6-Tier Routing + Live Budget Dashboard</div>
+          <div class="case-stats">
+            <div>
+              <div class="case-stat-val">9d → 2.5d</div>
+              <div class="case-stat-label">Approval cycle time</div>
+            </div>
+            <div>
+              <div class="case-stat-val">USD 200M+</div>
+              <div class="case-stat-label">Annual spend tracked</div>
+            </div>
+            <div>
+              <div class="case-stat-val">6-tier</div>
+              <div class="case-stat-label">Routing logic</div>
+            </div>
+            <div>
+              <div class="case-stat-val">100%</div>
+              <div class="case-stat-label">Digital audit trail</div>
+            </div>
+          </div>
+          <div class="case-quote">"The manual approval chain took 9 working days. We're now at 2.5 — with six approval tiers still in place and a live view of every pending item."</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-number">Case 02 · Manufacturing</div>
+          <div class="case-industry-tag">Power Apps · Power Automate · Power BI</div>
+          <div class="case-title">Quality NCR Management System</div>
+          <div class="case-stack">Mobile Canvas App + Auto-Assignment + Defect Trend Dashboard</div>
+          <div class="case-stats">
+            <div>
+              <div class="case-stat-val">−72%</div>
+              <div class="case-stat-label">Quality escapes</div>
+            </div>
+            <div>
+              <div class="case-stat-val">3d → 6h</div>
+              <div class="case-stat-label">NCR resolution time</div>
+            </div>
+            <div>
+              <div class="case-stat-val">100%</div>
+              <div class="case-stat-label">Digital NCR records</div>
+            </div>
+            <div>
+              <div class="case-stat-val">15 min</div>
+              <div class="case-stat-label">Dashboard refresh</div>
+            </div>
+          </div>
+          <div class="case-quote">"NCRs used to be filed on paper and assigned by walking the floor. Now defects are captured on mobile, routed automatically, and the quality team has a live trend view."</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-number">Case 03 · Manufacturing</div>
+          <div class="case-industry-tag">Power BI · Power Automate · ETL</div>
+          <div class="case-title">OEE Production Dashboard</div>
+          <div class="case-stack">Automated ETL + Live OEE + Auto Shift Reports</div>
+          <div class="case-stats">
+            <div>
+              <div class="case-stat-val">18 → 1</div>
+              <div class="case-stat-label">Manual reports eliminated</div>
+            </div>
+            <div>
+              <div class="case-stat-val">4 plants</div>
+              <div class="case-stat-label">Consolidated in one view</div>
+            </div>
+            <div>
+              <div class="case-stat-val">−28%</div>
+              <div class="case-stat-label">Unplanned downtime</div>
+            </div>
+            <div>
+              <div class="case-stat-val">15 min</div>
+              <div class="case-stat-label">Live data refresh</div>
+            </div>
+          </div>
+          <div class="case-quote">"18 shift reports, manually compiled every morning. Now one live dashboard pulls from 4 plants automatically — and the production team can see downtime patterns before they repeat."</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-number">Case 04 · Retail &amp; Distribution</div>
+          <div class="case-industry-tag">Power Apps · Power Automate · Dataverse</div>
+          <div class="case-title">Supplier Onboarding &amp; Vendor Performance</div>
+          <div class="case-stack">MDA Portal + Automated KYC + Vendor KPI Dashboard</div>
+          <div class="case-stats">
+            <div>
+              <div class="case-stat-val">90%</div>
+              <div class="case-stat-label">Faster onboarding</div>
+            </div>
+            <div>
+              <div class="case-stat-val">400+</div>
+              <div class="case-stat-label">Suppliers, 3 regions</div>
+            </div>
+            <div>
+              <div class="case-stat-val">3h → 45m</div>
+              <div class="case-stat-label">Vendor reporting time</div>
+            </div>
+            <div>
+              <div class="case-stat-val">100%</div>
+              <div class="case-stat-label">Compliance visibility</div>
+            </div>
+          </div>
+          <div class="case-quote">"Onboarding 400+ suppliers across three regions used to mean weeks of email chains. The portal handled the whole sequence — document collection, approvals, and KYC — automatically."</div>
+        </div>
+
+        <div class="case-card">
+          <div class="case-number">Case 05 · FMCG</div>
+          <div class="case-industry-tag">MDA · Power Automate · Power BI · Dataverse</div>
+          <div class="case-title">Contractor Compliance &amp; Lifecycle Management</div>
+          <div class="case-stack">Model-Driven App + Dataverse + Automated Alerts + Power BI</div>
+          <div class="case-stats">
+            <div>
+              <div class="case-stat-val">Zero</div>
+              <div class="case-stat-label">Lapsed docs in 6 months</div>
+            </div>
+            <div>
+              <div class="case-stat-val">100%</div>
+              <div class="case-stat-label">Policy sign-off in 5 days</div>
+            </div>
+            <div>
+              <div class="case-stat-val">500+</div>
+              <div class="case-stat-label">Employees tracked</div>
+            </div>
+            <div>
+              <div class="case-stat-val">Live</div>
+              <div class="case-stat-label">Compliance dashboard</div>
+            </div>
+          </div>
+          <div class="case-quote">"Contractor documents used to lapse silently. Now every expiry triggers an automated sequence — reminders, escalations, and a live compliance view for the ops team."</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll dots -->
+    <div class="cases-dots" id="cases-dots">
+      <button class="cases-dot active" data-index="0" aria-label="Case 1"></button>
+      <button class="cases-dot" data-index="1" aria-label="Case 2"></button>
+      <button class="cases-dot" data-index="2" aria-label="Case 3"></button>
+      <button class="cases-dot" data-index="3" aria-label="Case 4"></button>
+      <button class="cases-dot" data-index="4" aria-label="Case 5"></button>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY KRITINAI ── -->
+<section id="why">
+  <div class="container">
+    <div class="section-label reveal">Why KritinAI</div>
+    <h2 class="section-heading reveal reveal-delay-1">What you actually get</h2>
+    <p class="section-sub reveal reveal-delay-2">Every vendor says they're different. Here's what the comparison actually looks like.</p>
+
+    <div class="reveal reveal-delay-3" style="overflow-x:auto">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="col-kritinai">KritinAI</th>
+            <th class="col-other">In-house Team</th>
+            <th class="col-other">Large SI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20+ years institutional experience</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+            <td class="col-other"><span class="partial">Varies</span></td>
+          </tr>
+          <tr>
+            <td>Dedicated, exclusive resources</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="check">✓</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>On-site deployment available</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="check">✓</span></td>
+            <td class="col-other"><span class="partial">Premium</span></td>
+          </tr>
+          <tr>
+            <td>Inhouse product track record</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Engagement without large-SI overhead</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="partial">Partial</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Works with EY, Deloitte, KPMG, Accenture</td>
+            <td class="col-kritinai"><span class="check">✓</span></td>
+            <td class="col-other"><span class="cross">✗</span></td>
+            <td class="col-other"><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── LEADERSHIP ── -->
+<section id="leadership">
+  <div class="container">
+    <div class="section-label reveal">Leadership</div>
+    <h2 class="section-heading reveal reveal-delay-1">Built on institutional experience</h2>
+
+    <div class="leadership-grid">
+      <div class="leader-card reveal reveal-delay-2">
+        <div class="leader-monogram">AKP</div>
+        <div class="leader-name">Awanish Kumar Prajapati</div>
+        <div class="leader-title">Co-Founder &amp; Director</div>
+        <div class="leader-bio">20+ years of enterprise engineering delivery across the world's most demanding financial institutions. Brings institutional-grade engineering discipline to every KritinAI engagement — with the pragmatism of a founder who is accountable for the outcome.</div>
+        <div class="institution-badges">
+          <span class="inst-badge">Morgan Stanley</span>
+          <span class="inst-badge">Barclays</span>
+          <span class="inst-badge">Citi</span>
+          <span class="inst-badge">Deutsche Bank</span>
+          <span class="inst-badge">UBS</span>
+          <span class="inst-badge">Fiserv</span>
+        </div>
+      </div>
+      <div class="certifications reveal reveal-delay-3">
+        <div class="cert-row">
+          <div class="cert-icon">💳</div>
+          <div>
+            <div class="cert-name">PCI-DSS</div>
+            <div class="cert-desc">Payment Card Industry Data Security Standard</div>
+          </div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-icon">📋</div>
+          <div>
+            <div class="cert-name">SOX Compliant</div>
+            <div class="cert-desc">Sarbanes-Oxley financial controls framework</div>
+          </div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-icon">🏛️</div>
+          <div>
+            <div class="cert-name">RBI Guidelines</div>
+            <div class="cert-desc">Reserve Bank of India IT governance standards</div>
+          </div>
+        </div>
+        <div class="cert-row">
+          <div class="cert-icon">🤝</div>
+          <div>
+            <div class="cert-name">CIN: U62020PN2025PTC245276</div>
+            <div class="cert-desc">Registered company, Pune · GSTIN: 27AAMCK1105B1Z2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="cta">
+  <div class="container">
+    <div class="cta-block reveal">
+      <h2>Ready to build something<br><span class="grad-text">that actually works?</span></h2>
+      <p>Talk to engineers who have shipped production systems at the world's most demanding institutions — and now bring that discipline to your problem.</p>
+      <div class="cta-actions">
+        <a href="mailto:connectus@kritinai.com" class="btn-primary">
+          Start a conversation
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="tel:+918446878088" class="btn-ghost">+91 8446 878 088</a>
+      </div>
+      <div class="contact-strip">
+        <div class="contact-item">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:connectus@kritinai.com">connectus@kritinai.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🌐</span>
+          <a href="https://www.kritinai.com" target="_blank">www.kritinai.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <span>Pune, Maharashtra, India</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#" class="nav-logo" style="margin-bottom:16px; display:flex;">
+          <div class="nav-logo-mark">K</div>
+          <span class="nav-logo-text">Kritin<span>AI</span></span>
+        </a>
+        <p class="footer-brand-desc">End-to-end IT solutions built by engineers with two decades of institutional experience. Pune, India.</p>
+        <div class="footer-cert-row">
+          <span class="footer-cert">PCI-DSS</span>
+          <span class="footer-cert">SOX</span>
+          <span class="footer-cert">RBI</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul class="footer-links">
+          <li><a href="#services">Power Apps &amp; Automate</a></li>
+          <li><a href="#services">Power BI &amp; ETL</a></li>
+          <li><a href="#services">RPA &amp; Automation</a></li>
+          <li><a href="#services">AI &amp; Copilot Studio</a></li>
+          <li><a href="#services">Enterprise App Dev</a></li>
+          <li><a href="#services">Solution Architecture</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Products</h5>
+        <ul class="footer-links">
+          <li><a href="#products">PlusAI Platform</a></li>
+          <li><a href="#products">DMAAC</a></li>
+          <li><a href="#products">MyFarm</a></li>
+          <li><a href="#products">HelloMate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul class="footer-links">
+          <li><a href="#industries">Industries</a></li>
+          <li><a href="#cases">Case Studies</a></li>
+          <li><a href="#why">Why KritinAI</a></li>
+          <li><a href="#leadership">Leadership</a></li>
+          <li><a href="mailto:connectus@kritinai.com">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 KritinAI Technologies Pvt. Ltd. All rights reserved.</div>
+      <div class="footer-reg">CIN: U62020PN2025PTC245276 · GSTIN: 27AAMCK1105B1Z2</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── NAV scroll ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // ── Mobile menu ──
+  // Menu uses opacity + pointer-events now (not display toggle), so class alone drives it
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    // Animate hamburger → X on open
+    const spans = hamburger.querySelectorAll('span');
+    if (open) {
+      spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+      spans[1].style.opacity = '0';
+      spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+    } else {
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    }
+  });
+  document.querySelectorAll('.mobile-link, .mobile-menu .btn-primary').forEach(el => {
+    el.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      const spans = hamburger.querySelectorAll('span');
+      spans[0].style.transform = '';
+      spans[1].style.opacity = '';
+      spans[2].style.transform = '';
+    });
+  });
+
+  // ── Scroll reveals ──
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // ── Industry tabs — sliding indicator ──
+  const indicator = document.getElementById('tab-indicator');
+  const tabsContainer = document.getElementById('industry-tabs');
+
+  function positionIndicator(btn) {
+    // Measure relative to the tabs container, not the viewport
+    const containerRect = tabsContainer.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    indicator.style.left = (btnRect.left - containerRect.left) + 'px';
+    indicator.style.width = btnRect.width + 'px';
+  }
+
+  function switchIndustry(id, btn) {
+    document.querySelectorAll('.industry-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.industry-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + id).classList.add('active');
+    btn.classList.add('active');
+    positionIndicator(btn);
+  }
+
+  // Position indicator on first paint — no transition on initial placement
+  window.addEventListener('load', () => {
+    const firstActive = document.querySelector('.industry-tab.active');
+    if (firstActive) {
+      indicator.style.transition = 'none';
+      positionIndicator(firstActive);
+      // Re-enable transition after a frame so first placement is instant
+      requestAnimationFrame(() => {
+        indicator.style.transition = '';
+      });
+    }
+  });
+
+  // Re-position on resize (tab widths may change)
+  window.addEventListener('resize', () => {
+    const activeTab = document.querySelector('.industry-tab.active');
+    if (activeTab) positionIndicator(activeTab);
+  }, { passive: true });
+
+  // ── Cases horizontal scroll — drag + dot sync ──
+  const casesScroll = document.getElementById('cases-scroll');
+  const casesDots = document.querySelectorAll('.cases-dot');
+  const caseCards = document.querySelectorAll('.cases-grid .case-card');
+
+  // Dot click → scroll to card
+  casesDots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const idx = parseInt(dot.dataset.index);
+      const card = caseCards[idx];
+      if (card) {
+        casesScroll.scrollTo({ left: card.offsetLeft - 32, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Scroll → sync dots (using IntersectionObserver per card)
+  const cardObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        const idx = Array.from(caseCards).indexOf(entry.target);
+        casesDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    });
+  }, { root: casesScroll, threshold: 0.5 });
+  caseCards.forEach(card => cardObs.observe(card));
+
+  // Mouse drag-to-scroll
+  let isDragging = false, startX = 0, scrollStart = 0;
+  casesScroll.addEventListener('pointerdown', e => {
+    isDragging = true;
+    startX = e.clientX;
+    scrollStart = casesScroll.scrollLeft;
+    casesScroll.classList.add('dragging');
+    casesScroll.setPointerCapture(e.pointerId);
+  });
+  casesScroll.addEventListener('pointermove', e => {
+    if (!isDragging) return;
+    casesScroll.scrollLeft = scrollStart - (e.clientX - startX);
+  });
+  casesScroll.addEventListener('pointerup', () => {
+    isDragging = false;
+    casesScroll.classList.remove('dragging');
+  });
+  casesScroll.addEventListener('pointercancel', () => {
+    isDragging = false;
+    casesScroll.classList.remove('dragging');
+  });
+</script>
+</body>
+</html>
