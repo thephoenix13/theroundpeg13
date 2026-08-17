@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — prakrit.ai | Built for Every Indian Family</title>
+  <meta name="description" content="Prakrit.AI was built by people who live India's health challenges every day. Learn about our mission, team, and the problem we're solving for 1.4 billion Indians." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & base ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #fafaf8;
+      color: #1a1714;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ─── Tokens ─── */
+    :root {
+      --forest:      #0d3b2e;
+      --terracotta:  #c85b2a;
+      --sand:        #f6f4f0;
+      --page-bg:     #fafaf8;
+      --ink:         #1a1714;
+      --muted:       #6b655c;
+      --line:        #e3ded4;
+      --forest-light:#d6f0e7;
+      --forest-pale: #edf8f3;
+      --white:       #ffffff;
+      --radius-pill: 99px;
+      --radius-card: 16px;
+    }
+
+    /* ─── Typography helpers ─── */
+    .eyebrow {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--forest-light);
+      display: block;
+      margin-bottom: .75rem;
+    }
+    .eyebrow--forest { color: var(--terracotta); }
+    .eyebrow--muted  { color: var(--muted); }
+
+    /* ─── Buttons ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .7rem 1.6rem;
+      border-radius: var(--radius-pill);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 700;
+      font-size: .92rem;
+      cursor: pointer;
+      border: none;
+      transition: all .2s ease;
+      white-space: nowrap;
+    }
+    .btn-terracotta {
+      background: var(--terracotta);
+      color: var(--white);
+    }
+    .btn-terracotta:hover { background: #b34f24; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(200,91,42,.3); }
+    .btn-forest {
+      background: var(--forest);
+      color: var(--white);
+    }
+    .btn-forest:hover { background: #0a2e23; transform: translateY(-1px); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--forest);
+      border: 1.5px solid var(--forest);
+    }
+    .btn-ghost:hover { background: var(--forest); color: var(--white); }
+
+    /* ─── Nav ─── */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:68px;display:flex;align-items:center;background:var(--white);transition:background .3s,box-shadow .3s;border-bottom:1px solid var(--line);}
+    #nav.scrolled{box-shadow:0 1px 12px rgba(0,0,0,.07);}
+    .nav-inner{display:flex;align-items:center;width:100%;max-width:1120px;margin:0 auto;gap:32px;}
+    .nav-logo{font-size:1.35rem;font-weight:900;letter-spacing:-.04em;display:flex;align-items:center;flex-shrink:0;line-height:1;}
+    .logo-main{color:var(--forest);}
+    .logo-ai{color:var(--terracotta);}
+    .nav-links{display:flex;align-items:center;gap:28px;margin-left:auto;}
+    .nav-links a{font-size:.88rem;font-weight:600;color:var(--muted);transition:color .2s;}
+    .nav-links a:hover{color:var(--forest);}
+    .nav-links a.active{color:var(--forest);font-weight:700;}
+    .nav-ctas{display:flex;align-items:center;gap:10px;margin-left:24px;}
+    .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+    .nav-hamburger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .2s;}
+    .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--line);padding:20px 24px;z-index:99;flex-direction:column;gap:16px;box-shadow:0 8px 32px rgba(0,0,0,.10);}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-size:1rem;font-weight:600;color:var(--muted);padding:6px 0;border-bottom:1px solid var(--line);}
+    .mobile-menu .mobile-ctas{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+
+    /* ─── Sections shared ─── */
+    section { width: 100%; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── 1. Hero ─── */
+    .hero {
+      background: var(--forest);
+      padding: 7rem 2rem 6rem;
+      text-align: center;
+    }
+    .hero .container { max-width: 820px; }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -.02em;
+    }
+    .hero__sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: rgba(255,255,255,.7);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ─── 2. Mission ─── */
+    .mission {
+      background: var(--white);
+      padding: 5.5rem 2rem;
+    }
+    .mission__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+      margin-bottom: 3.5rem;
+    }
+    .mission__grid h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 900;
+      color: var(--forest);
+      line-height: 1.15;
+      letter-spacing: -.025em;
+      position: sticky;
+      top: 88px;
+    }
+    .mission__right p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .mission__principles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    .principle-card {
+      background: var(--sand);
+      border-radius: var(--radius-card);
+      border-left: 4px solid var(--forest);
+      padding: 1.75rem 1.5rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .principle-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(13,59,46,.1); }
+    .principle-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--forest);
+      margin-bottom: .75rem;
+    }
+    .principle-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── 3. Numbers ─── */
+    .numbers {
+      background: var(--sand);
+      padding: 4.5rem 2rem;
+    }
+    .numbers__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+    .stat-cell {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: background .2s;
+    }
+    .stat-cell:hover { background: var(--forest-pale); }
+    .stat-cell__value {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 500;
+      color: var(--forest);
+      line-height: 1;
+      margin-bottom: .65rem;
+      display: block;
+    }
+    .stat-cell__label {
+      font-size: .9rem;
+      color: var(--muted);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .stat-cell__note {
+      display: block;
+      font-size: .78rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      margin-top: .4rem;
+    }
+
+    /* ─── 4. Opportunity ─── */
+    .opportunity {
+      background: var(--white);
+      padding: 5.5rem 2rem;
+    }
+    .opportunity__header {
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+    }
+    .opportunity__header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .opportunity__header p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .opportunity__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .opp-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 2rem 1.75rem;
+      background: var(--white);
+      transition: box-shadow .2s, transform .2s;
+    }
+    .opp-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,.08); transform: translateY(-3px); }
+    .opp-card__icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--forest-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+    .opp-card h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--forest);
+      margin-bottom: .75rem;
+    }
+    .opp-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .opp-callout {
+      background: var(--forest);
+      border-radius: var(--radius-card);
+      padding: 2.5rem 2.5rem;
+      color: var(--white);
+      text-align: center;
+    }
+    .opp-callout p {
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.7;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .opp-callout strong { color: var(--forest-light); font-weight: 800; }
+
+    /* ─── 5. India context ─── */
+    .india-context {
+      background: var(--page-bg);
+      padding: 5.5rem 2rem;
+    }
+    .india-context__header {
+      max-width: 640px;
+      margin: 0 auto 3.5rem;
+      text-align: center;
+    }
+    .india-context__header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .india-context__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .impact-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 2rem 2rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .impact-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,.07); transform: translateY(-2px); }
+    .impact-card__stat {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-weight: 500;
+      color: var(--terracotta);
+      line-height: 1;
+      display: block;
+      margin-bottom: .75rem;
+    }
+    .impact-card p {
+      font-size: .93rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .impact-card strong { color: var(--ink); font-weight: 700; }
+
+    /* ─── 6. Team ─── */
+    .team {
+      background: var(--white);
+      padding: 5.5rem 2rem;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--ink);
+      letter-spacing: -.025em;
+      margin-bottom: .9rem;
+      line-height: 1.2;
+    }
+    .section-header p {
+      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .founders-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .founder-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 2.25rem 2rem;
+      background: var(--white);
+      text-align: center;
+      transition: box-shadow .25s, transform .25s;
+    }
+    .founder-card:hover { box-shadow: 0 16px 40px rgba(13,59,46,.1); transform: translateY(-4px); }
+    .founder-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--white);
+      margin: 0 auto 1.25rem;
+      letter-spacing: .05em;
+    }
+    .avatar-forest  { background: var(--forest); }
+    .avatar-terra   { background: var(--terracotta); }
+    .avatar-ink     { background: var(--ink); }
+    .founder-card__name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: .25rem;
+    }
+    .founder-card__role {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--terracotta);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .founder-card p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ─── 7. Advisory Board ─── */
+    .advisors {
+      background: var(--sand);
+      padding: 5.5rem 2rem;
+    }
+    .advisors-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+    .advisor-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 1.75rem 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .advisor-card:hover { box-shadow: 0 10px 28px rgba(0,0,0,.07); transform: translateY(-2px); }
+    .advisor-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--forest-pale);
+      border: 2px solid var(--forest-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: .85rem;
+      font-weight: 500;
+      color: var(--forest);
+      flex-shrink: 0;
+    }
+    .advisor-card__body { flex: 1; }
+    .advisor-card__name {
+      font-size: .97rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: .2rem;
+    }
+    .advisor-card__title {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--terracotta);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: .75rem;
+    }
+    .advisor-card p {
+      font-size: .875rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── 8. Doctor Network ─── */
+    .doctors {
+      background: var(--forest-pale);
+      padding: 5.5rem 2rem;
+    }
+    .doctors__inner {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .doctors__left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 900;
+      color: var(--forest);
+      letter-spacing: -.025em;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .doctors__left .sub {
+      font-size: 1.02rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+    .doctors__left .desc {
+      font-size: .93rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.75rem;
+    }
+    .network-points {
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+      margin-bottom: 2rem;
+    }
+    .network-point {
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+    }
+    .network-point__dot {
+      width: 8px;
+      height: 8px;
+      background: var(--terracotta);
+      border-radius: 50%;
+      margin-top: .55rem;
+      flex-shrink: 0;
+    }
+    .network-point p {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .doctors__cta {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--forest);
+      border-bottom: 2px solid var(--forest);
+      padding-bottom: 2px;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      transition: gap .2s;
+    }
+    .doctors__cta:hover { gap: .7rem; }
+    .doctors__right {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .dr-stat {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-card);
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      transition: box-shadow .2s;
+    }
+    .dr-stat:hover { box-shadow: 0 8px 24px rgba(13,59,46,.1); }
+    .dr-stat__value {
+      font-family: 'DM Mono', monospace;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--forest);
+      display: block;
+      margin-bottom: .3rem;
+    }
+    .dr-stat__label {
+      font-size: .82rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ─── 9. Final CTA ─── */
+    .final-cta {
+      background: var(--forest);
+      padding: 6rem 2rem;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -.025em;
+      line-height: 1.2;
+      max-width: 720px;
+      margin: 0 auto 1.25rem;
+    }
+    .final-cta p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.7);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      background: #061f18;
+      padding: 4rem 2rem 2rem;
+      color: rgba(255,255,255,.65);
+    }
+    .footer__grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer__logo {
+      font-size: 1.3rem;
+      margin-bottom: .85rem;
+    }
+    .footer__logo .forest { color: var(--forest-light); font-weight: 900; }
+    .footer__logo .terra  { color: var(--terracotta); font-weight: 900; }
+    .footer__tagline {
+      font-size: .88rem;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .footer__socials {
+      display: flex;
+      gap: .75rem;
+    }
+    .footer__social {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 700;
+      color: rgba(255,255,255,.5);
+      transition: all .2s;
+    }
+    .footer__social:hover { border-color: var(--forest-light); color: var(--forest-light); }
+    .footer__col-title {
+      font-size: .78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(255,255,255,.35);
+      margin-bottom: 1.1rem;
+    }
+    .footer__col ul li {
+      margin-bottom: .55rem;
+    }
+    .footer__col ul li a {
+      font-size: .88rem;
+      color: rgba(255,255,255,.5);
+      transition: color .2s;
+    }
+    .footer__col ul li a:hover { color: var(--white); }
+    .footer__col ul li a.email { color: var(--forest-light); }
+    .footer__bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer__copy {
+      font-size: .82rem;
+      color: rgba(255,255,255,.3);
+    }
+    .footer__disclaimer {
+      font-size: .78rem;
+      color: rgba(255,255,255,.25);
+      max-width: 560px;
+      text-align: right;
+      line-height: 1.6;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 1024px) {
+      .numbers__grid         { grid-template-columns: repeat(2, 1fr); }
+      .opportunity__cards    { grid-template-columns: 1fr 1fr; }
+      .footer__grid          { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .footer__disclaimer    { text-align: left; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-ctas { display: none; }
+      .nav-hamburger        { display: flex; }
+      .mission__grid         { grid-template-columns: 1fr; gap: 2rem; }
+      .mission__grid h2      { position: static; }
+      .mission__principles   { grid-template-columns: 1fr; }
+      .numbers__grid         { grid-template-columns: 1fr 1fr; }
+      .opportunity__cards    { grid-template-columns: 1fr; }
+      .india-context__grid   { grid-template-columns: 1fr; }
+      .founders-grid         { grid-template-columns: 1fr; }
+      .advisors-grid         { grid-template-columns: 1fr; }
+      .doctors__inner        { grid-template-columns: 1fr; gap: 2.5rem; }
+      .doctors__right        { grid-template-columns: repeat(2, 1fr); }
+      .footer__grid          { grid-template-columns: 1fr 1fr; }
+      .footer__bottom        { flex-direction: column; align-items: flex-start; }
+      .footer__disclaimer    { text-align: left; }
+    }
+    @media (max-width: 480px) {
+      .numbers__grid  { grid-template-columns: 1fr; }
+      .footer__grid   { grid-template-columns: 1fr; }
+      .hero           { padding: 4.5rem 1.5rem 4rem; }
+      .opp-callout    { padding: 1.75rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-main">prakrit.</span><span class="logo-ai">ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="features.html">Features</a>
+      <a href="index.html#how-it-works">How it Works</a>
+      <a href="about.html" class="active">About Us</a>
+      <a href="institutions.html">For Institutions</a>
+    </div>
+    <div class="nav-ctas">
+      <a href="#" class="btn btn-terracotta">Get Started Free</a>
+    </div>
+    <div class="nav-hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="features.html">Features</a>
+    <a href="index.html#how-it-works">How it Works</a>
+    <a href="about.html" class="active">About Us</a>
+    <a href="institutions.html">For Institutions</a>
+    <div class="mobile-ctas"><a href="#" class="btn btn-terracotta">Get Started Free</a></div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     1. HERO
+════════════════════════════════════════════ -->
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="container">
+    <span class="eyebrow">Our story</span>
+    <h1 id="hero-h1">Built by people who live India's health challenges every day.</h1>
+    <p class="hero__sub">Prakrit was born from a simple frustration — brilliant Indian families, managing complex health situations, left without the clarity they deserve.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     2. MISSION
+════════════════════════════════════════════ -->
+<section class="mission" aria-labelledby="mission-h2">
+  <div class="container">
+    <div class="mission__grid">
+      <h2 id="mission-h2">Our mission.</h2>
+      <div class="mission__right">
+        <p style="font-size:1.15rem;color:#1a1714;font-weight:500;line-height:1.75;margin-bottom:1.25rem;">To make health information accessible, understandable, and actionable — for every Indian family, regardless of language, location, or literacy.</p>
+        <p>India has world-class medical expertise. What it has lacked is a layer between the doctor's report and the patient's understanding. Prakrit.AI is that layer — translating clinical complexity into the plain language every family deserves.</p>
+      </div>
+    </div>
+    <div class="mission__principles">
+      <div class="principle-card">
+        <h3>Empowerment, not advice</h3>
+        <p>We translate and organize health data to empower patients for better doctor conversations. We strictly never diagnose or prescribe — ever. That boundary is sacred to us.</p>
+      </div>
+      <div class="principle-card">
+        <h3>Zero hallucinations</h3>
+        <p>Prakrit answers only from documents you have uploaded. It never invents information. If it doesn't know, it says so clearly. Reliability is not a feature — it is the foundation.</p>
+      </div>
+      <div class="principle-card">
+        <h3>Deeply India-first</h3>
+        <p>Trained on Indian medical report formats, designed for Indian languages, built for the way Indian families — joint households, multigenerational care — actually manage health.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     3. NUMBERS
+════════════════════════════════════════════ -->
+<section class="numbers" aria-label="Key metrics">
+  <div class="container">
+    <div class="numbers__grid">
+      <div class="stat-cell">
+        <span class="stat-cell__value">1,20,000+</span>
+        <span class="stat-cell__label">Families across India</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-cell__value">78%</span>
+        <span class="stat-cell__label">Weekly retention rate</span>
+        <span class="stat-cell__note">3–4× industry average</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-cell__value">12.7L+</span>
+        <span class="stat-cell__label">Health questions answered by AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     4. OPPORTUNITY
+════════════════════════════════════════════ -->
+<section class="opportunity" aria-labelledby="opp-h2">
+  <div class="container">
+    <div class="opportunity__header">
+      <span class="eyebrow eyebrow--forest">The opportunity</span>
+      <h2 id="opp-h2">Three forces converging at exactly the right moment.</h2>
+      <p>India's digital health opportunity isn't coming — it's here. And it's bigger than most people realize.</p>
+    </div>
+    <div class="opportunity__cards">
+      <div class="opp-card">
+        <div class="opp-card__icon">🧠</div>
+        <h3>Technology Readiness</h3>
+        <p>Large Language Models have reached the capability threshold to understand complex medical documents and explain them accurately. AI costs have dropped 90%+ in 3 years — making consumer AI health products economically viable for the very first time.</p>
+      </div>
+      <div class="opp-card">
+        <div class="opp-card__icon">📱</div>
+        <h3>Market Readiness</h3>
+        <p>India's 700M+ smartphone users are increasingly comfortable with digital health tools. The COVID-19 pandemic accelerated digital health adoption by 5+ years. Families are actively seeking better ways to manage, understand, and share health information.</p>
+      </div>
+      <div class="opp-card">
+        <div class="opp-card__icon">🏛️</div>
+        <h3>Regulatory Readiness</h3>
+        <p>The Government's Ayushman Bharat Digital Mission (ABDM) is creating health data interoperability infrastructure. 90 crore ABHA accounts have already been created. India's data protection framework is maturing with the landmark DPDP Act.</p>
+      </div>
+    </div>
+    <div class="opp-callout">
+      <p>The convergence of AI capability, market readiness, and regulatory support creates a narrow window to establish category leadership. <strong>Prakrit.AI is positioned to capture this moment.</strong></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     5. INDIA CONTEXT
+════════════════════════════════════════════ -->
+<section class="india-context" aria-labelledby="india-h2">
+  <div class="container">
+    <div class="india-context__header">
+      <span class="eyebrow eyebrow--muted">The problem at scale</span>
+      <h2 id="india-h2">The scale of the problem we're solving.</h2>
+    </div>
+    <div class="india-context__grid">
+      <div class="impact-card">
+        <span class="impact-card__stat">80%</span>
+        <p><strong>of healthcare specialists are concentrated in India's cities</strong> — yet <strong>73% of India's population lives elsewhere.</strong> Access to clear health communication is not just a convenience — it is a geographic inequality that costs lives.</p>
+      </div>
+      <div class="impact-card">
+        <span class="impact-card__stat">158.7M</span>
+        <p><strong>elderly Indians by 2026, growing to 347 million by 2050</strong> — each one managing chronic conditions, multiple medications, and complex diagnostic reports. Most rely on family members with no clinical training to make sense of what they receive.</p>
+      </div>
+      <div class="impact-card">
+        <span class="impact-card__stat">535M+</span>
+        <p><strong>WhatsApp users in India</strong> — the platform where families already communicate health information, share reports, and ask questions in their own language. That is why Prakrit meets people where they already are.</p>
+      </div>
+      <div class="impact-card">
+        <span class="impact-card__stat">90 Cr</span>
+        <p><strong>ABHA accounts created under Ayushman Bharat Digital Mission</strong> — the government has already laid the infrastructure for a connected health ecosystem. Prakrit is the layer that connects families to that system in plain, understandable language.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     6. TEAM
+════════════════════════════════════════════ -->
+<section class="team" aria-labelledby="team-h2">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow eyebrow--muted">The people</span>
+      <h2 id="team-h2">The team behind Prakrit.</h2>
+      <p>A founding team combining product vision, technical depth, and decades of domain experience — united by a shared belief that Indian families deserve better.</p>
+    </div>
+    <div class="founders-grid">
+
+      <div class="founder-card" style="border:2px solid var(--forest);">
+        <div class="founder-avatar avatar-terra">SN</div>
+        <div class="founder-card__name">Shailesh N A</div>
+        <div class="founder-card__role">Primary Partner &amp; Co-Founder</div>
+        <p>Shailesh drives Prakrit's growth strategy and institutional partnerships. With a background spanning technology and business development, he ensures Prakrit reaches the families that need it most — wherever they are in India.</p>
+      </div>
+
+      <div class="founder-card">
+        <div class="founder-avatar avatar-forest">NR</div>
+        <div class="founder-card__name">Narayanan Ramachandran</div>
+        <div class="founder-card__role">Co-Founder</div>
+        <p>Narayanan brings deep product intuition and a relentless focus on user experience. His vision for Prakrit is rooted in making healthcare intelligence accessible to every Indian family — not just those with access to premium care.</p>
+      </div>
+
+      <div class="founder-card">
+        <div class="founder-avatar avatar-ink">PG</div>
+        <div class="founder-card__name">Pratik Gade</div>
+        <div class="founder-card__role">Co-Founder</div>
+        <p>Pratik architects Prakrit's technical foundation — from the AI document analysis pipeline to the multi-platform experience across web, mobile, and WhatsApp. He ensures Prakrit is as reliable and secure as the families depending on it deserve.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     7. ADVISORY BOARD
+════════════════════════════════════════════ -->
+<section class="advisors" aria-labelledby="advisors-h2">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow eyebrow--muted">Advisory board</span>
+      <h2 id="advisors-h2">Guided by domain experts.</h2>
+      <p>Prakrit's advisory board brings together investors, clinicians, and entrepreneurs who have seen India's health and technology landscape from every angle.</p>
+    </div>
+    <div class="advisors-grid">
+
+      <div class="advisor-card">
+        <div class="advisor-avatar">VK</div>
+        <div class="advisor-card__body">
+          <div class="advisor-card__name">Dr. Venkat Krishnan</div>
+          <div class="advisor-card__title">Serial Investor in Healthcare</div>
+          <p>Dr. Krishnan's experience backing successful health technology ventures across India and Southeast Asia provides Prakrit with strategic guidance on market entry, investor relations, and sustainable scale.</p>
+        </div>
+      </div>
+
+      <div class="advisor-card">
+        <div class="advisor-avatar">DR</div>
+        <div class="advisor-card__body">
+          <div class="advisor-card__name">Dr. Ram</div>
+          <div class="advisor-card__title">Director, CCU — Apollo Hospitals</div>
+          <p>With decades of clinical experience at one of India's premier hospital networks, Dr. Ram ensures Prakrit's AI features are medically sound, clinically relevant, and built around how doctors and patients actually interact.</p>
+        </div>
+      </div>
+
+      <div class="advisor-card">
+        <div class="advisor-avatar">JA</div>
+        <div class="advisor-card__body">
+          <div class="advisor-card__name">Mr. Jacob Antony</div>
+          <div class="advisor-card__title">Entrepreneur</div>
+          <p>A seasoned entrepreneur with experience building technology businesses across India, Jacob brings operational wisdom and the founder's perspective on building sustainable, scalable companies in complex markets.</p>
+        </div>
+      </div>
+
+      <div class="advisor-card">
+        <div class="advisor-avatar">GK</div>
+        <div class="advisor-card__body">
+          <div class="advisor-card__name">Mr. Gopi Krishnan</div>
+          <div class="advisor-card__title">Entrepreneur</div>
+          <p>Gopi's experience in technology entrepreneurship helps Prakrit navigate the unique challenges of building a consumer health platform in India's diverse and rapidly evolving digital market.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ═══════════════════════════════════════════
+     9. FINAL CTA
+════════════════════════════════════════════ -->
+<section class="final-cta" aria-labelledby="cta-h2">
+  <div class="container" style="max-width:800px;text-align:center;">
+    <span class="eyebrow">Join the movement</span>
+    <h2 id="cta-h2">Building India's health intelligence infrastructure — one family at a time.</h2>
+    <p>Join 1,20,000+ families who use Prakrit to understand their health, manage their records, and feel more in control of the decisions that matter most.</p>
+    <a href="#" class="btn btn-terracotta" style="font-size:1rem;padding:.85rem 2rem;">Get Started Free</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="footer__grid">
+    <div>
+      <div class="footer__logo">
+        <span class="forest">prakrit.</span><span class="terra">ai</span>
+      </div>
+      <p class="footer__tagline">Your family's health companion.<br/>Understand every report. Ask every question. Never feel lost again.</p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social" aria-label="LinkedIn">in</a>
+        <a href="#" class="footer__social" aria-label="X / Twitter">𝕏</a>
+        <a href="#" class="footer__social" aria-label="Instagram">ig</a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Product</div>
+      <ul>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="index.html#how-it-works">How it Works</a></li>
+        <li><a href="#">PrakritGPT</a></li>
+        <li><a href="#">Emergency Card</a></li>
+        <li><a href="institutions.html">For Institutions</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Company</div>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="#">Our Story</a></li>
+
+        <li><a href="#">Contact</a></li>
+        <li><a href="mailto:hello@prakrit.ai" class="email">hello@prakrit.ai</a></li>
+      </ul>
+    </div>
+    <div class="footer__col">
+      <div class="footer__col-title">Legal</div>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">DPDP Compliance</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span class="footer__copy">© 2026 Prakrit AI Technologies Pvt. Ltd. All rights reserved.</span>
+    <span class="footer__disclaimer">Prakrit.AI is not a medical device. It does not diagnose, treat, or prescribe. All health information is for educational and organizational purposes only. Always consult a qualified healthcare professional for medical decisions.</span>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════
+     JS — Scroll shadow + Hamburger
+════════════════════════════════════════════ -->
+<script>
+  // Sticky nav scroll shadow
+  (function () {
+    var nav = document.getElementById('nav');
+    function onScroll() {
+      if (window.scrollY > 8) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Hamburger menu
+  function toggleMenu() {
+    var menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+  document.addEventListener('click', function (e) {
+    var menu = document.getElementById('mobileMenu');
+    var hamburger = document.querySelector('.nav-hamburger');
+    if (menu && menu.classList.contains('open') && !hamburger.contains(e.target) && !menu.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+  document.getElementById('mobileMenu').querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    });
+  });
+
+  // Scroll shadow placeholder kept for parity
+  (function () {
+    var isOpen = false;
+    // Close on outside click (handled above)
+    document.addEventListener('click', function (e) {
+      if (isOpen) {
+        isOpen = false;
+      }
+    });
+  })();
+</script>
+
+</body>
+</html>

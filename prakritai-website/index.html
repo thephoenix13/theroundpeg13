@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>prakrit.ai — Your Family's Health Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── Reset & tokens ── */
+:root{
+  --f9:#061f18;--f8:#0d3b2e;--f7:#145040;--f6:#1c6852;--f4:#3da07f;
+  --f2:#a8dccb;--f1:#d6f0e7;--f0:#edf8f3;
+  --t:#c85b2a;--t1:#fce8db;--t0:#fdf4ef;
+  --wa:#25D366;
+  --sand:#f6f4f0;--sand2:#efece5;--page:#fafaf8;
+  --ink:#1a1714;--char:#2e2a25;--muted:#6b655c;--subtle:#9b948b;
+  --line:#e3ded4;--white:#fff;
+  --r-btn:99px;--r-card:16px;--r-sm:8px;
+  --shadow:0 2px 12px rgba(0,0,0,.07);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--page);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;font-size:16px;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+
+/* ── Typography ── */
+h1,h2,h3{letter-spacing:-.03em;line-height:1.15;}
+h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:900;}
+h2{font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;}
+h3{font-size:1.1rem;font-weight:700;}
+p{line-height:1.7;}
+
+/* ── Utilities ── */
+.container{max-width:1120px;margin:0 auto;padding:0 24px;}
+.eyebrow{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--f4);}
+.eyebrow.terra{color:var(--t);}
+.eyebrow.muted{color:var(--muted);}
+.mono{font-family:'DM Mono',monospace;}
+.section{padding:96px 0;}
+.section.compact{padding:64px 0;}
+.section.sand{background:var(--sand);}
+.section.forest{background:var(--f8);}
+.section.dark{background:var(--f9);}
+.text-center{text-align:center;}
+.text-muted{color:var(--muted);}
+
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.6rem;border-radius:var(--r-btn);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;border:2px solid transparent;white-space:nowrap;}
+.btn-primary{background:var(--t);color:#fff;border-color:var(--t);}
+.btn-primary:hover{background:#b04d23;border-color:#b04d23;transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,91,42,.35);}
+.btn-forest{background:var(--f8);color:#fff;border-color:var(--f8);}
+.btn-forest:hover{background:var(--f7);border-color:var(--f7);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--f8);border-color:var(--f8);}
+.btn-ghost:hover{background:var(--f8);color:#fff;}
+.btn-ghost-white{background:transparent;color:#fff;border-color:rgba(255,255,255,.4);}
+.btn-ghost-white:hover{background:rgba(255,255,255,.1);border-color:#fff;}
+.btn-wa{background:var(--wa);color:#fff;border-color:var(--wa);}
+.btn-wa:hover{background:#1da855;border-color:#1da855;transform:translateY(-1px);box-shadow:0 4px 16px rgba(37,211,102,.3);}
+.btn-lg{padding:1rem 2rem;font-size:1rem;}
+.btn-sm{padding:.55rem 1.1rem;font-size:.82rem;}
+
+/* ── WA icon ── */
+.wa-icon{width:20px;height:20px;fill:currentColor;flex-shrink:0;}
+
+/* ── NAV ── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 32px;height:68px;display:flex;align-items:center;
+  background:var(--white);
+  transition:background .3s,box-shadow .3s,border-color .3s;
+  border-bottom:1px solid var(--line);
+}
+#nav.scrolled{box-shadow:0 1px 12px rgba(0,0,0,.07);}
+.nav-inner{display:flex;align-items:center;width:100%;max-width:1120px;margin:0 auto;gap:32px;}
+.nav-logo{font-size:1.35rem;font-weight:900;letter-spacing:-.04em;display:flex;align-items:center;flex-shrink:0;line-height:1;}
+.logo-main{color:var(--f8);}
+.logo-ai{color:var(--t);}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:auto;}
+.nav-links a{font-size:.88rem;font-weight:600;color:var(--char);transition:color .2s;}
+.nav-links a:hover{color:var(--f8);}
+.nav-ctas{display:flex;align-items:center;gap:10px;margin-left:24px;}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.nav-hamburger span{width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .2s;}
+.mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--line);padding:20px 24px;z-index:99;flex-direction:column;gap:16px;box-shadow:var(--shadow-lg);}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{font-size:1rem;font-weight:600;color:var(--char);padding:6px 0;border-bottom:1px solid var(--line);}
+.mobile-menu .mobile-ctas{display:flex;flex-direction:column;gap:10px;margin-top:8px;}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding-top:68px;
+  background:var(--page);
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 50% at 70% 50%,var(--f0) 0%,transparent 70%);
+}
+.hero-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:center;gap:64px;
+  width:100%;max-width:1120px;margin:0 auto;
+  padding:80px 24px;
+}
+.hero-text .eyebrow{margin-bottom:20px;}
+.hero-text h1{margin-bottom:20px;color:var(--ink);}
+.hero-text h1 span{color:var(--f8);}
+.hero-text .subhead{font-size:1.1rem;color:var(--muted);margin-bottom:32px;max-width:480px;line-height:1.7;}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:20px;}
+.hero-proof{font-size:.8rem;color:var(--subtle);display:flex;align-items:center;gap:6px;}
+.hero-proof::before{content:'';width:8px;height:8px;background:var(--f4);border-radius:50%;flex-shrink:0;}
+
+/* Hero visual */
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;}
+.hero-phone-wrap{position:relative;width:280px;}
+.hero-photo-bg{
+  width:100%;aspect-ratio:3/4;border-radius:24px;overflow:hidden;
+  background:linear-gradient(135deg,var(--f1) 0%,var(--f0) 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-lg);
+}
+.hero-photo-placeholder{text-align:center;padding:32px;}
+.hero-photo-placeholder .icon{font-size:3rem;margin-bottom:12px;}
+.hero-photo-placeholder p{font-size:.82rem;color:var(--f7);font-weight:500;}
+.hero-card-float{
+  position:absolute;
+  background:var(--white);border-radius:var(--r-card);
+  padding:14px 16px;box-shadow:var(--shadow-lg);
+  border:1px solid var(--line);
+}
+.hero-card-float.top-left{top:-16px;left:-40px;min-width:160px;}
+.hero-card-float.bottom-right{bottom:24px;right:-40px;min-width:180px;}
+.float-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:4px;}
+.float-val{font-size:.88rem;font-weight:800;color:var(--ink);}
+.float-sub{font-size:.7rem;color:var(--muted);margin-top:1px;}
+.float-bar{height:4px;border-radius:99px;background:var(--f1);margin-top:8px;overflow:hidden;}
+.float-fill{height:100%;background:var(--f8);border-radius:99px;width:78%;}
+
+/* ── TRUST BAR ── */
+#trust-bar{
+  background:var(--white);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:0;
+}
+.trust-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.trust-item{
+  padding:32px 24px;text-align:center;
+  border-right:1px solid var(--line);
+}
+.trust-item:last-child{border-right:none;}
+.trust-num{font-family:'DM Mono',monospace;font-size:2rem;font-weight:700;color:var(--f8);line-height:1;margin-bottom:6px;}
+.trust-label{font-size:.82rem;color:var(--muted);}
+
+/* ── PROBLEM ── */
+.problem-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:24px;margin-top:56px;
+}
+.problem-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:32px;
+  transition:box-shadow .2s;
+}
+.problem-card:hover{box-shadow:var(--shadow-lg);}
+.problem-icon{
+  width:52px;height:52px;border-radius:14px;
+  background:var(--t0);display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;margin-bottom:20px;
+}
+.problem-card h3{margin-bottom:12px;color:var(--ink);}
+.problem-card p{font-size:.9rem;color:var(--muted);line-height:1.7;}
+
+/* ── SOLUTION BRIDGE ── */
+.solution-bridge{max-width:680px;margin:0 auto;text-align:center;}
+.solution-bridge h2{margin-bottom:20px;color:var(--f8);}
+.solution-bridge p{font-size:1.1rem;color:var(--char);line-height:1.8;margin-bottom:16px;}
+.solution-disclaimer{
+  font-size:.82rem;color:var(--subtle);
+  border-top:1px solid var(--line);padding-top:16px;margin-top:16px;
+}
+
+/* ── HOW IT WORKS ── */
+.how-header{text-align:center;max-width:600px;margin:0 auto 64px;}
+.how-header h2{margin-bottom:16px;}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+.steps::before{
+  content:'';position:absolute;top:36px;left:calc(12.5% + 18px);right:calc(12.5% + 18px);
+  height:2px;background:linear-gradient(90deg,var(--f1),var(--f2),var(--f1));
+  pointer-events:none;
+}
+.step{text-align:center;padding:0 16px;}
+.step-num{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--f8);color:#fff;
+  font-weight:900;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;position:relative;z-index:1;
+  box-shadow:0 0 0 8px var(--page);
+}
+.step-screen{
+  background:var(--f0);border:1px solid var(--f1);border-radius:14px;
+  padding:20px 12px;margin-bottom:16px;aspect-ratio:3/4;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;color:var(--f7);text-align:center;line-height:1.5;
+}
+.step h3{font-size:.95rem;margin-bottom:8px;}
+.step p{font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+/* ── FEATURES ── */
+.features-header{text-align:center;max-width:600px;margin:0 auto 64px;}
+.features-header h2{margin-bottom:16px;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.feature-card{
+  background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);
+  overflow:hidden;transition:box-shadow .2s,transform .2s;
+}
+.feature-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);}
+.feature-screen{
+  aspect-ratio:4/3;background:var(--f0);border-bottom:1px solid var(--f1);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  font-size:.78rem;color:var(--f7);text-align:center;line-height:1.5;
+}
+.feature-body{padding:24px;}
+.feature-body h3{margin-bottom:8px;font-size:1rem;}
+.feature-body p{font-size:.84rem;color:var(--muted);line-height:1.65;}
+
+/* ── PRAKRITGPT SPOTLIGHT ── */
+#gpt-section{background:var(--f8);padding:96px 0;overflow:hidden;}
+.gpt-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;align-items:center;
+}
+.gpt-text .eyebrow{color:var(--f2);margin-bottom:20px;}
+.gpt-text h2{color:#fff;margin-bottom:20px;}
+.gpt-text p{color:rgba(255,255,255,.7);font-size:1rem;line-height:1.75;margin-bottom:28px;}
+.gpt-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px;}
+.gpt-chip{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:99px;padding:.4rem .9rem;
+  font-size:.8rem;color:rgba(255,255,255,.8);font-style:italic;
+}
+.gpt-visual{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:24px;
+}
+.chat-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.1);}
+.chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--t);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#fff;flex-shrink:0;}
+.chat-name{font-size:.9rem;font-weight:700;color:#fff;}
+.chat-status{font-size:.72rem;color:var(--f2);}
+.chat-msg{margin-bottom:12px;}
+.chat-msg.user{text-align:right;}
+.chat-bubble{
+  display:inline-block;padding:10px 14px;border-radius:16px;
+  font-size:.84rem;line-height:1.55;max-width:80%;
+}
+.chat-bubble.ai{background:rgba(255,255,255,.1);color:rgba(255,255,255,.9);border-bottom-left-radius:4px;}
+.chat-bubble.user-b{background:var(--t);color:#fff;border-bottom-right-radius:4px;}
+.chat-highlight{color:var(--f2);font-weight:700;}
+
+/* ── RETENTION PROOF ── */
+.retention-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.retention-text h2{margin-bottom:16px;}
+.retention-text p{color:var(--muted);font-size:1rem;line-height:1.75;margin-bottom:32px;}
+.retention-quote{
+  border-left:3px solid var(--t);padding-left:16px;
+  font-size:.92rem;color:var(--char);font-style:italic;line-height:1.65;
+}
+.bar-section{background:var(--sand);border-radius:var(--r-card);padding:28px;}
+.bar-label{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:20px;}
+.bar-row{margin-bottom:14px;}
+.bar-name{font-size:.82rem;font-weight:600;color:var(--char);margin-bottom:6px;display:flex;justify-content:space-between;}
+.bar-name span{font-family:'DM Mono',monospace;font-weight:700;}
+.bar-track{height:28px;background:var(--line);border-radius:6px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:12px;font-size:.78rem;font-weight:700;color:#fff;}
+.bar-fill.prakrit{background:var(--f8);width:78%;}
+.bar-fill.industry{background:#94a3b8;width:28%;}
+.bar-note{font-size:.72rem;color:var(--muted);margin-top:12px;}
+.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+.mini-stat{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:14px;}
+.mini-stat .n{font-family:'DM Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--f8);}
+.mini-stat .l{font-size:.72rem;color:var(--muted);margin-top:2px;}
+
+/* ── TESTIMONIALS ── */
+.stories-header{text-align:center;max-width:600px;margin:0 auto 56px;}
+.stories-header h2{margin-bottom:12px;}
+.stories-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.story-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:32px;position:relative;
+}
+.story-quote{
+  font-size:3rem;color:var(--t);line-height:1;margin-bottom:16px;
+  font-family:Georgia,serif;font-weight:900;
+}
+.story-text{font-size:.92rem;color:var(--char);line-height:1.75;margin-bottom:20px;}
+.story-author{display:flex;align-items:center;gap:12px;}
+.story-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--f1);display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:.85rem;color:var(--f8);flex-shrink:0;
+}
+.story-name{font-size:.88rem;font-weight:700;color:var(--ink);}
+.story-loc{font-size:.75rem;color:var(--muted);}
+
+/* ── WHATSAPP ── */
+#wa-section{background:var(--f9);padding:96px 0;}
+.wa-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.wa-text .eyebrow{color:var(--f2);margin-bottom:20px;}
+.wa-text h2{color:#fff;margin-bottom:20px;}
+.wa-text p{color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:32px;}
+.wa-steps{margin-bottom:36px;}
+.wa-step{display:flex;gap:16px;margin-bottom:16px;align-items:flex-start;}
+.wa-step-n{
+  width:28px;height:28px;border-radius:50%;background:var(--wa);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0;margin-top:1px;
+}
+.wa-step p{font-size:.88rem;color:rgba(255,255,255,.75);line-height:1.6;}
+.wa-visual{
+  background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:20px;
+}
+.wa-chat-header{
+  display:flex;align-items:center;gap:10px;
+  background:var(--wa);margin:-20px -20px 16px;
+  padding:14px 20px;border-radius:20px 20px 0 0;
+}
+.wa-chat-avatar{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#fff;}
+.wa-chat-name{font-size:.88rem;font-weight:700;color:#fff;}
+.wa-chat-status{font-size:.68rem;color:rgba(255,255,255,.8);}
+.wa-bubble{padding:10px 14px;border-radius:14px;font-size:.82rem;line-height:1.55;margin-bottom:8px;max-width:88%;}
+.wa-bubble.in{background:var(--white);color:var(--ink);border-bottom-left-radius:4px;}
+.wa-bubble.out{background:#dcf8c6;color:var(--ink);margin-left:auto;border-bottom-right-radius:4px;}
+.wa-bubble.bot{background:var(--white);color:var(--ink);border-bottom-left-radius:4px;}
+.wa-bubble .wa-bold{font-weight:700;}
+.wa-bubble .wa-green{color:var(--f7);font-weight:700;}
+
+/* ── LANGUAGES ── */
+.lang-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.lang-text h2{margin-bottom:16px;}
+.lang-text p{color:var(--muted);line-height:1.75;margin-bottom:32px;}
+.lang-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.lang-chip{
+  background:var(--f0);border:1px solid var(--f1);
+  border-radius:99px;padding:.35rem .85rem;
+  font-size:.85rem;color:var(--f8);font-weight:600;
+}
+.lang-chip.more{background:var(--sand2);border-color:var(--line);color:var(--muted);}
+.voice-card{
+  background:var(--t0);border:1px solid var(--t1);
+  border-radius:var(--r-card);padding:20px;
+}
+.voice-card h3{color:var(--t);margin-bottom:8px;font-size:.95rem;}
+.voice-card p{font-size:.84rem;color:var(--char);line-height:1.65;}
+.lang-visual{
+  background:var(--f0);border:1px solid var(--f1);
+  border-radius:var(--r-card);padding:32px;
+  display:flex;align-items:center;justify-content:center;
+  min-height:320px;font-size:.82rem;color:var(--f7);text-align:center;
+}
+
+/* ── INSTITUTIONS ── */
+#institutions{background:var(--sand);}
+.inst-inner{display:grid;grid-template-columns:3fr 2fr;gap:80px;align-items:center;}
+.inst-text h2{margin-bottom:16px;}
+.inst-text p{color:var(--muted);line-height:1.75;margin-bottom:32px;}
+.inst-points{margin-bottom:32px;}
+.inst-point{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start;}
+.inst-check{color:var(--f8);font-size:1rem;flex-shrink:0;margin-top:2px;font-weight:900;}
+.inst-point p{font-size:.88rem;color:var(--char);line-height:1.6;}
+.inst-cards{display:flex;flex-direction:column;gap:14px;}
+.inst-card{
+  background:var(--white);border:1px solid var(--line);
+  border-radius:var(--r-card);padding:20px;
+}
+.inst-card h3{font-size:.92rem;color:var(--f8);margin-bottom:6px;}
+.inst-card p{font-size:.82rem;color:var(--muted);line-height:1.55;}
+
+/* ── TRUST & SECURITY ── */
+.security-header{text-align:center;max-width:560px;margin:0 auto 56px;}
+.security-header h2{margin-bottom:12px;}
+.security-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:48px;}
+.security-card{background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:28px;}
+.security-icon{font-size:1.8rem;margin-bottom:16px;}
+.security-card h3{font-size:.95rem;margin-bottom:10px;}
+.security-card p{font-size:.83rem;color:var(--muted);line-height:1.65;}
+.badge-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
+.badge{
+  background:var(--f0);border:1px solid var(--f1);
+  border-radius:10px;padding:14px 24px;
+  font-size:.82rem;font-weight:700;color:var(--f8);
+  display:flex;align-items:center;gap:8px;
+}
+
+/* ── FAQ ── */
+.faq-wrap{max-width:720px;margin:0 auto;}
+.faq-header{text-align:center;margin-bottom:48px;}
+.faq-header h2{margin-bottom:12px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:20px 0;cursor:pointer;gap:16px;
+}
+.faq-q span{font-size:.95rem;font-weight:600;color:var(--ink);line-height:1.4;}
+.faq-icon{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--f0);border:1px solid var(--f1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--t);flex-shrink:0;
+  transition:transform .2s;font-weight:700;
+}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;
+  font-size:.88rem;color:var(--muted);line-height:1.75;
+}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px;}
+
+/* ── FINAL CTA ── */
+#final-cta{background:var(--f8);padding:96px 0;text-align:center;}
+#final-cta h2{color:#fff;margin-bottom:16px;}
+#final-cta p{color:rgba(255,255,255,.7);font-size:1.05rem;max-width:540px;margin:0 auto 40px;line-height:1.7;}
+.final-btns{display:flex;justify-content:center;flex-wrap:wrap;gap:14px;margin-bottom:32px;}
+.store-badges{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;}
+.store-badge{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:10px;padding:10px 18px;color:rgba(255,255,255,.8);
+  font-size:.8rem;display:flex;align-items:center;gap:8px;
+}
+
+/* ── FOOTER ── */
+footer{background:var(--f9);padding:64px 0 32px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand .logo{font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:-.04em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.footer-brand p{font-size:.84rem;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:20px;}
+.social-row{display:flex;gap:12px;}
+.social-link{
+  width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.5);
+  font-size:.8rem;transition:all .2s;
+}
+.social-link:hover{background:rgba(255,255,255,.1);color:#fff;}
+.footer-col h4{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.3);margin-bottom:16px;}
+.footer-col a{display:block;font-size:.85rem;color:rgba(255,255,255,.5);margin-bottom:10px;transition:color .2s;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.07);
+  padding-top:24px;display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:12px;
+}
+.footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.25);}
+.footer-disclaimer{font-size:.72rem;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6;max-width:800px;}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .hero-visual{display:none;}
+  .trust-grid{grid-template-columns:repeat(2,1fr);}
+  .trust-item:nth-child(2){border-right:none;}
+  .trust-item:nth-child(1),.trust-item:nth-child(2){border-bottom:1px solid var(--line);}
+  .problem-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:repeat(2,1fr);}
+  .steps::before{display:none;}
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .gpt-inner,.wa-inner,.lang-inner,.inst-inner,.retention-inner{grid-template-columns:1fr;}
+  .security-grid{grid-template-columns:1fr 1fr;}
+  .stories-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .nav-links,.nav-ctas{display:none;}
+  .nav-hamburger{display:flex;}
+}
+@media(max-width:600px){
+  .trust-grid{grid-template-columns:1fr 1fr;}
+  .features-grid{grid-template-columns:1fr;}
+  .steps{grid-template-columns:1fr;}
+  .security-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  h1{font-size:2.2rem;}
+  h2{font-size:1.7rem;}
+  .section{padding:64px 0;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <span class="logo-main">prakrit.</span><span class="logo-ai">ai</span>
+    </a>
+    <div class="nav-links">
+      <a href="features.html">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="about.html">About Us</a>
+      <a href="institutions.html">For Institutions</a>
+    </div>
+    <div class="nav-ctas">
+      <a href="#final-cta" class="btn btn-primary btn-sm">Get Started Free</a>
+    </div>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="features.html" onclick="toggleMenu()">Features</a>
+  <a href="#how-it-works" onclick="toggleMenu()">How it works</a>
+  <a href="about.html" onclick="toggleMenu()">About Us</a>
+  <a href="institutions.html" onclick="toggleMenu()">For Institutions</a>
+  <div class="mobile-ctas">
+    <a href="#final-cta" class="btn btn-primary" onclick="toggleMenu()">Get Started Free</a>
+  </div>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="eyebrow">India's Family Health Companion</div>
+      <h1>Your family's health, finally in <span>plain language.</span></h1>
+      <p class="subhead">Scan any lab report. Understand it instantly. Manage every family member's health history — in Hindi, English, or your own language. All in one secure place.</p>
+      <div class="hero-ctas">
+        <a href="#final-cta" class="btn btn-primary btn-lg">Get Started Free</a>
+        <a href="#how-it-works" class="btn btn-ghost btn-lg">See How It Works</a>
+      </div>
+      <div class="hero-proof">1,20,000+ families across India · Free to start</div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-phone-wrap">
+        <div class="hero-card-float top-left">
+          <div class="float-label">Weekly retention</div>
+          <div class="float-val">78%</div>
+          <div class="float-sub">vs 20–30% industry avg</div>
+          <div class="float-bar"><div class="float-fill"></div></div>
+        </div>
+        <div class="hero-photo-bg">
+          <div class="hero-photo-placeholder">
+            <div class="icon">👨‍👩‍👧‍👦</div>
+            <p>Indian family photo<br>Grandparent + grandchild<br>looking at health app together<br><br><em style="font-size:.7rem;color:var(--f6);">[Replace with real photography]</em></p>
+          </div>
+        </div>
+        <div class="hero-card-float bottom-right">
+          <div class="float-label">Last report analyzed</div>
+          <div class="float-val">HbA1c — 7.2%</div>
+          <div class="float-sub" style="color:var(--t);">⚠ Slightly above range</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST BAR ══ -->
+<section id="trust-bar">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item">
+        <div class="trust-num">1,20,000+</div>
+        <div class="trust-label">Families across India</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">78%</div>
+        <div class="trust-label">Weekly retention rate</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">12.7L+</div>
+        <div class="trust-label">Health questions answered</div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-num">&lt;7 sec</div>
+        <div class="trust-label">Report to plain language</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROBLEM ══ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="max-width:600px;margin:0 auto 56px;">
+      <div class="eyebrow muted" style="margin-bottom:16px;">The reality for most families</div>
+      <h2>Managing your family's health shouldn't feel this hard.</h2>
+      <p style="color:var(--muted);margin-top:16px;">For most Indian families, health information is confusing, scattered, and impossible to act on.</p>
+    </div>
+    <div style="background:var(--f0);border:1px solid var(--f1);border-radius:14px;padding:20px 28px;margin-bottom:48px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="font-family:'DM Mono',monospace;font-size:2rem;font-weight:700;color:var(--f8);flex-shrink:0;">80%</div>
+      <div style="font-size:.9rem;color:var(--char);line-height:1.6;flex:1;min-width:200px;">of India's healthcare specialists are concentrated in cities — yet <strong>73% of India's population lives elsewhere</strong>. For hundreds of millions of families, clear health communication isn't a convenience. It's a necessity.</div>
+      <a href="about.html" style="font-size:.82rem;font-weight:700;color:var(--f8);white-space:nowrap;border-bottom:1px solid var(--f1);">Learn about our mission →</a>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">📋</div>
+        <h3>Medical jargon no one explains</h3>
+        <p>You get the report. You see the numbers. But what does "serum creatinine 1.4 mg/dL" actually mean for your father? Doctors are rushed. Google is overwhelming. You're left guessing.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📂</div>
+        <h3>Health records scattered everywhere</h3>
+        <p>Some reports are in WhatsApp groups. Some printed in a drawer. Some on a CD from 2019. When the doctor asks for history, you're scrambling through six places at once.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">🚨</div>
+        <h3>Critical info missing in emergencies</h3>
+        <p>Blood type? Allergies? Current medications? In an emergency, no one remembers. Every second of delay matters — and confusion costs precious time when it matters most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUTION BRIDGE ══ -->
+<section class="section compact sand">
+  <div class="container">
+    <div class="solution-bridge">
+      <div class="eyebrow terra" style="margin-bottom:20px;">The solution</div>
+      <h2 style="color:var(--f8);">Prakrit brings your family's entire health journey into one secure, intelligent app.</h2>
+      <p style="margin-top:20px;">Upload any medical document and get a plain-language explanation in under 7 seconds. Manage health profiles for every family member. Ask questions in Hindi or English. Set medication reminders. And in an emergency — everything your family needs is one tap away.</p>
+      <div class="solution-disclaimer">Prakrit organizes and explains your health documents. It does not diagnose, prescribe, or replace your doctor's advice.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section id="how-it-works" class="section">
+  <div class="container">
+    <div class="how-header">
+      <div class="eyebrow muted" style="margin-bottom:16px;">Simple by design</div>
+      <h2>From a blurry photo to complete clarity — in under 7 seconds.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-screen">📸<br><br>Photo or upload<br>of any medical doc<br><br><em style="font-size:.7rem;">[App screenshot:<br>upload screen]</em></div>
+        <h3>Photograph or upload</h3>
+        <p>Take a photo of any lab report, prescription, or discharge summary — or upload a PDF from WhatsApp.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-screen">🤖<br><br>AI reading<br>your document…<br><br><em style="font-size:.7rem;">[App screenshot:<br>processing screen]</em></div>
+        <h3>AI reads and understands</h3>
+        <p>Prakrit's AI scans the document, recognizes Indian medical formats, and extracts every key data point in under 7 seconds.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-screen">💬<br><br>HbA1c 7.2% — slightly above<br>normal range. This suggests…<br><br><em style="font-size:.7rem;">[App screenshot:<br>analysis result]</em></div>
+        <h3>Plain language explanation</h3>
+        <p>Every test, every value, every finding — explained in simple English or Hindi. No jargon. No guesswork. Just clarity.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-screen">🏠<br><br>Saved to<br>Papa's profile<br>Aug 17, 2026<br><br><em style="font-size:.7rem;">[App screenshot:<br>timeline entry]</em></div>
+        <h3>Saved to your family profile</h3>
+        <p>The report is permanently stored, linked to the right family member, and added to their health timeline. Always accessible. Never lost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section id="features" class="section sand">
+  <div class="container">
+    <div class="features-header">
+      <div class="eyebrow muted" style="margin-bottom:16px;">Built for Indian families</div>
+      <h2>Everything your family's health needs. All in one place.</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-screen">🔬<br><br>Lab report analysis result<br>Values · Trends · Plain explanations<br><br><em style="font-size:.7rem;">[App screenshot: document analysis]</em></div>
+        <div class="feature-body">
+          <h3>AI Document Analysis</h3>
+          <p>Upload any lab report, prescription, or scan. Get a plain-language breakdown of every finding — what's normal, what to watch, what to ask your doctor.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">👨‍👩‍👧‍👦<br><br>Family profiles<br>Papa · Amma · Riya · Self<br><br><em style="font-size:.7rem;">[App screenshot: family list]</em></div>
+        <div class="feature-body">
+          <h3>Family Health Profiles</h3>
+          <p>One app for your parents, children, and yourself. Separate profiles, separate timelines, one dashboard. Managing health for a family of five is finally as simple as managing one.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">🤖<br><br>"Is Papa's HbA1c improving?"<br>"Yes, it improved from 7.8 to 7.2…"<br><br><em style="font-size:.7rem;">[App screenshot: PrakritGPT chat]</em></div>
+        <div class="feature-body">
+          <h3>PrakritGPT — AI Health Advisor</h3>
+          <p>Ask anything about your health documents, medications, or symptoms. PrakritGPT gives document-aware answers — grounded only in your own records, never guessing.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">💊<br><br>Metformin 500mg — 8:00 AM ✓<br>Telmisartan 40mg — 8:00 PM<br><br><em style="font-size:.7rem;">[App screenshot: medication tracker]</em></div>
+        <div class="feature-body">
+          <h3>Medication Tracking</h3>
+          <p>Set reminders for every family member's medications. Track adherence. Never miss a dose — and never wonder if Amma took her evening tablet.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">📅<br><br>Aug 2026 — HbA1c 7.2<br>Jun 2026 — BP 138/86<br>Mar 2026 — TSH 2.3<br><br><em style="font-size:.7rem;">[App screenshot: health timeline]</em></div>
+        <div class="feature-body">
+          <h3>Health Timeline</h3>
+          <p>Every doctor visit, every report, every medication change — laid out chronologically. See patterns, track progress, and walk into every appointment fully prepared.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">🆘<br><br>Blood Type: O+<br>Allergies: Penicillin<br>Conditions: T2DM, HTN<br><br><em style="font-size:.7rem;">[App screenshot: emergency card]</em></div>
+        <div class="feature-body">
+          <h3>Emergency Health Card</h3>
+          <p>Blood type, allergies, chronic conditions, current medications — compiled into a shareable emergency card. One QR scan tells paramedics everything they need to know.</p>
+        </div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-screen">📊<br><br>⚠ Papa's BP trending up — 3 weeks<br>💊 Missed doses correlate with sugar rise<br>🔔 Amma's TSH due for retest<br><br><em style="font-size:.7rem;">[App screenshot: health insights]</em></div>
+        <div class="feature-body">
+          <h3>Health Insights</h3>
+          <p>AI continuously analyzes your family's uploaded documents and medication data — surfacing patterns, correlations, and preventive nudges before problems escalate. Not a diagnosis. A heads-up.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="features.html" class="btn btn-ghost btn-lg">See all 9 features in detail →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRAKRITGPT SPOTLIGHT ══ -->
+<section id="gpt-section">
+  <div class="container">
+    <div class="gpt-inner">
+      <div class="gpt-text">
+        <div class="eyebrow" style="margin-bottom:20px;">PrakritGPT</div>
+        <h2 style="color:#fff;">Ask anything. Get answers grounded in your own health records.</h2>
+        <p style="margin-top:16px;">PrakritGPT is not a generic chatbot. It reads your actual uploaded reports, understands Indian medical formats, and answers in plain Hindi or English — with zero hallucinations. It will not guess. It will not speculate. It only answers from what it knows to be true from your documents.</p>
+        <div class="gpt-chips">
+          <span class="gpt-chip">"Is Papa's HbA1c improving?"</span>
+          <span class="gpt-chip">"What does 'mild cardiomegaly' mean?"</span>
+          <span class="gpt-chip">"Are these two medications safe together?"</span>
+          <span class="gpt-chip">"When was Amma's last thyroid test?"</span>
+        </div>
+        <a href="#final-cta" class="btn btn-primary btn-lg">Get Started Free</a>
+      </div>
+      <div class="gpt-visual">
+        <div class="chat-header">
+          <div class="chat-avatar">P</div>
+          <div>
+            <div class="chat-name">PrakritGPT</div>
+            <div class="chat-status">● Online · Grounded in your documents</div>
+          </div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-bubble ai">Namaste! I can help you understand any health document you've uploaded, or answer questions about your family's health history. What would you like to know?</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-bubble user-b">Papa's new doctor prescribed Metformin along with his existing Telmisartan. Is it safe?</div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-bubble ai">Based on Papa's uploaded records, <span class="chat-highlight">Metformin and Telmisartan are safe to take together</span> — they're commonly co-prescribed for patients managing both Type 2 Diabetes and hypertension.<br><br>One thing to watch: <span class="chat-highlight">Telmisartan can slightly lower blood sugar</span>, so monitor for dizziness after meals in the first 2 weeks. This is routine — your doctor is already aware of this interaction.</div>
+        </div>
+        <div class="chat-msg user">
+          <div class="chat-bubble user-b">Can you tell me in Hindi?</div>
+        </div>
+        <div class="chat-msg">
+          <div class="chat-bubble ai">हाँ बिल्कुल — <span class="chat-highlight">Metformin और Telmisartan साथ में लेना सुरक्षित है।</span> दोनों दवाएं अक्सर एक साथ दी जाती हैं...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ RETENTION PROOF ══ -->
+<section class="section">
+  <div class="container">
+    <div class="retention-inner">
+      <div class="retention-text">
+        <div class="eyebrow muted" style="margin-bottom:20px;">What the numbers say</div>
+        <h2>Families don't just try Prakrit. They rely on it.</h2>
+        <p style="margin-top:16px;">78% of families who use Prakrit are still active a week later. The industry average for health apps is 20–30%. That difference is families who found something that actually works for them.</p>
+        <div class="retention-quote" style="margin-top:24px;">
+          "High retention means Prakrit isn't an app people try — it's an app families integrate into how they actually manage their health."
+        </div>
+      </div>
+      <div>
+        <div class="bar-section">
+          <div class="bar-label">Weekly Retention Rate</div>
+          <div class="bar-row">
+            <div class="bar-name">prakrit.ai <span>78%</span></div>
+            <div class="bar-track"><div class="bar-fill prakrit">78%</div></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-name">Industry average <span>20–30%</span></div>
+            <div class="bar-track"><div class="bar-fill industry">28%</div></div>
+          </div>
+          <div class="bar-note">3–4× the industry average for health apps</div>
+        </div>
+        <div class="mini-stats">
+          <div class="mini-stat"><div class="n">12.7L+</div><div class="l">Health questions answered</div></div>
+          <div class="mini-stat"><div class="n">3.1L+</div><div class="l">Documents uploaded & analyzed</div></div>
+          <div class="mini-stat"><div class="n">6pm–1am</div><div class="l">Peak family usage hours</div></div>
+          <div class="mini-stat"><div class="n">1.2L+</div><div class="l">Medication reminders set</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STORIES ══ -->
+<section id="stories" class="section sand">
+  <div class="container">
+    <div class="stories-header">
+      <div class="eyebrow muted" style="margin-bottom:16px;">Real families. Real health wins.</div>
+      <h2>What families say about Prakrit</h2>
+    </div>
+    <div class="stories-grid">
+      <div class="story-card">
+        <div class="story-quote">"</div>
+        <p class="story-text">My father's endocrinologist gave us a 3-page report after his diabetes check-up. I had no idea what half of it meant. I uploaded it to Prakrit and within seconds I could see exactly which values were borderline and what they meant. I walked into the next appointment knowing what questions to ask. That felt like a superpower.</p>
+        <div class="story-author">
+          <div class="story-avatar">PS</div>
+          <div><div class="story-name">Priya Sharma</div><div class="story-loc">Kothrud, Pune</div></div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-quote">"</div>
+        <p class="story-text">We have four family members with four different sets of medications. I set up reminders for all of them in Prakrit in 10 minutes. In the first month, my mother-in-law missed zero doses. First time in years. That alone was worth everything.</p>
+        <div class="story-author">
+          <div class="story-avatar">RN</div>
+          <div><div class="story-name">Rajan Nair</div><div class="story-loc">Baner, Pune</div></div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-quote">"</div>
+        <p class="story-text">My mother had a mild cardiac event while I was travelling. The ER doctor needed her full history — medications, blood type, past surgeries. I shared her Prakrit emergency card from my phone in one tap. The doctor said that information saved them 20 minutes. Those 20 minutes matter.</p>
+        <div class="story-author">
+          <div class="story-avatar">MK</div>
+          <div><div class="story-name">Meena Kulkarni</div><div class="story-loc">Aundh, Pune</div></div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="story-quote">"</div>
+        <p class="story-text">My 70-year-old father asked PrakritGPT in Hindi about whether two new medications were safe together. It told him they were — and explained why — in plain Hindi. He understood. He trusted it. I've never seen him engage with a health app like that before.</p>
+        <div class="story-author">
+          <div class="story-avatar">VJ</div>
+          <div><div class="story-name">Vikram Joshi</div><div class="story-loc">Wakad, Pune</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHATSAPP ══ -->
+<section id="wa-section">
+  <div class="container">
+    <div class="wa-inner">
+      <div class="wa-text">
+        <div class="eyebrow" style="margin-bottom:20px;">Zero-friction entry</div>
+        <h2 style="color:#fff;">Already on WhatsApp? You're already on Prakrit.</h2>
+        <p>India has 535 million+ WhatsApp users. We built Prakrit to meet families where they already are — no app switch, no new habit to form. Just send a photo and get clarity in seconds.</p>
+        <div class="wa-steps">
+          <div class="wa-step"><div class="wa-step-n">1</div><p>Send a photo of any lab report or prescription to Prakrit's WhatsApp number</p></div>
+          <div class="wa-step"><div class="wa-step-n">2</div><p>AI reads and analyzes the document in under 7 seconds</p></div>
+          <div class="wa-step"><div class="wa-step-n">3</div><p>Receive a complete plain-language breakdown as a WhatsApp message</p></div>
+          <div class="wa-step"><div class="wa-step-n">4</div><p>Ask follow-up questions in Hindi or English — right in the same chat</p></div>
+        </div>
+        <a href="#final-cta" class="btn btn-primary btn-lg">Get Started Free</a>
+      </div>
+      <div class="wa-visual">
+        <div class="wa-chat-header">
+          <div class="wa-chat-avatar">P</div>
+          <div>
+            <div class="wa-chat-name">Prakrit AI</div>
+            <div class="wa-chat-status">● Online</div>
+          </div>
+        </div>
+        <div class="wa-bubble out">
+          [Photo of lab report attached]<br>
+          Can you explain this report? It's my mother's thyroid test.
+        </div>
+        <div class="wa-bubble bot">
+          <span class="wa-bold">Thyroid Function Test — Explained</span><br><br>
+          <span class="wa-green">✓ TSH: 2.3 mIU/L — Normal</span> (range: 0.4–4.0)<br>
+          <span class="wa-green">✓ T4: 8.2 µg/dL — Normal</span><br>
+          <span class="wa-green">✓ T3: 1.1 ng/mL — Normal</span><br><br>
+          Your mother's thyroid function is completely normal. All values are well within the healthy range. No medication changes needed. 👍<br><br>
+          <em style="font-size:.75rem;color:#666;">Ask me anything about this report — in Hindi if you prefer.</em>
+        </div>
+        <div class="wa-bubble out">शुक्रिया! क्या यह रिपोर्ट पिछले साल से बेहतर है?</div>
+        <div class="wa-bubble bot">हाँ! पिछले साल आपकी माँ का TSH 3.8 था, जो अब 2.3 हो गया है। यह सुधार का संकेत है — बिल्कुल सही दिशा में। 👏</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LANGUAGES ══ -->
+<section class="section">
+  <div class="container">
+    <div class="lang-inner">
+      <div class="lang-text">
+        <div class="eyebrow muted" style="margin-bottom:20px;">Built for Bharat</div>
+        <h2>Your health, in your language.</h2>
+        <p style="margin-top:16px;">Speak or type in any of 16+ languages — including Hindi, Tamil, Telugu, Kannada, Marathi, Bengali, and more. Prakrit understands Indian languages the way Indians actually speak them.</p>
+        <div class="lang-chips" style="margin-top:24px;">
+          <span class="lang-chip">हिंदी</span>
+          <span class="lang-chip">English</span>
+          <span class="lang-chip">தமிழ்</span>
+          <span class="lang-chip">తెలుగు</span>
+          <span class="lang-chip">ಕನ್ನಡ</span>
+          <span class="lang-chip">मराठी</span>
+          <span class="lang-chip">বাংলা</span>
+          <span class="lang-chip">ગુજરાતી</span>
+          <span class="lang-chip">ਪੰਜਾਬੀ</span>
+          <span class="lang-chip">اردو</span>
+          <span class="lang-chip">ଓଡ଼ିଆ</span>
+          <span class="lang-chip">മലയാളം</span>
+          <span class="lang-chip more">+ 4 more</span>
+        </div>
+        <div class="voice-card" style="margin-top:20px;">
+          <h3>🎙 Voice Mode</h3>
+          <p>Can't type? Just speak. Prakrit's voice mode lets elderly users ask health questions out loud — in Hindi, Tamil, Telugu, or any supported language. Designed for those who find typing difficult.</p>
+        </div>
+      </div>
+      <div class="lang-visual">
+        <div style="text-align:center;">
+          <div style="font-size:2.5rem;margin-bottom:16px;">🗺</div>
+          <div style="font-size:.88rem;color:var(--f7);font-weight:600;">India map with regional language coverage</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:8px;">[Replace with India SVG map<br>with language regions highlighted in forest green]</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ INSTITUTIONS ══ -->
+<section id="institutions" class="section sand">
+  <div class="container">
+    <div class="inst-inner">
+      <div class="inst-text">
+        <div class="eyebrow muted" style="margin-bottom:20px;">Beyond families</div>
+        <h2>Prakrit for Institutions — powering care at scale.</h2>
+        <p style="margin-top:16px;">We've extended Prakrit's AI intelligence to care facilities, hospitals, and diagnostic labs — so professional caregivers have the same clarity and confidence that families do.</p>
+        <div class="inst-points" style="margin-top:28px;">
+          <div class="inst-point"><div class="inst-check">✓</div><p>Staff log vitals via the app or a simple WhatsApp message — AI parses and stores automatically</p></div>
+          <div class="inst-point"><div class="inst-check">✓</div><p>AI flags deteriorating health patterns before they become emergencies — 3 days early on average</p></div>
+          <div class="inst-point"><div class="inst-check">✓</div><p>Families receive real-time updates about their loved ones via WhatsApp</p></div>
+          <div class="inst-point"><div class="inst-check">✓</div><p>Doctors get an AI-prepared briefing before every round — sorted by severity</p></div>
+        </div>
+        <a href="/institutions" class="btn btn-forest">Explore Prakrit for Institutions →</a>
+      </div>
+      <div class="inst-cards">
+        <div class="inst-card">
+          <h3>🏡 Old Age Homes & Care Facilities</h3>
+          <p>Vitals logging, medication rounds, AI early-warning alerts, family WhatsApp updates, and doctor briefings — all in one platform.</p>
+        </div>
+        <div class="inst-card">
+          <h3>🏥 Hospitals & Clinics</h3>
+          <p>Patient engagement, pre-appointment health summaries, and discharge follow-up — in plain language, in the patient's own language.</p>
+        </div>
+        <div class="inst-card">
+          <h3>🔬 Diagnostic Labs</h3>
+          <p>Automatic plain-language report delivery to patients the moment results are ready — no waiting, no confusion.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TEAM ══ -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;max-width:560px;margin:0 auto 56px;">
+      <div class="eyebrow muted" style="margin-bottom:16px;">The people behind Prakrit</div>
+      <h2>Built by a team that understands India's health challenges.</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;">
+      <div style="background:var(--white);border:2px solid var(--f8);border-radius:var(--r-card);padding:32px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--t);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">SN</div>
+        <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Shailesh N A</div>
+        <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Primary Partner & Co-Founder</div>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Drives Prakrit's growth strategy and institutional partnerships — ensuring Prakrit reaches the families that need it most.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:32px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--f8);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">NR</div>
+        <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Narayanan Ramachandran</div>
+        <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Co-Founder</div>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Product vision rooted in making healthcare intelligence accessible to every Indian family — not just those with access to premium care.</p>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:32px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">PG</div>
+        <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Pratik Gade</div>
+        <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Co-Founder</div>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Architects Prakrit's technical foundation — from the AI document analysis pipeline to the multi-platform experience families rely on daily.</p>
+      </div>
+    </div>
+    <div style="background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:6px;">Advisory Board</div>
+        <div style="font-size:.9rem;color:var(--char);">Dr. Venkat Krishnan (Serial Healthcare Investor) · Dr. Ram (Director CCU, Apollo Hospitals) · Mr. Jacob Antony · Mr. Gopi Krishnan</div>
+      </div>
+      <a href="about.html" class="btn btn-ghost btn-sm" style="flex-shrink:0;">Meet the full team →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST & SECURITY ══ -->
+<section class="section">
+  <div class="container">
+    <div class="security-header">
+      <div class="eyebrow muted" style="margin-bottom:16px;">Built on trust</div>
+      <h2>Your family's health data is yours. Always.</h2>
+      <p style="color:var(--muted);margin-top:12px;">Health data is deeply personal. We designed Prakrit with privacy as a foundation — not an afterthought.</p>
+    </div>
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-icon">🚫</div>
+        <h3>Zero Hallucinations</h3>
+        <p>Prakrit only answers from your uploaded documents. It will never invent information, make up values, or speculate. If it doesn't know, it says so.</p>
+      </div>
+      <div class="security-card">
+        <div class="security-icon">🔒</div>
+        <h3>We never train on your data</h3>
+        <p>Your family's health records are never used to train AI models. Your data is used to help you — and only you.</p>
+      </div>
+      <div class="security-card">
+        <div class="security-icon">🔐</div>
+        <h3>End-to-end encrypted</h3>
+        <p>All documents and records are encrypted at rest and in transit. No one — including Prakrit's team — can read your family's records.</p>
+      </div>
+      <div class="security-card">
+        <div class="security-icon">🇮🇳</div>
+        <h3>Built for India's standards</h3>
+        <p>DPDP Act compliant. Designed to integrate with Ayushman Bharat Digital Mission (ABDM). Your data stays in India.</p>
+      </div>
+    </div>
+    <div class="badge-row">
+      <div class="badge">✓ DPDP Act Compliant</div>
+      <div class="badge">✓ ABDM Compatible</div>
+      <div class="badge">✓ End-to-End Encrypted</div>
+      <div class="badge">✓ Zero Training on User Data</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="section compact sand">
+  <div class="container">
+    <div class="faq-wrap">
+      <div class="faq-header">
+        <div class="eyebrow muted" style="margin-bottom:16px;">Got questions?</div>
+        <h2>Questions we hear most often.</h2>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is Prakrit a medical app? Can it diagnose me?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">No. Prakrit organizes and explains your health information. It does not diagnose conditions, prescribe medications, or replace your doctor's advice. It helps you understand your own documents so you can have better conversations with your doctor.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is my health data safe?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. All data is end-to-end encrypted, DPDP Act compliant, and your records are never used to train AI models. Your family's health data belongs to your family — we are only custodians, not owners.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Does Prakrit work without downloading an app?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. You can send lab reports directly on WhatsApp and receive plain-language explanations without downloading anything. The full app experience is available on Android and iOS for unlimited uploads, family profiles, medication reminders, and more.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Which languages does Prakrit support?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">English, Hindi, Tamil, Telugu, Kannada, Marathi, Bengali, Gujarati, Punjabi, Urdu, Odia, Malayalam, and more — 16+ Indian languages in total, with voice input support. You can switch languages at any time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I manage health records for my parents or elderly relatives?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. You can create separate family profiles for every family member — parents, children, grandparents — all managed from one account. Each person has their own health timeline, medication reminders, and emergency card.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Is Prakrit free?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes, core features are free — including document analysis, family profiles, medication reminders, and the emergency card. Premium plans are available for advanced AI insights, unlimited uploads, and priority support.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Does it work with Indian hospital and lab report formats?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. Prakrit is specifically trained on Indian medical reporting formats — SRL, Thyrocare, Apollo, Metropolis, Lal PathLabs, and government health documents. It understands Indian abbreviations, units, and terminology.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What documents can I upload?</span>
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Lab reports, prescriptions, discharge summaries, X-ray reports, ultrasound reports, ECG results, blood reports, urine reports — any medical document as a photo (JPG/PNG) or PDF. We handle both scanned and digital formats.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section id="final-cta">
+  <div class="container">
+    <div class="eyebrow" style="margin-bottom:20px;">Get started today</div>
+    <h2>Your family's health is worth organizing.</h2>
+    <p>Join 1,20,000+ Indian families who use Prakrit to understand their health, manage their records, and feel more in control — starting today, for free.</p>
+    <div class="final-btns">
+      <a href="/auth" class="btn btn-primary btn-lg">Get Started Free</a>
+      <a href="#how-it-works" class="btn btn-ghost-white btn-lg">See How It Works</a>
+    </div>
+    <p style="margin-top:20px;font-size:.78rem;color:rgba(255,255,255,.3);">Available in 16+ Indian languages · DPDP compliant · Free to start</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo"><span style="width:8px;height:8px;background:var(--t);border-radius:50%;display:inline-block;"></span> prakrit.ai</div>
+        <p>Your family's health companion. Understand any medical document in plain language, manage every family member's health, and always be prepared — in Hindi, English, or your language.</p>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:8px;">hello@prakrit.ai</p>
+        <div class="social-row">
+          <a class="social-link" href="#">in</a>
+          <a class="social-link" href="#">𝕏</a>
+          <a class="social-link" href="#">ig</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="features.html">All Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#gpt-section">PrakritGPT</a>
+        <a href="features.html#emergency">Emergency Card</a>
+        <a href="institutions.html">For Institutions</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="about.html#team">Our Team</a>
+
+        <a href="mailto:hello@prakrit.ai">Contact Us</a>
+        <a href="mailto:hello@prakrit.ai">hello@prakrit.ai</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Use</a>
+        <a href="about.html#compliance">DPDP Compliance</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Prakrit AI. All rights reserved.</p>
+      <p>hello@prakrit.ai · prakrit.ai</p>
+    </div>
+    <p class="footer-disclaimer">Prakrit is not a medical device. It does not diagnose conditions, prescribe medications, or provide medical advice. Always consult a qualified healthcare professional for medical decisions. Prakrit helps you understand and organize your own health information.</p>
+  </div>
+</footer>
+
+<script>
+/* Nav scroll behaviour */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
+});
+
+/* Mobile menu */
+function toggleMenu(){
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+/* FAQ accordion */
+function toggleFaq(el){
+  const item=el.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* Smooth scroll for nav links */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id==='#')return;
+    const el=document.querySelector(id);
+    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+
+/* Close mobile menu on outside click */
+document.addEventListener('click',e=>{
+  const menu=document.getElementById('mobile-menu');
+  const hamburger=document.getElementById('hamburger');
+  if(menu.classList.contains('open')&&!menu.contains(e.target)&&!hamburger.contains(e.target)){
+    menu.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
