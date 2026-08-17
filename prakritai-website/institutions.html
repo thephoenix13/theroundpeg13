@@ -68,7 +68,7 @@ p{line-height:1.72;}
 .mb-48{margin-bottom:48px;}
 
 /* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.75rem;border-radius:var(--r-btn);font-weight:700;font-size:.92rem;cursor:pointer;transition:all .2s;border:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.75rem;border-radius:var(--r-btn);font-weight:700;font-size:.92rem;cursor:pointer;transition:all .2s;border:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;min-height:44px;}
 .btn-primary{background:var(--t);color:#fff;border-color:var(--t);}
 .btn-primary:hover{background:#b04d23;border-color:#b04d23;transform:translateY(-2px);box-shadow:0 6px 20px rgba(200,91,42,.38);}
 .btn-forest{background:var(--f8);color:#fff;border-color:var(--f8);}
@@ -270,7 +270,8 @@ footer{background:var(--dark);padding:72px 0 40px;}
   .nav-links,.nav-cta{display:none;}
   .nav-hamburger{display:flex;}
   .section{padding:64px 0;}
-  .hero{padding:120px 0 72px;}
+  .hero{padding:100px 0 64px;}
+  .footer-copy,.footer-disclaimer,.footer-col a,.footer-brand p{font-size:14px;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-bottom{flex-direction:column;align-items:flex-start;}
   .footer-disclaimer{text-align:left;}
@@ -330,7 +331,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
     <div class="hero-inner">
       <span class="eyebrow light">Prakrit for Institutions</span>
       <h1>AI-powered health management for care facilities, hospitals, and diagnostic labs.</h1>
-      <p class="hero-sub">The same AI intelligence trusted by 1,20,000+ families — now built for professional care settings. Staff log vitals in seconds. AI catches deteriorating patterns early. Families stay informed automatically.</p>
+      <p class="hero-sub">Prakrit runs in 1,20,000+ family households. The same platform, built for professional care settings — where staff log vitals in seconds, the AI catches deteriorating patterns early, and families get updates without anyone making extra calls.</p>
       <div class="hero-ctas">
         <a href="#contact" class="btn btn-primary btn-lg">Schedule a Demo</a>
         <a href="#" class="btn btn-ghost-white btn-lg">
@@ -416,7 +417,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
     <div class="text-center">
       <span class="eyebrow">Role-Based Access</span>
       <h2>Three logins. One platform. Complete visibility.</h2>
-      <p class="text-muted mt-16" style="max-width:600px;margin-left:auto;margin-right:auto;font-size:1.05rem;">Every stakeholder — staff, administrators, and families — gets a view designed specifically for their role.</p>
+      <p class="text-muted mt-16" style="max-width:600px;margin-left:auto;margin-right:auto;font-size:1.05rem;">Staff, administrators, and families each get a view built for what they actually need to do.</p>
     </div>
 
     <div class="login-grid">
@@ -477,7 +478,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
     <div class="text-center">
       <span class="eyebrow white">The Prakrit AI Engine</span>
       <h2 style="color:#fff;margin-top:8px;">An AI engine that thinks ahead — not just records.</h2>
-      <p style="color:rgba(255,255,255,.65);max-width:620px;margin:16px auto 0;font-size:1.05rem;">Most care platforms just digitize paper. Prakrit's AI actively monitors, correlates, and alerts — turning raw numbers into actionable clinical intelligence.</p>
+      <p style="color:rgba(255,255,255,.65);max-width:620px;margin:16px auto 0;font-size:1.05rem;">Most care platforms just digitize paper. Prakrit actively monitors, correlates, and alerts, turning logged numbers into something a doctor can act on.</p>
     </div>
 
     <div class="ai-grid">
@@ -512,7 +513,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
           Missed Dose Correlation
         </span>
         <h3>Vitals + Medication Linkage</h3>
-        <p>When vitals trend bad and medications were missed in the same period, the AI correlates both signals and surfaces them together — with a plain-language explanation for the doctor.</p>
+        <p>When vitals trend bad and medications were missed in the same period, the AI connects both signals and presents them together, with a plain-language note for the doctor.</p>
         <div class="ai-example">
           <p>"Prakash's blood sugar has risen this week. He also missed his morning Metformin on 3 of the last 5 days. These may be related."</p>
         </div>
@@ -655,7 +656,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
       <div class="roi-card">
         <div class="roi-num"><span>−</span>76<span>%</span></div>
         <div class="roi-label">Lower readmission risk</div>
-        <p class="roi-sub">When early-warning alerts are acted on, facilities see dramatically lower rates of avoidable hospital readmissions.</p>
+        <p class="roi-sub">When early-warning alerts get acted on, facilities see far fewer avoidable readmissions.</p>
       </div>
     </div>
 
@@ -680,7 +681,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
     <div class="text-center">
       <span class="eyebrow">Pilot Onboarding</span>
       <h2>From agreement to live in 5 days.</h2>
-      <p class="text-muted mt-16" style="font-size:1.02rem;">We've done this enough times to make it fast and painless. Here's exactly what happens.</p>
+      <p class="text-muted mt-16" style="font-size:1.02rem;">We've done this enough times to know what slows things down. Here's what to expect.</p>
     </div>
 
     <div class="timeline">
@@ -749,7 +750,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
       <div class="contact-card">
         <div style="font-size:2rem;margin-bottom:12px;">🚀</div>
         <h3>Start Your Free Pilot</h3>
-        <p>Ready to try it with your team? Our 30-day free pilot gets you fully live — residents, staff, and families — with our team supporting every step of the onboarding and beyond.</p>
+        <p>Ready to try it with your team? Our 30-day free pilot gets you fully live: residents, staff, and families, with our team supporting every step of onboarding.</p>
         <a href="mailto:hello@prakrit.ai?subject=Free Pilot Request — Institutions" class="btn btn-ghost-white btn-lg">Start Free Pilot</a>
       </div>
 
@@ -771,7 +772,7 @@ footer{background:var(--dark);padding:72px 0 40px;}
         <a href="index.html" style="font-size:1.3rem;font-weight:900;letter-spacing:-.04em;display:inline-flex;align-items:center;">
           <span style="color:#d6f0e7;">prakrit.</span><span style="color:#c85b2a;">ai</span>
         </a>
-        <p>Your family's health companion — and your institution's most reliable care intelligence layer.</p>
+        <p>Your family's health companion. For institutions, a monitoring platform your staff will actually use.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>

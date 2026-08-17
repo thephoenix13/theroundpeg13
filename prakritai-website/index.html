@@ -47,7 +47,7 @@ p{line-height:1.7;}
 .text-muted{color:var(--muted);}
 
 /* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.6rem;border-radius:var(--r-btn);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;border:2px solid transparent;white-space:nowrap;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.6rem;border-radius:var(--r-btn);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;border:2px solid transparent;white-space:nowrap;min-height:44px;}
 .btn-primary{background:var(--t);color:#fff;border-color:var(--t);}
 .btn-primary:hover{background:#b04d23;border-color:#b04d23;transform:translateY(-1px);box-shadow:0 4px 16px rgba(200,91,42,.35);}
 .btn-forest{background:var(--f8);color:#fff;border-color:var(--f8);}
@@ -457,10 +457,16 @@ footer{background:var(--f9);padding:64px 0 32px;}
 .footer-bottom p{font-size:.75rem;color:rgba(255,255,255,.25);}
 .footer-disclaimer{font-size:.72rem;color:rgba(255,255,255,.2);margin-top:12px;line-height:1.6;max-width:800px;}
 
+/* ── Team grid ── */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;}
+
 /* ── Responsive ── */
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr;gap:40px;}
   .hero-visual{display:none;}
+  .hero-text{text-align:center;}
+  .hero-ctas{justify-content:center;}
+  .hero-text .subhead{margin-left:auto;margin-right:auto;}
   .trust-grid{grid-template-columns:repeat(2,1fr);}
   .trust-item:nth-child(2){border-right:none;}
   .trust-item:nth-child(1),.trust-item:nth-child(2){border-bottom:1px solid var(--line);}
@@ -474,16 +480,27 @@ footer{background:var(--f9);padding:64px 0 32px;}
   .footer-grid{grid-template-columns:1fr 1fr;}
   .nav-links,.nav-ctas{display:none;}
   .nav-hamburger{display:flex;}
+  .team-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  .container{padding:0 16px;}
+  #nav{padding:0 16px;}
 }
 @media(max-width:600px){
-  .trust-grid{grid-template-columns:1fr 1fr;}
+  .trust-grid{grid-template-columns:repeat(2,1fr);}
   .features-grid{grid-template-columns:1fr;}
   .steps{grid-template-columns:1fr;}
   .security-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
   h1{font-size:2.2rem;}
   h2{font-size:1.7rem;}
   .section{padding:64px 0;}
+}
+@media(max-width:400px){
+  .trust-grid{grid-template-columns:1fr;}
+  .trust-item{border-right:none;border-bottom:1px solid var(--line);}
+  .trust-item:last-child{border-bottom:none;}
 }
 </style>
 </head>
@@ -528,7 +545,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="hero-text">
       <div class="eyebrow">India's Family Health Companion</div>
       <h1>Your family's health, finally in <span>plain language.</span></h1>
-      <p class="subhead">Scan any lab report. Understand it instantly. Manage every family member's health history — in Hindi, English, or your own language. All in one secure place.</p>
+      <p class="subhead">Scan any lab report. Understand it in seconds. Manage every family member's health history in Hindi, English, or your own language. All in one secure place.</p>
       <div class="hero-ctas">
         <a href="#final-cta" class="btn btn-primary btn-lg">Get Started Free</a>
         <a href="#how-it-works" class="btn btn-ghost btn-lg">See How It Works</a>
@@ -593,7 +610,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
     </div>
     <div style="background:var(--f0);border:1px solid var(--f1);border-radius:14px;padding:20px 28px;margin-bottom:48px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
       <div style="font-family:'DM Mono',monospace;font-size:2rem;font-weight:700;color:var(--f8);flex-shrink:0;">80%</div>
-      <div style="font-size:.9rem;color:var(--char);line-height:1.6;flex:1;min-width:200px;">of India's healthcare specialists are concentrated in cities — yet <strong>73% of India's population lives elsewhere</strong>. For hundreds of millions of families, clear health communication isn't a convenience. It's a necessity.</div>
+      <div style="font-size:.9rem;color:var(--char);line-height:1.6;flex:1;min-width:200px;">of India's healthcare specialists are concentrated in cities, but <strong>73% of India's population lives elsewhere</strong>. For hundreds of millions of families, getting clear health information is not optional. It's survival.</div>
       <a href="about.html" style="font-size:.82rem;font-weight:700;color:var(--f8);white-space:nowrap;border-bottom:1px solid var(--f1);">Learn about our mission →</a>
     </div>
     <div class="problem-grid">
@@ -610,7 +627,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
       <div class="problem-card">
         <div class="problem-icon">🚨</div>
         <h3>Critical info missing in emergencies</h3>
-        <p>Blood type? Allergies? Current medications? In an emergency, no one remembers. Every second of delay matters — and confusion costs precious time when it matters most.</p>
+        <p>Blood type? Allergies? Current medications? In an emergency, no one can remember everything. Every second counts. Confusion costs time no one has.</p>
       </div>
     </div>
   </div>
@@ -622,7 +639,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="solution-bridge">
       <div class="eyebrow terra" style="margin-bottom:20px;">The solution</div>
       <h2 style="color:var(--f8);">Prakrit brings your family's entire health journey into one secure, intelligent app.</h2>
-      <p style="margin-top:20px;">Upload any medical document and get a plain-language explanation in under 7 seconds. Manage health profiles for every family member. Ask questions in Hindi or English. Set medication reminders. And in an emergency — everything your family needs is one tap away.</p>
+      <p style="margin-top:20px;">Upload any medical document and get a plain-language explanation in under 7 seconds. Manage health profiles for every family member. Ask questions in Hindi or English. Set medication reminders. In an emergency, your family's complete history is right there.</p>
       <div class="solution-disclaimer">Prakrit organizes and explains your health documents. It does not diagnose, prescribe, or replace your doctor's advice.</div>
     </div>
   </div>
@@ -718,7 +735,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
         <div class="feature-screen">📊<br><br>⚠ Papa's BP trending up — 3 weeks<br>💊 Missed doses correlate with sugar rise<br>🔔 Amma's TSH due for retest<br><br><em style="font-size:.7rem;">[App screenshot: health insights]</em></div>
         <div class="feature-body">
           <h3>Health Insights</h3>
-          <p>AI continuously analyzes your family's uploaded documents and medication data — surfacing patterns, correlations, and preventive nudges before problems escalate. Not a diagnosis. A heads-up.</p>
+          <p>AI continuously analyzes your family's uploaded documents and medication data, surfacing patterns, correlations, and preventive nudges before problems escalate. Not a diagnosis. A heads-up.</p>
         </div>
       </div>
     </div>
@@ -735,7 +752,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
       <div class="gpt-text">
         <div class="eyebrow" style="margin-bottom:20px;">PrakritGPT</div>
         <h2 style="color:#fff;">Ask anything. Get answers grounded in your own health records.</h2>
-        <p style="margin-top:16px;">PrakritGPT is not a generic chatbot. It reads your actual uploaded reports, understands Indian medical formats, and answers in plain Hindi or English — with zero hallucinations. It will not guess. It will not speculate. It only answers from what it knows to be true from your documents.</p>
+        <p style="margin-top:16px;">PrakritGPT is not a generic chatbot. It reads your actual uploaded reports, understands Indian medical formats, and answers in plain Hindi or English. It will not guess. It will not speculate. It only answers from what it knows to be true from your documents.</p>
         <div class="gpt-chips">
           <span class="gpt-chip">"Is Papa's HbA1c improving?"</span>
           <span class="gpt-chip">"What does 'mild cardiomegaly' mean?"</span>
@@ -778,10 +795,10 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="retention-inner">
       <div class="retention-text">
         <div class="eyebrow muted" style="margin-bottom:20px;">What the numbers say</div>
-        <h2>Families don't just try Prakrit. They rely on it.</h2>
-        <p style="margin-top:16px;">78% of families who use Prakrit are still active a week later. The industry average for health apps is 20–30%. That difference is families who found something that actually works for them.</p>
+        <h2>Families who try Prakrit keep coming back.</h2>
+        <p style="margin-top:16px;">78% of families who use Prakrit are still active a week later. The industry average for health apps is 20–30%. That gap represents families who found something that actually works for them.</p>
         <div class="retention-quote" style="margin-top:24px;">
-          "High retention means Prakrit isn't an app people try — it's an app families integrate into how they actually manage their health."
+          "High retention means families open Prakrit regularly. They use it to track medications, store reports, and prepare for appointments — not just once after a checkup."
         </div>
       </div>
       <div>
@@ -859,7 +876,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
       <div class="wa-text">
         <div class="eyebrow" style="margin-bottom:20px;">Zero-friction entry</div>
         <h2 style="color:#fff;">Already on WhatsApp? You're already on Prakrit.</h2>
-        <p>India has 535 million+ WhatsApp users. We built Prakrit to meet families where they already are — no app switch, no new habit to form. Just send a photo and get clarity in seconds.</p>
+        <p>India has 535 million+ WhatsApp users. So we built Prakrit to work inside WhatsApp. No separate app, no new habit to build. Just send a photo and get clarity in seconds.</p>
         <div class="wa-steps">
           <div class="wa-step"><div class="wa-step-n">1</div><p>Send a photo of any lab report or prescription to Prakrit's WhatsApp number</p></div>
           <div class="wa-step"><div class="wa-step-n">2</div><p>AI reads and analyzes the document in under 7 seconds</p></div>
@@ -940,8 +957,8 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="inst-inner">
       <div class="inst-text">
         <div class="eyebrow muted" style="margin-bottom:20px;">Beyond families</div>
-        <h2>Prakrit for Institutions — powering care at scale.</h2>
-        <p style="margin-top:16px;">We've extended Prakrit's AI intelligence to care facilities, hospitals, and diagnostic labs — so professional caregivers have the same clarity and confidence that families do.</p>
+        <h2>Prakrit for Institutions.</h2>
+        <p style="margin-top:16px;">We built a version of Prakrit for care facilities, hospitals, and diagnostic labs. Professional caregivers get the same clear picture of patient health that families get.</p>
         <div class="inst-points" style="margin-top:28px;">
           <div class="inst-point"><div class="inst-check">✓</div><p>Staff log vitals via the app or a simple WhatsApp message — AI parses and stores automatically</p></div>
           <div class="inst-point"><div class="inst-check">✓</div><p>AI flags deteriorating health patterns before they become emergencies — 3 days early on average</p></div>
@@ -975,24 +992,24 @@ footer{background:var(--f9);padding:64px 0 32px;}
       <div class="eyebrow muted" style="margin-bottom:16px;">The people behind Prakrit</div>
       <h2>Built by a team that understands India's health challenges.</h2>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px;">
+    <div class="team-grid">
       <div style="background:var(--white);border:2px solid var(--f8);border-radius:var(--r-card);padding:32px;text-align:center;">
         <div style="width:64px;height:64px;border-radius:50%;background:var(--t);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">SN</div>
         <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Shailesh N A</div>
         <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Primary Partner & Co-Founder</div>
-        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Drives Prakrit's growth strategy and institutional partnerships — ensuring Prakrit reaches the families that need it most.</p>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Drives Prakrit's growth strategy and institutional partnerships, focused on getting Prakrit to the families who need it most.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:32px;text-align:center;">
         <div style="width:64px;height:64px;border-radius:50%;background:var(--f8);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">NR</div>
         <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Narayanan Ramachandran</div>
         <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Co-Founder</div>
-        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Product vision rooted in making healthcare intelligence accessible to every Indian family — not just those with access to premium care.</p>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Leads product vision with one clear goal: healthcare information that any Indian family can understand, whether they're in Delhi or a small town in Bihar.</p>
       </div>
       <div style="background:var(--white);border:1px solid var(--line);border-radius:var(--r-card);padding:32px;text-align:center;">
         <div style="width:64px;height:64px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:1.1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">PG</div>
         <div style="font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:4px;">Pratik Gade</div>
         <div style="font-size:.75rem;font-weight:700;color:var(--t);margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;">Co-Founder</div>
-        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Architects Prakrit's technical foundation — from the AI document analysis pipeline to the multi-platform experience families rely on daily.</p>
+        <p style="font-size:.84rem;color:var(--muted);line-height:1.65;">Builds Prakrit's technical core, from the AI document analysis pipeline to the cross-platform experience families rely on every day.</p>
       </div>
     </div>
     <div style="background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;">
@@ -1011,7 +1028,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="security-header">
       <div class="eyebrow muted" style="margin-bottom:16px;">Built on trust</div>
       <h2>Your family's health data is yours. Always.</h2>
-      <p style="color:var(--muted);margin-top:12px;">Health data is deeply personal. We designed Prakrit with privacy as a foundation — not an afterthought.</p>
+      <p style="color:var(--muted);margin-top:12px;">Health data is deeply personal. We built Prakrit's privacy model from the ground up, not added it later.</p>
     </div>
     <div class="security-grid">
       <div class="security-card">
@@ -1117,7 +1134,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
   <div class="container">
     <div class="eyebrow" style="margin-bottom:20px;">Get started today</div>
     <h2>Your family's health is worth organizing.</h2>
-    <p>Join 1,20,000+ Indian families who use Prakrit to understand their health, manage their records, and feel more in control — starting today, for free.</p>
+    <p>Join 1,20,000+ Indian families who use Prakrit to understand their health records and feel prepared at every doctor visit. Free to start.</p>
     <div class="final-btns">
       <a href="/auth" class="btn btn-primary btn-lg">Get Started Free</a>
       <a href="#how-it-works" class="btn btn-ghost-white btn-lg">See How It Works</a>
@@ -1132,7 +1149,7 @@ footer{background:var(--f9);padding:64px 0 32px;}
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="logo"><span style="width:8px;height:8px;background:var(--t);border-radius:50%;display:inline-block;"></span> prakrit.ai</div>
-        <p>Your family's health companion. Understand any medical document in plain language, manage every family member's health, and always be prepared — in Hindi, English, or your language.</p>
+        <p>Understand any medical document in plain language, keep every family member's records in one place, and have what you need when you need it — in Hindi, English, or your own language.</p>
         <p style="font-size:.78rem;color:rgba(255,255,255,.35);margin-top:8px;">hello@prakrit.ai</p>
         <div class="social-row">
           <a class="social-link" href="#">in</a>

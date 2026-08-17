@@ -46,7 +46,7 @@ p{line-height:1.72;color:var(--char);}
 .section.forest-dark{background:var(--f9);}
 
 /* ─── Buttons ─── */
-.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.6rem;border-radius:var(--r-btn);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .18s ease;border:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.85rem 1.6rem;border-radius:var(--r-btn);font-weight:700;font-size:.9rem;cursor:pointer;transition:all .18s ease;border:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;min-height:44px;}
 .btn-primary{background:var(--t);color:#fff;border-color:var(--t);}
 .btn-primary:hover{background:#b04d23;border-color:#b04d23;transform:translateY(-1px);box-shadow:0 4px 20px rgba(200,91,42,.35);}
 .btn-forest{background:var(--f8);color:#fff;border-color:var(--f8);}
@@ -290,7 +290,7 @@ p{line-height:1.72;color:var(--char);}
 .faq-intro{text-align:center;margin-bottom:44px;}
 .faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:880px;margin:0 auto;}
 .faq-item{background:#fff;border-radius:12px;border:1px solid var(--line);overflow:hidden;}
-.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 20px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 20px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:700;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:44px;}
 .faq-q .icon{width:20px;height:20px;border-radius:50%;background:var(--sand);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .2s;}
 .faq-q.open .icon{background:var(--f0);transform:rotate(45deg);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .2s;}
@@ -328,15 +328,24 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
   .hero-stat-bar{gap:24px;}
   .compare-table th,.compare-table td{padding:12px 10px;}
 }
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .nav-ctas{display:none;}
+  .nav-hamburger{display:flex;}
+  .hero-stat-bar{flex-wrap:wrap;gap:24px;}
+  .hero-stat-bar .hero-stat{min-width:calc(50% - 24px);}
+  .mock-phone,.mock-wide{max-width:100% !important;}
+  .feat-text{order:1 !important;}
+  .feat-visual{order:2 !important;}
+}
 @media(max-width:640px){
-  .nav-links,.nav-right .btn{display:none;}
-  .hamburger{display:flex;}
   .section{padding:64px 0;}
   .feat-section{padding:64px 0;}
   .footer-grid{grid-template-columns:1fr;}
-  .hero-stat-bar{gap:16px;flex-wrap:wrap;}
+  .hero-stat-bar{gap:16px;}
   .hero-stat-bar .hero-stat{min-width:calc(50% - 16px);}
   .compare-table{min-width:500px;}
+  .container{padding:0 16px;}
 }
 </style>
 </head>
@@ -375,7 +384,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
   <div class="container">
     <span class="eyebrow terra">Built for Indian Families</span>
     <h1>Nine features. One app.<br><em>Complete family health intelligence.</em></h1>
-    <p class="sub">From decoding a lab report to managing four family members' medications — Prakrit handles every part of your family's health journey.</p>
+    <p class="sub">From decoding a lab report to keeping track of four family members' medications, Prakrit handles it all in one place.</p>
     <a href="#" class="btn btn-primary">Get Started Free &nbsp;→</a>
     <div class="hero-stat-bar">
       <div class="hero-stat">
@@ -425,7 +434,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <div class="desc">
           <p>Most Indians leave the clinic with a folder full of papers they don't fully understand. Lab reports, discharge summaries, ECGs, ultrasound findings — each written in clinical shorthand designed for doctors, not families.</p>
           <p>Prakrit's AI reads any medical document and translates it into plain, human language in under 7 seconds. Upload a photo from your phone camera — blurry, angled, even folded — and Prakrit will identify the lab, extract every value, flag what's outside the normal range, and explain what it means for your health.</p>
-          <p>Trained on Indian lab formats from SRL, Thyrocare, Apollo Diagnostics, Metropolis, and Lal PathLabs, the AI understands how Indian labs present values, reference ranges, and units — including regional format variations across states.</p>
+          <p>Trained on Indian lab formats from SRL, Thyrocare, Apollo Diagnostics, Metropolis, and Lal PathLabs, the AI understands how Indian labs present values, reference ranges, and units. It handles regional format differences across states too.</p>
         </div>
         <ul class="feat-bullets">
           <li>Accepts lab reports, prescriptions, discharge summaries, X-ray reports, ultrasounds, ECGs, blood panels — any format</li>
@@ -550,9 +559,9 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <span class="feat-num">Feature 03</span>
         <h2>Prakrit<span>GPT</span></h2>
         <div class="desc">
-          <p>Generic AI chatbots will confidently tell you things that aren't in your documents — and you'll never know the difference. PrakritGPT is different by design. It answers only from what's actually in your family's uploaded documents, nothing more. No hallucinations. No invented correlations. No false reassurance.</p>
-          <p>Ask it anything about your family's health records in Hindi or English, and it will search across all uploaded documents, synthesize an answer, and explain it clearly. If the answer isn't in your documents, it says so directly — and suggests what to ask your doctor instead.</p>
-          <p>This is what a knowledgeable family member with a medical background would do: explain what the reports actually say, flag what seems important, and help you prepare the right questions before your next appointment.</p>
+          <p>Generic AI chatbots will confidently tell you things that aren't in your documents, and you'll never know the difference. PrakritGPT answers only from what's actually in your family's uploaded documents. No hallucinations, no invented correlations, no false reassurance.</p>
+          <p>Ask it anything about your family's health records in Hindi or English. It searches across all uploaded documents, synthesizes an answer, and explains it clearly. If the answer isn't in your documents, it says so and suggests what to ask your doctor instead.</p>
+          <p>Think of it as a medically literate family member who reads your reports, flags what matters, and helps you walk into the next doctor visit prepared.</p>
         </div>
         <ul class="feat-bullets">
           <li>Strictly document-grounded — every answer cites which report it came from, with the exact value</li>
@@ -608,8 +617,8 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <span class="feat-num">Feature 04</span>
         <h2>Medication <span>Tracking</span></h2>
         <div class="desc">
-          <p>Most medication reminder apps treat all pills the same. Prakrit understands that Amma takes Metformin before meals, Telmisartan in the evening, and Calcium after lunch — and Papa's Glimepiride must be taken before breakfast, not after. These details matter enormously in chronic disease management.</p>
-          <p>Set up each family member's complete medication schedule once, and Prakrit handles the reminders. Track who took what, and when. If a dose is missed two or more times in a week, Prakrit sends a gentle alert — not a harsh notification — and logs the missed dose so you can discuss adherence patterns with the doctor.</p>
+          <p>Most medication reminder apps treat all pills the same. Prakrit understands that Amma takes Metformin before meals, Telmisartan in the evening, and Calcium after lunch, while Papa's Glimepiride must be taken before breakfast, not after. In chronic disease management, these details matter.</p>
+          <p>Set up each family member's complete medication schedule once, and Prakrit handles the reminders. Track who took what and when. If a dose is missed two or more times in a week, Prakrit sends a gentle alert and logs the missed dose so you can discuss adherence with the doctor.</p>
           <p>When a new prescription is uploaded, Prakrit automatically offers to add the new medications to the schedule, extracting the dosage, frequency, and timing instructions directly from the prescription image.</p>
         </div>
         <ul class="feat-bullets">
@@ -682,7 +691,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <span class="feat-num">Feature 05</span>
         <h2>Health <span>Timeline</span></h2>
         <div class="desc">
-          <p>A doctor you're seeing for the first time will ask: "Any hospitalizations? What medications are you on? When was your last blood test?" Most patients can't answer these questions accurately — not because they don't care, but because health records are scattered across WhatsApp chats, clinic folders, and memory.</p>
+          <p>A doctor you're seeing for the first time will ask: "Any hospitalizations? What medications are you on? When was your last blood test?" Most patients can't answer accurately. Health records are scattered across WhatsApp chats, clinic folders, and memory.</p>
           <p>Prakrit's Health Timeline solves this permanently. Every document uploaded, every medication change, every doctor visit logged — all organized chronologically on a single timeline per family member. Scroll back years. See when a diagnosis was made, how values have trended, which treatments were tried.</p>
           <p>The AI continuously analyzes the timeline to surface trends: "Papa's HbA1c has improved three months in a row" or "Amma's blood pressure readings are higher than last quarter." One tap to export the complete timeline as a shareable PDF — ready to hand to any new specialist.</p>
         </div>
@@ -766,7 +775,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <div class="desc">
           <p>Most health apps wait for you to ask questions. Prakrit's Insights engine works constantly in the background — analyzing your family's uploaded documents, medication adherence data, and health timeline — and surfaces what matters before you know to ask.</p>
           <p>It connects dots that are hard to see manually: missed doses followed by higher blood sugar readings, a blood pressure trend that's quietly creeping upward over six weeks, a lab test that's overdue based on the last result. These patterns exist in the data — Prakrit simply makes them visible.</p>
-          <p>Insights are calibrated carefully. Prakrit does not overalert, does not make diagnoses, and does not create anxiety around normal variation. Every insight includes a clear action: discuss with your doctor, schedule a retest, or simply keep an eye on it.</p>
+          <p>Insights are calibrated. Prakrit doesn't raise false alarms or make diagnoses, and it never flags normal variation as a problem. Every insight comes with a clear next step: discuss with your doctor, schedule a retest, or just watch it.</p>
         </div>
         <ul class="feat-bullets">
           <li>Continuous background analysis across medications, lab results, and health events — no manual input required</li>
@@ -819,7 +828,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <div class="desc">
           <p>In a medical emergency, 90 seconds of delay in communicating critical information can change outcomes. When a paramedic or emergency room doctor needs to know about allergies, chronic conditions, and current medications, the information must be immediately available — not buried in a WhatsApp folder, not locked behind an app that needs Wi-Fi.</p>
           <p>Prakrit's Emergency Health Card is a digital summary card for every family member. Blood type, known allergies, chronic conditions, current medications with doses, and primary emergency contacts — compiled automatically from uploaded documents and always kept current.</p>
-          <p>The card is available offline, accessible with one tap even on a locked screen (via a widget or saved shortcut), and shareable as a QR code that any smartphone camera can read. No app download required for whoever receives the QR.</p>
+          <p>The card is available offline. One tap on a locked screen (via a widget or shortcut) opens it. It's shareable as a QR code readable by any smartphone camera, no app download required for whoever receives it.</p>
         </div>
         <ul class="feat-bullets">
           <li>Available fully offline — no internet connection required in an emergency situation</li>
@@ -954,7 +963,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
         <div class="desc">
           <p>India has 535 million active WhatsApp users. Most of them are already sharing medical reports on WhatsApp — sending photos to relatives, doctors, and pharmacists. Prakrit meets them exactly where they already are.</p>
           <p>Add Prakrit on WhatsApp, send any medical report as a photo, and receive a complete, plain-language breakdown within seconds. Ask follow-up questions in Hindi or English in the same chat. The entire experience works inside WhatsApp — no app to download, no account to create, no learning curve.</p>
-          <p>For users who later want the full family management experience, results can be saved to a Prakrit account with one confirmation message. WhatsApp is the zero-friction entry point into the Prakrit ecosystem — designed for the vast majority of Indians who will engage with health AI on WhatsApp before they download any app.</p>
+          <p>For users who later want the full family management experience, results can be saved to a Prakrit account with one confirmation message. WhatsApp is the zero-friction entry point into the Prakrit ecosystem, built for the reality that most Indians will try health AI on WhatsApp long before they download any app.</p>
         </div>
         <ul class="feat-bullets">
           <li>Zero-friction entry: just send a report photo on WhatsApp — no app download, no signup required to get started</li>
@@ -1029,7 +1038,7 @@ footer{background:var(--f9);color:rgba(255,255,255,.75);padding:64px 0 32px;}
     <div class="compare-intro">
       <span class="eyebrow terra">Category Comparison</span>
       <h2>No other platform combines all of this.</h2>
-      <p>Prakrit.AI sits at the intersection of a category no existing product owns — family-centric, document-native, vernacular-first health intelligence.</p>
+      <p>Prakrit.AI sits at an intersection no existing product owns: family-centric, document-native, vernacular-first health intelligence.</p>
     </div>
     <div class="compare-table-wrap">
       <table class="compare-table">
