@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Perfect Skills — Sales Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:#1d4ed8; --brand-50:#eff6ff; --brand-100:#dbeafe; --brand-700:#1d4ed8; --brand-800:#1e40af; --brand-900:#1e3a8a;
+    --green:#15803d; --green-50:#f0fdf4; --green-100:#dcfce7;
+    --amber:#b45309; --amber-50:#fffbeb; --amber-100:#fef3c7;
+    --red:#b91c1c; --red-50:#fef2f2; --red-100:#fee2e2;
+    --ink:#111827; --charcoal:#1f2937; --muted:#6b7280; --line:#e5e7eb; --sand:#f9fafb; --white:#fff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"DM Sans",-apple-system,sans-serif;color:var(--charcoal);background:var(--sand);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+  /* Layout */
+  .layout{display:flex;min-height:100vh;}
+  .sidebar{width:240px;flex:none;background:var(--brand-900);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;z-index:50;padding:0 0 24px;}
+  .main{margin-left:240px;max-width:860px;padding:40px 48px 80px;}
+
+  /* Sidebar */
+  .sb-brand{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1);}
+  .sb-brand .name{font-size:.95rem;font-weight:800;color:#fff;letter-spacing:-.01em;}
+  .sb-brand .sub{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:2px;}
+  .sb-section{padding:10px 20px 4px;font-size:.62rem;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.14em;margin-top:8px;}
+  .sb-link{display:block;padding:6px 20px;font-size:.82rem;font-weight:600;color:rgba(255,255,255,.65);text-decoration:none;border-left:3px solid transparent;transition:all .15s;}
+  .sb-link:hover,.sb-link.active{color:#fff;background:rgba(255,255,255,.08);border-left-color:#60a5fa;}
+
+  /* Typography */
+  h1{font-size:2rem;font-weight:800;color:var(--brand-900);letter-spacing:-.02em;margin-bottom:.4rem;}
+  h2{font-size:1.4rem;font-weight:800;color:var(--brand-900);letter-spacing:-.01em;margin-bottom:1rem;padding-top:2.5rem;}
+  h3{font-size:1.05rem;font-weight:700;color:var(--charcoal);margin-bottom:.5rem;margin-top:1.2rem;}
+  h4{font-size:.88rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;margin-top:1rem;}
+  p{margin-bottom:.7rem;color:var(--charcoal);}
+
+  /* Divider */
+  .section-divider{border:none;border-top:2px solid var(--line);margin:2.5rem 0 0;}
+
+  /* Callout boxes */
+  .box{border-radius:12px;padding:1rem 1.2rem;margin:1rem 0;}
+  .box-blue{background:var(--brand-50);border-left:4px solid var(--brand-700);}
+  .box-green{background:var(--green-50);border-left:4px solid var(--green);}
+  .box-amber{background:var(--amber-50);border-left:4px solid var(--amber);}
+  .box-red{background:var(--red-50);border-left:4px solid var(--red);}
+  .box p,.box li{font-size:.9rem;color:var(--ink);}
+  .box strong{color:var(--ink);}
+
+  /* Script blocks */
+  .script{background:#1e293b;border-radius:12px;padding:1.1rem 1.3rem;margin:1rem 0;}
+  .script .script-label{font-size:.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem;}
+  .script p{color:#e2e8f0;font-size:.9rem;line-height:1.65;margin-bottom:.5rem;}
+  .script p:last-child{margin-bottom:0;}
+  .script .hi{color:#7dd3fc;font-weight:700;}
+  .script .pause{color:#fbbf24;font-size:.75rem;font-style:italic;}
+  .script .hindi{color:#86efac;}
+
+  /* Checklist */
+  .checklist{list-style:none;margin:.4rem 0 1rem;}
+  .checklist li{display:flex;gap:.7rem;align-items:flex-start;padding:.45rem 0;border-bottom:1px solid var(--line);font-size:.9rem;}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist li .cb{width:18px;height:18px;border:2px solid var(--line);border-radius:5px;flex:none;margin-top:2px;}
+  .checklist .tag{font-size:.7rem;font-weight:700;border-radius:6px;padding:.1rem .45rem;flex:none;}
+  .tag-must{background:var(--red-100);color:var(--red);}
+  .tag-good{background:var(--green-100);color:var(--green);}
+  .tag-opt{background:var(--line);color:var(--muted);}
+
+  /* Objection table */
+  .obj-row{display:grid;grid-template-columns:1fr 1.4fr;gap:1rem;border-bottom:1px solid var(--line);padding:.9rem 0;}
+  .obj-row:last-child{border-bottom:none;}
+  .obj-q{font-size:.88rem;font-weight:700;color:var(--red);line-height:1.4;}
+  .obj-a{font-size:.88rem;color:var(--charcoal);line-height:1.5;}
+
+  /* Price table */
+  .price-row{display:grid;grid-template-columns:1.4fr 1fr 1.6fr;gap:.8rem;padding:.75rem 0;border-bottom:1px solid var(--line);align-items:start;}
+  .price-row:last-child{border-bottom:none;}
+  .price-row .offer{font-size:.9rem;font-weight:700;color:var(--ink);}
+  .price-row .amt{font-size:.9rem;font-weight:800;color:var(--brand-700);font-family:"DM Mono",monospace;}
+  .price-row .note{font-size:.8rem;color:var(--muted);line-height:1.4;}
+  .price-hdr{display:grid;grid-template-columns:1.4fr 1fr 1.6fr;gap:.8rem;padding:.4rem 0;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:2px solid var(--line);}
+
+  /* Follow-up template */
+  .template{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem 1.2rem;margin:.8rem 0;font-size:.88rem;line-height:1.7;}
+  .template .tlabel{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.5rem;}
+  .template p{margin-bottom:.4rem;color:var(--ink);}
+
+  /* Step badges */
+  .step-row{display:flex;gap:1rem;align-items:flex-start;margin:.7rem 0;}
+  .step-num{width:30px;height:30px;border-radius:50%;background:var(--brand-700);color:#fff;font-weight:800;font-size:.82rem;display:grid;place-items:center;flex:none;margin-top:2px;}
+  .step-body h3{margin-top:0;}
+
+  /* Status pills */
+  .pill{display:inline-block;border-radius:999px;padding:.18rem .65rem;font-size:.72rem;font-weight:700;}
+  .pill-india{background:#fef3c7;color:#92400e;}
+  .pill-us{background:#dbeafe;color:#1e40af;}
+  .pill-both{background:#f0fdf4;color:#166534;}
+
+  /* Print */
+  @media print{
+    .sidebar{display:none;}
+    .main{margin-left:0;padding:20px;}
+    .script{background:#1e293b !important;-webkit-print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-brand">
+    <div class="name">Perfect Skills</div>
+    <div class="sub">Sales Playbook · 2026</div>
+  </div>
+  <div class="sb-section">Foundation</div>
+  <a class="sb-link" href="#overview">Overview & Offer</a>
+  <a class="sb-link" href="#leads">Lead Segments</a>
+  <a class="sb-link" href="#pricing">Pricing Reference</a>
+  <div class="sb-section">Pre-Call</div>
+  <a class="sb-link" href="#precall">Pre-Call Checklist</a>
+  <div class="sb-section">Pitch Scripts</div>
+  <a class="sb-link" href="#india-script">India Script (Hi/En)</a>
+  <a class="sb-link" href="#us-script">US Script (En)</a>
+  <div class="sb-section">Handling</div>
+  <a class="sb-link" href="#objections">Objection Handling</a>
+  <div class="sb-section">Post-Call SOP</div>
+  <a class="sb-link" href="#postcall">Post-Call Actions</a>
+  <a class="sb-link" href="#followup">Follow-Up Templates</a>
+  <a class="sb-link" href="#tracker">Tracker & CRM</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- Header -->
+  <div style="margin-bottom:2rem;">
+    <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--brand-700);margin-bottom:.4rem;">Perfect Skills · Internal</div>
+    <h1>Sales Playbook</h1>
+    <p style="font-size:1.05rem;color:var(--muted);max-width:54ch;">Everything a resource needs to go from cold lead to signed proposal — pitch scripts, objection responses, SOP, and follow-up templates.</p>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem;">
+      <span class="pill pill-india">India Leads</span>
+      <span class="pill pill-us">US Leads</span>
+      <span class="pill pill-both">Websites · Automation · Consulting</span>
+    </div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 1: OVERVIEW ═══ -->
+  <h2 id="overview">1. What We Offer</h2>
+  <p>Perfect Skills builds digital infrastructure for small and mid-size businesses — websites, conversion landing pages, WhatsApp/AI automations, and consulting on identifying where their business is leaking. We are a full-service digital partner, not a freelancer.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8rem;margin:1rem 0;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem;">
+      <div style="font-size:1.3rem;margin-bottom:.4rem;">🌐</div>
+      <div style="font-weight:800;font-size:.9rem;color:var(--ink);margin-bottom:.3rem;">Website Build</div>
+      <div style="font-size:.8rem;color:var(--muted);line-height:1.5;">Professional, mobile-first website. For businesses with no site or an embarrassingly old one.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem;">
+      <div style="font-size:1.3rem;margin-bottom:.4rem;">🤖</div>
+      <div style="font-weight:800;font-size:.9rem;color:var(--ink);margin-bottom:.3rem;">WhatsApp / AI Automation</div>
+      <div style="font-size:.8rem;color:var(--muted);line-height:1.5;">Lead capture bots, follow-up sequences, appointment booking, inquiry handling — 24/7 on autopilot.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:12px;padding:1rem;">
+      <div style="font-size:1.3rem;margin-bottom:.4rem;">🔍</div>
+      <div style="font-weight:800;font-size:.9rem;color:var(--ink);margin-bottom:.3rem;">Digital Consulting</div>
+      <div style="font-size:.8rem;color:var(--muted);line-height:1.5;">Audit their current setup, identify gaps, propose the right solution — paid engagement or free discovery.</div>
+    </div>
+  </div>
+
+  <div class="box box-blue">
+    <p><strong>Our positioning:</strong> We are not the cheapest. We are the ones who actually understand what's costing you customers — and we fix it. The website is just the beginning.</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 2: LEAD SEGMENTS ═══ -->
+  <h2 id="leads">2. Lead Segments</h2>
+  <p>You are calling from scraped Google Maps lists. Every lead has been pulled because they have a weak or missing digital presence. Understand which list you're working before dialling.</p>
+
+  <h3><span class="pill pill-india">India</span> &nbsp;Pune · Surat · Jaipur</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem;margin:.7rem 0 1.2rem;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem;">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:.3rem;">🏠 Real Estate Agents</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.5;">Property brokers with no web presence. Buyers search online, agents lose leads to bigger portals.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem;">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:.3rem;">🏫 Coaching Institutes</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.5;">Tutoring centres. Parents Google before calling. Most have zero or outdated websites.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem;">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:.3rem;">🏥 Clinics / Medspas</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.5;">Doctors, aesthetic clinics. Patients search symptoms + location. Appointment booking = gold.</div>
+    </div>
+  </div>
+
+  <h3><span class="pill pill-us">US</span> &nbsp;Houston · Phoenix · Orlando</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.7rem 0 1.2rem;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem;">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:.3rem;">🏠 Real Estate Agents</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.5;">Most have a site but it's generic. Zillow-linked, no personal brand, no lead capture. Opportunity = personal brand site + automation.</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:.8rem;">
+      <div style="font-weight:700;font-size:.85rem;margin-bottom:.3rem;">💆 MedSpas / Aesthetic Clinics</div>
+      <div style="font-size:.78rem;color:var(--muted);line-height:1.5;">Site exists but slow, no online booking, losing to Instagram-first competitors. Opportunity = conversion landing page + booking bot.</div>
+    </div>
+  </div>
+
+  <div class="box box-amber">
+    <p><strong>Key mindset:</strong> India = build from scratch. US = fix what doesn't work. The pain is different. Your opening line must match.</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 3: PRICING ═══ -->
+  <h2 id="pricing">3. Pricing Reference</h2>
+
+  <div class="price-hdr"><span>Offering</span><span>Price</span><span>Notes</span></div>
+  <div class="price-row">
+    <span class="offer">🌐 Website Build</span>
+    <span class="amt">$1,000 USD</span>
+    <span class="note">India equivalent: ₹83,000. Mobile-first, professional, up in 2–3 weeks. Hosting setup included.</span>
+  </div>
+  <div class="price-row">
+    <span class="offer">🤖 WhatsApp / AI Automation</span>
+    <span class="amt">Case by case</span>
+    <span class="note">Depends on complexity. Lead capture bot starts ~$300–$500. Full inquiry-to-booking flows quoted after scoping.</span>
+  </div>
+  <div class="price-row">
+    <span class="offer">📦 Full Digital Package</span>
+    <span class="amt">$1,200–$1,800</span>
+    <span class="note">Website + basic WhatsApp automation bundled. Strongest close for India. Position as the complete solution.</span>
+  </div>
+  <div class="price-row">
+    <span class="offer">🔍 Digital Consulting / Audit</span>
+    <span class="amt">Case by case</span>
+    <span class="note">Can be free (discovery call → sells website) or paid ($200–$500) for detailed audit + roadmap. Use free audit as a foot-in-the-door.</span>
+  </div>
+
+  <div class="box box-green">
+    <p><strong>Anchor on the website first.</strong> $1,000 is your concrete number — it makes the conversation real. Automation and consulting get scoped after trust is established.</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 4: PRE-CALL CHECKLIST ═══ -->
+  <h2 id="precall">4. Pre-Call Checklist</h2>
+  <p>Do this for every lead <em>before</em> dialling. 5 minutes of research = 10× better conversation.</p>
+
+  <ul class="checklist">
+    <li><div class="cb"></div><span class="tag tag-must">Must</span><div><strong>Google their business name.</strong> Is there a website? Is it live? Note the URL. If no website — that IS your pitch.</div></li>
+    <li><div class="cb"></div><span class="tag tag-must">Must</span><div><strong>Check Google Maps listing.</strong> Any reviews? Rating? Do they have photos, hours, a description? Gaps = conversation starters.</div></li>
+    <li><div class="cb"></div><span class="tag tag-must">Must</span><div><strong>Check if site is mobile-friendly.</strong> Open on phone. Slow to load? Looks broken? Note it — use it on the call.</div></li>
+    <li><div class="cb"></div><span class="tag tag-good">Good</span><div><strong>Check their social media</strong> (Instagram, Facebook). Active or dead? How many followers? Are they running ads?</div></li>
+    <li><div class="cb"></div><span class="tag tag-good">Good</span><div><strong>Run a quick speed test</strong> (Google PageSpeed or gtmetrix.com). Score below 50 on mobile = instant talking point for US leads.</div></li>
+    <li><div class="cb"></div><span class="tag tag-good">Good</span><div><strong>Find one specific thing you can compliment.</strong> Their specialisation, their reviews, their niche. Personalisation builds rapport.</div></li>
+    <li><div class="cb"></div><span class="tag tag-opt">Optional</span><div><strong>Check if they have a WhatsApp Business number.</strong> If not — that's an automation opportunity to mention.</div></li>
+  </ul>
+
+  <div class="box box-amber">
+    <p><strong>Log everything</strong> in the tracker before the call: website status, social score, what you noticed. You'll need it for the follow-up message too.</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 5: INDIA SCRIPT ═══ -->
+  <h2 id="india-script">5. India Call Script</h2>
+  <p><span class="pill pill-india">India</span> &nbsp;Pune · Surat · Jaipur — Real estate, coaching, clinics. Keep it conversational and English throughout.</p>
+
+  <h3>Opening (first 15 seconds)</h3>
+  <div class="script">
+    <div class="script-label">Say this</div>
+    <p>• "Hi, is this [Name]? Good morning / afternoon."</p>
+    <p>• "I'm calling from <span class="hi">Perfect Skills</span> — we help local businesses in [City] get more customers through a professional online presence."</p>
+    <p>• "I was looking at your [real estate / clinic / coaching centre] on Google and I noticed <span class="hi">[specific observation — e.g., "there's no website" / "the site hasn't been updated in a while" / "you have great reviews but no way for people to reach you online directly"].</span>"</p>
+    <p>• "I'm calling because I think we can genuinely help. Do you have 2 minutes?" <span class="pause">— pause, wait for answer —</span></p>
+  </div>
+
+  <h3>If they say yes — Qualify</h3>
+  <div class="script">
+    <div class="script-label">Pick the question that fits</div>
+    <p>• <span class="hi">Real Estate:</span> "How many of your clients come through referrals versus people finding you online?"</p>
+    <p>• <span class="hi">Coaching:</span> "When parents search for [subject] coaching in [area], are they finding you online or mostly through word of mouth?"</p>
+    <p>• <span class="hi">Clinics:</span> "Do patients book appointments with you online, or mostly by calling during working hours?"</p>
+    <p><span class="pause">— Listen. Let them describe the gap themselves. —</span></p>
+  </div>
+
+  <h3>Present the Problem + Solution</h3>
+  <div class="script">
+    <div class="script-label">After they answer</div>
+    <p>• "The issue is — even people who get a referral will Google you first. If there's no proper website, they move on to whoever shows up next."</p>
+    <p>• "What we do is build a professional website — <span class="hi">mobile-first, fast, designed to get people to call or message you.</span> Most clients start seeing new inquiries within the first month."</p>
+    <p>• "It's a one-time investment of <span class="hi">₹83,000</span> — delivered in 2–3 weeks, and then it works for you 24/7." <span class="pause">— pause —</span></p>
+    <p>• "We also offer WhatsApp automation — so when someone messages you, they get an instant reply with your details and a booking link, even at 2am. Fully automatic, nothing for you to manage."</p>
+  </div>
+
+  <h3>Soft Close</h3>
+  <div class="script">
+    <div class="script-label">Moving toward next step</div>
+    <p>• "I'd rather understand your business before sending a proposal. Can we do a <span class="hi">15-minute video call this week</span> — I'll show you what I found about your current online presence and what we'd build for you."</p>
+    <p>• "No commitment. I'll also send you a few examples of sites we've done for similar businesses before the call."</p>
+    <p><span class="pause">— Stop talking. Let them respond. Do not fill the silence. —</span></p>
+  </div>
+
+  <h3>If they ask for WhatsApp</h3>
+  <div class="script">
+    <div class="script-label">When they say "send on WhatsApp"</div>
+    <p>• "Absolutely — I'll send it right now while we're on the call. You'll get our website, a couple of examples, and a short note on what I noticed about your online presence."</p>
+    <p>• "Have a look and let me know — happy to jump on a call once you've seen it."</p>
+    <p><em>(Send the WhatsApp follow-up template immediately — see Section 9.)</em></p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 6: US SCRIPT ═══ -->
+  <h2 id="us-script">6. US Call Script</h2>
+  <p><span class="pill pill-us">US</span> &nbsp;Houston · Phoenix · Orlando — Real estate agents, MedSpas. Professional tone, lead with the audit finding.</p>
+
+  <h3>Opening (first 15 seconds)</h3>
+  <div class="script">
+    <div class="script-label">Say this</div>
+    <p>Hi, is this <span class="hi">[Name]</span>?</p>
+    <p>Hi [Name], I'm calling from <span class="hi">Perfect Skills</span> — we help real estate agents and small businesses in [Houston/Phoenix/Orlando] improve their online presence and capture more leads from their website.</p>
+    <p>I was actually looking at your site before I called, and I noticed <span class="hi">[specific finding — e.g., "your mobile load time is pretty slow" / "there's no direct contact form or lead capture" / "your Google Business listing doesn't link to your site correctly"].</span></p>
+    <p>I wanted to reach out because fixing this is usually a quick win. Do you have 2 minutes?</p>
+  </div>
+
+  <h3>Qualify</h3>
+  <div class="script">
+    <div class="script-label">Understand their situation</div>
+    <p><span class="hi">For Real Estate:</span> "How are you currently generating new buyer or seller leads — mostly referrals, or do you get inquiries through your website too?"</p>
+    <p><span class="hi">For MedSpa:</span> "Are most of your new clients coming from Instagram, Google, or referrals — or a mix? Do you have online booking set up?"</p>
+    <p><span class="pause">— Listen. Let them tell you where the gap is. —</span></p>
+  </div>
+
+  <h3>Present the Problem + Solution</h3>
+  <div class="script">
+    <div class="script-label">After they answer</div>
+    <p>What we typically see with [real estate agents / medspas] in your market is that the website exists, but it's not actually <span class="hi">working as a lead machine.</span> People visit, don't find what they need quickly, and move on.</p>
+    <p>We rebuild or redesign the site — <span class="hi">fast, mobile-optimised, with a clear call to action</span> — so visitors actually convert into calls or form fills. We can also set up an AI assistant on WhatsApp or your website that handles inquiries automatically, 24/7.</p>
+    <p>Our website package starts at <span class="hi">$1,000</span> flat — typically a 2–3 week turnaround. Automation is scoped separately based on what you actually need.</p>
+    <p><span class="pause">— pause —</span></p>
+    <p>The most useful thing I can do right now is put together a <span class="hi">quick audit of your current site</span> — what's working, what's not, and what we'd change. Would that be helpful? I can have it to you by [tomorrow/end of week].</p>
+  </div>
+
+  <h3>Book the follow-up</h3>
+  <div class="script">
+    <div class="script-label">Close to next step</div>
+    <p>The audit is completely free — takes me about 20 minutes to put together. I'll send it over and then we can jump on a quick call if it makes sense to move forward.</p>
+    <p>What's a good email to send it to? And are you generally available for a 15-minute call <span class="hi">[Tuesday/Wednesday]</span> morning?</p>
+    <p><span class="pause">— Get the email. Confirm the call time. End the call on a clear next step. —</span></p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 7: OBJECTION HANDLING ═══ -->
+  <h2 id="objections">7. Objection Handling</h2>
+
+  <div class="obj-row" style="padding-top:0;">
+    <div class="obj-q">"I already have a website."</div>
+    <div class="obj-a">That's great — I saw it actually. A lot of businesses have a website but it's not generating leads. Can I ask — how many inquiries do you get through it in a month? <em>(If low → offer the audit. If they don't know → that's the problem.)</em></div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"We get most business from referrals."</div>
+    <div class="obj-a">Referrals are the best leads — but the first thing a referred person does is Google you to verify you're legit. If they land on a weak site or nothing at all, you lose them before they even call. A good website protects your referral pipeline.</div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"I don't have budget right now."</div>
+    <div class="obj-a">I understand. Can I ask — what's one new client worth to you? <em>(They give a number)</em>. Our website typically helps clients get 2–3 new inquiries in the first month. At $1,000 it pays for itself with one conversion. Would it help to see a couple of examples first?</div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"We already have someone managing our digital."</div>
+    <div class="obj-a">That's fair. Out of curiosity — are you happy with the results you're getting from your current site? <em>(If yes → respect it and exit cleanly. If hesitant → offer the free audit as a second opinion.)</em></div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"Send me an email / WhatsApp."</div>
+    <div class="obj-a">Absolutely — I'll send it right now while we're speaking. What's a good number / email? <em>(This is a warm signal. Send the template immediately and follow up in 24 hours.)</em></div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"Not interested."</div>
+    <div class="obj-a">Totally fine. Just out of curiosity — is it the timing, or is digital presence not something you're focused on right now? <em>(One genuine question. If still no — thank them, mark archive, move on. Do not push.)</em></div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"That's too expensive." / "Budget nahi hai."</div>
+    <div class="obj-a">I understand. Can I ask — what's one new client worth to your business? <em>(They give a number.)</em> If the website brings in even one new client, it pays for itself. And the site works for 3–4 years — that's less than ₹70 per day. Would it help to see a couple of examples first?</div>
+  </div>
+  <div class="obj-row">
+    <div class="obj-q">"I need to think / discuss with partner."</div>
+    <div class="obj-a">Of course — what's the best way to follow up? Can I send you a short brief over WhatsApp that you can share with them? That way they have the full picture. <em>(Get the commitment to a specific follow-up time.)</em></div>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 8: POST-CALL SOP ═══ -->
+  <h2 id="postcall">8. Post-Call SOP</h2>
+  <p>What you do <em>immediately</em> after hanging up determines whether the lead converts or goes cold.</p>
+
+  <div class="step-row">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>Log the call in the tracker — within 5 minutes</h3>
+      <p>Open <code>LeadScraper-Tracker.xlsx</code>. Update: call outcome (Interested / Follow-up / Not interested / No answer), notes from the call, and next action with date.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>Send the WhatsApp / email follow-up — within 10 minutes</h3>
+      <p>Do not wait. Send the relevant template (see Section 9) while you're still top of mind. Personalise it with 1–2 specific things from the call.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>For US leads — send the audit</h3>
+      <p>If you promised an audit, prepare and send it within 24 hours. Use the site speed score, mobile screenshot, missing CTA — make it concrete, not generic.</p>
+    </div>
+  </div>
+  <div class="step-row">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>Schedule the follow-up reminder</h3>
+      <p>If no response in 48 hours — send follow-up #2. If no response to that — call again on Day 6. Use the sequence below.</p>
+    </div>
+  </div>
+
+  <h4>Follow-up Sequence</h4>
+  <div style="display:grid;grid-template-columns:80px 1fr;gap:.5rem .9rem;align-items:start;margin:.5rem 0 1rem;font-size:.88rem;">
+    <span style="font-weight:700;color:var(--brand-700);font-family:'DM Mono',monospace;">Day 0</span><span>Call + immediate WhatsApp/email follow-up</span>
+    <span style="font-weight:700;color:var(--brand-700);font-family:'DM Mono',monospace;">Day 2–3</span><span>WhatsApp follow-up #2 — value add (share a relevant example or insight)</span>
+    <span style="font-weight:700;color:var(--brand-700);font-family:'DM Mono',monospace;">Day 6</span><span>Call back — offer one free fix or the free audit</span>
+    <span style="font-weight:700;color:var(--brand-700);font-family:'DM Mono',monospace;">Day 10</span><span>Final WhatsApp — social proof + soft close</span>
+    <span style="font-weight:700;color:var(--brand-700);font-family:'DM Mono',monospace;">Day 14</span><span>Archive to cold list. Move on.</span>
+  </div>
+
+  <div class="box box-red">
+    <p><strong>Do not over-contact.</strong> 4 touchpoints over 14 days is the ceiling. After that, they move to cold and you re-approach in 60 days with a different angle.</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 9: FOLLOW-UP TEMPLATES ═══ -->
+  <h2 id="followup">9. Follow-Up Templates</h2>
+  <p>Copy, personalise the <span style="background:#fef3c7;padding:.1rem .3rem;border-radius:4px;font-family:'DM Mono',monospace;font-size:.8rem;">[bracketed]</span> fields, and send. Do not send generic messages.</p>
+
+  <h3><span class="pill pill-india">India</span> &nbsp;WhatsApp — After Call (Day 0)</h3>
+  <div class="template">
+    <div class="tlabel">WhatsApp · India · Post-call · Day 0</div>
+    <p>Hi [Name], good to speak with you just now.</p>
+    <p>As discussed, I'm sending over what we can do for your business.</p>
+    <p>✅ Professional, mobile-first website<br/>
+    ✅ 2–3 week delivery<br/>
+    ✅ [Specific thing you discussed on call — e.g., contact form + WhatsApp button]<br/>
+    ✅ One-time investment: ₹83,000</p>
+    <p>I've pulled a few examples for businesses similar to yours — have a look: [link or attach screenshots]</p>
+    <p>Happy to do a quick 15-minute call this week to walk you through exactly what we'd build for you. When works better — [Day 1] or [Day 2]?</p>
+    <p>— [Your name], Perfect Skills<br/>perfectskills.in</p>
+  </div>
+
+  <h3><span class="pill pill-india">India</span> &nbsp;WhatsApp — Follow-Up #2 (Day 3)</h3>
+  <div class="template">
+    <div class="tlabel">WhatsApp · India · Day 3</div>
+    <p>Hi [Name],</p>
+    <p>One thing worth sharing — businesses in [City] that show up properly on Google get around 40% more inquiries than those relying only on referrals.</p>
+    <p>A clean, professional website can make that difference for your [real estate / clinic / coaching centre].</p>
+    <p>Happy to answer any questions — or just give me a call: [Your number]</p>
+  </div>
+
+  <h3><span class="pill pill-us">US</span> &nbsp;Email — After Call (Day 0)</h3>
+  <div class="template">
+    <div class="tlabel">Email · US · Post-call · Day 0</div>
+    <p><strong>Subject: Quick audit of [Business Name]'s website — as promised</strong></p>
+    <p>Hi [Name],</p>
+    <p>Great speaking with you. As promised, here's a quick look at what I found about your current online presence:</p>
+    <p><strong>What's working:</strong> [1 genuine positive — reviews, good listing, etc.]</p>
+    <p><strong>What we'd fix:</strong><br/>
+    • [Specific issue 1 — e.g., mobile load time is X seconds — industry standard is under 3s]<br/>
+    • [Specific issue 2 — e.g., no contact form / no lead capture above the fold]<br/>
+    • [Specific issue 3 — e.g., Google Business listing not connected to site]</p>
+    <p>We can fix all of this with a rebuilt site at <strong>$1,000 flat</strong> — typically delivered in 2–3 weeks.</p>
+    <p>I've attached a couple of examples from similar businesses we've worked with. Happy to jump on a 15-minute call to walk through what a new site would look like for you specifically.</p>
+    <p>Are you free [Tuesday at 10am] or [Wednesday at 2pm]?</p>
+    <p>— [Your name]<br/>Perfect Skills | perfectskills.in</p>
+  </div>
+
+  <h3><span class="pill pill-us">US</span> &nbsp;Email — Follow-Up #2 (Day 3)</h3>
+  <div class="template">
+    <div class="tlabel">Email · US · Day 3</div>
+    <p><strong>Subject: Re: Quick audit of [Business Name]'s website</strong></p>
+    <p>Hi [Name],</p>
+    <p>Just following up on my note from earlier this week.</p>
+    <p>I worked with a [real estate agent / medspa] in [similar city] recently — they had the same issue with [specific problem]. After we rebuilt their site, they went from 3–4 monthly web inquiries to 15–20 in the first 60 days.</p>
+    <p>Happy to share the details on a quick call. Still available [Thursday/Friday] if that works.</p>
+    <p>— [Your name]<br/>Perfect Skills | perfectskills.in</p>
+  </div>
+
+  <h3><span class="pill pill-both">Both</span> &nbsp;Final Touchpoint — Day 10</h3>
+  <div class="template">
+    <div class="tlabel">WhatsApp or Email · Day 10 · Final</div>
+    <p>Hi [Name],</p>
+    <p>Last note from my end — I don't want to keep reaching out if the timing isn't right.</p>
+    <p>If you ever want a second opinion on your digital presence, or if things change and you want to explore a website or automation, just reply here — we're easy to work with and fast to deliver.</p>
+    <p>Wishing you a great [week / month]!</p>
+    <p>— [Your name], Perfect Skills<br/>perfectskills.in</p>
+  </div>
+
+  <hr class="section-divider"/>
+
+  <!-- ═══ SECTION 10: TRACKER ═══ -->
+  <h2 id="tracker">10. Tracker & CRM</h2>
+  <p>Use <code>LeadScraper-Tracker.xlsx</code> in <code>D:\Projects\LeadScraper\</code>. Every lead must be logged — no exceptions.</p>
+
+  <h4>Required columns per lead</h4>
+  <ul class="checklist">
+    <li><div class="cb"></div><span></span><div><strong>Business name + phone</strong> — from the CSV file</div></li>
+    <li><div class="cb"></div><span></span><div><strong>City + niche</strong> — e.g., Pune / Real Estate</div></li>
+    <li><div class="cb"></div><span></span><div><strong>Website status</strong> — None / Weak / OK / Good</div></li>
+    <li><div class="cb"></div><span></span><div><strong>Call date + outcome</strong> — No answer / Not interested / Follow-up / Interested / Proposal sent</div></li>
+    <li><div class="cb"></div><span></span><div><strong>Notes</strong> — what they said, what pain point came up</div></li>
+    <li><div class="cb"></div><span></span><div><strong>Next action + date</strong> — e.g., "Send audit by Aug 21", "Call back Aug 23"</div></li>
+    <li><div class="cb"></div><span></span><div><strong>Assigned to</strong> — which resource is managing this lead</div></li>
+  </ul>
+
+  <h4>Lead status definitions</h4>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin:.5rem 0;">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>🔵 New</strong> — Not yet called</div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>🟡 In Progress</strong> — Called, follow-up pending</div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>🟠 Proposal Sent</strong> — Waiting on decision</div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>🟢 Won</strong> — Agreed, payment / kick-off</div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>🔴 Not Interested</strong> — Hard no, do not call again</div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:9px;padding:.7rem .9rem;font-size:.85rem;"><strong>⚫ Archived</strong> — No response after full sequence, re-approach in 60 days</div>
+  </div>
+
+  <div class="box box-blue" style="margin-top:1.5rem;">
+    <p><strong>Questions?</strong> Contact Pratik on WhatsApp. For the proposal template to send to warm leads — use <code>PerfectSkills-Proposal-Template.html</code> in the same folder.</p>
+  </div>
+
+  <div style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted);">
+    Perfect Skills · Sales Playbook · August 2026 · Internal use only · perfectskills.in
+  </div>
+
+</main>
+</div>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('h2[id]');
+  const links = document.querySelectorAll('.sb-link');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Perfect Skills — Proposal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:#1d4ed8; --brand-50:#eff6ff; --brand-100:#dbeafe; --brand-700:#1d4ed8; --brand-800:#1e40af; --brand-900:#1e3a8a;
+    --green:#15803d; --green-50:#f0fdf4; --green-100:#dcfce7;
+    --amber:#b45309; --amber-50:#fffbeb;
+    --ink:#111827; --charcoal:#1f2937; --muted:#6b7280; --line:#e5e7eb; --sand:#f9fafb; --white:#fff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:"DM Sans",-apple-system,sans-serif;color:var(--charcoal);background:var(--sand);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+  /* Page container */
+  .page{max-width:740px;margin:0 auto;background:#fff;box-shadow:0 4px 40px rgba(0,0,0,.08);min-height:100vh;}
+
+  /* Header stripe */
+  .header{background:var(--brand-900);padding:40px 48px 36px;}
+  .header .brand-row{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .header .logo{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:18px;font-weight:800;color:#fff;font-family:"DM Mono",monospace;}
+  .header .brand-name{font-size:1.1rem;font-weight:800;color:#fff;letter-spacing:-.01em;}
+  .header .brand-url{font-size:.75rem;color:rgba(255,255,255,.45);margin-top:1px;}
+  .header h1{font-size:2rem;font-weight:800;color:#fff;letter-spacing:-.02em;line-height:1.2;margin-bottom:.5rem;}
+  .header .subtitle{font-size:1rem;color:rgba(255,255,255,.65);margin-bottom:24px;}
+  .header .meta-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .meta-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.75);border-radius:999px;padding:.25rem .75rem;font-size:.78rem;font-weight:600;}
+
+  /* Body sections */
+  .body{padding:40px 48px;}
+  h2{font-size:1.15rem;font-weight:800;color:var(--brand-900);letter-spacing:-.01em;margin:2rem 0 .7rem;padding-bottom:.5rem;border-bottom:2px solid var(--line);}
+  h2:first-of-type{margin-top:0;}
+  h3{font-size:.95rem;font-weight:700;color:var(--charcoal);margin:.8rem 0 .3rem;}
+  p{color:var(--charcoal);margin-bottom:.6rem;font-size:.93rem;}
+
+  /* Callout */
+  .callout{background:var(--brand-50);border-left:4px solid var(--brand-700);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:1rem 0;}
+  .callout p{font-size:.9rem;color:var(--ink);margin:0;}
+
+  /* Problem bullets */
+  .problem-list{list-style:none;margin:.6rem 0 1rem;}
+  .problem-list li{display:flex;gap:.8rem;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--line);font-size:.88rem;color:var(--charcoal);}
+  .problem-list li:last-child{border-bottom:none;}
+  .problem-list .icon{font-size:1rem;flex:none;width:24px;text-align:center;margin-top:.1rem;}
+
+  /* Deliverables grid */
+  .deliverables{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.7rem 0 1rem;}
+  .del-card{background:var(--sand);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem;}
+  .del-card .del-icon{font-size:1.1rem;margin-bottom:.4rem;}
+  .del-card .del-title{font-size:.88rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;}
+  .del-card .del-desc{font-size:.8rem;color:var(--muted);line-height:1.5;}
+
+  /* Pricing table */
+  .price-table{width:100%;border-collapse:collapse;margin:.7rem 0 1rem;font-size:.88rem;}
+  .price-table th{text-align:left;padding:.6rem .8rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:2px solid var(--line);}
+  .price-table td{padding:.7rem .8rem;border-bottom:1px solid var(--line);vertical-align:top;}
+  .price-table tr:last-child td{border-bottom:none;}
+  .price-table .item{font-weight:700;color:var(--ink);}
+  .price-table .price-amt{font-weight:800;color:var(--brand-700);font-family:"DM Mono",monospace;white-space:nowrap;}
+  .price-table .note{font-size:.78rem;color:var(--muted);}
+  .price-table .total-row td{background:var(--brand-50);font-weight:800;padding:.8rem;}
+  .price-table .total-label{color:var(--brand-900);}
+  .price-table .total-amt{color:var(--brand-700);font-size:1.05rem;font-family:"DM Mono",monospace;}
+
+  /* Timeline */
+  .timeline{margin:.6rem 0 1rem;}
+  .tl-row{display:flex;gap:1rem;align-items:flex-start;padding:.5rem 0;font-size:.88rem;}
+  .tl-week{font-family:"DM Mono",monospace;font-size:.8rem;font-weight:700;color:var(--brand-700);min-width:60px;padding-top:.2rem;}
+  .tl-bar{height:6px;border-radius:3px;background:var(--brand-700);margin-top:.5rem;min-width:20px;}
+  .tl-content .tl-title{font-weight:700;color:var(--ink);}
+  .tl-content .tl-detail{font-size:.78rem;color:var(--muted);}
+
+  /* Guarantees */
+  .guarantee-row{display:flex;gap:.7rem;margin:.4rem 0;font-size:.88rem;}
+  .guarantee-row .g-icon{color:var(--green);font-weight:800;font-size:.9rem;flex:none;margin-top:.15rem;}
+
+  /* CTA footer */
+  .cta-section{background:var(--brand-900);padding:32px 48px;margin-top:2rem;}
+  .cta-section h2{color:#fff;border-bottom-color:rgba(255,255,255,.2);font-size:1.3rem;margin-top:0;}
+  .cta-section p{color:rgba(255,255,255,.75);font-size:.93rem;}
+  .cta-section .contact-box{margin-top:1.2rem;display:flex;gap:1.5rem;flex-wrap:wrap;}
+  .cta-section .contact-item{display:flex;flex-direction:column;gap:.2rem;}
+  .cta-section .contact-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.4);}
+  .cta-section .contact-val{font-size:.95rem;font-weight:700;color:#fff;}
+  .cta-section .contact-val a{color:#93c5fd;text-decoration:none;}
+
+  /* Edit hints (shown on screen, hidden on print) */
+  .edit-hint{font-size:.72rem;font-weight:600;color:#9ca3af;background:#f3f4f6;border:1px dashed #d1d5db;border-radius:5px;padding:.15rem .45rem;margin-left:.4rem;display:inline;}
+
+  /* Print */
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none;max-width:100%;}
+    .header{background:var(--brand-900) !important;-webkit-print-color-adjust:exact;}
+    .cta-section{background:var(--brand-900) !important;-webkit-print-color-adjust:exact;}
+    .edit-hint{display:none;}
+    .body{padding:28px 36px;}
+    .header{padding:28px 36px;}
+    .cta-section{padding:24px 36px;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-row">
+      <div class="logo">PS</div>
+      <div>
+        <div class="brand-name">Perfect Skills</div>
+        <div class="brand-url">perfectskills.in</div>
+      </div>
+    </div>
+    <h1>Digital Growth Proposal</h1>
+    <div class="subtitle">Prepared for <span id="client-name" contenteditable="true" style="border-bottom:1px dashed rgba(255,255,255,.4);outline:none;cursor:text;">[Client Business Name]</span></div>
+    <div class="meta-row">
+      <span class="meta-pill" id="city-pill" contenteditable="true" style="outline:none;cursor:text;">[City]</span>
+      <span class="meta-pill" id="niche-pill" contenteditable="true" style="outline:none;cursor:text;">[Industry / Niche]</span>
+      <span class="meta-pill" id="date-pill" contenteditable="true" style="outline:none;cursor:text;">[Month Year]</span>
+      <span class="meta-pill">perfectskills.in</span>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- Section 1: Context -->
+    <h2>What We Discussed</h2>
+    <p>Following our conversation on <span contenteditable="true" style="border-bottom:1px dashed var(--line);outline:none;">[Date of call]</span>, we put together this proposal based on what we learned about your business and your current digital presence.</p>
+
+    <div class="callout">
+      <p><strong>Our observation:</strong> <span contenteditable="true" style="outline:none;">[1–2 sentences about what you found. E.g.: "Your clinic has strong reviews on Google but no website for patients to find you or book appointments. Most people searching for aesthetic clinics in Phoenix click straight past listings with no website."]</span></p>
+    </div>
+
+    <!-- Section 2: Problems -->
+    <h2>Where You're Losing Customers Today</h2>
+    <ul class="problem-list">
+      <li>
+        <span class="icon">❌</span>
+        <div><strong contenteditable="true" style="outline:none;">[Problem 1 — e.g., No website or outdated website]</strong><br/><span style="color:var(--muted);font-size:.82rem;" contenteditable="true">People search online for [your service] and can't find you — they go to a competitor instead.</span></div>
+      </li>
+      <li>
+        <span class="icon">❌</span>
+        <div><strong contenteditable="true" style="outline:none;">[Problem 2 — e.g., No online lead capture]</strong><br/><span style="color:var(--muted);font-size:.82rem;" contenteditable="true">Even if someone finds you on Google Maps, there's no way to contact you directly or submit an inquiry without calling during business hours.</span></div>
+      </li>
+      <li>
+        <span class="icon">❌</span>
+        <div><strong contenteditable="true" style="outline:none;">[Problem 3 — e.g., Slow / not mobile-friendly / no WhatsApp automation]</strong><br/><span style="color:var(--muted);font-size:.82rem;" contenteditable="true">Add or delete this row as needed.</span></div>
+      </li>
+    </ul>
+
+    <!-- Section 3: Our Recommendation -->
+    <h2>What We Recommend</h2>
+    <p>Based on what we discussed, we recommend the following package for <span contenteditable="true" style="border-bottom:1px dashed var(--line);outline:none;">[Client Name]</span>:</p>
+
+    <div class="deliverables">
+      <div class="del-card">
+        <div class="del-icon">🌐</div>
+        <div class="del-title">Professional Website</div>
+        <div class="del-desc" contenteditable="true">Mobile-first, fast-loading, designed to convert visitors into calls and inquiries. Includes contact form, service overview, and Google Maps integration.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">📱</div>
+        <div class="del-title">Mobile Optimised</div>
+        <div class="del-desc" contenteditable="true">70%+ of your customers search on their phone. Your site will load under 3 seconds on mobile and look great on all screen sizes.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-icon">🔍</div>
+        <div class="del-title">Google-Ready Setup</div>
+        <div class="del-desc" contenteditable="true">Basic SEO, Google Business Profile link, correct meta tags — so you show up in local searches for [your niche] in [city].</div>
+      </div>
+      <div class="del-card" id="optional-card">
+        <div class="del-icon">🤖</div>
+        <div class="del-title">WhatsApp Automation <span class="edit-hint">optional — delete if not included</span></div>
+        <div class="del-desc" contenteditable="true">Auto-respond to WhatsApp inquiries 24/7 with your service info, pricing, and a link to book. No missed leads, no manual replies.</div>
+      </div>
+    </div>
+
+    <!-- Section 4: Pricing -->
+    <h2>Investment</h2>
+    <table class="price-table">
+      <thead>
+        <tr><th>Item</th><th>Details</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item">Website Design & Build</td>
+          <td class="note" contenteditable="true">5–7 page professional website, mobile-first, hosting setup included</td>
+          <td class="price-amt" contenteditable="true">$1,000</td>
+        </tr>
+        <tr id="automation-row">
+          <td class="item">WhatsApp Automation <span class="edit-hint">delete if not applicable</span></td>
+          <td class="note" contenteditable="true">Inquiry handling bot, auto-reply, lead capture</td>
+          <td class="price-amt" contenteditable="true">$350</td>
+        </tr>
+        <tr class="total-row">
+          <td class="total-label" colspan="2">Total Investment</td>
+          <td class="total-amt" contenteditable="true">$1,350</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>Payment terms:</strong> 50% to begin, 50% on delivery. <span contenteditable="true" style="outline:none;">[Add any other payment notes or instalment options if discussed.]</span></p>
+    </div>
+
+    <!-- Section 5: Timeline -->
+    <h2>Timeline</h2>
+    <div class="timeline">
+      <div class="tl-row">
+        <div>
+          <div class="tl-week">Week 1</div>
+          <div class="tl-bar" style="width:80px;"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Kickoff & Content Gathering</div>
+          <div class="tl-detail">We collect your content, images, services list, and any brand materials. One short call to align on design direction.</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div>
+          <div class="tl-week">Week 2</div>
+          <div class="tl-bar" style="width:80px;"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Design & Build</div>
+          <div class="tl-detail">We build the site. You get a preview link to review and give feedback before anything goes live.</div>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div>
+          <div class="tl-week">Week 3</div>
+          <div class="tl-bar" style="width:80px;"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Review, Revisions & Launch</div>
+          <div class="tl-detail">Up to 2 rounds of revisions. Final approval → go live. We hand over all credentials and walk you through the site.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 6: Why Us -->
+    <h2>Why Perfect Skills</h2>
+    <div class="guarantee-row"><span class="g-icon">✓</span><div><strong>We are a full-service digital team</strong> — not a freelancer. Design, development, and automation under one roof.</div></div>
+    <div class="guarantee-row"><span class="g-icon">✓</span><div><strong>We understand local Indian and US markets</strong> — we know what works for real estate, clinics, and local service businesses.</div></div>
+    <div class="guarantee-row"><span class="g-icon">✓</span><div><strong>Fast delivery</strong> — 2–3 weeks, not 2–3 months. We move at the speed your business needs.</div></div>
+    <div class="guarantee-row"><span class="g-icon">✓</span><div><strong>2 rounds of revisions included</strong> — you get exactly what you want before we charge the final payment.</div></div>
+    <div class="guarantee-row"><span class="g-icon">✓</span><div><strong>Post-launch support</strong> — we stay available for 30 days after launch for any questions or small fixes.</div></div>
+
+    <!-- Section 7: Next Steps -->
+    <h2>Next Steps</h2>
+    <p>To move forward, here's all we need from you:</p>
+    <div style="display:grid;grid-template-columns:30px 1fr;gap:.5rem .8rem;align-items:start;margin:.6rem 0;font-size:.88rem;">
+      <span style="font-weight:800;color:var(--brand-700);">1.</span><span>Reply to confirm you'd like to proceed — we'll send a simple agreement and the first invoice (50%).</span>
+      <span style="font-weight:800;color:var(--brand-700);">2.</span><span>Share a few details: your logo (if you have one), photos, services list, and one or two sites you like the style of.</span>
+      <span style="font-weight:800;color:var(--brand-700);">3.</span><span>We kick off within 24 hours of payment confirmation.</span>
+    </div>
+
+    <div class="callout" style="margin-top:1rem;background:var(--green-50);border-left-color:var(--green);">
+      <p><strong>If we start this week, your site is live in under 3 weeks.</strong> That's new inquiries coming in before the end of the month.</p>
+    </div>
+
+  </div><!-- /body -->
+
+  <!-- CTA FOOTER -->
+  <div class="cta-section">
+    <h2>Ready to move forward?</h2>
+    <p>Let's make this happen. Reach out any time — we're quick to respond and easy to work with.</p>
+    <div class="contact-box">
+      <div class="contact-item">
+        <span class="contact-label">Contact</span>
+        <span class="contact-val" contenteditable="true">[Your Name]</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Phone / WhatsApp</span>
+        <span class="contact-val" contenteditable="true">[+91 XXXXX XXXXX]</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <span class="contact-val"><a href="mailto:aashish@perfectskills.in">aashish@perfectskills.in</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Website</span>
+        <span class="contact-val"><a href="https://perfectskills.in" target="_blank">perfectskills.in</a></span>
+      </div>
+    </div>
+    <p style="margin-top:1.5rem;font-size:.75rem;color:rgba(255,255,255,.3);">Perfect Skills · Digital Growth Partner · This proposal is valid for 14 days from the date of issue.</p>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+  // Auto-set date pill to today if blank
+  const datePill = document.getElementById('date-pill');
+  if (datePill.textContent.includes('[Month Year]')) {
+    const d = new Date();
+    datePill.textContent = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  }
+
+  // Warn before closing if edits made
+  let edited = false;
+  document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+    el.addEventListener('input', () => { edited = true; });
+  });
+  window.addEventListener('beforeunload', e => {
+    if (edited) { e.preventDefault(); e.returnValue = ''; }
+  });
+</script>
+
+</body>
+</html>
