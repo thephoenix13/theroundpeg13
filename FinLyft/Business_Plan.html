@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Plan — Finlyft AI</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Segoe UI',system-ui,sans-serif;background:#f5f6fa;color:#1a1a2e;line-height:1.68}
+    header{background:#0f1f3d;color:#fff;padding:14px 32px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+    .logo{width:38px;height:38px;background:#c9a227;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;color:#0f1f3d;flex-shrink:0;letter-spacing:-.5px}
+    .brand{font-size:18px;font-weight:700;letter-spacing:.3px}
+    .brand span{color:#c9a227}
+    main{max-width:860px;margin:0 auto;padding:44px 24px 88px}
+    footer{text-align:center;padding:22px;color:#999;font-size:13px;border-top:1px solid #e0e0e0;background:#fff;margin-top:40px}
+    #content h1{font-size:30px;font-weight:800;color:#0f1f3d;margin:0 0 10px}
+    #content h2{font-size:20px;font-weight:700;color:#0f1f3d;margin:38px 0 12px;padding-bottom:7px;border-bottom:2.5px solid #c9a227}
+    #content h3{font-size:16px;font-weight:700;color:#1a1a2e;margin:24px 0 8px}
+    #content h4{font-size:13px;font-weight:700;color:#555;margin:16px 0 6px;text-transform:uppercase;letter-spacing:.6px}
+    #content p{margin:10px 0}
+    #content ul,#content ol{padding-left:22px;margin:10px 0}
+    #content li{margin:5px 0}
+    #content strong{font-weight:700;color:#0f1f3d}
+    #content em{color:#555;font-style:italic}
+    #content blockquote{border-left:4px solid #c9a227;padding:14px 18px;margin:18px 0;background:#fffbef;color:#444;border-radius:0 6px 6px 0;font-style:italic}
+    #content table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+    #content th{background:#0f1f3d;color:#fff;padding:10px 13px;text-align:left;font-weight:600;font-size:13px}
+    #content td{padding:9px 13px;border-bottom:1px solid #eaecf2}
+    #content tr:nth-child(even) td{background:#f8f9fc}
+    #content hr{border:none;border-top:1px solid #dde0ea;margin:30px 0}
+    #content code{background:#f0f0f5;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px}
+    #content a{color:#c9a227;text-decoration:none}
+    #content a:hover{text-decoration:underline}
+    @media(max-width:600px){main{padding:20px 16px 60px}#content h1{font-size:22px}#content h2{font-size:17px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">FL</div>
+    <span class="brand">Finlyft <span>AI</span></span>
+  </header>
+  <main>
+    <div id="content"></div>
+  </main>
+  <footer>Confidential &middot; Finlyft AI &middot; August 2026</footer>
+  <script>
+    const md = `# Finlyft AI — Business Plan
+
+**Prepared:** August 2026 · Confidential · Version 1.0
+**Entity:** Finlyft AI Private Limited (pending registration)
+**Contact:** Prashant (CEO) · Pratik Gade (Tech Lead) · pratikgade@perfectskills.in
+
+---
+
+## Executive Summary
+
+Finlyft AI is a personal finance super-app for India. It uses the RBI's Account Aggregator (AA) framework to connect all of a user's financial accounts — bank accounts, loans, investments, credit cards — with a single consent tap, delivers a complete financial picture in real time, and provides CFP-grade financial advisory in Hindi and English via AI.
+
+The problem: 500 million urban Indians manage money across 4–6 financial institutions and have never seen their complete financial picture in one place. Professional financial advice (CFP) starts at ₹2,000/hour — inaccessible to most. The AA infrastructure to fix this has been live since 2022, with 252 million users already linked. The consumer product on top of it does not exist.
+
+The opportunity: India's retail loan book is ₹22 lakh crore. Insurance new business premium is ₹3.2 lakh crore. Even a 0.1% share of commission revenue from these markets is a ₹220 Cr+ annual opportunity.
+
+**Financial projections:**
+
+| Year | MAU | Monthly Revenue | ARR |
+|---|---|---|---|
+| Year 1 (Month 12) | 5,000+ | ₹5–8L | ₹60–96L |
+| Year 2 (Month 24) | 40,000+ | ₹35–50L | ₹4.2–6Cr |
+| Year 3 (Month 36) | 150,000+ | ₹1–1.5Cr | ₹12–18Cr |
+
+**Funding:** Seeking ₹75L–1Cr angel round (10–15% dilution) to reach Month 12 milestones. Seed round of ₹3–5Cr at Month 12.
+
+---
+
+## 1. Company description
+
+**Company name:** Finlyft AI Private Limited
+**Registered office:** Pune, Maharashtra
+**Directors:** Prashant (CEO/Founder), [3 others TBD based on structure]
+**CIN:** Pending registration
+**Industry:** Fintech / Personal Finance / AI
+**Stage:** Pre-seed (registration in Month 0)
+
+The company will be registered as a Private Limited company under the Companies Act 2013, with a share structure of: Prashant 80%, ESOP pool 10%, reserved 10%.
+
+---
+
+## 2. The problem
+
+### 2.1 Fragmented financial data
+
+The average urban Indian professional (earning ₹8–30L/year) has money spread across:
+- 2–3 bank accounts (salary, savings, NRI)
+- 1–3 active loans (home, personal, vehicle)
+- 2–4 investment platforms (Groww, Zerodha, PPF, NPS)
+- 1–3 credit cards
+
+No single screen shows all of this at once. Each institution shows only what it holds. The user has never seen their net worth, total EMI burden, or combined XIRR — the numbers that actually drive financial decisions.
+
+### 2.2 Advice gap
+
+India has approximately 7,000 FPSB-certified financial planners and 1,300 SEBI-registered investment advisers for a population of 1.4 billion. (Source: FPSB India, SEBI, 2024) A CFP charges ₹2,000–8,000/hour. Most households cannot afford structured advice. The result: millions of Indians are overpaying on high-interest debt, underdiversified in investments, and underinsured — not because they don't care, but because they can't see the problem.
+
+### 2.3 Loan over-indebtedness
+
+Millions of Indians carry loans across 2–3 institutions simultaneously. They don't track combined EMI burden, don't know if their rate is competitive, and have never been told that consolidating 3 personal loans at 16–18% into one at 13% saves ₹4,200/month. (Source: TransUnion CIBIL Report, 2024)
+
+---
+
+## 3. The solution
+
+### 3.1 Account Aggregator (AA) framework
+
+The Reserve Bank of India's Account Aggregator framework (2021) allows users to share their financial data — bank statements, loan details, investment holdings, insurance — across institutions, with explicit digital consent, in real time. Finlyft AI registers as a Financial Information User (FIU) and uses this framework to pull all financial data into one screen with a single consent tap.
+
+AA is:
+- **Consent-based:** the user initiates every data share; can revoke at any time
+- **Read-only:** no app can move or transact on money through AA; it only reads
+- **Real-time:** data refreshes automatically, no manual entry
+- **Regulated:** RBI-mandated; data travels through a licensed Account Aggregator intermediary
+
+### 3.2 The product — 7 modules
+
+**Day 0 — 6 license-free tools (Month 0–2, before app build completes):**
+
+The AA app takes 3 months to build. Licenses (DSA, FIU, IRDAI POSP, AMFI ARN) take 2–3 months to process in parallel. The following 6 features are the entire Finlyft AI product for the first 3 months:
+1. EMI calculator
+2. SIP calculator
+3. Loan eligibility calculator
+4. Basic budgeting tool (user-entered data, no AA required)
+5. Financial literacy content — blog and newsletter
+6. Credit card affiliate links via EarnKaro, BankBazaar, CreditMantri
+
+These generate credit card affiliate revenue from Day 1 (₹5–20K/month) and build the waitlist audience that converts to AA users at Month 3 beta launch.
+
+**MVP (Month 3 — app build complete, licenses active):**
+- Module 1 — Unified Financial Dashboard: all accounts, loans, investments, credit cards on one screen. Net worth, EMI burden, investment portfolio, cash flow — live from AA.
+- Module 2 — AI Financial Advisor: conversational AI with full AA data context. Hindi + English. Specific and actionable. "Your HDFC card is charging 42% interest. You have ₹60K idle in savings. Paying it off saves ₹14,000 this year."
+
+**Post-MVP (Month 7–12):**
+- Module 3 — Loan Suite + Consolidation (Month 7)
+- Module 4 — Financial Health Score (Month 8)
+- Module 5 — Marketplace (Month 7–8; license-dependent)
+- Module 6 — Goals Planner (Month 10)
+- Module 7 — Investment Hub (Month 11)
+
+---
+
+## 4. Market analysis
+
+### 4.1 Total addressable market
+
+| Segment | Market size | Finlyft AI commission potential |
+|---|---|---|
+| Retail loans | ₹22L Cr outstanding (Source: RBI 2023-24) | DSA commissions 0.5–1.5% on new disbursements |
+| Life + general insurance | ₹3.2L Cr new business premium (Source: IRDAI 2023-24) | POSP commissions up to 35% first-year (term) |
+| Mutual funds | ₹60L Cr AUM (Source: AMFI, Jun 2025) | 0.5–1% trail commission on new SIP investments |
+| Credit cards | 100M cards; 5M new applications/month est. | ₹500–3,000 per approved application |
+
+Even capturing 0.01% of total loan disbursements (₹2,200 Cr/year estimated) at 1% commission = ₹22 Cr annual revenue from DSA alone.
+
+### 4.2 Serviceable addressable market
+
+Urban Indian professionals earning ₹8–30L/year with at least one active loan and one investment account: approximately 30–50 million people. These are Finlyft AI's core users.
+
+### 4.3 Serviceable obtainable market (Year 1)
+
+5,000 MAU with AA connections by Month 12. At ₹5–8L/month revenue, this is a ₹60–96L annual revenue rate — sufficient to support the seed raise narrative.
+
+### 4.4 Competitive landscape
+
+| Competitor | What they do | Why Finlyft AI is different |
+|---|---|---|
+| Fi Money | Neo-banking (savings account + debit card) | Requires banking license; AA add-on only; no AI advisor |
+| Jupiter | Neo-banking | Same banking license constraint; no AA + AI combo |
+| CRED | Credit card rewards platform | Credit card only; no multi-account view; no loans |
+| ET Money | Mutual fund investment platform | MF only; no AA; no loan management; no AI |
+| OneScore | Credit score platform | Credit score only; no dashboard; no financial advice |
+| BankBazaar | Product marketplace | Lead generation only; no account aggregation or AI |
+
+No competitor combines: (1) AA-powered multi-account dashboard + (2) AI advisor with full account context + (3) integrated DSA loan marketplace.
+
+---
+
+## 5. Business model
+
+### 5.1 Revenue streams
+
+**Commission revenue (primary — Year 1):**
+
+| Stream | Commission rate | License required | Live from |
+|---|---|---|---|
+| DSA loan commissions (personal loans) | 1–1.5% of disbursement | DSA registration | Month 3 |
+| DSA home loan commissions | 0.5–1% of disbursement | DSA registration | Month 3 |
+| DSA loan consolidation | 1–1.5% of new disbursement | DSA registration | Month 7 |
+| IRDAI POSP insurance (term) | Up to 35% first-year premium | IRDAI POSP | Month 4 |
+| IRDAI POSP insurance (health) | Up to 15% per policy | IRDAI POSP | Month 4 |
+| AMFI ARN mutual fund trail | 0.5–1% annual trail | AMFI ARN | Month 6 |
+| Credit card affiliate | ₹500–3,000 per approved card | None (affiliate only) | Month 0 |
+
+**Subscription revenue (secondary — Year 1, primary — Year 2):**
+
+| Tier | Price | What's included |
+|---|---|---|
+| Free | ₹0 | Unified dashboard, basic AI advisor (limited queries), Financial Health Score number only |
+| Premium | ₹199–499/month | Unlimited AI advisor queries, proactive alerts, full Health Score breakdown, tax planning, investment XIRR |
+
+**B2B white-label (Year 2):**
+₹50K–5L/month per institution for NBFC/bank white-label of the platform.
+
+### 5.2 Revenue projections
+
+| Month | MAU | Monthly revenue | Primary driver |
+|---|---|---|---|
+| 0–2 | 0 (no app) | ₹5–20K | Credit card affiliate from calculator site only |
+| 3 | 30 | ₹0–50K | Credit card affiliate + first DSA referrals (app live) |
+| 6 | 500 | ₹1–3L | DSA + insurance POSP + affiliate |
+| 9 | 2,000 | ₹3–5L | DSA + marketplace + subscriptions |
+| 12 | 5,000 | ₹5–8L | Full marketplace + subscriptions |
+| 24 | 40,000 | ₹35–50L | Marketplace + premium + first NBFC contracts |
+
+### 5.3 Unit economics (target by Month 12)
+
+| Metric | Target |
+|---|---|
+| CAC (blended) | ₹330/user |
+| Monthly revenue per user (blended) | ₹100–160 |
+| LTV (24-month retention, 60% retention assumed) | ₹1,500–2,400 |
+| LTV:CAC ratio | 4.5–7.3× |
+| Payback period | 2–3 months |
+
+---
+
+## 6. Operations
+
+### 6.1 Team
+
+| Person | Role | Monthly cost (post-funding) |
+|---|---|---|
+| Prashant | CEO / Founder — product, BD, regulatory, fundraising | ₹50K (steps to ₹1L at seed) |
+| Pratik | Tech Lead — architecture, React Native, API integrations | ₹50K consulting (steps to ₹1L at seed) |
+| Ashish | Backend Developer — Node.js, DB, AA integration | ₹50K consulting (steps to ₹1L at seed) |
+| Shashi | Frontend Developer — React Native, UI/UX | ₹50K consulting (steps to ₹1L at seed) |
+
+All four are bound by IP assignment clauses from Day 1. All consulting agreements must be signed before any code is written.
+
+### 6.2 Tech stack
+
+| Layer | Technology | Notes |
+|---|---|---|
+| Mobile app | React Native (Expo) | iOS + Android from single codebase |
+| Backend | Node.js + PostgreSQL | AWS RDS, hosted on Mumbai (ap-south-1) |
+| AA integration | Setu AA SDK | Via Setu as TSP; FIU registration bundled |
+| Aadhaar eKYC | Setu eKYC | Bundled with FIU registration; ₹3–10/verification |
+| AI advisor | Claude (Anthropic) API — Year 1 | Migrates to fine-tuned FLM in Year 2 |
+| Infrastructure | AWS Mumbai | S3, RDS, EC2, CloudFront |
+
+### 6.3 Regulatory requirements
+
+| License | Purpose | Timeline | Cost |
+|---|---|---|---|
+| FIU registration via Setu | Core product — AA data pull | 4–6 weeks from company registration | Bundled in Setu plan |
+| DSA registration (Bajaj, Tata Capital, HDFC) | Loan referral commissions | 2–3 weeks per lender | Free to low cost |
+| IRDAI POSP license | Insurance commissions | 2–3 weeks (online training + exam) | ~₹2K exam fee |
+| AMFI ARN | Mutual fund trail commissions | 4–6 weeks | ₹3K exam + registration |
+| DPIIT recognition | Angel Tax exemption, patent rebate | 2–10 days post-company-registration | Free |
+| VAPT security audit | Production go-live requirement | Month 4–5 | ₹2–3L (CERT-In empanelled auditor) |
+
+---
+
+## 7. Financial plan
+
+### 7.1 Year 1 P&L projection
+
+| Item | Monthly (average) | Annual |
+|---|---|---|
+| **Revenue** | | |
+| DSA commissions | ₹1.5L | ₹18L |
+| Insurance POSP | ₹50K | ₹6L |
+| Credit card affiliate | ₹30K | ₹3.6L |
+| Premium subscriptions | ₹50K | ₹6L |
+| **Total revenue** | **₹2.3L** | **₹27.6L** |
+| **Expenses** | | |
+| Salaries + consulting (4 people) | ₹2L | ₹24L |
+| AWS + API costs | ₹40K | ₹4.8L |
+| Legal + compliance | ₹30K | ₹3.6L |
+| User acquisition | ₹1.5L | ₹18L |
+| G&A (CA, bank charges, misc) | ₹15K | ₹1.8L |
+| **Total expenses** | **₹4.35L** | **₹52.2L** |
+| **Net cash flow** | **−₹2L** | **−₹24.6L** |
+
+Angel round of ₹75L covers Year 1 burn with ₹30L buffer.
+
+Revenue ramps significantly in H2 (Month 7–12) as Marketplace goes live — the above is conservative, blended across all 12 months.
+
+### 7.2 Financial assumptions
+
+- DSA commission per loan referral: ₹5,000 average (personal loans) + ₹20,000 average (home loans)
+- Referral conversion: 4% of active users generate a loan referral per month
+- Premium conversion: 8% of active users subscribe at ₹299/month average
+- LLM API cost: ₹0.80/user/day at current usage (10 queries/day average on Claude Haiku)
+- CAC blended: ₹330/activated user (AA consent completed)
+- Monthly churn: 8% (aggressive early-stage assumption; target 5% by Month 12)
+
+---
+
+## 8. Risk management
+
+| Risk | Severity | Mitigation |
+|---|---|---|
+| Angel round delayed > 3 months | High | 100X.VC parallel application; Prashant stays employed until wire arrives; team costs ₹0 until funded |
+| AA consent drop-off in onboarding | High | 3 onboarding flow A/B tests before scaling; one-tap consent, not form-based |
+| LLM API costs spike at scale | Medium | FLM development starting Month 6 (training data collection); FLM deployed by Month 18 reduces API cost by 80% |
+| Regulatory change to AA framework | Low | AA is RBI-mandated; 151 banks and ₹22L Cr in loan infrastructure depend on it; not reversible |
+| DSA / AI advice regulatory conflict | Medium | All AI outputs framed as "information and options," never directives; one-line disclaimer on every response |
+| Ops team bandwidth | Medium | Weekly hour commitment in agreements; Pratik, Ashish, and Shashi each commit minimum hours/week in writing |
+| NBFC competition replicates product | Low-Medium | Speed to 5,000 users is the Year 1 moat; FLM trained on proprietary data is the Year 2 moat |
+
+---
+
+## 9. Milestones and KPIs
+
+| Milestone | Month | KPI |
+|---|---|---|
+| 6 Day 0 features live | 0, Week 1–2 | Calculator site + credit card affiliate links on landing page |
+| Company registered | 0, Week 4 | CIN received |
+| DPIIT recognition | 0, Week 4+ | Certificate received |
+| Tech build starts | 0 | React Native app + AA integration in development (3-month build) |
+| All licenses applied for | 0 | DSA, IRDAI POSP, FIU via Setu, AMFI ARN — all in progress |
+| Angel round closed | 3 | Wire received; Prashant full-time; all licenses active |
+| FIU registration complete | 3 | Production go-live with Setu |
+| MVP beta | 3 | 20–30 users with completed AA consent |
+| First DSA commission | 3–4 | Any amount |
+| Angel check-in | 6 | 500+ MAU, ₹1–3L/month revenue |
+| Loan Suite live | 7 | 1,000 dashboard users (launch trigger met) |
+| FLM dataset 20K examples | 9 | Dataset verified by finance professional |
+| Seed ready | 12 | 5,000+ MAU, ₹5–8L/month revenue, seed deck complete |
+
+---
+
+## 10. Exit / long-term vision
+
+Year 3–5: The platform has 150,000+ MAU, a deployed fine-tuned model, and B2B NBFC white-label contracts. At this scale, Finlyft AI becomes an acquisition target for:
+- Major banks seeking to add AA capabilities without building internally
+- Larger fintech platforms (Groww, Zerodha, PhonePe) seeking a financial advisory layer
+- Insurance companies seeking a direct distribution channel
+
+Alternatively, Finlyft AI pursues a SEBI RIA license in Year 3, enabling direct investment advice — moving from information to execution, and from commission revenue to advisory AUM-based fees. This unlocks a materially higher revenue per user.
+
+The long-term vision is not to be an app — it is to be the financial operating system for the Indian middle class.
+
+---
+
+*Version 1.0 · August 2026 · Confidential · For investor and partner use only*`;
+    document.getElementById('content').innerHTML = marked.parse(md);
+  </script>
+</body>
+</html>

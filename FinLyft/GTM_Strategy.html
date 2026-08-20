@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTM Strategy — Finlyft AI</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6fa; color: #1a1a2e; }
+  header { background: #0f1f3d; color: #fff; padding: 16px 32px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .logo-mark { width: 40px; height: 40px; background: #c9a227; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #0f1f3d; letter-spacing: -1px; flex-shrink: 0; }
+  .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .brand span { color: #c9a227; }
+  .doc-title { margin-left: auto; font-size: 13px; color: #a0aec0; font-weight: 400; }
+  main { max-width: 860px; margin: 40px auto; padding: 0 24px 80px; }
+  .card { background: #fff; border-radius: 12px; padding: 40px 48px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .card h1 { font-size: 28px; font-weight: 800; color: #0f1f3d; margin-bottom: 6px; }
+  .card h2 { font-size: 20px; font-weight: 700; color: #0f1f3d; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c9a227; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #0f1f3d; margin: 20px 0 8px; }
+  .card p { line-height: 1.75; color: #374151; margin-bottom: 12px; }
+  .card ul, .card ol { padding-left: 22px; margin-bottom: 12px; }
+  .card li { line-height: 1.75; color: #374151; margin-bottom: 4px; }
+  .card table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .card th { background: #0f1f3d; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .card td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; color: #374151; }
+  .card tr:nth-child(even) td { background: #f9fafb; }
+  .card blockquote { border-left: 4px solid #c9a227; padding: 12px 20px; background: #fffbf0; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; color: #4a3728; }
+  .card code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #c9a227; }
+  .card hr { border: none; border-top: 1px solid #e5e7eb; margin: 32px 0; }
+  .confidential-bar { background: #0f1f3d; color: #c9a227; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 6px; }
+</style>
+</head>
+<body>
+<div class="confidential-bar">CONFIDENTIAL — FINLYFT AI INTERNAL DOCUMENT</div>
+<header>
+  <div class="logo-mark">FL</div>
+  <div class="brand">Finlyft <span>AI</span></div>
+  <div class="doc-title">Go-to-Market Strategy</div>
+</header>
+<main>
+  <div class="card" id="content"></div>
+</main>
+<script>
+const md = `# Finlyft AI — Go-to-Market Strategy
+
+**Prepared:** August 2026 · Confidential
+
+---
+
+## North star metric
+
+**Users who completed AA consent and came back at least 3 times.**
+
+Not downloads. Not registrations. Not first logins. Someone who went through the consent flow, saw their full financial picture, got a specific AI recommendation, and returned the following week. Everything in this GTM points at this number.
+
+| Checkpoint | Target |
+|---|---|
+| Month 3 | 20–30 beta users (AA consent complete) |
+| Month 6 | 500+ active AA users |
+| Month 9 | 2,000+ active AA users |
+| Month 12 | 5,000+ MAU |
+
+---
+
+## Ideal customer profile (ICP)
+
+**Primary ICP — urban Indian professional:**
+
+| Dimension | Description |
+|---|---|
+| Age | 27–42 years |
+| Income | ₹8–30L/year |
+| Geography | Tier 1: Mumbai, Pune, Bengaluru, Hyderabad, Delhi. Tier 2: Nashik, Indore, Jaipur, Coimbatore |
+| Loans | At least one active loan (home, personal, or vehicle) |
+| Investments | 2+ investment accounts (Groww + Zerodha, or PPF + mutual funds) |
+| Credit cards | 1–3 cards, combined utilisation unknown to them |
+| Pain | Money spread across 4–6 institutions; has never seen the full picture; wants advice but can't afford ₹5,000/hour CFP |
+| Trigger | Just got a home loan, just started investing on Groww, just hit a credit card limit, just got a salary hike and wondering where it goes |
+
+**Secondary ICP — NRI with India financial exposure:**
+- Has EPF, PPF, NPS from India employment
+- Has loans or property in India
+- Has family members dependent on India accounts
+- Pain: impossible to track India finances from abroad; no unified view available
+
+---
+
+## Phase 1 — Pre-launch: Day 0 Site + Waitlist (Month 0–2)
+
+**What exists in Phase 1:** The AA app is being built (takes 3 months). Licenses are in progress (also 2–3 months). The only live product is the Day 0 calculator website with 6 license-free features. Phase 1 has two parallel goals:
+
+1. **Day 0 site live in Week 1–2** — 3 calculator tools, basic budgeting, financial literacy content, credit card affiliate links. This earns ₹5–20K/month from Day 1 with no license and no app.
+2. **1,000 waitlist signups before the app beta opens.** Zero paid spend.
+
+### Channel 0 — Calculator site launch (Day 0, Week 1–2)
+
+Before any outreach, the calculator website goes live:
+- EMI calculator, SIP calculator, loan eligibility calculator — each with an organic SEO keyword target
+- Credit card affiliate links on every calculator result screen (EarnKaro, BankBazaar, CreditMantri)
+- Email capture on every page — "Get the full financial picture when our app launches"
+- Basic budgeting tool for users who want to track income/expenses without AA
+
+This is the only product for 3 months. Treat it as a real business, not a waiting room.
+
+### Channel 1 — Personal network (highest conversion, zero cost)
+
+All 4 team members personally reach out to 75–100 contacts each = 300–400 warm touches.
+
+Message template (adapt to personal relationship):
+> "Building something for people who have a home loan + mutual funds across 5 apps and have never seen it all in one place. Want early access? Takes 30 seconds to sign up."
+
+Target profiles to reach: colleagues, ex-colleagues, batchmates from college, family members in salaried jobs with investments.
+
+### Channel 2 — LinkedIn (Prashant-led content)
+
+3–4 posts per month from Prashant. No pitching. Curiosity-first.
+
+Post types:
+- "How much is your home loan actually costing you? Here's the math no one shows you."
+- "I asked 50 people how much they pay in total EMI per month. Only 12 knew the answer."
+- "The RBI built something in 2022 that most Indians don't know about. Here's what Account Aggregator actually does."
+- "One thing I'd tell everyone with a home loan in India right now." (then tag a scenario where refinancing saves ₹3,200/month)
+
+Call to action on each post: link to waitlist. Not "download our app" — "get early access."
+
+### Channel 3 — Reddit (community participation, not promotion)
+
+Post in r/IndiaInvestments (450K members) and r/personalfinanceindia (300K members).
+
+Approach: genuine participation first. Answer questions about home loans, mutual funds, AA. Mention Finlyft AI when it's relevant and organic — never as a primary post announcement.
+
+Post frequency: 3–4 quality responses per week, not mass commenting.
+
+### Channel 4 — WhatsApp and Telegram groups
+
+Join 5–10 personal finance WhatsApp/Telegram groups: HDFC loan user groups, NRI investor groups, working professional communities, Zerodha user communities.
+
+Same approach as Reddit: participate genuinely. Don't dump links. Share useful information.
+
+### Channel 5 — Calculator tools on landing page (SEO / organic)
+
+Build 3 calculators at launch:
+1. Loan prepayment savings calculator ("pay ₹50K extra today, save ₹X over Y years")
+2. EMI affordability calculator ("at ₹X income, can I afford a ₹40L home loan?")
+3. Loan consolidation savings calculator ("3 personal loans → 1 consolidated loan, save ₹X/month")
+
+These pull consistent organic traffic with no ongoing spend.
+
+---
+
+## Phase 2 — Beta launch and referral engine (Month 3–4)
+
+**Goal:** 200–500 activated users (AA consent complete).
+
+### Launch mechanic
+
+Email the waitlist on beta launch day. Subject line: "You're in — Finlyft AI early access is live."
+
+Body: "You signed up [X days] ago. Here's your link. The first 500 who connect their accounts get the full Premium experience free for 6 months. No credit card. Just connect your accounts."
+
+### Referral program
+
+**Option A (recommended): Cash voucher**
+- Referrer gets ₹200 Amazon voucher when referred user completes AA consent + gets first financial summary
+- Cost per user via referral: ₹200–250
+
+**Option B: Premium access**
+- Referrer and referee both get 3 months free Premium when referred user activates
+- No cash outflow; lower conversion than cash but sustainable longer
+
+Run both and measure which drives higher D30 retention.
+
+Mechanics:
+- One-tap referral link generated for each user post-onboarding
+- Share via WhatsApp: pre-written message "I just connected all my accounts in one place — try it: [link]"
+- Viral loop: "Share your Financial Health Score" card. After getting their score, users can generate a branded card showing their score on a 300–900 scale.
+
+### 10 user interviews — Month 4
+
+Before scaling any channel, conduct 10 structured user interviews. Apply findings before spending on Phase 3 channels.
+
+---
+
+## Phase 3 — CA partnerships and influencers (Month 4–6)
+
+**Goal:** 500+ activated users by Month 6 angel check-in.
+
+### CA partnerships
+
+Chartered accountants are uniquely positioned to refer Finlyft AI:
+- Their clients are exactly the ICP (income ₹8–30L, active investments, home loans)
+- Clients trust CA recommendations on financial tools implicitly
+
+**Offer:** ₹150 per activated referral (user who completes AA consent).
+
+**Target:** 20–30 CA firms in Pune and Mumbai initially.
+
+**Economics:** 15 CA partners × 20 referrals each = 300 users at ₹150/referral = ₹45K cost. CAC of ₹150 is excellent.
+
+### Finance influencer deals
+
+**Target tier:** 50K–500K subscribers on YouTube or Instagram. Personal finance content (loans, tax, mutual funds) — not stock tips.
+
+**Deal structure:**
+- Performance-based: ₹300–500 per activated user (AA consent complete), not per view or click
+- This aligns incentives: creator earns only when users actually connect accounts
+- No upfront fee for small creators; negotiate a small upfront fee (₹10–20K) for creators 200K+ as minimum guarantee
+
+**Start small:** First deal with a 50K–100K subscriber creator. Test messaging and conversion before committing ₹5–10L to large creators.
+
+---
+
+## Phase 4 — Scale to 5,000 MAU (Month 7–12)
+
+**Goal:** 5,000 activated users with AA consent by Month 12.
+
+### Paid acquisition (Google + Meta)
+
+**Start Month 6–7 only.** Never before unit economics are known from organic channels.
+
+**Google Search Ads — high intent targeting:**
+
+| Keyword | Intent | Estimated CPC |
+|---|---|---|
+| "loan management app India" | High — user has existing loans | ₹15–25 |
+| "track all investments one place" | High — user has fragmented portfolio | ₹12–20 |
+| "account aggregator app" | High — user knows what AA is | ₹8–15 |
+| "how to check all bank accounts together" | High — exactly our problem | ₹6–12 |
+| "SIP and loan in one app" | Medium | ₹8–15 |
+| "home loan prepayment calculator" | Medium — educational; retarget | ₹3–8 |
+
+Target CAC from paid search: ₹400–600/activated user.
+
+**Meta (Instagram + Facebook) — interest targeting:**
+- Audience: 27–42, income ₹8L+ (target financial product interest signals), cities: Mumbai, Pune, Bengaluru, Hyderabad
+- Custom audiences: website visitors from calculator pages (highest intent)
+- Lookalike: 1% lookalike of users who completed AA consent
+
+Budget allocation (Phase 4 total — ₹7.5L):
+- Google Search: ₹4L (primary — higher intent)
+- Meta retargeting: ₹2L
+- Meta lookalike: ₹1.5L
+
+### Corporate wellness channel (Month 6+)
+
+Pitch to HR departments:
+> "Financial stress is the #1 non-health cause of employee productivity loss. Finlyft AI gives your employees a complete view of their finances and an AI advisor for the first time. Free 3-month Premium access for all employees, negotiated rate after that."
+
+**Target companies:** IT companies, startups, banks and NBFCs with headquarters in Pune + Bengaluru.
+
+**Economics:** 3 companies × 200 employees each = 600 users. CAC: ~₹200/user.
+
+### NBFC co-marketing (Month 8+)
+
+> "We refer your customers. In return, email your 50,000 customers about us — one campaign, no cost to you, better engagement from customers already talking to us."
+
+Estimated result: 50K customers × 1% CTR × 20% activation = 100 users per campaign, zero cost to Finlyft AI.
+
+---
+
+## Channel economics summary
+
+| Channel | Users | Cost | CAC |
+|---|---|---|---|
+| Personal network + LinkedIn + Reddit | 500 | ₹0 | ₹0 |
+| Referral program (₹200/voucher) | 1,000 | ₹2L | ₹200 |
+| CA partnerships (₹150/referral) | 500 | ₹75K | ₹150 |
+| Finance influencer deals | 1,000 | ₹5L | ₹500 |
+| Paid ads (Google + Meta) | 1,500 | ₹7.5L | ₹500 |
+| Corporate wellness + NBFC co-marketing | 500 | ₹1L | ₹200 |
+| **Total** | **5,000** | **~₹16–17L** | **~₹330 avg** |
+
+Total user acquisition budget: ₹16–17L. Within the ₹20L allocated in the angel round use of funds.
+
+---
+
+## Messaging framework
+
+### Primary message (all audiences)
+
+"All your accounts. One screen. An AI that tells you exactly what to do with your money."
+
+### Secondary messages by persona
+
+**Home loan owner:**
+> "You have a home loan but you've never seen what it's actually costing you, or whether your rate is competitive. Finlyft AI pulls your full loan picture in one tap and tells you exactly what to do."
+
+**Multi-app investor:**
+> "Your money is on Groww, Zerodha, and PPF, but you've never seen your total XIRR. Finlyft AI shows you your complete investment picture — and whether your mix is right."
+
+**Credit card user:**
+> "Most people with 2 credit cards don't know their combined utilisation. Finlyft AI shows it — and if you're carrying high-interest debt when you have idle savings, it tells you the exact cost."
+
+**NRI:**
+> "Managing India finances from abroad means logging into 4 different apps. Finlyft AI brings everything into one screen, with an AI that answers your questions in Hindi and English."
+
+---
+
+## What not to do
+
+- **Don't run paid ads before Month 6.** You don't know your CAC, you don't know your messaging, and you'll burn ₹5L without learning anything useful.
+- **Don't chase downloads.** Downloads are vanity. Activated users (AA consent complete) are the metric.
+- **Don't pitch in communities.** Reddit and Telegram users immediately smell a promotional post.
+- **Don't sign large influencer deals upfront.** Performance-based deals only until conversion is validated.
+- **Don't try to reach everyone.** The ICP is 27–42, income ₹8L+, active loan + investment. Not college students, not retirees, not people without loans.
+
+---
+
+## KPIs by phase
+
+| Metric | Phase 1 (M0–2) | Phase 2 (M3–4) | Phase 3 (M4–6) | Phase 4 (M7–12) |
+|---|---|---|---|---|
+| Waitlist signups | 1,000 | — | — | — |
+| AA consent activation | — | 200–500 | 500 | 5,000 |
+| D30 retention | — | >40% | >45% | >50% |
+| CAC (blended) | ₹0 | ₹200 | ₹250 | ₹330 |
+| Product live | 6 calculator/tool features only — no app | AA app beta goes live | Full app + POSP/AMFI active | Full marketplace |
+| Monthly revenue | ₹5–20K (credit card affiliate only) | ₹0–50K | ₹1–3L | ₹5–8L |
+| NPS | — | >50 | >55 | >60 |
+
+---
+
+*Version 1.0 · August 2026 · Confidential*`;
+
+document.getElementById('content').innerHTML = marked.parse(md);
+</script>
+</body>
+</html>
