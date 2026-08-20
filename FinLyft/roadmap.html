@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finlyft AI — 1-Year Roadmap</title>
+  <style>
+    :root {
+      --navy: #0f1f3d;
+      --gold: #c9a227;
+      --gold-light: #f5e9c4;
+      --text: #1a1a2e;
+      --muted: #5a6272;
+      --border: #dde1e9;
+      --bg: #ffffff;
+      --bg-alt: #f7f8fa;
+      --accent-bg: #eef2ff;
+      --m3: #1a6b3c;
+      --m3-bg: #edf7f1;
+      --m3-border: #a8d5b8;
+      --m6: #1a4f8b;
+      --m6-bg: #edf3fb;
+      --m6-border: #a8c4e8;
+      --m9: #7b3fa0;
+      --m9-bg: #f5eefb;
+      --m9-border: #d0a8e8;
+      --m12: #b8390e;
+      --m12-bg: #fdf0eb;
+      --m12-border: #f0b8a0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    header {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .header-inner {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--gold);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px;
+      color: var(--navy);
+    }
+    .logo-text { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: -0.3px; }
+    .logo-sub { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 1px; }
+    .header-badge {
+      font-size: 12px;
+      background: rgba(201,162,39,0.18);
+      color: var(--gold);
+      border: 1px solid rgba(201,162,39,0.35);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    main { max-width: 100%; margin: 0 auto; padding: 48px 48px 80px; }
+
+    .page-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+    .page-meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 32px; }
+
+    /* The north star box */
+    .north-star {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+    }
+    .north-star h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .north-star blockquote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      border: none;
+      padding: 0;
+      margin-bottom: 24px;
+    }
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .metric-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .metric-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+    .metric-value { font-size: 1.4rem; font-weight: 700; color: var(--gold); }
+    .metric-sub { font-size: 0.78rem; color: rgba(255,255,255,0.45); margin-top: 3px; }
+
+    /* Milestone sections */
+    .milestone {
+      border-radius: 12px;
+      border: 1.5px solid;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+    .milestone-header {
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .milestone-title { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.3px; }
+    .milestone-theme { font-size: 0.88rem; font-weight: 500; opacity: 0.75; margin-top: 2px; }
+    .milestone-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.18);
+      color: inherit;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .milestone-body { padding: 28px; background: var(--bg); }
+
+    .m3 { border-color: var(--m3-border); }
+    .m3 .milestone-header { background: var(--m3-bg); color: var(--m3); }
+    .m6 { border-color: var(--m6-border); }
+    .m6 .milestone-header { background: var(--m6-bg); color: var(--m6); }
+    .m9 { border-color: var(--m9-border); }
+    .m9 .milestone-header { background: var(--m9-bg); color: var(--m9); }
+    .m12 { border-color: var(--m12-border); }
+    .m12 .milestone-header { background: var(--m12-bg); color: var(--m12); }
+
+    /* Section grids */
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .section-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+    .info-block {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    .info-block h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .info-block ul { margin: 0; padding-left: 18px; }
+    .info-block li { margin-bottom: 5px; font-size: 0.88rem; line-height: 1.5; }
+    .info-block p { font-size: 0.88rem; margin-bottom: 6px; }
+
+    /* Action tables */
+    .action-table-wrap h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+      margin-bottom: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    thead tr { background: var(--navy); color: #fff; }
+    th {
+      padding: 9px 13px;
+      text-align: left;
+      font-size: 0.76rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+    td { padding: 8px 13px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:nth-child(even) { background: var(--bg-alt); }
+    tbody tr:hover { background: var(--accent-bg); }
+
+    .owner-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: var(--accent-bg);
+      color: var(--navy);
+      white-space: nowrap;
+    }
+    .owner-prashant { background: #fff3cd; color: #7d5a00; }
+    .owner-pratik { background: #d4edda; color: #155724; }
+    .owner-ashish { background: #cce5ff; color: #004085; }
+    .owner-shashi { background: #f8d7da; color: #721c24; }
+    .owner-all { background: #e2e3e5; color: #383d41; }
+
+    /* Milestone scorecard */
+    .scorecard {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .scorecard h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .scorecard-item {}
+    .scorecard-item .sc-label { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 3px; }
+    .scorecard-item .sc-value { font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+    /* Revenue bar */
+    .rev-arc {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+    }
+    .rev-arc h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .rev-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-size: 0.87rem;
+    }
+    .rev-month { width: 72px; font-weight: 600; color: var(--navy); flex-shrink: 0; }
+    .rev-bar-wrap { flex: 1; background: var(--border); border-radius: 4px; height: 18px; overflow: hidden; }
+    .rev-bar { height: 18px; border-radius: 4px; background: var(--navy); transition: width 0.3s; }
+    .rev-value { width: 80px; text-align: right; color: var(--muted); flex-shrink: 0; }
+    .rev-source { font-size: 0.78rem; color: var(--muted); }
+
+    /* Risk register */
+    .risk-high { color: #b8390e; font-weight: 600; }
+    .risk-medium { color: #c9a227; font-weight: 600; }
+    .risk-low { color: #1a6b3c; font-weight: 600; }
+
+    /* divider */
+    hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+    h2.section-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 40px 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.2px;
+    }
+
+    .note-box {
+      background: var(--gold-light);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 0.88rem;
+      color: var(--navy);
+      margin-bottom: 24px;
+    }
+    .note-box strong { font-weight: 700; }
+
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 24px 32px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* Make tables scroll horizontally on small screens */
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-scroll table { min-width: 520px; }
+
+    @media (max-width: 900px) {
+      .header-inner { padding: 14px 24px; }
+      main { padding: 32px 24px 60px; }
+      .metric-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner { padding: 12px 16px; }
+      main { padding: 24px 16px 60px; }
+      .metric-row { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .section-grid, .section-grid.three { grid-template-columns: 1fr; }
+      .scorecard-grid { grid-template-columns: repeat(2, 1fr); }
+      .header-badge { display: none; }
+      .page-title { font-size: 1.4rem; }
+      .milestone-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .milestone-title { font-size: 1.1rem; }
+      .north-star { padding: 20px 18px; }
+      .north-star blockquote { font-size: 0.97rem; }
+      .metric-value { font-size: 1.2rem; }
+      .rev-row { flex-wrap: wrap; gap: 6px; }
+      .rev-month { width: 64px; }
+      .rev-value { width: auto; }
+      .rev-source { width: 100%; padding-left: 70px; }
+      .scorecard { padding: 16px 18px; }
+      .scorecard-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .milestone-body { padding: 18px 16px; }
+      .info-block { padding: 14px 16px; }
+      .action-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .action-table-wrap table { min-width: 480px; }
+      table { min-width: 480px; }
+      .rev-bar-wrap { width: 100%; }
+    }
+    @media print {
+      header, footer { display: none; }
+      main { padding: 0; max-width: 100%; }
+      .milestone { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-mark">FL</div>
+      <div>
+        <div class="logo-text">Finlyft AI</div>
+        <div class="logo-sub">India's AI Finance Companion</div>
+      </div>
+    </div>
+    <div class="header-badge">Confidential · 1-Year Roadmap · August 2026</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-title">1-Year Roadmap</div>
+  <div class="page-meta">Prepared August 2026 &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; Founder: Prashant (CEO) &nbsp;·&nbsp; Ops team: Pratik · Ashish · Shashi</div>
+
+  <!-- North Star -->
+  <div class="north-star">
+    <h2>The one number that drives everything</h2>
+    <blockquote>"Users who completed AA consent and came back at least 3 times. Not downloads. Not registrations. Not first logins — those numbers feel good and mean nothing."</blockquote>
+    <div class="metric-row">
+      <div class="metric-card">
+        <div class="metric-label">Month 3</div>
+        <div class="metric-value">20–30</div>
+        <div class="metric-sub">beta users</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Month 6</div>
+        <div class="metric-value">500+</div>
+        <div class="metric-sub">active AA users</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Month 9</div>
+        <div class="metric-value">2,000+</div>
+        <div class="metric-sub">active AA users</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Month 12</div>
+        <div class="metric-value">5,000+</div>
+        <div class="metric-sub">MAU</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Revenue Arc -->
+  <div class="rev-arc">
+    <h3>Revenue arc — Year 1</h3>
+    <div class="rev-row">
+      <div class="rev-month">Month 0–2</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:2%; background:#dde1e9;"></div></div>
+      <div class="rev-value">₹0–20K</div>
+      <div class="rev-source">Credit card affiliate links</div>
+    </div>
+    <div class="rev-row">
+      <div class="rev-month">Month 3</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:6%;"></div></div>
+      <div class="rev-value">₹0–50K</div>
+      <div class="rev-source">Affiliate + first DSA referrals</div>
+    </div>
+    <div class="rev-row">
+      <div class="rev-month">Month 6</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:25%;"></div></div>
+      <div class="rev-value">₹1–3L</div>
+      <div class="rev-source">DSA + insurance POSP + affiliate</div>
+    </div>
+    <div class="rev-row">
+      <div class="rev-month">Month 9</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:55%;"></div></div>
+      <div class="rev-value">₹3–5L</div>
+      <div class="rev-source">DSA + marketplace + premium tier</div>
+    </div>
+    <div class="rev-row">
+      <div class="rev-month">Month 12</div>
+      <div class="rev-bar-wrap"><div class="rev-bar" style="width:100%;"></div></div>
+      <div class="rev-value">₹5–8L</div>
+      <div class="rev-source">DSA + marketplace + POSP + subscriptions</div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────── -->
+  <!-- DAY 0: LICENSE-FREE FEATURES -->
+  <!-- ────────────────────────────────────────────────────── -->
+  <div style="border-radius:12px; border:1.5px solid #d9c97a; margin-bottom:40px; overflow:hidden;">
+    <div style="padding:20px 28px; background:#faf5df; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div style="font-size:1.3rem; font-weight:800; letter-spacing:-0.3px; color:#4a3900;">Day 0 — license-free features</div>
+        <div style="font-size:0.88rem; font-weight:500; color:#7a6010; margin-top:2px;">Seven features that ship before FIU, before DSA, before anything. Each one builds the habit that makes the licensed product stickier on launch day.</div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="font-size:0.72rem; font-weight:600; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.65); color:#4a3900; border:1px solid rgba(74,57,0,0.2);">No FIU</span>
+        <span style="font-size:0.72rem; font-weight:600; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.65); color:#4a3900; border:1px solid rgba(74,57,0,0.2);">No DSA</span>
+        <span style="font-size:0.72rem; font-weight:600; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.65); color:#4a3900; border:1px solid rgba(74,57,0,0.2);">No IRDAI</span>
+        <span style="font-size:0.72rem; font-weight:600; padding:4px 10px; border-radius:20px; background:rgba(255,255,255,0.65); color:#4a3900; border:1px solid rgba(74,57,0,0.2);">No AMFI</span>
+      </div>
+    </div>
+    <div style="padding:28px; background:var(--bg);">
+
+      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:24px; line-height:1.65;">These are not filler features to keep the team busy before FIU clears. Five of the seven become revenue-earning the moment a license comes through — no rebuild, just a new CTA or data source. Ship them early, get user feedback, and the licensed product launches into a base of people who already understand the tool. Regulatory basis: SEBI IA Regulations 2013 (Reg. 4 — general information exemption), RBI FREE-AI Framework August 2025 (applies to regulated entities only, not pure software products), DPDPA 2023 (data consent — required regardless).</p>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>1. Financial health quiz (self-reported score)</h4>
+          <p style="font-size:0.88rem; margin-bottom:8px;">Ten to twelve questions: income bracket, active EMIs, months of emergency fund, investment types, insurance coverage. User gets a score out of 100 with a category breakdown. Last screen: "Connect your accounts to get your real score."</p>
+          <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> AA consent. Every user who finishes the quiz is already thinking about their score — the logical next step is connecting accounts to see the real number.</p>
+          <p style="font-size:0.82rem; color:var(--muted);"><strong>Design guardrail:</strong> Category-level gaps only in output ("emergency fund: low"). No product names. This keeps it within SEBI IA Reg 4's educational exemption.</p>
+        </div>
+        <div class="info-block">
+          <h4>2. AI document summarizer (user-uploaded PDFs)</h4>
+          <p style="font-size:0.88rem; margin-bottom:8px;">User uploads their own bank statement, loan agreement, or insurance policy. AI returns a plain-language summary: key numbers, dates, hidden charges, terms. This is not AA — the user hands over their own file directly. No RBI or SEBI touch.</p>
+          <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> Full AA product. Uploading a document is the same mental step as granting AA consent. Users who do one convert to the other at much higher rates.</p>
+          <p style="font-size:0.82rem; color:var(--muted);"><strong>Regulatory basis:</strong> RBI FREE-AI Framework applies only to regulated entities (banks, NBFCs). A software product processing a user's own file is outside that scope. DPDPA 2023 consent language is needed in onboarding.</p>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>3. Tax optimizer (80C, 80D, HRA, NPS, old vs. new regime)</h4>
+          <p style="font-size:0.88rem; margin-bottom:8px;">User enters income, current investments, HRA details. App shows tax liability under both regimes, optimal 80C allocation, and how much they can still save before March 31. One of the highest-search-volume personal finance queries in India, every January through March.</p>
+          <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> AMFI ARN (MF referrals). Surface ELSS category at the end — informational, not a buy call, so no ARN needed yet. The same screen earns commission once ARN is live.</p>
+        </div>
+        <div class="info-block">
+          <h4>4. Manual budget + expense tracker</h4>
+          <p style="font-size:0.88rem; margin-bottom:8px;">User logs income and expenses by category. Monthly snapshot, spending trends, savings rate. No license — expense tracking apps run freely in India. High daily engagement driver, builds the muscle memory for interacting with the app.</p>
+          <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> AA dashboard. When AA goes live, reconcile manual entries against actual transactions. "You thought you spent ₹12,000 on dining. You actually spent ₹18,400." That gap is the product's most persuasive moment.</p>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>5. Credit card comparison + affiliate links</h4>
+          <p style="font-size:0.88rem; margin-bottom:8px;">Public card features by spending type: reward rate, annual fee, fuel surcharge waiver, lounge access. User applies via affiliate link — EarnKaro or BankBazaar pay ₹500–3,000 per approved card. No DSA needed; this is referral, not loan arrangement.</p>
+          <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> DSA cross-sell. Once DSA is active, pair each card recommendation with a personal loan offer on the same screen.</p>
+          <p style="font-size:0.82rem; color:var(--muted);">Only Day 0 feature with a dependency: Pvt Ltd registration needed to open the affiliate account. Unblocked by Month 0, Week 3–4.</p>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-bottom:24px;">
+        <h4>6. Educational AI chatbot (concepts only, no specific picks)</h4>
+        <p style="font-size:0.88rem; margin-bottom:8px;">Answers general finance questions: "What is a SIP?", "How does home loan prepayment work?", "Explain Section 80C." SEBI's January 2025 finfluencer guidelines are explicit — educational content is outside IA registration requirements. The chatbot stays on mechanics and concepts, never names a fund or stock to buy.</p>
+        <p style="font-size:0.88rem; margin-bottom:8px;"><strong>Gateway to:</strong> AI Financial Advisor (Module 2). Same interface, same UX. The upgrade happens when the user connects their accounts — the chatbot then knows their actual situation. "You asked about home loan prepayment — based on your HDFC loan at 9.1%, here is what prepaying ₹1L today saves you."</p>
+        <p style="font-size:0.82rem; color:var(--muted);"><strong>Three rules that keep it legal:</strong> no specific security or fund name in outputs, no price data under 3 months old, no future performance claims. These are the exact lines SEBI's Reg. 4 exemption draws.</p>
+      </div>
+
+      <div class="action-table-wrap">
+        <h3>Day 0 feature summary</h3>
+        <table>
+          <thead>
+            <tr><th>Feature</th><th>Launch dependency</th><th>Early revenue</th><th>What it unlocks later</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Financial health quiz</td>
+              <td><span class="dep-none">None</span></td>
+              <td>None (acquisition)</td>
+              <td>AA consent — quiz completers are warm AA prospects</td>
+            </tr>
+            <tr>
+              <td>AI document summarizer</td>
+              <td><span class="dep-none">None</span></td>
+              <td>None (habit building)</td>
+              <td>AA product — same UX, same mental model</td>
+            </tr>
+            <tr>
+              <td>Tax optimizer</td>
+              <td><span class="dep-none">None</span></td>
+              <td>None now; ELSS referral once AMFI ARN live</td>
+              <td>MF referral entry point — same screen, add affiliate link</td>
+            </tr>
+            <tr>
+              <td>Manual budget + expense tracker</td>
+              <td><span class="dep-none">None</span></td>
+              <td>None (retention)</td>
+              <td>AA reconciliation — manual vs. actual spend delta</td>
+            </tr>
+            <tr>
+              <td>Credit card comparison + affiliate</td>
+              <td><span class="license-pill">Pvt Ltd reg</span></td>
+              <td>₹500–3,000 per approved card</td>
+              <td>DSA cross-sell — pair with personal loan offer</td>
+            </tr>
+            <tr>
+              <td>Educational AI chatbot</td>
+              <td><span class="dep-none">None</span></td>
+              <td>None (brand / trust building)</td>
+              <td>AI Financial Advisor — same interface, upgraded with live AA data</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>The pattern across all seven:</strong> none of these are throwaway features. Five become revenue-earning the moment a license clears. Ship them early, get feedback, and the licensed product launches into a base of people who already know how the app works.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────── -->
+  <!-- MILESTONE 1: MONTH 3 -->
+  <!-- ────────────────────────────────────────────────────── -->
+  <div class="milestone m3">
+    <div class="milestone-header">
+      <div>
+        <div class="milestone-title">Month 3 — Foundation &amp; Beta</div>
+        <div class="milestone-theme">Get the basics right before anything else. Company, money, product, first users.</div>
+      </div>
+      <div class="milestone-badges">
+        <span class="badge">Angel round closes</span>
+        <span class="badge">MVP live</span>
+        <span class="badge">Prashant full-time</span>
+      </div>
+    </div>
+    <div class="milestone-body">
+
+      <div class="scorecard">
+        <h4>What success looks like at Month 3</h4>
+        <div class="scorecard-grid">
+          <div class="scorecard-item"><div class="sc-label">Funding raised</div><div class="sc-value">₹75L–1Cr</div></div>
+          <div class="scorecard-item"><div class="sc-label">Beta users (AA consent)</div><div class="sc-value">20–30</div></div>
+          <div class="scorecard-item"><div class="sc-label">Monthly revenue</div><div class="sc-value">₹0–50K</div></div>
+          <div class="scorecard-item"><div class="sc-label">FIU registration</div><div class="sc-value">Complete</div></div>
+          <div class="scorecard-item"><div class="sc-label">DSA registration</div><div class="sc-value">Live</div></div>
+          <div class="scorecard-item"><div class="sc-label">Agreements signed</div><div class="sc-value">All 4</div></div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Business &amp; Legal</h4>
+          <ul>
+            <li>Private Limited company registered (not LLP — required for equity rounds)</li>
+            <li>Consulting agreements signed for all four — ₹50K/month, IP assignment, step-up clause at seed close</li>
+            <li>NDA executed with all parties</li>
+            <li>Prashant reviews employment contract with a lawyer — IP and non-compete check before writing a line of code</li>
+            <li>Prashant resigns from full-time job once round closes — not before</li>
+            <li>Share structure locked: Prashant 80%, ESOP pool 10%, reserved 10%</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Fundraising</h4>
+          <ul>
+            <li>Angel round closed: ₹75L–1Cr at 10–15% dilution</li>
+            <li>Applied to 100X.VC (rolling, zero traction needed — ₹25L for 1% SAFE)</li>
+            <li>Applied to Antler India (AI-first, ₹4Cr for 11% + $1M Azure credits)</li>
+            <li>3–5 angel conversations started in Month 1–2</li>
+            <li>Pitch deck finalized and rehearsed — 10 slides, demo in 60 seconds</li>
+            <li>Accelerator decision confirmed by end of Month 3</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Regulatory — all must be done by Month 3</h4>
+          <ul>
+            <li><strong>FIU registration</strong> via Setu + Sahamati (20–30 working days — start immediately after company registration)</li>
+            <li><strong>Aadhaar eKYC</strong> live — bundled with Setu FIU registration, ₹3–10 per verification</li>
+            <li><strong>DSA registration</strong> — Bajaj Finserv + Tata Capital (2–3 weeks each, start in Month 0)</li>
+            <li><strong>IRDAI POSP license</strong> via Turtlemint — 15-hour online training + exam (2–3 weeks)</li>
+            <li><strong>Provisional patent filed</strong> within 30 days of company registration</li>
+            <li><strong>AMFI ARN registration</strong> initiated (4–6 weeks, needed for Month 6+)</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Product — what ships by Month 3</h4>
+          <ul>
+            <li><strong>Module 1: Unified Financial Dashboard</strong> — AA consent flow live, all bank accounts + loans + investments + credit cards on one screen, auto-updating</li>
+            <li><strong>Module 2: AI Financial Advisor</strong> — conversational, Hindi + English, full AA data context, specific and actionable responses</li>
+            <li><strong>Aadhaar eKYC</strong> integrated into onboarding flow</li>
+            <li>Landing page + waitlist live since Month 0 with EMI/SIP calculators</li>
+            <li>Credit card affiliate links live on landing page (EarnKaro, BankBazaar)</li>
+            <li>Referral program launched — ₹200 Amazon voucher per activated referral</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-bottom:24px;">
+        <h4>Users &amp; GTM — Month 0 to 3</h4>
+        <ul>
+          <li><strong>Month 0–2 (pre-launch):</strong> All 4 team members personally reach out to 75–100 contacts each. Target: 1,000 waitlist signups before beta opens, zero paid spend.</li>
+          <li>Prashant posts on LinkedIn 3–4x/month — "building something for people with home loans and mutual funds in 5 apps — want early access?" No pitch, just curiosity.</li>
+          <li>Post in r/IndiaInvestments (450K members) and r/personalfinanceindia (300K members) — genuine participation, mention Finlyft AI when it fits.</li>
+          <li>Join 5–10 personal finance WhatsApp and Telegram groups (HDFC users, NRI investors, working professionals).</li>
+          <li><strong>Month 3 (beta launch):</strong> Email the waitlist — exclusive early access for the first 500 who complete AA consent. Referral engine goes live simultaneously.</li>
+          <li>Target: 20–30 real users with completed AA consent by end of Month 3.</li>
+        </ul>
+      </div>
+
+      <div class="action-table-wrap">
+        <h3>Action items by week — Month 0</h3>
+        <table>
+          <thead><tr><th>#</th><th>Action</th><th>Owner</th><th>When</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Engage a CA for Pvt Ltd registration (budget ₹15–25K)</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>2</td><td>Employment contract reviewed by a lawyer — IP and non-compete check</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>3</td><td>Draft salary + consulting agreements for all four — ₹50K/month, IP clause, step-up at seed</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>Week 1</td></tr>
+            <tr><td>4</td><td>Request Setu AA sandbox access (free, no registration needed)</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>5</td><td>Start DSA registration — Bajaj Finserv + Tata Capital portals</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>6</td><td>Start IRDAI POSP training via Turtlemint</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>7</td><td>Affiliate links live on landing page (EarnKaro, BankBazaar)</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>Week 1</td></tr>
+            <tr><td>8</td><td>Prashant posts first LinkedIn piece — AA explainer, curiosity hook</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 1</td></tr>
+            <tr><td>9</td><td>All consulting agreements signed by everyone</td><td><span class="owner-tag owner-all">All</span></td><td>Week 2</td></tr>
+            <tr><td>10</td><td>Angel pitch deck — first draft</td><td><span class="owner-tag owner-pratik">Pratik</span> + <span class="owner-tag owner-prashant">Prashant</span></td><td>Week 2</td></tr>
+            <tr><td>11</td><td>Landing page live with waitlist + calculator tools</td><td><span class="owner-tag owner-shashi">Shashi</span></td><td>Week 2</td></tr>
+            <tr><td>12</td><td>Tech architecture finalized, stack locked, LLM API provider selected</td><td><span class="owner-tag owner-pratik">Pratik</span> + <span class="owner-tag owner-ashish">Ashish</span></td><td>Week 2</td></tr>
+            <tr><td>13</td><td>Apply to 100X.VC (rolling)</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 2</td></tr>
+            <tr><td>14</td><td>Start compiling RBI/SEBI/IRDAI corpus for FLM dataset</td><td><span class="owner-tag owner-ashish">Ashish</span></td><td>Week 2</td></tr>
+            <tr><td>15</td><td>Company registration complete</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 4</td></tr>
+            <tr><td>16</td><td>FIU registration initiated with Setu — initiate eKYC discussion too</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 3</td></tr>
+            <tr><td>17</td><td>Apply to Antler India — watch cohort dates</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 3</td></tr>
+            <tr><td>18</td><td>Provisional patent filed</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 4</td></tr>
+            <tr><td>19</td><td>AMFI ARN registration initiated</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 3</td></tr>
+            <tr><td>20</td><td>Sprint 1 started — auth + onboarding + Aadhaar eKYC on Setu sandbox</td><td><span class="owner-tag owner-ashish">Ashish</span> + <span class="owner-tag owner-shashi">Shashi</span></td><td>Week 3</td></tr>
+            <tr><td>21</td><td>First 3 angel conversations booked</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 4</td></tr>
+            <tr><td>22</td><td>Outreach to 5 CA firms — early partnership conversation</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>Week 4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>Critical dependency:</strong> Nothing gets built until the company is registered and consulting agreements are signed. FIU registration is the longest-lead item — it takes 20–30 working days. Start it immediately after the company is registered. Do not wait for the angel round to close.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────── -->
+  <!-- MILESTONE 2: MONTH 6 -->
+  <!-- ────────────────────────────────────────────────────── -->
+  <div class="milestone m6">
+    <div class="milestone-header">
+      <div>
+        <div class="milestone-title">Month 6 — Market Validation</div>
+        <div class="milestone-theme">Prove the product retains users and earns money. This is what you show the angels.</div>
+      </div>
+      <div class="milestone-badges">
+        <span class="badge">Angel check-in</span>
+        <span class="badge">500+ active users</span>
+        <span class="badge">First real revenue</span>
+      </div>
+    </div>
+    <div class="milestone-body">
+
+      <div class="scorecard">
+        <h4>What success looks like at Month 6 — angel check-in milestone</h4>
+        <div class="scorecard-grid">
+          <div class="scorecard-item"><div class="sc-label">Active AA users</div><div class="sc-value">500+</div></div>
+          <div class="scorecard-item"><div class="sc-label">Monthly revenue</div><div class="sc-value">₹1–3L</div></div>
+          <div class="scorecard-item"><div class="sc-label">FIU registration</div><div class="sc-value">Complete</div></div>
+          <div class="scorecard-item"><div class="sc-label">DSA referrals/month</div><div class="sc-value">10–20</div></div>
+          <div class="scorecard-item"><div class="sc-label">VAPT audit</div><div class="sc-value">Complete</div></div>
+          <div class="scorecard-item"><div class="sc-label">CA partnerships</div><div class="sc-value">10–15 firms</div></div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Product state at Month 6</h4>
+          <ul>
+            <li>App fully stable — no critical bugs, AA consent flow verified across 500 real users</li>
+            <li>AI advisor answering real queries with live AA data; proactive alerts running ("your home loan EMI resets next month")</li>
+            <li>Conversation history working — advisor remembers what the user asked last week</li>
+            <li>One-tap "share your financial health score" card for WhatsApp sharing (viral loop)</li>
+            <li>VAPT security audit complete via CERT-In empanelled auditor (schedule Month 4–5; budget in license table)</li>
+            <li>AMFI ARN registration complete — trail commissions from MF referrals now live</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Revenue breakdown at Month 6</h4>
+          <ul>
+            <li><strong>DSA commissions:</strong> 10–20 loan referrals/month. Personal loan at 1–1.5% of disbursement (₹5L loan = ₹5,000–7,500 commission). Home loan at 0.5–1% (₹30L loan = ₹15,000–30,000).</li>
+            <li><strong>Insurance POSP:</strong> 5–10 policies/month. Term insurance up to 35% first-year premium. Health insurance up to 15% per policy. → ₹30–75K/month.</li>
+            <li><strong>Credit card affiliate:</strong> ₹500–3,000 per approved card (EarnKaro, BankBazaar). Steady from landing page.</li>
+            <li><strong>Total target:</strong> ₹1–3L/month by Month 6. Primary driver is DSA loan commissions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-bottom:24px;">
+        <h4>Users &amp; GTM — Month 3 to 6</h4>
+        <ul>
+          <li><strong>Waitlist to beta:</strong> Email the 1,000+ waitlist — exclusive early access for first 500 who complete AA consent. Urgency hook.</li>
+          <li><strong>Referral engine running:</strong> ₹200 Amazon voucher for referrer when referred user completes AA consent + gets first financial summary. Alternatively: 3 months free premium for both — lower cash burn.</li>
+          <li><strong>CA partnerships:</strong> Approach 20–30 CA firms in Pune and Mumbai. Offer: "recommend Finlyft AI to your clients, earn ₹150 per activated user." CA clients are exactly the Finlyft AI ICP — they have investments, loans, and trust their CA. Target: 15 CA partners × 20 referrals = 300 users at ₹45K cost.</li>
+          <li><strong>Finance influencers:</strong> 1–2 deals with mid-tier creators (50K–200K subscribers). Performance-based: ₹300–500 per activated user (completed AA consent), not per view. Start small, test messaging before committing to large deals.</li>
+          <li><strong>10 user interviews:</strong> Understand what's working, what's confusing in onboarding. Apply findings before scaling acquisition.</li>
+        </ul>
+      </div>
+
+      <div class="action-table-wrap">
+        <h3>Key actions — Month 4 to 6</h3>
+        <table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Month</th></tr></thead>
+          <tbody>
+            <tr><td>Beta launch — email waitlist, first 500 AA consent activations</td><td><span class="owner-tag owner-prashant">Prashant</span> + <span class="owner-tag owner-pratik">Pratik</span></td><td>4</td></tr>
+            <tr><td>Referral program live — ₹200 voucher or 3-month premium</td><td><span class="owner-tag owner-shashi">Shashi</span></td><td>4</td></tr>
+            <tr><td>First DSA commission earned and verified</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>4</td></tr>
+            <tr><td>IRDAI POSP license active, first insurance referrals live</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>4</td></tr>
+            <tr><td>VAPT security audit scheduled + completed</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>5</td></tr>
+            <tr><td>CA partnership outreach — first 10 CA firms signed up</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>4–5</td></tr>
+            <tr><td>Finance influencer outreach — 2 mid-tier creators, performance deals</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>5</td></tr>
+            <tr><td>10 user interviews completed — findings documented</td><td><span class="owner-tag owner-all">All</span></td><td>4</td></tr>
+            <tr><td>AMFI ARN registration complete</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>5</td></tr>
+            <tr><td>Proactive alerts live in AI advisor — rate resets, EMI calendars</td><td><span class="owner-tag owner-ashish">Ashish</span></td><td>5</td></tr>
+            <tr><td>WhatsApp sharing card live — one-tap financial health score share</td><td><span class="owner-tag owner-shashi">Shashi</span></td><td>5</td></tr>
+            <tr><td>Accelerator decision confirmed (Antler or 100X)</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>4</td></tr>
+            <tr><td>Angel check-in meeting — present Month 6 numbers</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>6</td></tr>
+            <tr><td>FLM dataset: target 10,000+ examples compiled</td><td><span class="owner-tag owner-ashish">Ashish</span></td><td>6</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>AA consent drop-off is the #1 risk at this stage.</strong> If users drop out during the consent flow, nothing else works. Invest engineering time in onboarding UX — one tap, not a form. Test at least 3 different onboarding flows before scaling acquisition spend.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────── -->
+  <!-- MILESTONE 3: MONTH 9 -->
+  <!-- ────────────────────────────────────────────────────── -->
+  <div class="milestone m9">
+    <div class="milestone-header">
+      <div>
+        <div class="milestone-title">Month 9 — Expansion</div>
+        <div class="milestone-theme">Post-MVP modules go live this phase. Revenue should be compounding. The seed story needs real numbers behind it, not projections.</div>
+      </div>
+      <div class="milestone-badges">
+        <span class="badge">Loan Suite live</span>
+        <span class="badge">Health Score live</span>
+        <span class="badge">2,000+ users</span>
+      </div>
+    </div>
+    <div class="milestone-body">
+
+      <div class="scorecard">
+        <h4>What success looks like at Month 9</h4>
+        <div class="scorecard-grid">
+          <div class="scorecard-item"><div class="sc-label">Active AA users</div><div class="sc-value">2,000+</div></div>
+          <div class="scorecard-item"><div class="sc-label">Monthly revenue</div><div class="sc-value">₹3–5L</div></div>
+          <div class="scorecard-item"><div class="sc-label">FLM dataset size</div><div class="sc-value">20,000+</div></div>
+          <div class="scorecard-item"><div class="sc-label">CA partnerships</div><div class="sc-value">25+ firms</div></div>
+          <div class="scorecard-item"><div class="sc-label">New modules live</div><div class="sc-value">2</div></div>
+          <div class="scorecard-item"><div class="sc-label">NBFC convos</div><div class="sc-value">1–2 active</div></div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Module 3 — Loan Suite (launches Month 7)</h4>
+          <p>Launch trigger: 1,000 active dashboard users. Uses AA data already flowing in — no manual entry.</p>
+          <ul>
+            <li>All loans in one view: personal, home, vehicle, education, credit card outstanding</li>
+            <li>EMI calendar — upcoming payment dates across all lenders</li>
+            <li>Prepayment calculator: "Pay ₹50K extra today, save ₹1.4L in interest, close 8 months early"</li>
+            <li>Refinancing alert: "SBI offering 8.5% — your current rate is 9.2%. Switch saves ₹3,200/month"</li>
+            <li>Debt payoff prioritizer: which loan to close first by rate, tenure, and cash flow</li>
+            <li>Loan consolidation: detect multi-loan situations, calculate savings, refer to DSA partner for commission (1–1.5% of new disbursement)</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Module 4 — Financial Health Score (launches Month 8)</h4>
+          <p>Launch trigger: Loan Suite at 1,000 users. Finlyft AI's proprietary score — not CIBIL.</p>
+          <ul>
+            <li>300–900 scale (mirrors CIBIL for intuitive reading)</li>
+            <li>6 components: credit utilisation (20%), debt-to-income (25%), savings rate (20%), emergency fund coverage (15%), investment diversification (10%), repayment track record (10%)</li>
+            <li>Month-on-month trend with explanation</li>
+            <li>"What's dragging your score" — specific breakdown</li>
+            <li>Actionable fix: "Pay Axis card below 30% utilisation — adds ~40 points"</li>
+            <li><strong>Premium gate:</strong> Free users see the number. Paid users see full breakdown. First subscription revenue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block" style="margin-bottom:24px;">
+        <h4>Module 5 — Marketplace (launches Month 7–8, parallel with Loan Suite)</h4>
+        <p>The revenue engine. Product recommendations surface inside AI advisor responses — not a separate catalogue. When AI says "your HDFC card rate is high," it follows with "here are two cards with lower rates." Those are affiliate links.</p>
+        <table style="margin-top:12px;">
+          <thead><tr><th>Category</th><th>Commission</th><th>License</th></tr></thead>
+          <tbody>
+            <tr><td>Personal loans</td><td>1–1.5% of disbursement</td><td>DSA (done)</td></tr>
+            <tr><td>Home loans</td><td>0.5–1% of disbursement</td><td>DSA (done)</td></tr>
+            <tr><td>Loan consolidation</td><td>1–1.5% of new disbursement</td><td>DSA (done)</td></tr>
+            <tr><td>Credit cards</td><td>₹500–3,000 per approved card</td><td>Affiliate (done)</td></tr>
+            <tr><td>Term insurance</td><td>Up to 35% first-year premium</td><td>IRDAI POSP (done)</td></tr>
+            <tr><td>Health insurance</td><td>Up to 15% per policy</td><td>IRDAI POSP (done)</td></tr>
+            <tr><td>Mutual funds</td><td>0.5–1% trail commission</td><td>AMFI ARN (done)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Users &amp; GTM — Month 7 to 9</h4>
+          <ul>
+            <li><strong>Paid acquisition starts:</strong> Google Search Ads targeting "loan management app India", "track all investments", "account aggregator app". Meta/Instagram retargeting and lookalikes. Budget: ₹8–10L over 6 months. Target CAC under ₹500 per activated user.</li>
+            <li><strong>Corporate wellness:</strong> Finlyft AI as employee financial wellness benefit. Target: IT companies and banks in Pune + Bengaluru. 3 companies × 200 employees = 600 users at near-zero CAC. Pitch to HR: "reduce financial stress = better retention."</li>
+            <li><strong>NBFC co-marketing (Month 8+):</strong> NBFCs Finlyft AI refers to email their customer base: "track all your loans with our partner app." One NBFC × 50K customers × 1% CTR × 20% activation = 100 users per campaign, zero cost.</li>
+            <li><strong>CA partnerships expanded:</strong> 25+ CA firms active.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>Tech &amp; IP — Month 7 to 9</h4>
+          <ul>
+            <li>FLM training dataset at 20,000+ examples, ready for fine-tuning in Year 2. Includes: RBI/SEBI/IRDAI corpus, synthetic Hindi-English Q&A pairs (each verified by a finance professional), and anonymized user queries (opt-in consent).</li>
+            <li>Sarvam AI partnership conversation started — potential base model for FLM (natively trained on 10 Indian languages).</li>
+            <li>App load-tested for 5,000 MAU on AWS Mumbai (ap-south-1).</li>
+            <li>LLM API costs managed via query caching and cheaper models for simple queries. Target: under ₹40–50K/month at 2,000 MAU.</li>
+            <li>NBFC pipeline: 2–3 conversations started for the B2B white-label Year 2 pitch.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-table-wrap">
+        <h3>Key actions — Month 7 to 9</h3>
+        <table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Month</th></tr></thead>
+          <tbody>
+            <tr><td>Loan Suite launched (requires 1,000 active dashboard users first)</td><td><span class="owner-tag owner-ashish">Ashish</span> + <span class="owner-tag owner-shashi">Shashi</span></td><td>7</td></tr>
+            <tr><td>Marketplace integrated — all 7 product categories in AI advisor flow</td><td><span class="owner-tag owner-pratik">Pratik</span> + <span class="owner-tag owner-ashish">Ashish</span></td><td>7–8</td></tr>
+            <tr><td>Financial Health Score live with premium gate</td><td><span class="owner-tag owner-ashish">Ashish</span> + <span class="owner-tag owner-shashi">Shashi</span></td><td>8</td></tr>
+            <tr><td>Google Search Ads live — loan and investment keywords</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>7</td></tr>
+            <tr><td>Corporate wellness pitches — 3 target companies in Pune/Bengaluru</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>7–8</td></tr>
+            <tr><td>NBFC co-marketing deal — first NBFC email campaign to their customer base</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>8–9</td></tr>
+            <tr><td>CA partnerships expanded to 25+ firms</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>7–9</td></tr>
+            <tr><td>Finance influencer: scale to 3–4 creators, performance deals</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>7</td></tr>
+            <tr><td>FLM dataset: 20,000+ examples, all verified by finance professional</td><td><span class="owner-tag owner-ashish">Ashish</span></td><td>9</td></tr>
+            <tr><td>Sarvam AI partnership conversation initiated</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>8</td></tr>
+            <tr><td>2–3 NBFC conversations started for B2B Year 2 pipeline</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>8–9</td></tr>
+            <tr><td>AWS load test — verify infrastructure handles 5,000 MAU</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>9</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>Module sequencing is not optional.</strong> Add a new module only after the previous one has 1,000 active users. Shipping 5 half-built features that nobody returns for is worse than shipping 2 that work perfectly. Loan Suite goes live only when the dashboard has 1,000 active users. Health Score goes live only when Loan Suite has 1,000 active users.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────────────── -->
+  <!-- MILESTONE 4: MONTH 12 -->
+  <!-- ────────────────────────────────────────────────────── -->
+  <div class="milestone m12">
+    <div class="milestone-header">
+      <div>
+        <div class="milestone-title">Month 12 — Seed Ready</div>
+        <div class="milestone-theme">Hit the numbers. Close the seed round. Salary step-up triggers for everyone.</div>
+      </div>
+      <div class="milestone-badges">
+        <span class="badge">5,000+ MAU</span>
+        <span class="badge">₹5–8L/month</span>
+        <span class="badge">Seed deck ready</span>
+      </div>
+    </div>
+    <div class="milestone-body">
+
+      <div class="scorecard">
+        <h4>What the seed pitch requires — Month 12 metrics</h4>
+        <div class="scorecard-grid">
+          <div class="scorecard-item"><div class="sc-label">MAU with AA consent</div><div class="sc-value">5,000+</div></div>
+          <div class="scorecard-item"><div class="sc-label">Monthly revenue</div><div class="sc-value">₹5–8L</div></div>
+          <div class="scorecard-item"><div class="sc-label">Revenue run rate</div><div class="sc-value">₹60–96L</div></div>
+          <div class="scorecard-item"><div class="sc-label">Seed round target</div><div class="sc-value">₹3–5Cr</div></div>
+          <div class="scorecard-item"><div class="sc-label">Target dilution</div><div class="sc-value">15–20%</div></div>
+          <div class="scorecard-item"><div class="sc-label">Salary step-up</div><div class="sc-value">₹1L/month</div></div>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Product — in development for seed pitch</h4>
+          <ul>
+            <li><strong>Module 6 — Goals Planner</strong> in development: emergency fund, home purchase, child's education, retirement, vehicle, custom goals. Progress auto-updated from AA data. Goal-linked product suggestions (MF SIPs, RDs).</li>
+            <li><strong>Module 7 — Investment Hub</strong> in development: cross-platform portfolio view (Groww + Zerodha + PPF + NPS on one screen), XIRR calculation, benchmark comparison, tax impact summary, diversification analysis.</li>
+            <li>FLM fine-tuning initiated — first training run on Finlyft AI dataset. Evaluate against frontier LLM on Indian finance benchmarks.</li>
+            <li>Premium tier fully defined: unlimited AI queries, proactive alerts, full Health Score breakdown, tax planning. Subscription revenue visible in seed data room.</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>How 5,000 MAU is reached</h4>
+          <table style="margin:0;">
+            <thead><tr><th>Channel</th><th>Users</th><th>Cost</th></tr></thead>
+            <tbody>
+              <tr><td>Organic + waitlist + Reddit</td><td>500</td><td>₹0</td></tr>
+              <tr><td>Referral (₹200 voucher)</td><td>1,000</td><td>₹2L</td></tr>
+              <tr><td>CA partnerships (₹150/ref)</td><td>500</td><td>₹75K</td></tr>
+              <tr><td>Finance influencers</td><td>1,000</td><td>₹5L</td></tr>
+              <tr><td>Google + Meta paid ads</td><td>1,500</td><td>₹7.5L</td></tr>
+              <tr><td>Corporate wellness + NBFC</td><td>500</td><td>₹1L</td></tr>
+              <tr><td><strong>Total</strong></td><td><strong>5,000</strong></td><td><strong>~₹16L</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-grid">
+        <div class="info-block">
+          <h4>Seed round — fundraising plan</h4>
+          <ul>
+            <li><strong>Target:</strong> ₹3–5Cr at 15–20% dilution</li>
+            <li><strong>Target investors:</strong> Surge (Peak XV) — apply once 500+ users confirmed; Blume Ventures; Prime Venture Partners; Elevation Capital</li>
+            <li><strong>Use of funds:</strong> All salaries step up to ₹1L/month; FLM compute (₹2–5L one-time); paid acquisition scale-up; Goals Planner + Investment Hub build; SEBI RIA feasibility study for Year 2</li>
+            <li><strong>Data room:</strong> AA user cohorts, revenue breakdown, retention curves, CAC by channel, FLM roadmap, B2B NBFC pipeline</li>
+            <li><strong>Google for Startups Accelerator:</strong> Apply — AI-focused, equity-free, Google Cloud credits + mentorship</li>
+            <li><strong>RBI Regulatory Sandbox:</strong> Apply if cohort timing aligns — adds credibility, helps with FIU compliance narrative</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <h4>FLM — where the Year 2 moat comes from</h4>
+          <ul>
+            <li>Year 1: Frontier LLM APIs (OpenAI, Anthropic, Google). Fast, high quality, no ML team needed.</li>
+            <li>The problem at scale: 5,000 MAU × 5 queries/day × ₹1/query = ₹7.5L/month in API costs. That is the entire Month 12 revenue target, wiped out.</li>
+            <li><strong>Year 2, Q1:</strong> Fine-tune Llama 3.2 or Sarvam-2B on Finlyft AI's 50,000+ example dataset. One-time GPU cost: ₹2–5L on AWS SageMaker.</li>
+            <li><strong>Year 2, Q2:</strong> Self-host on AWS. Cost drops to ₹20–40K/month vs. ₹75K–1.5L on APIs. Break-even at 2,500–3,000 MAU.</li>
+            <li><strong>The moat:</strong> A model trained on real Indian user financial queries — PPF, NPS, ELSS, Section 80C, Hindi-English code-switching — cannot be replicated without the same data and the same domain time. AA integration is replicable. This is not.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="action-table-wrap">
+        <h3>Key actions — Month 10 to 12</h3>
+        <table>
+          <thead><tr><th>Action</th><th>Owner</th><th>Month</th></tr></thead>
+          <tbody>
+            <tr><td>Goals Planner development started</td><td><span class="owner-tag owner-ashish">Ashish</span> + <span class="owner-tag owner-shashi">Shashi</span></td><td>10</td></tr>
+            <tr><td>Investment Hub development started</td><td><span class="owner-tag owner-ashish">Ashish</span> + <span class="owner-tag owner-shashi">Shashi</span></td><td>10</td></tr>
+            <tr><td>FLM fine-tuning initiated — first training run on Finlyft AI dataset</td><td><span class="owner-tag owner-pratik">Pratik</span> + <span class="owner-tag owner-ashish">Ashish</span></td><td>11</td></tr>
+            <tr><td>Seed deck complete — ₹3–5Cr ask, 15–20% dilution</td><td><span class="owner-tag owner-prashant">Prashant</span> + <span class="owner-tag owner-pratik">Pratik</span></td><td>10</td></tr>
+            <tr><td>Data room ready — user cohorts, revenue, retention, CAC by channel</td><td><span class="owner-tag owner-pratik">Pratik</span></td><td>11</td></tr>
+            <tr><td>Apply to Surge (Peak XV) — traction should meet bar by now</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>10</td></tr>
+            <tr><td>Apply to Google for Startups Accelerator India</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>10</td></tr>
+            <tr><td>First seed investor meetings — Blume, Prime, Elevation</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>11</td></tr>
+            <tr><td>2–3 NBFC conversations active for B2B Year 2 white-label</td><td><span class="owner-tag owner-prashant">Prashant</span></td><td>10–12</td></tr>
+            <tr><td>SEBI RIA feasibility study — Year 2 investment advice capability</td><td><span class="owner-tag owner-pratik">Pratik</span> + <span class="owner-tag owner-prashant">Prashant</span></td><td>12</td></tr>
+            <tr><td>Salary step-up triggered for all four at seed close — ₹1L/month</td><td><span class="owner-tag owner-all">All</span></td><td>12</td></tr>
+            <tr><td>FLM dataset: 50,000+ examples — full fine-tuning ready for Year 2</td><td><span class="owner-tag owner-ashish">Ashish</span></td><td>12</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note-box">
+        <strong>What seed investors will ask:</strong> (1) Why hasn't Fi or Jupiter built this? (2) What stops them from copying you once you prove the market? Answer: Speed to 5,000 users, FLM moat in Year 2, proprietary user data. The AA integration is table stakes. The data and the model are what's actually defensible.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Risk register -->
+  <h2 class="section-heading">Risk register</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td>Angel round delayed past Month 3</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-high">High</span></td><td>Run angel + accelerator tracks in parallel. Keep burn at zero until funded. Prashant stays employed until wire arrives.</td></tr>
+      <tr><td>AA consent drop-off &gt;60% in onboarding</td><td><span class="risk-high">High</span></td><td><span class="risk-high">High</span></td><td>Invest in onboarding UX — one tap, not a form. Test 3 different flows before scaling acquisition. Aadhaar eKYC must be seamless.</td></tr>
+      <tr><td>FIU registration delayed beyond 6 weeks</td><td><span class="risk-low">Low</span></td><td><span class="risk-medium">Medium</span></td><td>Setu as TSP compresses to 4–6 weeks. Start immediately after company registration. Do not wait.</td></tr>
+      <tr><td>LLM API costs spike at scale</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-medium">Medium</span></td><td>Query caching, cheaper models for simple queries in Year 1. FLM roadmap solves this in Year 2.</td></tr>
+      <tr><td>Competitor (Fi, Jupiter) ships AA + AI feature</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-high">High</span></td><td>Speed matters more than anything right now. Get to 5,000 users before they build the brief. Fi needs a banking license to do what Finlyft AI does; that is a real structural advantage.</td></tr>
+      <tr><td>DSA / AI advice regulatory conflict of interest</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-high">High</span></td><td>All AI outputs are "information" and "options" — not directives. Full disclosure on every recommendation. Advisory and marketplace are kept visually separate. One-line disclaimer on every AI response, every time.</td></tr>
+      <tr><td>Consulting team bandwidth (other active projects)</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-high">High</span></td><td>Lock in weekly hour commitments in consulting agreements before any build starts. Minimum hours per week specified in writing for each ops team member (Pratik, Ashish, Shashi).</td></tr>
+      <tr><td>Prashant's employment contract has restrictive IP clause</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-high">High</span></td><td>Lawyer reviews contract before Month 0. If restrictive: no code written until resignation. This check happens Week 1 — not later.</td></tr>
+      <tr><td>CAC exceeds ₹500 — paid acquisition doesn't scale</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-medium">Medium</span></td><td>Organic + CA partnerships first. Paid acquisition is Phase 4, not Phase 1. Unit economics confirmed before scaling spend.</td></tr>
+      <tr><td>FLM training data quality insufficient</td><td><span class="risk-medium">Medium</span></td><td><span class="risk-medium">Medium</span></td><td>Every synthetic Q&amp;A pair reviewed by a qualified finance professional before entering the training set.</td></tr>
+    </tbody>
+  </table></div>
+
+  <!-- Licenses -->
+  <h2 class="section-heading">License sequencing</h2>
+  <div class="table-scroll"><table>
+    <thead><tr><th>License</th><th>Start by</th><th>Needed by</th><th>Time needed</th><th>Est. Cost</th><th>Owner</th></tr></thead>
+    <tbody>
+      <tr><td>Pvt Ltd registration</td><td>Week 1</td><td>Month 0</td><td>2–3 weeks</td><td>₹8,000–15,000<br><small style="color:var(--muted)">MCA fees + CA charges</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>DSA — Bajaj Finserv + Tata Capital</td><td>Week 1</td><td>Month 3</td><td>2–3 weeks each</td><td>₹0<br><small style="color:var(--muted)">Documentation only</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>IRDAI POSP (via Turtlemint)</td><td>Week 1</td><td>Month 2</td><td>2–3 weeks</td><td>₹0<br><small style="color:var(--muted)">Turtlemint covers training + exam</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>FIU registration (Setu + Sahamati + Aujas)</td><td>After company reg</td><td>Month 3</td><td>20–30 working days</td><td>₹50,000–2,00,000<br><small style="color:var(--muted)">Setu setup + Sahamati/Aujas VASP certification; varies by TSP negotiation</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>Aadhaar eKYC (via Setu)</td><td>With FIU</td><td>Month 3</td><td>Bundled with FIU</td><td>₹3–10 per KYC<br><small style="color:var(--muted)">Runtime cost; setup bundled with FIU</small></td><td><span class="owner-tag owner-ashish">Ashish</span></td></tr>
+      <tr><td>AMFI ARN registration</td><td>Week 3</td><td>Month 5</td><td>4–6 weeks</td><td>₹3,000–5,000<br><small style="color:var(--muted)">NISM exam fee + ARN registration</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>DSA — HDFC Bank</td><td>Month 2</td><td>Month 5</td><td>Longer process (6–8 wks)</td><td>₹0<br><small style="color:var(--muted)">Documentation only</small></td><td><span class="owner-tag owner-prashant">Prashant</span></td></tr>
+      <tr><td>VAPT security audit (CERT-In empanelled)</td><td>Month 4</td><td>Month 5</td><td>2–4 weeks</td><td>₹50,000–1,50,000<br><small style="color:var(--muted)">CERT-In empanelled auditor; lower end for web app only</small></td><td><span class="owner-tag owner-pratik">Pratik</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note-box" style="margin-top:16px;">
+    <strong>Total regulatory budget estimate: ₹1,11,000–3,70,000</strong> &nbsp;·&nbsp; The FIU registration is the biggest variable — Setu's setup fee depends on the TSP package negotiated. VAPT is the second-largest line item and should be budgeted conservatively at ₹1.5L. All others are either ₹0 or under ₹15K. Plan for ₹2.5L as a working budget; ₹4L as a worst case.
+  </div>
+
+  <!-- Feature → License dependency map -->
+  <h2 class="section-heading">Feature &amp; license dependency map</h2>
+  <p style="color:var(--muted);font-size:0.88rem;margin-bottom:16px;">Every launchable feature, the license(s) it requires, and whether it is fully blocked or can partially ship without them.</p>
+
+  <style>
+    .dep-hard { display:inline-block; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; background:#fde8e8; color:#b8390e; white-space:nowrap; }
+    .dep-partial { display:inline-block; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; background:#fff8e1; color:#7d5a00; white-space:nowrap; }
+    .dep-none { display:inline-block; font-size:0.72rem; font-weight:700; padding:2px 8px; border-radius:10px; background:#e8f5e9; color:#1a6b3c; white-space:nowrap; }
+    .license-pill { display:inline-block; font-size:0.72rem; font-weight:600; padding:2px 7px; border-radius:10px; background:var(--accent-bg); color:var(--navy); margin:2px 2px 2px 0; white-space:nowrap; }
+    .feat-table td { vertical-align:middle; }
+    .feat-table td:first-child { font-weight:600; font-size:0.88rem; }
+  </style>
+
+  <div class="table-scroll"><table class="feat-table">
+    <thead>
+      <tr>
+        <th>Feature / Functionality</th>
+        <th>Module</th>
+        <th>License(s) required</th>
+        <th>Launch status</th>
+        <th>Unblocked from</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- No license needed -->
+      <tr>
+        <td>Landing page + waitlist</td>
+        <td>Pre-launch</td>
+        <td><span class="dep-none">None</span></td>
+        <td><span class="dep-none">Can ship now</span></td>
+        <td>Day 1</td>
+        <td>EMI/SIP calculators, email capture — no regulatory touch</td>
+      </tr>
+      <tr>
+        <td>Credit card affiliate links</td>
+        <td>Pre-launch</td>
+        <td><span class="license-pill">Pvt Ltd reg</span></td>
+        <td><span class="dep-partial">Partial block</span></td>
+        <td>Month 0 (Week 3–4)</td>
+        <td>EarnKaro / BankBazaar affiliate accounts require a registered entity; links can go live once company is registered</td>
+      </tr>
+      <tr>
+        <td>AI Financial Advisor (sandbox / demo)</td>
+        <td>Module 2</td>
+        <td><span class="license-pill">Pvt Ltd reg</span></td>
+        <td><span class="dep-partial">Partial block</span></td>
+        <td>Month 0</td>
+        <td>Can be built and demoed without FIU; will not have live AA data until FIU is complete — advisor runs on manually entered data only</td>
+      </tr>
+
+      <!-- FIU-blocked -->
+      <tr>
+        <td>Aadhaar eKYC (user onboarding)</td>
+        <td>Onboarding</td>
+        <td><span class="license-pill">FIU reg (Setu)</span> <span class="license-pill">Pvt Ltd reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 3</td>
+        <td>Bundled with Setu FIU setup; cannot go live before company reg + FIU approval</td>
+      </tr>
+      <tr>
+        <td>AA Consent flow</td>
+        <td>Module 1 — Dashboard</td>
+        <td><span class="license-pill">FIU reg (Setu + Sahamati)</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 3</td>
+        <td>Core AA flow is the single most critical license dependency; the entire product is gated behind it</td>
+      </tr>
+      <tr>
+        <td>Unified Financial Dashboard</td>
+        <td>Module 1 — Dashboard</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 3</td>
+        <td>Aggregated bank + loan + investment data requires FIU; can show placeholder UI before</td>
+      </tr>
+      <tr>
+        <td>AI Financial Advisor (live AA data)</td>
+        <td>Module 2</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 3</td>
+        <td>Advisor is useful without AA data but genuinely powerful only once live account data flows in</td>
+      </tr>
+      <tr>
+        <td>Proactive alerts (EMI resets, rate changes)</td>
+        <td>Module 2</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 5</td>
+        <td>Requires live transaction + loan data from AA; alert logic can be built in Month 3–4, triggered once data flows</td>
+      </tr>
+      <tr>
+        <td>Loan Suite (EMI calendar, prepayment calc, refinancing alerts)</td>
+        <td>Module 3</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 7</td>
+        <td>All loan intelligence comes from AA data; DSA license needed separately for the referral / consolidation component</td>
+      </tr>
+      <tr>
+        <td>Financial Health Score</td>
+        <td>Module 4</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 8</td>
+        <td>Score is computed from AA data (credit utilisation, debt-to-income, savings rate etc.); no other license needed, just data</td>
+      </tr>
+      <tr>
+        <td>Goals Planner</td>
+        <td>Module 6</td>
+        <td><span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 10</td>
+        <td>Goal progress is auto-updated from AA data; goal-linked MF SIP suggestions also need AMFI ARN for commission</td>
+      </tr>
+      <tr>
+        <td>Investment Hub (cross-platform portfolio view, XIRR, tax impact)</td>
+        <td>Module 7</td>
+        <td><span class="license-pill">FIU reg</span> <span class="license-pill">AMFI ARN</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 10</td>
+        <td>Portfolio view from AA data; MF referral + trail commission requires AMFI ARN; XIRR/benchmark display has no license dependency</td>
+      </tr>
+
+      <!-- DSA-blocked -->
+      <tr>
+        <td>Loan referrals — Bajaj Finserv + Tata Capital</td>
+        <td>Revenue / DSA</td>
+        <td><span class="license-pill">DSA — Bajaj + Tata</span> <span class="license-pill">Pvt Ltd reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 3</td>
+        <td>Referring personal and home loans for commission; registration takes 2–3 weeks per lender — start Week 1</td>
+      </tr>
+      <tr>
+        <td>Loan referrals — HDFC Bank</td>
+        <td>Revenue / DSA</td>
+        <td><span class="license-pill">DSA — HDFC Bank</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 5</td>
+        <td>HDFC has a longer onboarding process (6–8 weeks); lower priority than Bajaj + Tata but expands lender coverage</td>
+      </tr>
+      <tr>
+        <td>Loan consolidation referral (Marketplace)</td>
+        <td>Module 5 — Marketplace</td>
+        <td><span class="license-pill">DSA — Bajaj + Tata</span> <span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 7</td>
+        <td>Requires AA loan data to detect multi-loan situation + DSA to earn commission on new disbursement</td>
+      </tr>
+
+      <!-- IRDAI-blocked -->
+      <tr>
+        <td>Insurance referrals — term + health policies</td>
+        <td>Revenue / POSP</td>
+        <td><span class="license-pill">IRDAI POSP (Turtlemint)</span> <span class="license-pill">Pvt Ltd reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 2–3</td>
+        <td>15-hr training + exam via Turtlemint; fastest regulatory unlock after company reg; up to 35% first-year commission on term</td>
+      </tr>
+
+      <!-- AMFI-blocked -->
+      <tr>
+        <td>Mutual fund referrals + trail commissions</td>
+        <td>Revenue / Marketplace</td>
+        <td><span class="license-pill">AMFI ARN</span> <span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 5</td>
+        <td>ARN takes 4–6 weeks (NISM exam + registration); trail commissions are recurring revenue — longest-horizon unlock</td>
+      </tr>
+
+      <!-- VAPT-blocked -->
+      <tr>
+        <td>Production scale-up (paid acquisition)</td>
+        <td>GTM — Month 7+</td>
+        <td><span class="license-pill">VAPT audit</span> <span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 5</td>
+        <td>CERT-In empanelled VAPT audit is a prerequisite before scaling paid user acquisition; FIU compliance also mandates it</td>
+      </tr>
+
+      <!-- Multi-license -->
+      <tr>
+        <td>Marketplace — all product categories live</td>
+        <td>Module 5 — Marketplace</td>
+        <td><span class="license-pill">DSA — Bajaj + Tata</span> <span class="license-pill">IRDAI POSP</span> <span class="license-pill">AMFI ARN</span> <span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-hard">Hard block</span></td>
+        <td>Month 7–8</td>
+        <td>Full marketplace (loans + insurance + MF) requires all three earning licenses; each category can unlock independently as licenses come through</td>
+      </tr>
+      <tr>
+        <td>Premium subscription tier</td>
+        <td>Module 4 / Revenue</td>
+        <td><span class="license-pill">Pvt Ltd reg</span> <span class="license-pill">FIU reg</span></td>
+        <td><span class="dep-partial">Partial block</span></td>
+        <td>Month 8</td>
+        <td>Pvt Ltd needed for payment gateway (Razorpay); full Health Score breakdown (the premium hook) needs AA data from FIU</td>
+      </tr>
+      <tr>
+        <td>Corporate wellness / B2B offering</td>
+        <td>GTM — Month 7+</td>
+        <td><span class="license-pill">Pvt Ltd reg</span> <span class="license-pill">VAPT audit</span></td>
+        <td><span class="dep-partial">Partial block</span></td>
+        <td>Month 7</td>
+        <td>Enterprises will require proof of security compliance before allowing employee data; VAPT report is typically mandatory in B2B contracts</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="note-box" style="margin-top:16px;">
+    <strong>Critical path:</strong> FIU registration unlocks 9 of the 20 features in this table. It is the single most consequential license in the stack. Start it the same week the company is registered. DSA, IRDAI POSP, and AMFI ARN can all run in parallel — but FIU has no shortcut if it slips.
+  </div>
+
+</main>
+
+<footer>
+  Finlyft AI &nbsp;·&nbsp; Confidential &nbsp;·&nbsp; August 2026 &nbsp;·&nbsp; For founding team use only
+</footer>
+
+</body>
+</html>

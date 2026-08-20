@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1-Year Roadmap — Finlyft AI</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6fa; color: #1a1a2e; }
+  header { background: #0f1f3d; color: #fff; padding: 16px 32px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .logo-mark { width: 40px; height: 40px; background: #c9a227; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #0f1f3d; letter-spacing: -1px; flex-shrink: 0; }
+  .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .brand span { color: #c9a227; }
+  .doc-title { margin-left: auto; font-size: 13px; color: #a0aec0; font-weight: 400; }
+  main { max-width: 860px; margin: 40px auto; padding: 0 24px 80px; }
+  .card { background: #fff; border-radius: 12px; padding: 40px 48px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .card h1 { font-size: 28px; font-weight: 800; color: #0f1f3d; margin-bottom: 6px; }
+  .card h2 { font-size: 20px; font-weight: 700; color: #0f1f3d; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c9a227; }
+  .card h3 { font-size: 16px; font-weight: 700; color: #0f1f3d; margin: 20px 0 8px; }
+  .card p { line-height: 1.75; color: #374151; margin-bottom: 12px; }
+  .card ul, .card ol { padding-left: 22px; margin-bottom: 12px; }
+  .card li { line-height: 1.75; color: #374151; margin-bottom: 4px; }
+  .card table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .card th { background: #0f1f3d; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .card td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; color: #374151; }
+  .card tr:nth-child(even) td { background: #f9fafb; }
+  .card blockquote { border-left: 4px solid #c9a227; padding: 12px 20px; background: #fffbf0; border-radius: 0 8px 8px 0; margin: 16px 0; font-style: italic; color: #4a3728; }
+  .card code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #c9a227; }
+  .card hr { border: none; border-top: 1px solid #e5e7eb; margin: 32px 0; }
+  .confidential-bar { background: #0f1f3d; color: #c9a227; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 6px; }
+</style>
+</head>
+<body>
+<div class="confidential-bar">CONFIDENTIAL — FINLYFT AI INTERNAL DOCUMENT</div>
+<header>
+  <div class="logo-mark">FL</div>
+  <div class="brand">Finlyft <span>AI</span></div>
+  <div class="doc-title">1-Year Roadmap</div>
+</header>
+<main>
+  <div class="card" id="content"></div>
+</main>
+<script>
+const md = `# Finlyft AI — 1-Year Roadmap
+**Prepared:** August 2026 · Confidential
+**Founder:** Prashant (CEO) · **Ops team:** Pratik · Ashish · Shashi
+
+---
+
+## The one number that drives everything
+
+> Users who completed AA consent and came back at least 3 times.
+
+| Checkpoint | Target |
+|---|---|
+| Month 3 | 20–30 beta users |
+| Month 6 | 500+ active AA users |
+| Month 9 | 2,000+ active AA users |
+| Month 12 | 5,000+ MAU |
+
+---
+
+## Month 0–2 — Day 0 Foundation (Pre-App)
+
+**Theme: 6 license-free features are the entire product. App and licenses are being built in parallel.**
+
+### What is live from Week 1–2 (no app, no license required)
+
+The AA dashboard, AI advisor, and the full module suite do not exist yet — they take 3 months to build. Licenses (DSA, FIU, IRDAI POSP, AMFI ARN) also take 2–3 months to process. During Month 0–2, these 6 features are the complete Finlyft AI offering:
+
+1. **EMI calculator** — loan repayment math, no regulatory activity
+2. **SIP calculator** — SIP vs. lump sum, return projections
+3. **Loan eligibility calculator** — income + expense → loan eligibility estimate
+4. **Basic budgeting tool** — user-entered income and expense tracking, no AA, no advice, no license
+5. **Financial literacy content** — blog, newsletter, LinkedIn posts from Prashant
+6. **Credit card affiliate links** — EarnKaro, BankBazaar, CreditMantri — ₹500–3,000 per approved card application
+
+### Running in parallel (Month 0–2)
+
+**Tech build:**
+- AA consent flow + Aadhaar eKYC on Setu sandbox
+- Unified Dashboard + AI Advisor in React Native
+- Backend (Node.js + PostgreSQL on AWS Mumbai)
+- Target: tech complete by end of Month 3
+
+**Licenses and registrations (all applied for in Month 0):**
+- Company Private Limited registration — done Month 0, Week 4
+- DSA registration (Bajaj Finserv + Tata Capital) — start Month 0, process takes 2–3 months
+- IRDAI POSP via Turtlemint — start Month 0, process takes 2–3 months
+- FIU registration via Setu — start Month 0, process takes 20–30 working days
+- AMFI ARN — start Month 0, process takes 4–6 weeks
+- All licenses expected ready by Month 3
+
+**Fundraising:**
+- 3–5 angel conversations running
+- Applied to Antler India and 100X.VC
+
+### Revenue (Month 0–2)
+- Credit card affiliate links on calculator pages: ₹5–20K/month
+- Calculators drive organic search traffic; affiliate links convert that traffic
+- No DSA commissions, no insurance commissions, no subscription revenue — none of those licenses are active yet
+
+### Users (Month 0–2)
+- Target: 1,000 waitlist signups via calculator organic traffic + LinkedIn + Reddit
+- No AA users — the app is not built yet
+- Referral program designed and ready to launch at Month 3 beta
+
+---
+
+## Month 3 — App Launch & Beta
+
+**Theme: Tech is complete. Licenses are active. App goes live with first beta users.**
+
+### Business & Legal
+- Consulting agreements signed — all four (₹50K/month, IP assignment, step-up clause at seed)
+- NDA executed with all parties
+- Prashant resigns from full-time job — funded from angel round
+- Angel round closed: ₹75L–1Cr raised at 10–15% dilution
+
+### Regulatory (all completed during Month 0–2 build period)
+- FIU registration complete via Setu
+- Aadhaar eKYC live (bundled with Setu FIU registration)
+- DSA registration done — Bajaj Finserv + Tata Capital
+- IRDAI POSP license active via Turtlemint
+- AMFI ARN registration complete
+- Provisional patent filed
+
+### Product
+- Unified Financial Dashboard live (AA consent flow, all accounts on one screen)
+- AI Financial Advisor live — Hindi + English, full AA data context
+- Aadhaar eKYC integrated into onboarding
+- 6 Day 0 calculator/affiliate features remain live alongside the new app
+
+### Users & Revenue
+- 20–30 beta users with active AA connections
+- First DSA referral links live
+- Referral program launched: ₹200 voucher per activated referral
+- Revenue: ₹0–50K/month (credit card affiliate from calculator site; DSA revenue begins once first loan referrals convert)
+
+### Fundraising
+- Angels closed and wired
+- Applied to Antler India and 100X.VC
+- Accelerator decision expected this month
+
+---
+
+## Month 6 — Market Validation
+
+**Theme: Prove the product retains users and earns money.**
+
+### This is the angel check-in milestone. What they need to see:
+
+| Metric | Target |
+|---|---|
+| Active AA users | 500+ |
+| Monthly revenue | ₹1–3L |
+| FIU registration | Complete |
+| Product stability | No critical bugs |
+
+### Product
+- App stable — no critical bugs, smooth AA consent flow
+- AI advisor handling real queries with full user data context
+- Proactive alerts live ("your home loan EMI resets next month")
+- Conversation history working — advisor remembers past sessions
+- VAPT (security audit) complete — CERT-In empanelled auditor
+
+### Users & GTM
+- Waitlist converted: 1,000 signups → 500 activated (AA consent complete)
+- Referral engine running — users sharing financial health score cards on WhatsApp
+- CA partnerships: 10–15 CA firms in Pune + Mumbai actively referring clients
+- Finance influencer deals: 1–2 mid-tier creators (50K–200K subscribers) on performance basis
+- 10+ user interviews done — product improvements applied
+
+### Revenue
+- DSA commissions: 10–15 referrals/month @ ₹5K–30K per referral
+- Insurance POSP: 5–10 policies/month
+- Credit card affiliate: steady from landing page
+- Monthly revenue: ₹1–3L
+
+### Infrastructure & IP
+- AMFI ARN registration complete
+- FLM training dataset: 10,000+ examples compiled (RBI/SEBI/IRDAI corpus + synthetic Q&A)
+- LLM API costs managed via caching + cheaper models for simple queries
+
+---
+
+## Month 9 — Expansion
+
+**Theme: Add the post-MVP modules. Revenue starts compounding.**
+
+### Product — new modules live
+- **Loan Suite** launched (all loans in one view, EMI calendar, prepayment calculator, refinancing alerts, consolidation)
+- **Financial Health Score** live — proprietary 300–900 scale, breakdown by component, premium gate on full breakdown
+- **Marketplace** integrated — loan products, insurance, credit cards surfaced inside AI advisor responses (not a separate catalogue)
+- Google Ads running — targeting "track all investments", "loan management app India", "account aggregator app"
+
+### Users & GTM
+- 2,000+ active users with AA consent
+- Corporate wellness channel: 2–3 IT companies offering Finlyft AI as employee benefit (600+ users)
+- NBFC co-marketing: 1–2 NBFC partners emailing their customer base
+- Finance influencer: scale to 3–4 creators, performance-based
+- CA partnerships expanded: 25+ CA firms
+
+### Revenue
+- DSA commissions growing — loan consolidation referrals adding significant ticket size
+- Marketplace commissions: loan + insurance + credit card in one funnel
+- Financial Health Score premium tier generating subscription revenue
+- Monthly revenue: ₹3–5L
+
+### Tech & IP
+- FLM training dataset: 20,000+ examples — ready for fine-tuning in Year 2
+- Sarvam AI partnership conversation initiated (base model for FLM)
+- App scaled on AWS Mumbai — load tested for 5,000 MAU
+- NBFC conversations started: 2–3 in pipeline for B2B Year 2
+
+---
+
+## Month 12 — Seed Ready
+
+**Theme: Hit the numbers. Close the seed round.**
+
+### The seed pitch requires:
+
+| Metric | Target |
+|---|---|
+| MAU with AA consent | 5,000+ |
+| Monthly revenue | ₹5–8L |
+| Revenue run rate (annualised) | ₹60–96L |
+| Seed ask | ₹3–5Cr |
+
+### Product — in development for seed pitch
+- Goals Planner: in development (emergency fund, home purchase, education, retirement goals — linked to AA data)
+- Investment Hub: in development (cross-platform portfolio view, XIRR, tax impact, rebalancing analysis)
+- FLM fine-tuning initiated — first training run on Finlyft AI dataset
+
+### Users & GTM
+- 5,000 MAU — breakdown: organic + referral (2,000), CA channel (500), influencers (1,000), paid ads (1,500)
+- CAC under ₹500 per activated user, proven across channels
+- Surge (Peak XV) application submitted — traction meets their bar
+- B2B pipeline: 2–3 NBFC conversations active for Year 2 white-label
+
+### Revenue
+- DSA commissions: primary driver — 60–80 referrals/month
+- Marketplace: loan + insurance + MF trail commissions running together
+- Premium tier: Financial Health Score + unlimited AI queries + proactive alerts
+- Monthly revenue: ₹5–8L
+
+### Fundraising — Seed Round
+- Seed deck complete: ₹3–5Cr target, 15–20% dilution
+- Use of funds: team salaries step up to ₹1L/month, FLM compute (₹2–5L), paid acquisition scale-up
+- Target investors: Surge (Peak XV), Blume Ventures, Prime Venture Partners, Elevation Capital
+- Data room ready — AA user data, revenue cohorts, retention curves
+
+---
+
+## Revenue Arc — Year 1
+
+| Month | Revenue/month | Primary source |
+|---|---|---|
+| 0–2 | ₹5–20K | Credit card affiliate from calculator site — no app, no licenses active |
+| 3 | ₹0–50K | Credit card affiliate + first DSA referrals (app live, licenses active) |
+| 6 | ₹1–3L | DSA + insurance POSP + affiliate |
+| 9 | ₹3–5L | DSA + marketplace + premium tier |
+| 12 | ₹5–8L | DSA + marketplace + POSP + subscriptions |
+
+---
+
+## Licenses — sequenced by when needed
+
+| License | Deadline | Owner | Time needed |
+|---|---|---|---|
+| Pvt Ltd registration | Month 0 | Prashant + CA | 2–3 weeks |
+| DSA — Bajaj Finserv + Tata Capital | Month 0 start → Month 2 done | Prashant | 2–3 weeks |
+| IRDAI POSP | Month 1 | Prashant via Turtlemint | 2–3 weeks |
+| FIU registration (Setu + Sahamati) | Month 0 start → Month 2 done | Prashant + Setu | 20–30 working days |
+| Aadhaar eKYC (Setu) | Bundled with FIU | Ashish | Bundled |
+| AMFI ARN | Month 3 | Prashant | 4–6 weeks |
+| VAPT security audit | Month 5 | Pratik | 2–4 weeks |
+
+---
+
+## Risk watchlist
+
+| Risk | When it bites | How to handle |
+|---|---|---|
+| Angel round delayed past Month 3 | Month 2–3 | Run Antler + 100X in parallel. Keep burn at zero until funded. |
+| AA consent drop-off > 60% | Month 3–4 | Invest in onboarding UX. One tap. Test 3 different flows before scaling. |
+| LLM API costs spike at scale | Month 7+ | Caching, cheaper models for simple queries. FLM in Year 2 is the real fix. |
+| Competitor (Fi/Jupiter) ships AA + AI | Any time | Speed is the only moat right now. 5,000 users before they notice. |
+| DSA/AI advice conflict of interest | Ongoing | Full disclosure on every recommendation. Advisory and marketplace kept visually separate. |
+| Consulting team bandwidth (other projects) | Ongoing | Lock weekly hour commitments in agreements before build starts. |
+
+---
+
+*Version 1.0 · August 2026 · Links to Finlyft AI_Plan.md (master)*`;
+
+document.getElementById('content').innerHTML = marked.parse(md);
+</script>
+</body>
+</html>

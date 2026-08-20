@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mutual NDA — Finlyft AI</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6fa; color: #1a1a2e; }
+  header { background: #0f1f3d; color: #fff; padding: 16px 32px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .logo-mark { width: 40px; height: 40px; background: #c9a227; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 16px; color: #0f1f3d; letter-spacing: -1px; flex-shrink: 0; }
+  .brand { font-size: 20px; font-weight: 700; letter-spacing: 0.5px; }
+  .brand span { color: #c9a227; }
+  .doc-title { margin-left: auto; font-size: 13px; color: #a0aec0; font-weight: 400; }
+  main { max-width: 860px; margin: 40px auto; padding: 0 24px 80px; }
+  .card { background: #fff; border-radius: 12px; padding: 40px 48px; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+  .card h1 { font-size: 24px; font-weight: 800; color: #0f1f3d; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+  .card h2 { font-size: 18px; font-weight: 700; color: #0f1f3d; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #c9a227; }
+  .card h3 { font-size: 15px; font-weight: 700; color: #0f1f3d; margin: 20px 0 8px; }
+  .card p { line-height: 1.8; color: #374151; margin-bottom: 12px; }
+  .card ul, .card ol { padding-left: 22px; margin-bottom: 12px; }
+  .card li { line-height: 1.8; color: #374151; margin-bottom: 6px; }
+  .card table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+  .card th { background: #0f1f3d; color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+  .card td { padding: 10px 14px; border-bottom: 1px solid #e5e7eb; color: #374151; }
+  .card blockquote { border-left: 4px solid #c9a227; padding: 12px 20px; background: #fffbf0; border-radius: 0 8px 8px 0; margin: 16px 0; color: #4a3728; }
+  .card hr { border: none; border-top: 2px solid #0f1f3d; margin: 32px 0; }
+  .legal-notice { background: #fff8e1; border: 1px solid #c9a227; border-radius: 8px; padding: 16px 20px; margin-bottom: 24px; font-size: 13px; color: #7c5e00; }
+  .confidential-bar { background: #0f1f3d; color: #c9a227; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px; padding: 6px; }
+</style>
+</head>
+<body>
+<div class="confidential-bar">LEGAL DOCUMENT — FINLYFT AI — CONFIDENTIAL</div>
+<header>
+  <div class="logo-mark">FL</div>
+  <div class="brand">Finlyft <span>AI</span></div>
+  <div class="doc-title">Mutual Non-Disclosure Agreement</div>
+</header>
+<main>
+  <div class="legal-notice" style="max-width:860px;margin:24px auto 0;border-radius:8px 8px 0 0;">
+    ⚖️ This is a draft legal document. It is strongly recommended that both Parties have this Agreement reviewed by qualified legal counsel before execution. This document does not constitute legal advice.
+  </div>
+  <div class="card" id="content"></div>
+</main>
+<script>
+const md = `# MUTUAL NON-DISCLOSURE AGREEMENT
+
+**This Mutual Non-Disclosure Agreement** ("Agreement") is entered into as of _____________ ("Effective Date") by and among the following individuals, collectively referred to as "the Parties":
+
+1. **Prashant [LAST NAME]**, residing at [ADDRESS], [CITY], [STATE] – [PIN] ("Prashant")
+2. **Pratik [LAST NAME]**, residing at [ADDRESS], [CITY], [STATE] – [PIN] ("Pratik")
+3. **Ashish [LAST NAME]**, residing at [ADDRESS], [CITY], [STATE] – [PIN] ("Ashish")
+4. **Shashi [LAST NAME]**, residing at [ADDRESS], [CITY], [STATE] – [PIN] ("Shashi")
+
+---
+
+## RECITALS
+
+The Parties intend to collaborate on the development of a personal finance application for India, working under the project name **Finlyft AI**, which includes but is not limited to an AI-powered financial advisory platform, Account Aggregator (AA) integration, proprietary financial health scoring, a fine-tuned language model, and related business and technical work (collectively, the "Project").
+
+In connection with this collaboration, each Party may disclose or have access to certain confidential and proprietary information of the other Parties. The Parties wish to set out the terms under which such information shall be shared, used, and protected.
+
+---
+
+## AGREEMENT
+
+### 1. Definition of Confidential Information
+
+"Confidential Information" means any information, whether oral, written, electronic, or in any other form, disclosed by one Party ("Disclosing Party") to any other Party ("Receiving Party") in connection with the Project, that is designated as confidential at the time of disclosure or that, by its nature, a reasonable person would consider confidential. This includes, without limitation:
+
+- The Finlyft AI concept, product vision, features, and roadmap
+- Business plans, financial models, projections, and revenue strategies
+- Technical architecture, source code, algorithms, models, and system designs
+- The fine-tuned language model (FLM) architecture, training data, and methodology
+- Patent strategy, provisional patent claims, and intellectual property filings
+- Investor conversations, pitch materials, term sheets, and funding details
+- User data, customer lists, and any personally identifiable information
+- Partnerships, negotiations, and regulatory strategy
+- Information relating to the Account Aggregator (AA) framework integration specific to Finlyft AI's implementation
+- Any information marked "Confidential" or disclosed in a context where confidentiality is reasonably implied
+
+### 2. Obligations of the Receiving Party
+
+Each Receiving Party agrees to:
+
+a. Hold all Confidential Information in strict confidence and not disclose it to any third party without the prior written consent of the Disclosing Party;
+
+b. Use the Confidential Information solely for the purpose of advancing the Project and for no other purpose;
+
+c. Limit access to Confidential Information to those who need to know it for the purposes of the Project and who are bound by obligations of confidentiality no less restrictive than those in this Agreement;
+
+d. Take all reasonable precautions to protect the confidentiality of the Confidential Information, using at minimum the same degree of care used to protect its own confidential information, but in no case less than reasonable care;
+
+e. Promptly notify the Disclosing Party in writing upon becoming aware of any unauthorized use, disclosure, or breach of this Agreement.
+
+### 3. Exclusions
+
+The obligations in Section 2 do not apply to information that:
+
+a. Was, at the time of disclosure, in the public domain or later becomes part of the public domain through no act or omission of the Receiving Party;
+
+b. Was rightfully in the Receiving Party's possession at the time of disclosure, without any obligation of confidentiality;
+
+c. Is independently developed by the Receiving Party without reference to or use of the Confidential Information;
+
+d. Is received from a third party who had the lawful right to disclose it without restriction;
+
+e. Is required to be disclosed by applicable law, regulation, or court order, provided the Receiving Party gives the Disclosing Party prompt prior written notice (to the extent legally permitted) and reasonably cooperates in seeking a protective order.
+
+### 4. Intellectual Property
+
+Nothing in this Agreement grants any license or right to use any Confidential Information for any purpose other than the Project. All intellectual property rights in Confidential Information disclosed by any Party remain with the Disclosing Party. Upon the formation of Finlyft AI Private Limited, the Parties agree to execute any further agreements necessary to confirm ownership and assignment of intellectual property developed in connection with the Project.
+
+### 5. Return or Destruction of Information
+
+Upon request by a Disclosing Party, or upon termination of the Project or this Agreement, the Receiving Party shall promptly return or certifiably destroy all tangible materials containing the Confidential Information, including all copies, reproductions, summaries, and extracts. Electronically stored copies shall be permanently deleted. The Receiving Party shall, upon request, confirm such return or destruction in writing.
+
+### 6. Term
+
+This Agreement comes into effect on the Effective Date and continues for the duration of the Parties' collaboration on the Project. The confidentiality obligations under this Agreement shall survive the termination of the Project or any Engagement Agreement between the Parties for a period of **five (5) years** from the date of termination.
+
+### 7. No Obligation to Proceed
+
+Nothing in this Agreement obligates any Party to proceed with the Project, enter into any business arrangement, or continue collaboration with any other Party.
+
+### 8. Remedies
+
+Each Party acknowledges that a breach of this Agreement may cause irreparable harm to the Disclosing Party, for which monetary damages may be an inadequate remedy. Accordingly, the Disclosing Party shall be entitled to seek injunctive relief or other equitable remedies in addition to any other remedies available at law or in equity, without the requirement to post a bond or other security.
+
+### 9. Governing Law and Jurisdiction
+
+This Agreement shall be governed by and construed in accordance with the laws of India, including the Indian Contract Act, 1872. Any disputes arising out of or in connection with this Agreement shall be subject to the exclusive jurisdiction of the courts in **Pune, Maharashtra, India**.
+
+### 10. Dispute Resolution
+
+In the event of any dispute arising out of this Agreement, the Parties shall first attempt to resolve the dispute through good-faith discussions for a period of thirty (30) days. If the dispute cannot be resolved amicably, it shall be referred to a sole arbitrator mutually appointed by the Parties, and arbitration shall be conducted in accordance with the Arbitration and Conciliation Act, 1996 (India). The place of arbitration shall be Pune, Maharashtra, and the language of arbitration shall be English.
+
+### 11. Entire Agreement
+
+This Agreement constitutes the entire agreement between the Parties with respect to confidentiality of the Confidential Information and supersedes all prior discussions, representations, and understandings relating to the same subject matter. This Agreement may not be amended except by a written instrument signed by all Parties.
+
+### 12. Severability
+
+If any provision of this Agreement is held to be invalid, illegal, or unenforceable, the remaining provisions shall continue in full force and effect.
+
+### 13. No Waiver
+
+Failure by any Party to enforce any provision of this Agreement shall not be construed as a waiver of such Party's right to enforce such provision in the future.
+
+---
+
+## SIGNATURES
+
+IN WITNESS WHEREOF, the Parties have executed this Agreement as of the Effective Date.
+
+---
+
+**Prashant [LAST NAME]**
+
+Signature: ___________________________
+
+Date: ________________________________
+
+PAN: ________________________________
+
+---
+
+**Pratik [LAST NAME]**
+
+Signature: ___________________________
+
+Date: ________________________________
+
+PAN: ________________________________
+
+---
+
+**Ashish [LAST NAME]**
+
+Signature: ___________________________
+
+Date: ________________________________
+
+PAN: ________________________________
+
+---
+
+**Shashi [LAST NAME]**
+
+Signature: ___________________________
+
+Date: ________________________________
+
+PAN: ________________________________
+
+---
+
+*This is a legally binding document. Each Party should retain a signed copy. It is strongly recommended that this Agreement be reviewed by a qualified legal counsel before execution.*`;
+
+document.getElementById('content').innerHTML = marked.parse(md);
+</script>
+</body>
+</html>
