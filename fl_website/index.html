@@ -1,0 +1,1850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortune Logistics — Brand Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  :root {
+    --cyan:    #00AEEF;
+    --cyan-dk: #0090C8;
+    --cyan-lt: #E6F7FD;
+    --lavender:#8B9DC3;
+    --amber:   #FFC107;
+    --orange:  #F47920;
+    --dark:    #111827;
+    --mid:     #374151;
+    --muted:   #6B7280;
+    --border:  #E5E7EB;
+    --bg:      #F9FAFB;
+    --white:   #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 72px;
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,174,239,0.18) 0%, transparent 70%);
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(244,121,32,0.12) 0%, transparent 70%);
+  }
+  .cover-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 64px;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .cover h1 span { color: var(--cyan); }
+  .cover-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 56px;
+    font-weight: 300;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .cover-meta-item { }
+  .cover-meta-item .label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 4px;
+  }
+  .cover-meta-item .value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+  .cover-bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 6px; height: 100%;
+    background: linear-gradient(180deg, var(--cyan) 0%, var(--orange) 100%);
+  }
+
+  /* ── Layout ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 72px 40px; }
+  .section { margin-bottom: 72px; }
+  .section:last-child { margin-bottom: 0; }
+
+  /* ── Section headers ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .section-desc {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 56px 0;
+  }
+
+  /* ── Color swatches ── */
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  .swatch {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+  .swatch-block {
+    height: 120px;
+  }
+  .swatch-info {
+    padding: 14px 16px;
+  }
+  .swatch-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+  .swatch-role {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .swatch-hex {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--mid);
+    background: var(--bg);
+    border-radius: 4px;
+    padding: 2px 6px;
+    display: inline-block;
+  }
+  .swatch-rgb {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* usage badges */
+  .usage-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--mid);
+    background: var(--bg);
+  }
+
+  /* ── Logo section ── */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .logo-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .logo-card-canvas {
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .logo-card-info {
+    padding: 16px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .logo-card-info h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .logo-card-info p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── Logo preview using CSS ── */
+  .logo-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .logo-icon {
+    width: 56px; height: 56px;
+    border-radius: 12px;
+    background: var(--cyan-lt);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+  }
+  .logo-wordmark {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--cyan);
+  }
+  .logo-wordmark-dark {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--white);
+  }
+
+  /* ── Typography ── */
+  .type-row {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .type-meta { min-width: 160px; }
+  .type-meta .t-label { font-size: 11px; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+  .type-meta .t-spec { font-size: 12px; color: var(--muted); line-height: 1.8; }
+  .type-preview { flex: 1; }
+
+  /* ── Spec table ── */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .spec-table thead tr { background: var(--cyan); }
+  .spec-table thead th {
+    text-align: left;
+    padding: 12px 18px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .spec-table tbody tr { border-bottom: 1px solid var(--border); }
+  .spec-table tbody tr:last-child { border-bottom: none; }
+  .spec-table tbody tr:hover { background: var(--bg); }
+  .spec-table td { padding: 12px 18px; color: var(--mid); vertical-align: top; }
+  .spec-table td:first-child { font-weight: 600; color: var(--dark); }
+
+  /* ── Do / Don't ── */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .do-card, .dont-card {
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid;
+  }
+  .do-card {
+    background: #F0FDF4;
+    border-color: #86EFAC;
+  }
+  .dont-card {
+    background: #FFF1F2;
+    border-color: #FECDD3;
+  }
+  .do-card h4 { color: #16A34A; font-size: 13px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
+  .dont-card h4 { color: #E11D48; font-size: 13px; font-weight: 700; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
+  .do-card li, .dont-card li { font-size: 13px; color: var(--mid); margin-bottom: 8px; list-style: none; padding-left: 18px; position: relative; line-height: 1.5; }
+  .do-card li::before { content: '✓'; position: absolute; left: 0; color: #16A34A; font-weight: 700; }
+  .dont-card li::before { content: '✕'; position: absolute; left: 0; color: #E11D48; font-weight: 700; }
+
+  /* ── Info cards ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .info-card .ic-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .info-card .ic-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    line-height: 1.5;
+    word-break: break-all;
+  }
+  .info-card .ic-value a { color: var(--cyan); text-decoration: none; }
+
+  /* ── Client logos grid ── */
+  .client-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .client-pill {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mid);
+  }
+
+  /* ── Tone pills ── */
+  .tone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .tone-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .tone-card .t-word {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .tone-card .t-not {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 4px;
+  }
+  .tone-card .t-not span { color: #E11D48; }
+  .tone-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── Website color map ── */
+  .web-map {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .web-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 160px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    gap: 20px;
+  }
+  .web-row:last-child { border-bottom: none; }
+  .web-row:hover { background: var(--bg); }
+  .web-row .el { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .web-row .desc { font-size: 13px; color: var(--muted); }
+  .web-row .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    font-family: monospace;
+  }
+  .web-row .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── Flag banner ── */
+  .flag {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .flag-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .flag-body h4 { font-size: 14px; font-weight: 700; color: #92400E; margin-bottom: 4px; }
+  .flag-body p { font-size: 13px; color: #78350F; line-height: 1.6; }
+  .flag-body ul { margin-top: 8px; padding-left: 18px; }
+  .flag-body ul li { font-size: 13px; color: #78350F; margin-bottom: 4px; }
+
+  /* ── Footer ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+  }
+  footer span { color: var(--cyan); }
+
+  /* ── Print ── */
+  @media print {
+    .cover { min-height: auto; padding: 60px; }
+    .cover h1 { font-size: 48px; }
+    body { font-size: 13px; }
+    .page { padding: 48px 32px; }
+  }
+
+  /* ── Mockup scroll wrapper ── */
+  .mockup-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+  }
+  .mockup-scroll > div {
+    min-width: 880px;
+  }
+  .mockup-scroll-hint {
+    display: none;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    padding: 6px 0 12px;
+  }
+
+  /* ── Tablet ── */
+  @media (max-width: 900px) {
+    .page { padding: 56px 28px; }
+    .cover { padding: 60px 40px; }
+    .cover h1 { font-size: 50px; }
+    .color-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .tone-grid  { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+    .info-grid  { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 680px) {
+
+    /* Cover */
+    .cover { padding: 48px 24px 56px; }
+    .cover h1 { font-size: 34px; }
+    .cover-sub { font-size: 15px; margin-bottom: 36px; }
+    .cover-meta { flex-direction: column; gap: 20px; }
+
+    /* Page */
+    .page { padding: 40px 20px; }
+    .section { margin-bottom: 52px; }
+    .section-title { font-size: 22px; }
+    .divider { margin: 40px 0; }
+
+    /* Color swatches */
+    .color-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .swatch-block { height: 90px; }
+
+    /* Logo */
+    .logo-grid { grid-template-columns: 1fr; }
+    .logo-card-canvas { height: 150px; }
+
+    /* Type rows */
+    .type-row {
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px;
+    }
+    .type-meta { min-width: unset; }
+
+    /* Spec table — scrollable */
+    .spec-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 12px;
+    }
+    .spec-table { min-width: 480px; }
+
+    /* Web map */
+    .web-row {
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 12px 14px;
+    }
+    .web-row .desc { display: none; }
+    .web-map { border-radius: 10px; }
+
+    /* Do / Don't */
+    .do-dont { grid-template-columns: 1fr; }
+
+    /* Info grid */
+    .info-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .info-card { padding: 16px; }
+    .info-card .ic-value { font-size: 13px; }
+
+    /* Tone grid */
+    .tone-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .tone-card { padding: 16px; }
+    .tone-card .t-word { font-size: 15px; }
+
+    /* Client pills */
+    .client-grid { gap: 8px; }
+    .client-pill { font-size: 12px; padding: 8px 14px; }
+
+    /* Design concept headers */
+    .concept-header { flex-direction: column !important; gap: 12px !important; }
+
+    /* Concept annotation grids */
+    .concept-annotations { grid-template-columns: 1fr !important; }
+
+    /* Mockup scroll hint visible on mobile */
+    .mockup-scroll-hint { display: block; }
+  }
+
+  @media (max-width: 420px) {
+    .cover { padding: 40px 20px 48px; }
+    .cover h1 { font-size: 28px; }
+    .cover-bar { width: 4px; }
+    .color-grid { grid-template-columns: 1fr 1fr; }
+    .info-grid  { grid-template-columns: 1fr; }
+    .tone-grid  { grid-template-columns: 1fr; }
+    .section-title { font-size: 20px; }
+    .web-row .chip { font-size: 11px; padding: 3px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════
+     COVER
+════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-bar"></div>
+  <div class="cover-label">Brand Identity Document</div>
+  <h1>Fortune<br><span>Logistics</span></h1>
+  <p class="cover-sub">Colors · Logo · Typography · Voice · Website Application</p>
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <div class="label">Prepared by</div>
+      <div class="value">Perfect Skills</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Version</div>
+      <div class="value">1.0 — August 2026</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Purpose</div>
+      <div class="value">Website Development Reference</div>
+    </div>
+    <div class="cover-meta-item">
+      <div class="label">Certification</div>
+      <div class="value">ISO 9001-2015</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     OVERVIEW
+════════════════════════════════════════════════ -->
+<div class="page">
+
+  <div class="section">
+    <div class="section-label">About the Brand</div>
+    <div class="section-title">Who is Fortune Logistics?</div>
+    <p class="section-desc">Founded in 2022, Fortune Logistics is a Pune-based B2B transportation and packaging company focused on full truck load, part truck load, container transport, project cargo and ODC movements across India.</p>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="ic-label">Tagline</div>
+        <div class="ic-value">"Better Logistics Solution for You"</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Brand Promise</div>
+        <div class="ic-value">"Cheaper than Air, Faster than Road"</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Founded</div>
+        <div class="ic-value">2022</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Certification</div>
+        <div class="ic-value">ISO 9001-2015</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Core Business</div>
+        <div class="ic-value">Transportation & Returnable Packaging</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Vision</div>
+        <div class="ic-value">India's most trusted packaging & logistics company</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── COLORS ── -->
+  <div class="section">
+    <div class="section-label">Color System</div>
+    <div class="section-title">Brand Colors</div>
+    <p class="section-desc">The color palette is extracted directly from the Fortune Logistics company profile and brand collateral. Cyan is the dominant brand color and must remain the primary across all digital and print touchpoints.</p>
+
+    <div class="color-grid">
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#00AEEF;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fortune Cyan</div>
+          <div class="swatch-role">Primary Brand Color</div>
+          <div class="swatch-hex">#00AEEF</div>
+          <div class="swatch-rgb">rgb(0, 174, 239)</div>
+          <div class="usage-tags">
+            <span class="tag">Logo</span>
+            <span class="tag">Headings</span>
+            <span class="tag">CTAs</span>
+            <span class="tag">Icons</span>
+            <span class="tag">Links</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#0090C8;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Cyan</div>
+          <div class="swatch-role">Hover / Active State</div>
+          <div class="swatch-hex">#0090C8</div>
+          <div class="swatch-rgb">rgb(0, 144, 200)</div>
+          <div class="usage-tags">
+            <span class="tag">Hover</span>
+            <span class="tag">Pressed</span>
+            <span class="tag">Borders</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#E6F7FD;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cyan Tint</div>
+          <div class="swatch-role">Background Wash</div>
+          <div class="swatch-hex">#E6F7FD</div>
+          <div class="swatch-rgb">rgb(230, 247, 253)</div>
+          <div class="usage-tags">
+            <span class="tag">Card BG</span>
+            <span class="tag">Highlight</span>
+            <span class="tag">Icon BG</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#FFC107;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fortune Amber</div>
+          <div class="swatch-role">Accent 1 — Energy</div>
+          <div class="swatch-hex">#FFC107</div>
+          <div class="swatch-rgb">rgb(255, 193, 7)</div>
+          <div class="usage-tags">
+            <span class="tag">Cover</span>
+            <span class="tag">Highlight</span>
+            <span class="tag">Badges</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#F47920;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fortune Orange</div>
+          <div class="swatch-role">Accent 2 — Action</div>
+          <div class="swatch-hex">#F47920</div>
+          <div class="swatch-rgb">rgb(244, 121, 32)</div>
+          <div class="usage-tags">
+            <span class="tag">CTA Alt</span>
+            <span class="tag">Tags</span>
+            <span class="tag">Alerts</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#111827;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Logistics Dark</div>
+          <div class="swatch-role">Hero Background</div>
+          <div class="swatch-hex">#111827</div>
+          <div class="swatch-rgb">rgb(17, 24, 39)</div>
+          <div class="usage-tags">
+            <span class="tag">Hero</span>
+            <span class="tag">Footer</span>
+            <span class="tag">Nav (dark)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#374151;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Slate</div>
+          <div class="swatch-role">Body Text</div>
+          <div class="swatch-hex">#374151</div>
+          <div class="swatch-rgb">rgb(55, 65, 81)</div>
+          <div class="usage-tags">
+            <span class="tag">Body</span>
+            <span class="tag">Paragraph</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#8B9DC3;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Logo Lavender</div>
+          <div class="swatch-role">Logo Accent — Wing feathers</div>
+          <div class="swatch-hex">#8B9DC3</div>
+          <div class="swatch-rgb">rgb(139, 157, 195)</div>
+          <div class="usage-tags">
+            <span class="tag">Logo only</span>
+            <span class="tag">Subtle accent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="swatch">
+        <div class="swatch-block" style="background:#F9FAFB; border: 1px solid #E5E7EB;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Off White</div>
+          <div class="swatch-role">Page Background</div>
+          <div class="swatch-hex">#F9FAFB</div>
+          <div class="swatch-rgb">rgb(249, 250, 251)</div>
+          <div class="usage-tags">
+            <span class="tag">Page BG</span>
+            <span class="tag">Card BG</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── LOGO ── -->
+  <div class="section">
+    <div class="section-label">Logo</div>
+    <div class="section-title">Logo System</div>
+    <p class="section-desc">The Fortune Logistics logo is a <strong>dove in circular flight</strong>, enclosed in a cyan circular border. The dove body is rendered in sky cyan; the wing and tail feathers carry a soft lavender/periwinkle accent. The wordmark "Fortune Logistics" appears in italic serif below or alongside the mark.</p>
+
+    <!-- Logo image -->
+    <div style="background:#fff; border:1px solid var(--border); border-radius:16px; padding:24px; display:flex; align-items:center; gap:32px; margin-bottom:24px; flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <img src="fl_logo.jpeg" alt="Fortune Logistics Logo" style="width:140px; height:140px; object-fit:contain; display:block; margin:0 auto 12px;" />
+        <div style="font-size:11px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.1em;">Primary Mark</div>
+      </div>
+      <div style="flex:1; min-width:220px;">
+        <div style="font-size:13px; font-weight:700; color:var(--dark); margin-bottom:12px;">Logo anatomy</div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#00AEEF; flex-shrink:0;"></div>
+            <div style="font-size:13px; color:var(--mid);">Circular border &amp; dove body — Fortune Cyan <code style="font-size:11px; background:var(--bg); padding:1px 5px; border-radius:4px;">#00AEEF</code></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#8B9DC3; flex-shrink:0;"></div>
+            <div style="font-size:13px; color:var(--mid);">Wing &amp; tail feather accent — Logo Lavender <code style="font-size:11px; background:var(--bg); padding:1px 5px; border-radius:4px;">#8B9DC3</code></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:28px; height:28px; border-radius:50%; background:#ffffff; border:1px solid #E5E7EB; flex-shrink:0;"></div>
+            <div style="font-size:13px; color:var(--mid);">Internal fill — White <code style="font-size:11px; background:var(--bg); padding:1px 5px; border-radius:4px;">#FFFFFF</code></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="logo-grid" style="margin-bottom:24px;">
+      <div class="logo-card">
+        <div class="logo-card-canvas" style="background:#FFFFFF;">
+          <div class="logo-preview">
+            <div class="logo-icon">🕊️</div>
+            <div class="logo-wordmark">Fortune Logistics</div>
+            <div style="font-size:11px; color:#6B7280; margin-top:2px;">ISO 9001-2015</div>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Primary Logo — Light Background</h4>
+          <p>Use on white or very light backgrounds. Cyan circular dove mark with lavender wing accent + cyan italic wordmark. Minimum clear space: equal to the height of the 'F' on all sides.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-canvas" style="background:#111827;">
+          <div class="logo-preview">
+            <div class="logo-icon" style="background:rgba(0,174,239,0.15);">🕊️</div>
+            <div class="logo-wordmark-dark">Fortune Logistics</div>
+            <div style="font-size:11px; color:rgba(255,255,255,0.4); margin-top:2px;">ISO 9001-2015</div>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Reversed Logo — Dark Background</h4>
+          <p>Use on dark hero sections, navy or charcoal backgrounds. Wordmark renders in white; bird mark retains cyan or renders in white depending on contrast requirements.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-canvas" style="background:#00AEEF;">
+          <div class="logo-preview">
+            <div class="logo-icon" style="background:rgba(255,255,255,0.2);">🕊️</div>
+            <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:22px; color:#fff;">Fortune Logistics</div>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Brand Color Background</h4>
+          <p>Use when the primary cyan is the background color — e.g. email headers, banners, social media graphics. Both bird mark and wordmark render fully in white.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-canvas" style="background:#F9FAFB; border-bottom:none;">
+          <div style="text-align:center;">
+            <div class="logo-icon" style="display:inline-flex; margin:0 auto 12px;">🕊️</div>
+            <div style="font-size:11px; color:#6B7280;">Mark-only version<br>for favicon, app icon, social avatar</div>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Icon / Mark Only</h4>
+          <p>Use the circular dove mark alone at small sizes — favicon (32×32), social media profile picture, WhatsApp Business icon, app icon. At very small sizes (≤32px) the lavender accent may be dropped; retain only cyan on white. Never use the wordmark at sizes below 120px wide.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="spec-table-wrap"><table class="spec-table">
+      <thead>
+        <tr>
+          <th>Specification</th>
+          <th>Value</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Mark type</td><td>Dove in circular flight, enclosed in a circular border</td><td>Represents trust, reliability and freedom of movement</td></tr>
+        <tr><td>Logo colors</td><td>Cyan body + Lavender wing accent + White fill</td><td>#00AEEF / #8B9DC3 / #FFFFFF</td></tr>
+        <tr><td>Wordmark style</td><td>Italic serif — "Fortune Logistics"</td><td>DM Serif Display or similar as web substitute</td></tr>
+        <tr><td>Primary color</td><td>#00AEEF (Fortune Cyan)</td><td>Bird mark + wordmark on light backgrounds</td></tr>
+        <tr><td>Reversed color</td><td>White (#FFFFFF)</td><td>On dark or cyan backgrounds</td></tr>
+        <tr><td>Minimum size</td><td>Full logo: 140px wide / Mark only: 24px</td><td>Below these sizes legibility breaks</td></tr>
+        <tr><td>Clear space</td><td>Equal to height of capital 'F' on all sides</td><td>No other elements may enter this zone</td></tr>
+        <tr><td>File formats needed</td><td>SVG, PNG (transparent), PDF</td><td>Request from client — not yet received</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <div class="section">
+    <div class="section-label">Typography</div>
+    <div class="section-title">Type System</div>
+    <p class="section-desc">The website typography modernises the brochure's existing direction. A strong geometric sans-serif for headings, a legible humanist sans for body, and the existing italic serif preserved for brand wordmark use only.</p>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Display / H1</div>
+        <div class="t-spec">
+          Font: Inter 800<br>
+          Size: 56–72px<br>
+          Line height: 1.05<br>
+          Color: #111827 / #FFFFFF
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-size:52px; font-weight:800; color:#111827; line-height:1.05;">Moving India's Cargo.<br><span style="color:#00AEEF;">Every Single Day.</span></div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Heading H2</div>
+        <div class="t-spec">
+          Font: Inter 700<br>
+          Size: 32–40px<br>
+          Line height: 1.15<br>
+          Color: #111827
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-size:36px; font-weight:700; color:#111827; line-height:1.15;">Full Truck Load Solutions<br>Built for Indian Business</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Heading H3</div>
+        <div class="t-spec">
+          Font: Inter 600<br>
+          Size: 20–24px<br>
+          Line height: 1.3<br>
+          Color: #111827
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-size:22px; font-weight:600; color:#111827;">Container Transportation &amp; Express Delivery</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Section Label</div>
+        <div class="t-spec">
+          Font: Inter 700<br>
+          Size: 11px<br>
+          Case: UPPERCASE<br>
+          Tracking: 0.18em<br>
+          Color: #00AEEF
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:#00AEEF;">Our Services</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Body</div>
+        <div class="t-spec">
+          Font: Inter 400<br>
+          Size: 15–16px<br>
+          Line height: 1.7<br>
+          Color: #374151
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-size:15px; font-weight:400; color:#374151; line-height:1.7; max-width:480px;">Fortune Logistics provides time-bound full truck load, part load and container transportation services across India. With 24×7 operations and dedicated account management, we deliver cargo safely and on schedule.</div>
+      </div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="t-label">Brand Wordmark<br>(Logo use only)</div>
+        <div class="t-spec">
+          Font: DM Serif Display<br>
+          Style: Italic<br>
+          Color: #00AEEF<br>
+          Not for body use
+        </div>
+      </div>
+      <div class="type-preview">
+        <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:32px; color:#00AEEF;">Fortune Logistics</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── WEBSITE COLOR APPLICATION ── -->
+  <div class="section">
+    <div class="section-label">Website Application</div>
+    <div class="section-title">Color Map for the Website</div>
+    <p class="section-desc">How each brand color is applied across the new website's UI elements. This is the reference for the design and development team.</p>
+
+    <div class="web-map">
+      <div class="web-row" style="background:#F3F4F6;">
+        <div class="el" style="font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:#9CA3AF;">Element</div>
+        <div class="desc" style="font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:#9CA3AF;">Usage note</div>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:.1em; color:#9CA3AF;">Color</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Hero background</div>
+        <div class="desc">Full-width opening section on homepage and inner pages</div>
+        <div class="chip"><span class="dot" style="background:#111827;"></span>#111827</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Navigation bar</div>
+        <div class="desc">Sticky top nav on scroll; transparent on hero</div>
+        <div class="chip"><span class="dot" style="background:#111827;"></span>#111827</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Primary CTA button</div>
+        <div class="desc">"Request a Quote", "Contact Us" — main action</div>
+        <div class="chip"><span class="dot" style="background:#00AEEF;"></span>#00AEEF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">CTA hover</div>
+        <div class="desc">Button on mouse-over / pressed state</div>
+        <div class="chip"><span class="dot" style="background:#0090C8;"></span>#0090C8</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Secondary CTA</div>
+        <div class="desc">"WhatsApp Us", "Call Operations" — alt action</div>
+        <div class="chip"><span class="dot" style="background:#F47920;"></span>#F47920</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Section labels</div>
+        <div class="desc">Uppercase eyebrow text above headings</div>
+        <div class="chip"><span class="dot" style="background:#00AEEF;"></span>#00AEEF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">H1 / H2 headings</div>
+        <div class="desc">On white/light background sections</div>
+        <div class="chip"><span class="dot" style="background:#111827;"></span>#111827</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Headings on dark bg</div>
+        <div class="desc">Hero headline, footer section titles</div>
+        <div class="chip"><span class="dot" style="background:#FFFFFF; border:1px solid #E5E7EB;"></span>#FFFFFF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Accent word in headline</div>
+        <div class="desc">One word in hero H1 for visual emphasis</div>
+        <div class="chip"><span class="dot" style="background:#00AEEF;"></span>#00AEEF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Body text</div>
+        <div class="desc">All paragraph and descriptive content</div>
+        <div class="chip"><span class="dot" style="background:#374151;"></span>#374151</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Muted / helper text</div>
+        <div class="desc">Captions, labels, secondary info</div>
+        <div class="chip"><span class="dot" style="background:#6B7280;"></span>#6B7280</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Page background</div>
+        <div class="desc">Inner page white sections between content blocks</div>
+        <div class="chip"><span class="dot" style="background:#F9FAFB; border:1px solid #E5E7EB;"></span>#F9FAFB</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Card / panel background</div>
+        <div class="desc">Service cards, fleet cards, client logos</div>
+        <div class="chip"><span class="dot" style="background:#FFFFFF; border:1px solid #E5E7EB;"></span>#FFFFFF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Card icon background</div>
+        <div class="desc">Tinted cyan wash behind service/feature icons</div>
+        <div class="chip"><span class="dot" style="background:#E6F7FD;"></span>#E6F7FD</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Trust strip / proof bar</div>
+        <div class="desc">Stats bar on homepage (e.g. 5000 MT/day, 24×7)</div>
+        <div class="chip"><span class="dot" style="background:#00AEEF;"></span>#00AEEF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Footer background</div>
+        <div class="desc">Site-wide footer</div>
+        <div class="chip"><span class="dot" style="background:#111827;"></span>#111827</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Footer accent / links</div>
+        <div class="desc">Footer section headings, hover links</div>
+        <div class="chip"><span class="dot" style="background:#00AEEF;"></span>#00AEEF</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Highlight / badge</div>
+        <div class="desc">ISO badge, "New", service tag chips</div>
+        <div class="chip"><span class="dot" style="background:#FFC107;"></span>#FFC107</div>
+      </div>
+      <div class="web-row">
+        <div class="el">Dividers / borders</div>
+        <div class="desc">Card borders, table lines, horizontal rules</div>
+        <div class="chip"><span class="dot" style="background:#E5E7EB; border:1px solid #ccc;"></span>#E5E7EB</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── VOICE & TONE ── -->
+  <div class="section">
+    <div class="section-label">Voice & Tone</div>
+    <div class="section-title">How Fortune Logistics Communicates</div>
+    <p class="section-desc">The brand voice for the website should feel like a reliable logistics partner — confident, direct and professional. Not a multinational shipping corporation, not a brochure listing trucks.</p>
+
+    <div class="tone-grid" style="margin-bottom: 28px;">
+      <div class="tone-card">
+        <div class="t-word">Confident</div>
+        <div class="t-not">Not <span>Boastful</span></div>
+        <p>State capabilities clearly and with proof. "We move 5,000 MT daily, 365 days a year" — not "We are the best logistics company."</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-word">Direct</div>
+        <div class="t-not">Not <span>Corporate-Jargon</span></div>
+        <p>Short sentences. Tell the prospect what you do and how it helps their business. Avoid phrases like "end-to-end synergistic supply chain solutions."</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-word">Solution-led</div>
+        <div class="t-not">Not <span>Feature-listing</span></div>
+        <p>Lead with the business problem, follow with the Fortune solution. "Got heavy cargo that airlines won't touch? Our ODC trailers handle it."</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-word">Reliable</div>
+        <div class="t-not">Not <span>Salesy</span></div>
+        <p>Every claim on the website must be something Fortune can actually back up — verified fleet count, real client names, measurable SLAs.</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-word">Professional</div>
+        <div class="t-not">Not <span>Stiff</span></div>
+        <p>B2B-appropriate but approachable. WhatsApp CTA is fine. The brand serves businesses, not government tenders — keep it human.</p>
+      </div>
+      <div class="tone-card">
+        <div class="t-word">Indian</div>
+        <div class="t-not">Not <span>Generic Global</span></div>
+        <p>Speak to the Indian B2B buyer. Reference pan-India reach, North/West belt expertise, and the specific context of Indian road logistics.</p>
+      </div>
+    </div>
+
+    <div class="spec-table-wrap"><table class="spec-table">
+      <thead>
+        <tr><th>Write this</th><th>Not this</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>"On-time delivery, guaranteed."</td><td>"We leverage cutting-edge technology to ensure timely delivery."</td></tr>
+        <tr><td>"Request a quote in 60 seconds."</td><td>"Please fill out our enquiry form and we will revert at the earliest."</td></tr>
+        <tr><td>"Your cargo, tracked door-to-door."</td><td>"End-to-end supply chain visibility solutions."</td></tr>
+        <tr><td>"Founded in 2022. Growing fast."</td><td>"A young and dynamic company with decades of combined experience."</td></tr>
+        <tr><td>"ODC? We've moved it before."</td><td>"We offer Over Dimensional Cargo transportation services as per customer requirements."</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── DO / DON'T ── -->
+  <div class="section">
+    <div class="section-label">Brand Usage</div>
+    <div class="section-title">Do's and Don'ts</div>
+    <p class="section-desc">Rules for maintaining brand consistency across the website and all digital communications.</p>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <h4>✓ Do</h4>
+        <ul>
+          <li>Use Fortune Cyan (#00AEEF) as the dominant brand color on all pages</li>
+          <li>Use the bird mark + italic wordmark together as the primary logo</li>
+          <li>Pair dark hero sections (#111827) with cyan CTA buttons for contrast</li>
+          <li>Use Inter as the website typeface — bold weights for headings</li>
+          <li>Include the ISO 9001-2015 certification mark near the logo</li>
+          <li>Use amber (#FFC107) only as a small accent — badges, highlights</li>
+          <li>Always verify operational numbers before publishing as proof points</li>
+          <li>Keep sufficient white space — don't crowd the layout</li>
+          <li>Use real fleet photos and operations imagery wherever possible</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <h4>✕ Don't</h4>
+        <ul>
+          <li>Don't change the cyan to a different blue or teal without client sign-off</li>
+          <li>Don't stretch, rotate, recolor or add effects to the logo</li>
+          <li>Don't place the logo on a busy photographic background without a background card</li>
+          <li>Don't use the italic serif wordmark font for body or heading text</li>
+          <li>Don't publish the "850+ vehicles" or "30,000+ clients" claims — these are from Best Roadways, not confirmed as Fortune's own data</li>
+          <li>Don't use the "established 1986" date — Fortune was founded in 2022</li>
+          <li>Don't use client logos without written permission from each client</li>
+          <li>Don't use amber or orange as the primary color on any page section</li>
+          <li>Don't use stock photography of generic foreign trucks — use Indian fleet imagery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── COMPANY DETAILS ── -->
+  <div class="section">
+    <div class="section-label">Company Details</div>
+    <div class="section-title">Verified Contact & Legal Information</div>
+    <p class="section-desc">The following details are taken directly from the Fortune Logistics company profile and are confirmed for use on the website once the client validates them.</p>
+
+    <div class="info-grid" style="margin-bottom: 28px;">
+      <div class="info-card">
+        <div class="ic-label">Registered Name</div>
+        <div class="ic-value">M/s. Fortune Logistics</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Website</div>
+        <div class="ic-value"><a href="http://fortunelogistics.org">fortunelogistics.org</a></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Email</div>
+        <div class="ic-value">fortunelogistics2022@gmail.com<br>pune@fortunelogistics.co</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Phone</div>
+        <div class="ic-value">9657167777 / 7387648584<br>9763165609 / 7843067036</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Office Address</div>
+        <div class="ic-value">Shop No.13, Shree Sadguru Krupa Complex, Gosasi (Dhamantek), Khed City, Tal. Khed, Dist. Pune – 410505</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">GST Number</div>
+        <div class="ic-value">27AAIFF4499G1Z0</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">PAN Number</div>
+        <div class="ic-value">AAIF4499G</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Udyam Registration</div>
+        <div class="ic-value">UDYAM-MH-26-0273282</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Shop Act Number</div>
+        <div class="ic-value">105783972203</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Certification</div>
+        <div class="ic-value">ISO 9001-2015</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Founded</div>
+        <div class="ic-value">2022</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">HQ City</div>
+        <div class="ic-value">Khed, Pune, Maharashtra</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Manager</div>
+        <div class="ic-value">Shubham Naikare</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Contact Person</div>
+        <div class="ic-value">Shubham Naikare<br>9970318707</div>
+      </div>
+    </div>
+
+    <!-- Clients -->
+    <div style="margin-bottom:16px;">
+      <div class="section-label">Known Client List (from profile — permission needed before publishing)</div>
+    </div>
+    <div class="client-grid">
+      <div class="client-pill">Aberdare Technologies</div>
+      <div class="client-pill">Mars</div>
+      <div class="client-pill">Hira Technologies</div>
+      <div class="client-pill">Enpro</div>
+      <div class="client-pill">Raychem RPG</div>
+      <div class="client-pill">Chloride Metals</div>
+      <div class="client-pill">Deccan</div>
+      <div class="client-pill">Panchshil</div>
+      <div class="client-pill">Maass Global Group</div>
+    </div>
+  </div>
+
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════════════════════════
+       DESIGN CONCEPTS
+  ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Design Concepts</div>
+    <div class="section-title">3 Homepage Design Samples</div>
+    <p class="section-desc">Three distinct visual directions for the Fortune Logistics website homepage. Same brand, same colors — differentiated by layout, hierarchy and tone. Desktop view only at concept stage.</p>
+
+    <!-- ─────────────────────────────────────────
+         CONCEPT 1 — CORPORATE DARK
+    ───────────────────────────────────────── -->
+    <div style="margin-bottom:64px;">
+
+      <div class="concept-header" style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#00AEEF; margin-bottom:4px;">Concept 01</div>
+          <div style="font-size:22px; font-weight:800; color:#111827;">Corporate Dark</div>
+          <div style="font-size:13px; color:#6B7280; margin-top:4px;">Inspired by Maersk · GXO — Premium B2B, confidence-first</div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:11px; font-weight:600; background:#111827; color:#fff; padding:4px 10px; border-radius:100px;">Dark Hero</span>
+          <span style="font-size:11px; font-weight:600; background:#00AEEF; color:#fff; padding:4px 10px; border-radius:100px;">Cyan Accents</span>
+          <span style="font-size:11px; font-weight:600; background:#F47920; color:#fff; padding:4px 10px; border-radius:100px;">Orange CTA</span>
+        </div>
+      </div>
+
+      <!-- Browser frame -->
+      <p class="mockup-scroll-hint">← Scroll to view full desktop mockup →</p>
+      <div class="mockup-scroll"><div style="border-radius:14px; overflow:hidden; border:1px solid #D1D5DB; box-shadow:0 12px 40px rgba(0,0,0,0.14);">
+        <!-- Chrome bar -->
+        <div style="background:#F3F4F6; padding:10px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #E5E7EB;">
+          <div style="display:flex; gap:6px;">
+            <div style="width:11px; height:11px; border-radius:50%; background:#FC5F57;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#FDBC40;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#33C748;"></div>
+          </div>
+          <div style="flex:1; background:#fff; border-radius:5px; padding:4px 12px; font-size:11px; color:#9CA3AF; border:1px solid #E5E7EB;">www.fortunelogistics.org</div>
+        </div>
+
+        <!-- ── NAV ── -->
+        <div style="background:#0D1520; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:60px; position:sticky; top:0; z-index:10;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:32px; height:32px; border-radius:50%; border:2px solid #00AEEF; display:flex; align-items:center; justify-content:center;">
+              <div style="width:16px; height:16px; border-radius:50%; background:#00AEEF; opacity:.7;"></div>
+            </div>
+            <span style="font-family:'DM Serif Display',serif; font-style:italic; font-size:16px; color:#fff; letter-spacing:.01em;">Fortune Logistics</span>
+          </div>
+          <div style="display:flex; gap:28px; font-size:13px; color:rgba(255,255,255,0.65); font-weight:500;">
+            <span>Solutions</span><span>Fleet</span><span>Industries</span><span>Network</span><span>About</span>
+          </div>
+          <button style="background:#00AEEF; color:#fff; border:none; border-radius:6px; padding:8px 18px; font-size:13px; font-weight:600; cursor:pointer;">Request a Quote</button>
+        </div>
+
+        <!-- ── HERO ── -->
+        <div style="background:linear-gradient(135deg, #0D1520 0%, #111827 60%, #0a1a2e 100%); padding:80px 40px 72px; position:relative; overflow:hidden;">
+          <!-- Glow orbs -->
+          <div style="position:absolute; top:-80px; right:-80px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle, rgba(0,174,239,0.15) 0%, transparent 65%); pointer-events:none;"></div>
+          <div style="position:absolute; bottom:-60px; left:30%; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle, rgba(244,121,32,0.08) 0%, transparent 65%); pointer-events:none;"></div>
+
+          <div style="max-width:680px; position:relative; z-index:1;">
+            <div style="font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:20px;">ISO 9001-2015 Certified · Pan-India Operations</div>
+            <h1 style="font-family:'Inter',sans-serif; font-size:52px; font-weight:900; color:#fff; line-height:1.06; margin-bottom:20px;">Moving India's Cargo.<br><span style="color:#00AEEF;">Faster. Safer.</span><br>Every Single Day.</h1>
+            <p style="font-size:16px; color:rgba(255,255,255,0.55); line-height:1.7; margin-bottom:36px; max-width:520px;">Full truck load, part load, container and ODC transportation — time-bound delivery across all of India. One point of contact, end-to-end visibility, 24×7 operations.</p>
+            <div style="display:flex; gap:14px; flex-wrap:wrap;">
+              <button style="background:#00AEEF; color:#fff; border:none; border-radius:8px; padding:14px 28px; font-size:15px; font-weight:700; cursor:pointer;">Get a Quote →</button>
+              <button style="background:transparent; color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:14px 28px; font-size:15px; font-weight:600; cursor:pointer;">WhatsApp Us</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── PROOF STRIP ── -->
+        <div style="background:#00AEEF; padding:20px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:16px; text-align:center;">
+          <div><div style="font-size:26px; font-weight:900; color:#fff;">5,000+</div><div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:.08em;">Metric Tons / Day</div></div>
+          <div style="border-left:1px solid rgba(255,255,255,0.25);"><div style="font-size:26px; font-weight:900; color:#fff;">24 × 7</div><div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:.08em;">Operations</div></div>
+          <div style="border-left:1px solid rgba(255,255,255,0.25);"><div style="font-size:26px; font-weight:900; color:#fff;">Pan-India</div><div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:.08em;">Network Reach</div></div>
+          <div style="border-left:1px solid rgba(255,255,255,0.25);"><div style="font-size:26px; font-weight:900; color:#fff;">ISO</div><div style="font-size:11px; font-weight:600; color:rgba(255,255,255,0.75); text-transform:uppercase; letter-spacing:.08em;">9001-2015 Certified</div></div>
+        </div>
+
+        <!-- ── SERVICES ── -->
+        <div style="background:#F9FAFB; padding:64px 40px;">
+          <div style="text-align:center; margin-bottom:40px;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:8px;">What We Move</div>
+            <h2 style="font-size:30px; font-weight:800; color:#111827;">Logistics Solutions for Every Load</h2>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px;">
+            <div style="background:#fff; border:1px solid #E5E7EB; border-radius:12px; padding:24px; border-top:3px solid #00AEEF;">
+              <div style="width:40px; height:40px; background:#E6F7FD; border-radius:8px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:18px;">🚛</div>
+              <div style="font-size:15px; font-weight:700; color:#111827; margin-bottom:8px;">Full Truck Load</div>
+              <div style="font-size:13px; color:#6B7280; line-height:1.6;">Dedicated truck movement. Normal, Express and Super Express options for time-critical cargo.</div>
+            </div>
+            <div style="background:#fff; border:1px solid #E5E7EB; border-radius:12px; padding:24px; border-top:3px solid #00AEEF;">
+              <div style="width:40px; height:40px; background:#E6F7FD; border-radius:8px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:18px;">📦</div>
+              <div style="font-size:15px; font-weight:700; color:#111827; margin-bottom:8px;">Part Truck Load</div>
+              <div style="font-size:13px; color:#6B7280; line-height:1.6;">Cost-effective solution for freight too large for courier but too small for a full truck.</div>
+            </div>
+            <div style="background:#fff; border:1px solid #E5E7EB; border-radius:12px; padding:24px; border-top:3px solid #00AEEF;">
+              <div style="width:40px; height:40px; background:#E6F7FD; border-radius:8px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:18px;">🏭</div>
+              <div style="font-size:15px; font-weight:700; color:#111827; margin-bottom:8px;">Container Transport</div>
+              <div style="font-size:13px; color:#6B7280; line-height:1.6;">100% containerised fleet operations. Minimum transit time with maximum cargo safety.</div>
+            </div>
+            <div style="background:#fff; border:1px solid #E5E7EB; border-radius:12px; padding:24px; border-top:3px solid #00AEEF;">
+              <div style="width:40px; height:40px; background:#E6F7FD; border-radius:8px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; font-size:18px;">⚙️</div>
+              <div style="font-size:15px; font-weight:700; color:#111827; margin-bottom:8px;">Project & ODC</div>
+              <div style="font-size:13px; color:#6B7280; line-height:1.6;">Over-dimensional cargo handled with specialised trailers. Custom specs on request.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── WHY FORTUNE SPLIT ── -->
+        <div style="background:#111827; padding:64px 40px; display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+          <div>
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:12px;">Why Fortune</div>
+            <h2 style="font-size:30px; font-weight:800; color:#fff; line-height:1.2; margin-bottom:24px;">Built Around Your Delivery Deadline</h2>
+            <div style="display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; gap:14px;"><div style="width:20px; height:20px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:2px;"></div><div style="font-size:14px; color:rgba(255,255,255,0.75); line-height:1.6;"><strong style="color:#fff;">GPS-tracked, door-to-door.</strong> Live visibility on every consignment.</div></div>
+              <div style="display:flex; gap:14px;"><div style="width:20px; height:20px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:2px;"></div><div style="font-size:14px; color:rgba(255,255,255,0.75); line-height:1.6;"><strong style="color:#fff;">Dedicated Key Account Manager.</strong> One contact for every shipment.</div></div>
+              <div style="display:flex; gap:14px;"><div style="width:20px; height:20px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:2px;"></div><div style="font-size:14px; color:rgba(255,255,255,0.75); line-height:1.6;"><strong style="color:#fff;">Damage-free delivery guarantee.</strong> Professional material handling.</div></div>
+              <div style="display:flex; gap:14px;"><div style="width:20px; height:20px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:2px;"></div><div style="font-size:14px; color:rgba(255,255,255,0.75); line-height:1.6;"><strong style="color:#fff;">Cheaper than Air, Faster than Road.</strong> Two-driver express model.</div></div>
+            </div>
+          </div>
+          <div style="background:#0D1520; border-radius:12px; height:240px; display:flex; align-items:center; justify-content:center; border:1px solid rgba(0,174,239,0.2);">
+            <div style="text-align:center; color:rgba(255,255,255,0.2); font-size:13px;">[ Fleet / Operations Photo ]</div>
+          </div>
+        </div>
+
+        <!-- ── CTA BANNER ── -->
+        <div style="background:#00AEEF; padding:40px; text-align:center;">
+          <h2 style="font-size:24px; font-weight:800; color:#fff; margin-bottom:10px;">Ready to move your next shipment?</h2>
+          <p style="font-size:14px; color:rgba(255,255,255,0.8); margin-bottom:24px;">Talk to Shubham: 9970318707 · fortunelogistics2022@gmail.com</p>
+          <button style="background:#F47920; color:#fff; border:none; border-radius:8px; padding:14px 32px; font-size:15px; font-weight:700; cursor:pointer;">Request a Quote Now</button>
+        </div>
+
+        <!-- ── FOOTER ── -->
+        <div style="background:#0D1520; padding:36px 40px; display:grid; grid-template-columns:2fr 1fr 1fr; gap:40px;">
+          <div>
+            <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:18px; color:#fff; margin-bottom:10px;">Fortune Logistics</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4); line-height:1.8;">Better Logistics Solution for You<br>ISO 9001-2015 · Khed, Pune</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:700; color:#00AEEF; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px;">Services</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:2;">FTL · PTL · Container<br>Project Cargo · ODC<br>Packaging</div>
+          </div>
+          <div>
+            <div style="font-size:11px; font-weight:700; color:#00AEEF; text-transform:uppercase; letter-spacing:.1em; margin-bottom:12px;">Contact</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:2;">9970318707<br>fortunelogistics.org<br>Khed City, Pune 410505</div>
+          </div>
+        </div>
+      </div></div><!-- /browser frame -->
+
+      <!-- Annotations -->
+      <div class="concept-annotations" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px;">
+        <div style="background:#F0F9FF; border:1px solid #BAE6FD; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#0369A1; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Tone</div>
+          <div style="font-size:13px; color:#0C4A6E; line-height:1.6;">Premium and authoritative. Suits Fortune's ambition to be seen as a professional B2B logistics brand, not a local trucking company.</div>
+        </div>
+        <div style="background:#F0F9FF; border:1px solid #BAE6FD; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#0369A1; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Best for</div>
+          <div style="font-size:13px; color:#0C4A6E; line-height:1.6;">Enterprise buyers, procurement teams, large B2B accounts. Works well when Fortune wants to close higher-value contracts.</div>
+        </div>
+        <div style="background:#F0F9FF; border:1px solid #BAE6FD; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#0369A1; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Key elements</div>
+          <div style="font-size:13px; color:#0C4A6E; line-height:1.6;">Dark hero · Cyan proof strip · Top-border service cards · Split "Why Fortune" section · Orange CTA banner</div>
+        </div>
+      </div>
+    </div><!-- /concept 1 -->
+
+
+    <!-- ─────────────────────────────────────────
+         CONCEPT 2 — MODERN INDIAN
+    ───────────────────────────────────────── -->
+    <div style="margin-bottom:64px;">
+
+      <div class="concept-header" style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#00AEEF; margin-bottom:4px;">Concept 02</div>
+          <div style="font-size:22px; font-weight:800; color:#111827;">Modern Indian</div>
+          <div style="font-size:13px; color:#6B7280; margin-top:4px;">Inspired by Fleeton · URL Safe Express — Conversion-first, practical Indian B2B</div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:11px; font-weight:600; background:#00AEEF; color:#fff; padding:4px 10px; border-radius:100px;">Cyan Hero</span>
+          <span style="font-size:11px; font-weight:600; background:#fff; color:#111827; border:1px solid #E5E7EB; padding:4px 10px; border-radius:100px;">White Body</span>
+          <span style="font-size:11px; font-weight:600; background:#F47920; color:#fff; padding:4px 10px; border-radius:100px;">Embedded RFQ</span>
+        </div>
+      </div>
+
+      <p class="mockup-scroll-hint">← Scroll to view full desktop mockup →</p>
+      <div class="mockup-scroll"><div style="border-radius:14px; overflow:hidden; border:1px solid #D1D5DB; box-shadow:0 12px 40px rgba(0,0,0,0.14);">
+        <!-- Chrome -->
+        <div style="background:#F3F4F6; padding:10px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #E5E7EB;">
+          <div style="display:flex; gap:6px;">
+            <div style="width:11px; height:11px; border-radius:50%; background:#FC5F57;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#FDBC40;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#33C748;"></div>
+          </div>
+          <div style="flex:1; background:#fff; border-radius:5px; padding:4px 12px; font-size:11px; color:#9CA3AF; border:1px solid #E5E7EB;">www.fortunelogistics.org</div>
+        </div>
+
+        <!-- ── NAV ── -->
+        <div style="background:#fff; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:60px; border-bottom:1px solid #E5E7EB;">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:32px; height:32px; border-radius:50%; border:2px solid #00AEEF; display:flex; align-items:center; justify-content:center;">
+              <div style="width:16px; height:16px; border-radius:50%; background:#00AEEF; opacity:.7;"></div>
+            </div>
+            <span style="font-family:'DM Serif Display',serif; font-style:italic; font-size:16px; color:#00AEEF;">Fortune Logistics</span>
+          </div>
+          <div style="display:flex; gap:28px; font-size:13px; color:#374151; font-weight:500;">
+            <span>Solutions</span><span>Fleet</span><span>Industries</span><span>Network</span><span>About</span>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button style="background:transparent; color:#00AEEF; border:1.5px solid #00AEEF; border-radius:6px; padding:7px 16px; font-size:13px; font-weight:600; cursor:pointer;">WhatsApp</button>
+            <button style="background:#00AEEF; color:#fff; border:none; border-radius:6px; padding:8px 16px; font-size:13px; font-weight:600; cursor:pointer;">Get Quote</button>
+          </div>
+        </div>
+
+        <!-- ── HERO SPLIT ── -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; min-height:380px;">
+          <div style="background:#fff; padding:60px 40px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#00AEEF; margin-bottom:16px;">Pune · Pan-India · ISO 9001-2015</div>
+            <h1 style="font-size:40px; font-weight:900; color:#111827; line-height:1.1; margin-bottom:18px;">Cheaper than Air.<br>Faster than Road.<br><span style="color:#00AEEF;">Guaranteed.</span></h1>
+            <p style="font-size:14px; color:#6B7280; line-height:1.7; margin-bottom:28px;">FTL · PTL · Container · Project · ODC Transport across India. Two-driver express model delivers in under 36 hours.</p>
+            <div style="display:flex; gap:12px;">
+              <button style="background:#00AEEF; color:#fff; border:none; border-radius:8px; padding:12px 24px; font-size:14px; font-weight:700; cursor:pointer;">Request a Quote</button>
+              <button style="background:#F47920; color:#fff; border:none; border-radius:8px; padding:12px 24px; font-size:14px; font-weight:700; cursor:pointer;">📞 Call Now</button>
+            </div>
+          </div>
+          <div style="background:linear-gradient(135deg, #00AEEF 0%, #0090C8 100%); position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+            <div style="position:absolute; top:-40px; right:-40px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,0.08);"></div>
+            <div style="position:absolute; bottom:-60px; left:-30px; width:240px; height:240px; border-radius:50%; background:rgba(255,255,255,0.06);"></div>
+            <div style="text-align:center; color:rgba(255,255,255,0.35); font-size:13px; z-index:1;">[ Fleet / Truck Hero Image ]</div>
+          </div>
+        </div>
+
+        <!-- ── STATS ROW ── -->
+        <div style="background:#F9FAFB; border-top:1px solid #E5E7EB; border-bottom:1px solid #E5E7EB; padding:24px 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;">
+          <div><div style="font-size:28px; font-weight:900; color:#00AEEF;">FTL</div><div style="font-size:12px; color:#6B7280; font-weight:500;">Full Truck Load</div></div>
+          <div style="border-left:1px solid #E5E7EB;"><div style="font-size:28px; font-weight:900; color:#00AEEF;">PTL</div><div style="font-size:12px; color:#6B7280; font-weight:500;">Part Truck Load</div></div>
+          <div style="border-left:1px solid #E5E7EB;"><div style="font-size:28px; font-weight:900; color:#00AEEF;">ODC</div><div style="font-size:12px; color:#6B7280; font-weight:500;">Over-Dimensional Cargo</div></div>
+          <div style="border-left:1px solid #E5E7EB;"><div style="font-size:28px; font-weight:900; color:#00AEEF;">24/7</div><div style="font-size:12px; color:#6B7280; font-weight:500;">Operations & Support</div></div>
+        </div>
+
+        <!-- ── SERVICES GRID ── -->
+        <div style="background:#fff; padding:56px 40px;">
+          <div style="margin-bottom:32px;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:8px;">Our Services</div>
+            <h2 style="font-size:26px; font-weight:800; color:#111827;">Transportation solutions that fit your business</h2>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">🚛</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Full Truck Load</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">Dedicated trucks. Time-bound SLA. Normal, Express & Super Express.</div></div>
+            </div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">📦</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Part Truck Load</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">Share a truck, save on freight. Repeat intervals, competitive rates.</div></div>
+            </div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">🏗️</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Container Transport</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">100% containerised fleet. Safe, sealed, GPS-tracked.</div></div>
+            </div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">⚙️</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Project & ODC</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">Heavy, over-dimensional loads. Specialised trailers up to 40 MT.</div></div>
+            </div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">📦</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Returnable Packaging</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">Sustainable, cost-efficient packaging solutions for bulk cargo.</div></div>
+            </div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:20px; display:flex; gap:14px; align-items:flex-start;">
+              <div style="font-size:22px; flex-shrink:0;">⚡</div>
+              <div><div style="font-size:14px; font-weight:700; color:#111827; margin-bottom:4px;">Express Delivery</div><div style="font-size:12px; color:#6B7280; line-height:1.6;">Two-driver model. Delivery under 36 hours. Cheaper than air freight.</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── RFQ FORM ── -->
+        <div style="background:#111827; padding:56px 40px; display:grid; grid-template-columns:1.2fr 1fr; gap:48px; align-items:center;">
+          <div>
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:12px;">Quick Quote</div>
+            <h2 style="font-size:26px; font-weight:800; color:#fff; margin-bottom:12px;">Tell us about your shipment</h2>
+            <p style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.7;">We'll get back within 2 business hours. Or call Shubham directly on <strong style="color:#fff;">9970318707</strong>.</p>
+          </div>
+          <div style="background:#1F2937; border-radius:12px; padding:28px; display:flex; flex-direction:column; gap:14px;">
+            <div style="background:#374151; border-radius:8px; padding:12px 14px; font-size:13px; color:rgba(255,255,255,0.35);">Origin city</div>
+            <div style="background:#374151; border-radius:8px; padding:12px 14px; font-size:13px; color:rgba(255,255,255,0.35);">Destination city</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div style="background:#374151; border-radius:8px; padding:12px 14px; font-size:13px; color:rgba(255,255,255,0.35);">Service type</div>
+              <div style="background:#374151; border-radius:8px; padding:12px 14px; font-size:13px; color:rgba(255,255,255,0.35);">Cargo weight</div>
+            </div>
+            <div style="background:#374151; border-radius:8px; padding:12px 14px; font-size:13px; color:rgba(255,255,255,0.35);">Your mobile number</div>
+            <button style="background:#F47920; color:#fff; border:none; border-radius:8px; padding:13px; font-size:14px; font-weight:700; cursor:pointer;">Get My Quote →</button>
+          </div>
+        </div>
+
+        <!-- ── FOOTER ── -->
+        <div style="background:#0D1520; padding:28px 40px; display:flex; align-items:center; justify-content:space-between;">
+          <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:16px; color:#fff;">Fortune Logistics</div>
+          <div style="font-size:12px; color:rgba(255,255,255,0.35);">© 2024 Fortune Logistics · Khed, Pune · ISO 9001-2015</div>
+          <div style="font-size:12px; color:#00AEEF;">fortunelogistics.org</div>
+        </div>
+      </div></div><!-- /browser frame -->
+
+      <!-- Annotations -->
+      <div class="concept-annotations" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px;">
+        <div style="background:#FFF7ED; border:1px solid #FED7AA; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#C2410C; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Tone</div>
+          <div style="font-size:13px; color:#7C2D12; line-height:1.6;">Action-oriented and practical. Designed around the Indian B2B buyer who wants a fast quote and a direct contact number.</div>
+        </div>
+        <div style="background:#FFF7ED; border:1px solid #FED7AA; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#C2410C; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Best for</div>
+          <div style="font-size:13px; color:#7C2D12; line-height:1.6;">SME procurement, operations managers, logistics coordinators who compare vendors and want information quickly.</div>
+        </div>
+        <div style="background:#FFF7ED; border:1px solid #FED7AA; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#C2410C; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Key elements</div>
+          <div style="font-size:13px; color:#7C2D12; line-height:1.6;">Split hero · White nav · Service tiles grid · Embedded RFQ form · Orange call-to-action buttons</div>
+        </div>
+      </div>
+    </div><!-- /concept 2 -->
+
+
+    <!-- ─────────────────────────────────────────
+         CONCEPT 3 — CLEAN & STRUCTURED
+    ───────────────────────────────────────── -->
+    <div style="margin-bottom:32px;">
+
+      <div class="concept-header" style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:16px; flex-wrap:wrap;">
+        <div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#00AEEF; margin-bottom:4px;">Concept 03</div>
+          <div style="font-size:22px; font-weight:800; color:#111827;">Clean & Structured</div>
+          <div style="font-size:13px; color:#6B7280; margin-top:4px;">Inspired by Rhenus · Genex — Corporate clarity, solution architecture, industries-led</div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:11px; font-weight:600; background:#fff; color:#111827; border:1px solid #E5E7EB; padding:4px 10px; border-radius:100px;">Photo Hero</span>
+          <span style="font-size:11px; font-weight:600; background:#00AEEF; color:#fff; padding:4px 10px; border-radius:100px;">Stat Cards</span>
+          <span style="font-size:11px; font-weight:600; background:#111827; color:#fff; padding:4px 10px; border-radius:100px;">Industries Grid</span>
+        </div>
+      </div>
+
+      <p class="mockup-scroll-hint">← Scroll to view full desktop mockup →</p>
+      <div class="mockup-scroll"><div style="border-radius:14px; overflow:hidden; border:1px solid #D1D5DB; box-shadow:0 12px 40px rgba(0,0,0,0.14);">
+        <!-- Chrome -->
+        <div style="background:#F3F4F6; padding:10px 16px; display:flex; align-items:center; gap:10px; border-bottom:1px solid #E5E7EB;">
+          <div style="display:flex; gap:6px;">
+            <div style="width:11px; height:11px; border-radius:50%; background:#FC5F57;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#FDBC40;"></div>
+            <div style="width:11px; height:11px; border-radius:50%; background:#33C748;"></div>
+          </div>
+          <div style="flex:1; background:#fff; border-radius:5px; padding:4px 12px; font-size:11px; color:#9CA3AF; border:1px solid #E5E7EB;">www.fortunelogistics.org</div>
+        </div>
+
+        <!-- ── NAV ── -->
+        <div style="background:#fff; padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:64px; box-shadow:0 1px 8px rgba(0,0,0,0.06);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div style="width:34px; height:34px; border-radius:50%; border:2px solid #00AEEF; display:flex; align-items:center; justify-content:center;">
+              <div style="width:17px; height:17px; border-radius:50%; background:#00AEEF; opacity:.7;"></div>
+            </div>
+            <div>
+              <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:15px; color:#111827; line-height:1;">Fortune Logistics</div>
+              <div style="font-size:9px; color:#9CA3AF; letter-spacing:.1em; text-transform:uppercase;">ISO 9001-2015</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:32px; font-size:13px; color:#374151; font-weight:500; letter-spacing:.01em;">
+            <span style="color:#00AEEF; border-bottom:2px solid #00AEEF; padding-bottom:2px;">Home</span>
+            <span>Solutions</span><span>Fleet</span><span>Industries</span><span>Network</span><span>About</span>
+          </div>
+          <button style="background:#00AEEF; color:#fff; border:none; border-radius:6px; padding:9px 20px; font-size:13px; font-weight:700; cursor:pointer; letter-spacing:.01em;">Request a Quote</button>
+        </div>
+
+        <!-- ── HERO — PHOTO OVERLAY ── -->
+        <div style="background:linear-gradient(100deg, rgba(17,24,39,0.92) 45%, rgba(0,144,200,0.55) 100%), linear-gradient(180deg, #1a2840 0%, #111827 100%); padding:72px 40px; min-height:360px; display:flex; align-items:center; position:relative; overflow:hidden;">
+          <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:flex-end; padding-right:40px; opacity:.15; font-size:200px; pointer-events:none; user-select:none;">🚛</div>
+          <div style="max-width:560px; position:relative; z-index:1;">
+            <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(0,174,239,0.15); border:1px solid rgba(0,174,239,0.3); border-radius:100px; padding:5px 14px; margin-bottom:24px;">
+              <div style="width:7px; height:7px; border-radius:50%; background:#00AEEF;"></div>
+              <span style="font-size:11px; font-weight:600; color:#00AEEF; letter-spacing:.1em; text-transform:uppercase;">Pan-India · 24×7 Operations</span>
+            </div>
+            <h1 style="font-size:44px; font-weight:900; color:#fff; line-height:1.1; margin-bottom:20px;">A Green Supply Chain Solution.<br><span style="color:#00AEEF;">Transportation</span> & Packaging.</h1>
+            <p style="font-size:15px; color:rgba(255,255,255,0.6); line-height:1.7; margin-bottom:32px; max-width:460px;">Fortune Logistics provides complete, time-bound road logistics across India — from bulk FTL to over-dimensional project cargo. Founded in 2022. ISO certified.</p>
+            <div style="display:flex; gap:14px; align-items:center;">
+              <button style="background:#00AEEF; color:#fff; border:none; border-radius:8px; padding:13px 26px; font-size:14px; font-weight:700; cursor:pointer;">Plan Your Shipment</button>
+              <span style="font-size:13px; color:rgba(255,255,255,0.45);">or call Shubham · 9970318707</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STAT CARDS ── -->
+        <div style="background:#fff; padding:0 40px; display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-bottom:1px solid #E5E7EB;">
+          <div style="padding:28px 20px; text-align:center; border-right:1px solid #E5E7EB;">
+            <div style="font-size:32px; font-weight:900; color:#00AEEF; margin-bottom:4px;">FTL</div>
+            <div style="font-size:12px; color:#374151; font-weight:600;">Full Truck Load</div>
+            <div style="font-size:11px; color:#9CA3AF; margin-top:4px;">Normal · Express · Super Express</div>
+          </div>
+          <div style="padding:28px 20px; text-align:center; border-right:1px solid #E5E7EB;">
+            <div style="font-size:32px; font-weight:900; color:#00AEEF; margin-bottom:4px;">PTL</div>
+            <div style="font-size:12px; color:#374151; font-weight:600;">Part Truck Load</div>
+            <div style="font-size:11px; color:#9CA3AF; margin-top:4px;">Shared, cost-effective freight</div>
+          </div>
+          <div style="padding:28px 20px; text-align:center; border-right:1px solid #E5E7EB;">
+            <div style="font-size:32px; font-weight:900; color:#00AEEF; margin-bottom:4px;">ODC</div>
+            <div style="font-size:12px; color:#374151; font-weight:600;">Project / ODC Cargo</div>
+            <div style="font-size:11px; color:#9CA3AF; margin-top:4px;">Trailers up to 40 MT payload</div>
+          </div>
+          <div style="padding:28px 20px; text-align:center;">
+            <div style="font-size:32px; font-weight:900; color:#00AEEF; margin-bottom:4px;">PKG</div>
+            <div style="font-size:12px; color:#374151; font-weight:600;">Packaging Solutions</div>
+            <div style="font-size:11px; color:#9CA3AF; margin-top:4px;">Returnable, sustainable systems</div>
+          </div>
+        </div>
+
+        <!-- ── SOLUTIONS + WHY FORTUNE ── -->
+        <div style="background:#F9FAFB; padding:56px 40px;">
+          <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:48px; align-items:start;">
+            <div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:10px;">Solutions</div>
+              <h2 style="font-size:24px; font-weight:800; color:#111827; margin-bottom:24px;">What we deliver for your business</h2>
+              <div style="display:flex; flex-direction:column; gap:0; border:1px solid #E5E7EB; border-radius:12px; overflow:hidden; background:#fff;">
+                <div style="padding:16px 20px; border-bottom:1px solid #E5E7EB; display:flex; align-items:center; justify-content:space-between; background:#E6F7FD;">
+                  <div style="font-size:14px; font-weight:700; color:#00AEEF;">Full Truck Load (FTL)</div>
+                  <div style="font-size:11px; color:#00AEEF;">→</div>
+                </div>
+                <div style="padding:16px 20px; border-bottom:1px solid #E5E7EB; display:flex; align-items:center; justify-content:space-between;">
+                  <div style="font-size:14px; font-weight:600; color:#374151;">Part Truck Load (PTL)</div>
+                  <div style="font-size:11px; color:#9CA3AF;">→</div>
+                </div>
+                <div style="padding:16px 20px; border-bottom:1px solid #E5E7EB; display:flex; align-items:center; justify-content:space-between;">
+                  <div style="font-size:14px; font-weight:600; color:#374151;">Container Transportation</div>
+                  <div style="font-size:11px; color:#9CA3AF;">→</div>
+                </div>
+                <div style="padding:16px 20px; border-bottom:1px solid #E5E7EB; display:flex; align-items:center; justify-content:space-between;">
+                  <div style="font-size:14px; font-weight:600; color:#374151;">Project & ODC Cargo</div>
+                  <div style="font-size:11px; color:#9CA3AF;">→</div>
+                </div>
+                <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between;">
+                  <div style="font-size:14px; font-weight:600; color:#374151;">Returnable Packaging</div>
+                  <div style="font-size:11px; color:#9CA3AF;">→</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:10px;">Why Fortune</div>
+              <h2 style="font-size:24px; font-weight:800; color:#111827; margin-bottom:24px;">Our service commitments</h2>
+              <div style="display:flex; flex-direction:column; gap:14px;">
+                <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:5px;"></div>
+                  <div><div style="font-size:13px; font-weight:700; color:#111827;">Time-bound delivery</div><div style="font-size:12px; color:#6B7280; margin-top:2px;">Committed schedules. Normal, Express, Super Express tiers.</div></div>
+                </div>
+                <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:5px;"></div>
+                  <div><div style="font-size:13px; font-weight:700; color:#111827;">GPS visibility</div><div style="font-size:12px; color:#6B7280; margin-top:2px;">Live tracking. End-to-end consignment visibility.</div></div>
+                </div>
+                <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:5px;"></div>
+                  <div><div style="font-size:13px; font-weight:700; color:#111827;">Dedicated Key Account Manager</div><div style="font-size:12px; color:#6B7280; margin-top:2px;">One point of contact for every shipment.</div></div>
+                </div>
+                <div style="background:#fff; border:1px solid #E5E7EB; border-radius:10px; padding:16px 18px; display:flex; gap:12px; align-items:flex-start;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:#00AEEF; flex-shrink:0; margin-top:5px;"></div>
+                  <div><div style="font-size:13px; font-weight:700; color:#111827;">Damage-free guarantee</div><div style="font-size:12px; color:#6B7280; margin-top:2px;">Professional material handling on every consignment.</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── INDUSTRIES GRID ── -->
+        <div style="background:#fff; padding:48px 40px; border-top:1px solid #E5E7EB;">
+          <div style="margin-bottom:28px;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:8px;">Industries Served</div>
+            <h2 style="font-size:24px; font-weight:800; color:#111827;">Logistics expertise across sectors</h2>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(6,1fr); gap:12px;">
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">🏭</div><div style="font-size:11px; font-weight:600; color:#374151;">Manufacturing</div></div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">⚡</div><div style="font-size:11px; font-weight:600; color:#374151;">Electronics</div></div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">🧪</div><div style="font-size:11px; font-weight:600; color:#374151;">Chemicals</div></div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">🏗️</div><div style="font-size:11px; font-weight:600; color:#374151;">Infrastructure</div></div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">🛒</div><div style="font-size:11px; font-weight:600; color:#374151;">FMCG</div></div>
+            <div style="border:1px solid #E5E7EB; border-radius:10px; padding:16px 10px; text-align:center;"><div style="font-size:20px; margin-bottom:6px;">⚙️</div><div style="font-size:11px; font-weight:600; color:#374151;">Auto & Engineering</div></div>
+          </div>
+        </div>
+
+        <!-- ── CTA SPLIT ── -->
+        <div style="display:grid; grid-template-columns:1fr 1fr;">
+          <div style="background:#111827; padding:48px 40px; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-size:10px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#00AEEF; margin-bottom:12px;">Get Started</div>
+            <h2 style="font-size:24px; font-weight:800; color:#fff; margin-bottom:12px;">Plan your next shipment with us</h2>
+            <p style="font-size:13px; color:rgba(255,255,255,0.5); line-height:1.7; margin-bottom:24px;">We respond within 2 business hours. Direct line to operations 24×7.</p>
+            <button style="background:#00AEEF; color:#fff; border:none; border-radius:8px; padding:13px 24px; font-size:14px; font-weight:700; cursor:pointer; align-self:flex-start;">Request a Quote →</button>
+          </div>
+          <div style="background:#00AEEF; padding:48px 40px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+            <div style="font-size:36px; margin-bottom:12px;">📞</div>
+            <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,0.7); text-transform:uppercase; letter-spacing:.12em; margin-bottom:8px;">Speak to our team</div>
+            <div style="font-size:28px; font-weight:900; color:#fff; margin-bottom:4px;">9970318707</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.75); margin-bottom:4px;">Shubham Naikare · Manager</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.6);">fortunelogistics2022@gmail.com</div>
+          </div>
+        </div>
+
+        <!-- ── FOOTER ── -->
+        <div style="background:#0D1520; padding:32px 40px; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px;">
+          <div>
+            <div style="font-family:'DM Serif Display',serif; font-style:italic; font-size:17px; color:#fff; margin-bottom:8px;">Fortune Logistics</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.35); line-height:1.9;">Shop No.13, Shree Sadguru Krupa Complex,<br>Khed City, Pune 410505<br>GST: 27AAIFF4499G1Z0</div>
+          </div>
+          <div>
+            <div style="font-size:10px; font-weight:700; color:#00AEEF; text-transform:uppercase; letter-spacing:.12em; margin-bottom:12px;">Services</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4); line-height:2.1;">FTL<br>PTL<br>Container<br>Project / ODC<br>Packaging</div>
+          </div>
+          <div>
+            <div style="font-size:10px; font-weight:700; color:#00AEEF; text-transform:uppercase; letter-spacing:.12em; margin-bottom:12px;">Company</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4); line-height:2.1;">About Us<br>Fleet<br>Network<br>Certifications</div>
+          </div>
+          <div>
+            <div style="font-size:10px; font-weight:700; color:#00AEEF; text-transform:uppercase; letter-spacing:.12em; margin-bottom:12px;">Contact</div>
+            <div style="font-size:12px; color:rgba(255,255,255,0.4); line-height:2.1;">9970318707<br>9657167777<br>fortunelogistics.org</div>
+          </div>
+        </div>
+      </div></div><!-- /browser frame -->
+
+      <!-- Annotations -->
+      <div class="concept-annotations" style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:20px;">
+        <div style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#15803D; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Tone</div>
+          <div style="font-size:13px; color:#14532D; line-height:1.6;">Structured, credible and information-rich. For buyers who do their research and want complete answers before calling.</div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#15803D; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Best for</div>
+          <div style="font-size:13px; color:#14532D; line-height:1.6;">Supply chain managers, project planners, and decision-makers evaluating Fortune against other shortlisted vendors.</div>
+        </div>
+        <div style="background:#F0FDF4; border:1px solid #86EFAC; border-radius:10px; padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:#15803D; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;">Key elements</div>
+          <div style="font-size:13px; color:#14532D; line-height:1.6;">Photo hero overlay · Stat card row · Tab-style solution selector · Industries grid · Split CTA section</div>
+        </div>
+      </div>
+    </div><!-- /concept 3 -->
+
+  </div><!-- /section design concepts -->
+
+</div><!-- /page -->
+
+<!-- ════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════ -->
+<footer>
+  Prepared by <span>Perfect Skills</span> for Fortune Logistics &nbsp;·&nbsp; Website Development Project &nbsp;·&nbsp; August 2026 &nbsp;·&nbsp; Version 1.0
+</footer>
+
+</body>
+</html>
